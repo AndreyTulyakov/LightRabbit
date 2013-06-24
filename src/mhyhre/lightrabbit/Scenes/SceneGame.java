@@ -12,8 +12,10 @@
 
 package mhyhre.lightrabbit.Scenes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import mhyhre.lightrabbit.Dictionary;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
@@ -23,6 +25,8 @@ import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
+
+import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
 
@@ -43,6 +47,8 @@ public class SceneGame extends MhyhreScene {
 	ArrayList<Text> wordsText;
 	public SpriteBatch UIBatch;
 
+	Dictionary dictionary;
+
 	int ItemMaxCount = 32;
 	int ItemCount = 5;
 	final float verticalStep = 80;
@@ -51,6 +57,13 @@ public class SceneGame extends MhyhreScene {
 	long lasttime;
 
 	public SceneGame() {
+
+		try {
+			dictionary = new Dictionary("words.txbase");
+		} catch (IOException e) {
+			Log.i(MainActivity.DebugID, "Dictionary::cant load: " +e.getMessage());
+			e.printStackTrace();
+		}
 
 		// Задаем фон сцене
 		background = new Background(0.78f, 0.78f, 0.80f);
@@ -65,6 +78,7 @@ public class SceneGame extends MhyhreScene {
 		Vector3f posOffset = new Vector3f();
 		SetupSpriteBatch(posOffset);
 		SetupWordText(posOffset.x, posOffset.y, posOffset.z);
+
 	}
 
 	private void SetupSpriteBatch(Vector3f posOffset) {
@@ -104,14 +118,6 @@ public class SceneGame extends MhyhreScene {
 
 	}
 
-	String pstr(int x) {
-		String s = "";
-		for (int i = 0; i <= x; i++) {
-			s = s + i;
-		}
-		return s = "Человечество";
-	}
-
 	private void SetupWordText(float posVertical, float c1Horizontal, float c2Horizontal) {
 
 		posVertical += TextureRegions.get(0).getHeight() / 2 - MainActivity.Res.getFont("Pixel").getLineHeight() / 2;
@@ -122,7 +128,7 @@ public class SceneGame extends MhyhreScene {
 
 		// Left column
 		for (int i = 0; i < ItemCount; i++) {
-			wordsText.add(new Text(0, 0, MainActivity.Res.getFont("Pixel"), pstr(i), MainActivity.Me.getVertexBufferObjectManager()));
+			wordsText.add(new Text(0, 0, MainActivity.Res.getFont("Pixel"), dictionary.getRandomWord(), MainActivity.Me.getVertexBufferObjectManager()));
 			textHalfWidht = wordsText.get(i).getWidth() / 2;
 			wordsText.get(i).setPosition(c1Horizontal - textHalfWidht, posVertical + i * verticalStep);
 			attachChild(wordsText.get(i));
@@ -130,7 +136,7 @@ public class SceneGame extends MhyhreScene {
 
 		// Left column
 		for (int i = 0; i < ItemCount; i++) {
-			wordsText.add(new Text(0, 0, MainActivity.Res.getFont("Pixel"), pstr(i + ItemCount), MainActivity.Me.getVertexBufferObjectManager()));
+			wordsText.add(new Text(0, 0, MainActivity.Res.getFont("Pixel"), dictionary.getRandomWord(), MainActivity.Me.getVertexBufferObjectManager()));
 			textHalfWidht = wordsText.get(ItemCount + i).getWidth() / 2;
 			wordsText.get(ItemCount + i).setPosition(c2Horizontal - textHalfWidht, posVertical + i * verticalStep);
 			attachChild(wordsText.get(ItemCount + i));

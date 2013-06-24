@@ -20,7 +20,6 @@ import mhyhre.lightrabbit.GameProcessMode;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -41,7 +40,30 @@ public class SceneGame extends MhyhreScene {
 		}
 	}
 
-	static GameProcessMode mode = GameProcessMode.Ready;
+	GameProcessMode mode = GameProcessMode.Ready;
+	
+	public void setGameProcessMode(GameProcessMode mode){
+		this.mode = mode;
+		
+		switch(mode){
+		
+		case Ready:
+			
+			break;
+			
+		case Memorize:
+			
+			break;
+			
+		case Recollect:
+			
+			break;
+			
+		case Result:
+			
+			break;
+		}
+	}
 	
 	SceneGameReady sceneReady;
 	
@@ -69,11 +91,6 @@ public class SceneGame extends MhyhreScene {
 			e.printStackTrace();
 		}
 
-		// Задаем фон сцене
-		background = new Background(0.78f, 0.78f, 0.80f);
-		setBackgroundEnabled(false);
-		setBackground(background);
-
 		// Текстурные регионы для каждого элемента
 		TextureRegions = new ArrayList<ITextureRegion>();
 		TextureRegions.add(TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas(uiAtlasName), 0, 0, 310, 70, false));
@@ -84,11 +101,27 @@ public class SceneGame extends MhyhreScene {
 		SetupSpriteBatch(posOffset);
 		SetupWordText(posOffset.x, posOffset.y, posOffset.z);
 		
+		// ATTACHING!!!
+		// Add 1 layout
+		attachChild(UIBatch);
+		
+		// Add text layout
+		for(int i = 0; i < wordsText.size(); i++){
+			attachChild( wordsText.get(i));
+		}
+		
+		
+		
 		sceneReady = new SceneGameReady(this);
 		attachChild(sceneReady);
 		sceneReady.Show();
+		
+		
+		
+		
 	}
 
+	
 	private void SetupSpriteBatch(Vector3f posOffset) {
 
 		UIBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas(uiAtlasName), ItemMaxCount, MainActivity.Me.getVertexBufferObjectManager());
@@ -123,6 +156,7 @@ public class SceneGame extends MhyhreScene {
 		posOffset.z = posSecondColumn + TextureRegions.get(0).getWidth() / 2;
 	}
 
+	
 	private void SetupWordText(float posVertical, float c1Horizontal, float c2Horizontal) {
 
 		posVertical += TextureRegions.get(0).getHeight() / 2 - MainActivity.Res.getFont("Pixel").getLineHeight() / 2;
@@ -136,7 +170,6 @@ public class SceneGame extends MhyhreScene {
 			wordsText.add(new Text(0, 0, MainActivity.Res.getFont("Pixel"), dictionary.getRandomWord(), MainActivity.Me.getVertexBufferObjectManager()));
 			textHalfWidht = wordsText.get(i).getWidth() / 2;
 			wordsText.get(i).setPosition(c1Horizontal - textHalfWidht, posVertical + i * verticalStep);
-			attachChild(wordsText.get(i));
 		}
 
 		// Left column
@@ -144,10 +177,12 @@ public class SceneGame extends MhyhreScene {
 			wordsText.add(new Text(0, 0, MainActivity.Res.getFont("Pixel"), dictionary.getRandomWord(), MainActivity.Me.getVertexBufferObjectManager()));
 			textHalfWidht = wordsText.get(ItemCount + i).getWidth() / 2;
 			wordsText.get(ItemCount + i).setPosition(c2Horizontal - textHalfWidht, posVertical + i * verticalStep);
-			attachChild(wordsText.get(ItemCount + i));
 		}
 	}
 
+	
+	
+	
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
@@ -157,8 +192,6 @@ public class SceneGame extends MhyhreScene {
 		return super.onSceneTouchEvent(pSceneTouchEvent);
 	}
 
-	
-	
 
 	long time = 100;
 	long lasttime;
@@ -171,7 +204,5 @@ public class SceneGame extends MhyhreScene {
 		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
-
-	
 
 }

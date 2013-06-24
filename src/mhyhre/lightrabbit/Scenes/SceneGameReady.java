@@ -1,9 +1,7 @@
 package mhyhre.lightrabbit.Scenes;
 
-import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -23,11 +21,17 @@ public class SceneGameReady extends MhyhreScene {
 		
 		this.sceneGame = sceneGame;
 		
-		background = new Background(0.78f, 0.78f, 0.80f
+		background = new Background(0.78f, 0.78f, 0.80f);
 		setBackgroundEnabled(true);
 		setBackground(background);
 
+		// Add 1 layout
 		attachChild(sceneGame.UIBatch);
+		
+		// Add text layout
+		for(int i = 0; i < sceneGame.wordsText.size(); i++){
+			attachChild( sceneGame.wordsText.get(i));
+		}
 	}
 	
 	@Override

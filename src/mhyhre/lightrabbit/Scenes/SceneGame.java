@@ -41,24 +41,23 @@ public class SceneGame extends MhyhreScene {
 		}
 	}
 
-	static GameProcessMode mode;
-
+	static GameProcessMode mode = GameProcessMode.Ready;
+	
+	SceneGameReady sceneReady;
+	
 	// Resources
-	Background background;
-
 	String uiAtlasName = "User_Interface";
-	ArrayList<ITextureRegion> TextureRegions;
-	ArrayList<Text> wordsText;
+	
+	public ArrayList<ITextureRegion> TextureRegions;
+	public ArrayList<Text> wordsText;
 	public SpriteBatch UIBatch;
 
-	Dictionary dictionary;
+	public Dictionary dictionary;
 
-	int ItemMaxCount = 32;
-	int ItemCount = 5;
-	final float verticalStep = 80;
+	public int ItemMaxCount = 32;
+	public int ItemCount = 5;
+	public final float verticalStep = 80;
 
-	long time = 100;
-	long lasttime;
 	
 
 	public SceneGame() {
@@ -72,7 +71,7 @@ public class SceneGame extends MhyhreScene {
 
 		// Задаем фон сцене
 		background = new Background(0.78f, 0.78f, 0.80f);
-		setBackgroundEnabled(true);
+		setBackgroundEnabled(false);
 		setBackground(background);
 
 		// Текстурные регионы для каждого элемента
@@ -80,11 +79,14 @@ public class SceneGame extends MhyhreScene {
 		TextureRegions.add(TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas(uiAtlasName), 0, 0, 310, 70, false));
 		TextureRegions.add(TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas(uiAtlasName), 320, 0, 75, 80, false));
 
+		// Настройка геометрии
 		Vector3f posOffset = new Vector3f();
 		SetupSpriteBatch(posOffset);
 		SetupWordText(posOffset.x, posOffset.y, posOffset.z);
-
-		mode = GameProcessMode.Ready;
+		
+		sceneReady = new SceneGameReady(this);
+		attachChild(sceneReady);
+		sceneReady.Show();
 	}
 
 	private void SetupSpriteBatch(Vector3f posOffset) {
@@ -116,12 +118,9 @@ public class SceneGame extends MhyhreScene {
 
 		UIBatch.submit();
 
-		attachChild(UIBatch);
-
 		posOffset.x = verticalMult;
 		posOffset.y = posFirstColumn + TextureRegions.get(0).getWidth() / 2;
 		posOffset.z = posSecondColumn + TextureRegions.get(0).getWidth() / 2;
-
 	}
 
 	private void SetupWordText(float posVertical, float c1Horizontal, float c2Horizontal) {
@@ -152,12 +151,21 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
+		if(sceneReady != null)
+			sceneReady.onSceneTouchEvent(pSceneTouchEvent);
+		
 		return super.onSceneTouchEvent(pSceneTouchEvent);
 	}
 
+	
+	
+
+	long time = 100;
+	long lasttime;
+	
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
-
+		
 		if (System.currentTimeMillis() - lasttime > time) {
 			lasttime = System.currentTimeMillis();
 		}

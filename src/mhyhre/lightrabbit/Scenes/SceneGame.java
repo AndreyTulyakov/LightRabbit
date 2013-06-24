@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import mhyhre.lightrabbit.Dictionary;
+import mhyhre.lightrabbit.GameProcessMode;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
@@ -40,6 +41,9 @@ public class SceneGame extends MhyhreScene {
 		}
 	}
 
+	static GameProcessMode mode;
+
+	// Resources
 	Background background;
 
 	String uiAtlasName = "User_Interface";
@@ -55,9 +59,10 @@ public class SceneGame extends MhyhreScene {
 
 	long time = 100;
 	long lasttime;
+	
 
 	public SceneGame() {
-
+		
 		try {
 			dictionary = new Dictionary("words.txbase");
 		} catch (IOException e) {
@@ -79,6 +84,7 @@ public class SceneGame extends MhyhreScene {
 		SetupSpriteBatch(posOffset);
 		SetupWordText(posOffset.x, posOffset.y, posOffset.z);
 
+		mode = GameProcessMode.Ready;
 	}
 
 	private void SetupSpriteBatch(Vector3f posOffset) {
@@ -157,5 +163,7 @@ public class SceneGame extends MhyhreScene {
 		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
+
+	
 
 }

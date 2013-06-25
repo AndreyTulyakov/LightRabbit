@@ -34,7 +34,7 @@ public class SceneAbout extends MhyhreScene {
 		String TextLoadCaption = "About";
 		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("Pixel White"), TextLoadCaption, MainActivity.Me.getVertexBufferObjectManager());
 		mCaptionItem1.setPosition(
-				MainActivity.SCREEN_WIDTH/2.0f-mCaptionItem1.getWidth()/2.0f,
+				MainActivity.getHalfWidth()-mCaptionItem1.getWidth()/2.0f,
 				mCaptionItem1.getHeight()/2);
 		attachChild(mCaptionItem1);
 	}

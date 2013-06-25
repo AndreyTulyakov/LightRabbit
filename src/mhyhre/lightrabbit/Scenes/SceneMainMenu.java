@@ -93,8 +93,8 @@ public class SceneMainMenu extends MhyhreScene {
 		
 		
 		// Calculating positions
-		float OffsetY = MainActivity.SCREEN_HEIGHT/5.0f;
-		float OffsetX = (MainActivity.SCREEN_WIDTH/2.0f) - (mSpriteItem1.getWidth()/2.0f);
+		float OffsetY = MainActivity.getHeight()/5.0f;
+		float OffsetX = (MainActivity.getHalfWidth()) - (mSpriteItem1.getWidth()/2.0f);
 		
 		mSpriteItem1.setPosition(OffsetX, OffsetY*2);
 		mSpriteItem2.setPosition(OffsetX, OffsetY*3);

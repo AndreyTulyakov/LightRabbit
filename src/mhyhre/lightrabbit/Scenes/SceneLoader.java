@@ -69,17 +69,17 @@ public class SceneLoader extends MhyhreScene {
 		// Tap text
 		String TextMessage = "Just tap...";
 		mCaptionTapScreen = new Text(320, 400, MainActivity.Res.getFont("Pixel"), TextMessage, MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionTapScreen.setPosition(MainActivity.SCREEN_WIDTH / 2 - mCaptionTapScreen.getWidth() / 2, (MainActivity.SCREEN_HEIGHT / 5) * 4);
+		mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() - mCaptionTapScreen.getWidth() / 2, (MainActivity.getHeight()/ 5) * 4);
 		mCaptionTapScreen.setVisible(false);
 		mCaptionTapScreen.setAlpha(0.0f);
 
 		// creating a logo-sprite
 		mSpriteLogo = new Sprite(0, 0, mSplashTextureRegion, MainActivity.Me.getVertexBufferObjectManager());
-		mSpriteLogo.setPosition(MainActivity.SCREEN_WIDTH / 2 - mSplashTextureRegion.getWidth() / 2, MainActivity.SCREEN_HEIGHT / 2 - mSplashTextureRegion.getHeight() / 2);
+		mSpriteLogo.setPosition(MainActivity.getHalfWidth() - mSplashTextureRegion.getWidth() / 2, MainActivity.getHalfHeight() - mSplashTextureRegion.getHeight() / 2);
 		mSpriteLogo.setAlpha(0.0f);
 
 		// tap-zone
-		TapRect = new Rectangle(0, 0, MainActivity.SCREEN_WIDTH, MainActivity.SCREEN_HEIGHT, MainActivity.Me.getVertexBufferObjectManager()) {
+		TapRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN && !Clicked) {
@@ -161,7 +161,7 @@ public class SceneLoader extends MhyhreScene {
 		for (int i = 0; i < CloudCount; i++) {
 			CloudBase[i] = new Cloud();
 			CloudBase[i].SetSize((float) mCloudTR.getWidth(), (float) mCloudTR.getHeight());
-			CloudBase[i].SetPosition((float) mRandom.nextInt(MainActivity.SCREEN_WIDTH) - 5.0f, MainActivity.SCREEN_HEIGHT / 2.0f + (float) mRandom.nextInt(MainActivity.SCREEN_HEIGHT) * 0.66f - 5.0f);
+			CloudBase[i].SetPosition((float) mRandom.nextInt((int)MainActivity.getWidth()) - 5.0f, MainActivity.getHalfHeight() + (float) mRandom.nextInt((int)MainActivity.getHalfHeight()) * 0.66f - 5.0f);
 
 			CloudBase[i].SetMoveSpeed((mRandom.nextFloat() * 0.5f) - 0.25f, (mRandom.nextFloat() * 0.2f) - 0.1f);
 			CloudBase[i].SetScale(3.0f + mRandom.nextFloat() * 3.0f);
@@ -169,7 +169,7 @@ public class SceneLoader extends MhyhreScene {
 
 			CloudBase[i].SetColor(1.f, 0.f, 0.f);
 
-			CloudBase[i].Update(0, MainActivity.SCREEN_WIDTH, 0, MainActivity.SCREEN_HEIGHT);
+			CloudBase[i].Update(0, MainActivity.getWidth(), 0, MainActivity.getHeight());
 
 			cloudsSpriteBatch.draw(this.mCloudTR, CloudBase[i].PosX, CloudBase[i].PosY, CloudBase[i].SizeX, CloudBase[i].SizeY, CloudBase[i].Rotation, CloudBase[i].Scale, CloudBase[i].Scale,
 					CloudBase[i].Red, CloudBase[i].Green, CloudBase[i].Blue, 0.8f);
@@ -192,7 +192,7 @@ public class SceneLoader extends MhyhreScene {
 		if (Loaded) {
 
 			for (int i = 0; i < CloudCount; i++) {
-				CloudBase[i].Update(0, MainActivity.SCREEN_WIDTH, 0, MainActivity.SCREEN_HEIGHT);
+				CloudBase[i].Update(0, MainActivity.getWidth(), 0, MainActivity.getHeight());
 
 				cloudsSpriteBatch.draw(this.mCloudTR, CloudBase[i].PosX, CloudBase[i].PosY, CloudBase[i].SizeX, CloudBase[i].SizeY, CloudBase[i].Rotation, CloudBase[i].Scale, CloudBase[i].Scale,
 						CloudBase[i].Red, CloudBase[i].Green, CloudBase[i].Blue, 0.75f);

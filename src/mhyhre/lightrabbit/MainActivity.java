@@ -44,8 +44,8 @@ public class MainActivity extends SimpleBaseGameActivity {
 	public static Camera camera;
 
 	// screen sizes
-	public static int SCREEN_WIDTH;
-	public static int SCREEN_HEIGHT;
+	private static int SCREEN_WIDTH, SCREEN_HEIGHT;	
+	private static float HalfWidth, HalfHeight;
 
 	public static ResourceManager Res;
 	public static SceneRoot mSceneRoot;
@@ -67,8 +67,10 @@ public class MainActivity extends SimpleBaseGameActivity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
 		SCREEN_WIDTH = 960;
-		;
 		SCREEN_HEIGHT = 540;
+		
+		HalfWidth = SCREEN_WIDTH/2.0f;
+		HalfHeight = SCREEN_HEIGHT/2.0f;
 
 		camera = new Camera(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -130,5 +132,21 @@ public class MainActivity extends SimpleBaseGameActivity {
 			Log.i(DebugID, this.getClass().getSimpleName() + ".onDestroy");
 		super.onDestroy();
 		android.os.Process.killProcess(android.os.Process.myPid());
+	}
+	
+	public static float getWidth(){
+		return SCREEN_WIDTH;
+	}
+	
+	public static float getHeight(){
+		return SCREEN_HEIGHT;
+	}
+	
+	public static float getHalfWidth(){
+		return HalfWidth;
+	}
+	
+	public static float getHalfHeight(){
+		return HalfHeight;
 	}
 }

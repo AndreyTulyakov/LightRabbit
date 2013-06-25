@@ -79,15 +79,15 @@ public class SceneExit extends MhyhreScene {
 		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("Pixel White"),
 				TextLoadCaption, MainActivity.Me.getVertexBufferObjectManager());
 		mCaptionItem1.setPosition(
-				MainActivity.SCREEN_WIDTH / 2 - mCaptionItem1.getWidth() / 2,
-				MainActivity.SCREEN_HEIGHT / 2 - mCaptionItem1.getHeight() / 2);
+				MainActivity.getHalfWidth() - mCaptionItem1.getWidth() / 2,
+				MainActivity.getHalfHeight() - mCaptionItem1.getHeight() / 2);
 
 
 		mExitButtonSprite.setColor(1.0f, 0.8f, 0.8f);
 		mBackButtonSprite.setColor(0.8f, 0.8f, 1.0f);
 		
-		float OffsetX = MainActivity.SCREEN_WIDTH / 3.0f;
-		float OffsetY = MainActivity.SCREEN_HEIGHT - mExitButtonSprite.getHeight()*1.5f;
+		float OffsetX = MainActivity.getWidth() / 3.0f;
+		float OffsetY = MainActivity.getHeight() - mExitButtonSprite.getHeight()*1.5f;
 		
 		mBackButtonSprite.setPosition(OffsetX*1 - mBackButtonSprite.getWidth()/2, OffsetY);
 		mExitButtonSprite.setPosition(OffsetX*2 - mExitButtonSprite.getWidth()/2, OffsetY);

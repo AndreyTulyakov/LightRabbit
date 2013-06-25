@@ -20,9 +20,12 @@ import mhyhre.lightrabbit.GameProcessMode;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
+import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
 
@@ -40,7 +43,7 @@ public class SceneGame extends MhyhreScene {
 		}
 	}
 
-	GameProcessMode mode = GameProcessMode.Ready;
+	private GameProcessMode mode = GameProcessMode.Ready;
 	
 	public void setGameProcessMode(GameProcessMode mode){
 		this.mode = mode;
@@ -65,6 +68,10 @@ public class SceneGame extends MhyhreScene {
 		}
 	}
 	
+	public GameProcessMode getMode(){
+		return mode;
+	}
+	
 	SceneGameReady sceneReady;
 	
 	// Resources
@@ -87,15 +94,25 @@ public class SceneGame extends MhyhreScene {
 		try {
 			dictionary = new Dictionary("words.txbase");
 		} catch (IOException e) {
-			Log.i(MainActivity.DebugID, "Dictionary::cant load: " +e.getMessage());
+			Log.i(MainActivity.DebugID, "Dictionary::cant load: " + e.getMessage());
 			e.printStackTrace();
 		}
+		
+		Background background = new Background(0.78f, 0.78f, 0.80f);
+		setBackgroundEnabled(true);
+		setBackground(background);
 
 		// Текстурные регионы для каждого элемента
 		TextureRegions = new ArrayList<ITextureRegion>();
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas(uiAtlasName), 0, 0, 310, 70, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas(uiAtlasName), 320, 0, 75, 80, false));
-
+		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
+		
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 70, 74, 74, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 80, 70, 74, 74, false));
+		
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
+		
 		// Настройка геометрии
 		Vector3f posOffset = new Vector3f();
 		SetupSpriteBatch(posOffset);
@@ -103,6 +120,8 @@ public class SceneGame extends MhyhreScene {
 		
 		// ATTACHING!!!
 		// Add 1 layout
+		
+		
 		attachChild(UIBatch);
 		
 		// Add text layout
@@ -110,11 +129,42 @@ public class SceneGame extends MhyhreScene {
 			attachChild( wordsText.get(i));
 		}
 		
+		Sprite spriteToMenu = new Sprite(10, 10, TextureRegions.get(4), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+
+					Log.i(MainActivity.DebugID, "Game: clicked to menu buttons");
+					MainActivity.mVibrator.vibrate(30);
+				}
+				return true;
+			}
+		};
+		attachChild(spriteToMenu);
+		registerTouchArea(spriteToMenu);
+		
+		
+		Sprite spriteNext = new Sprite(MainActivity.getWidth() - (10+TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+
+					Log.i(MainActivity.DebugID, "Game: clicked next buttons");
+					MainActivity.mVibrator.vibrate(30);
+				}
+				return true;
+			}
+		};
+		attachChild(spriteNext);
+		registerTouchArea(spriteNext);
+		
 		
 		
 		sceneReady = new SceneGameReady(this);
 		attachChild(sceneReady);
-		sceneReady.Show();
+		//sceneReady.Show();
 		
 		
 		
@@ -127,12 +177,12 @@ public class SceneGame extends MhyhreScene {
 		UIBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas(uiAtlasName), ItemMaxCount, MainActivity.Me.getVertexBufferObjectManager());
 		UIBatch.setPosition(0, 0);
 
-		float posFirstColumn = MainActivity.SCREEN_WIDTH / 2 - (TextureRegions.get(0).getWidth() + TextureRegions.get(1).getWidth() / 2);
-		float posSecondColumn = MainActivity.SCREEN_WIDTH / 2 + TextureRegions.get(1).getWidth() / 2;
-		float posEqualColumn = MainActivity.SCREEN_WIDTH / 2 - TextureRegions.get(1).getWidth() / 2;
+		float posFirstColumn = MainActivity.getHalfWidth() - (TextureRegions.get(0).getWidth() + TextureRegions.get(1).getWidth() / 2);
+		float posSecondColumn = MainActivity.getHalfWidth() + TextureRegions.get(1).getWidth() / 2;
+		float posEqualColumn = MainActivity.getHalfWidth() - TextureRegions.get(1).getWidth() / 2;
 
 		// Расчет вертикального смещения
-		float verticalMult = (MainActivity.SCREEN_HEIGHT / 2) - ((ItemCount * verticalStep) / 2 - (verticalStep - TextureRegions.get(0).getHeight()) / 2);
+		float verticalMult = (MainActivity.getHalfHeight()) - ((ItemCount * verticalStep) / 2 - (verticalStep - TextureRegions.get(0).getHeight()) / 2);
 
 		// First Column
 		for (int i = 0; i < ItemCount; i++) {

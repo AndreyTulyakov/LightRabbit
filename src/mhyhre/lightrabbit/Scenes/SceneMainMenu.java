@@ -15,6 +15,7 @@ package mhyhre.lightrabbit.Scenes;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -35,11 +36,29 @@ public class SceneMainMenu extends MhyhreScene {
 	private Sprite mSpriteItem3;
 
 	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public SceneMainMenu() {
 
 		mBackGround = new Background(0.2f, 0.6f, 0.7f);
 		setBackground(mBackGround);
 		setBackgroundEnabled(true);
+		
+		// SHADER TEST!!!
+		Rectangle rect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager());
+		//rect.setShaderProgram(new ShockwaveShaderProgram(ShockwaveShaderProgram.loadFile("s2.fshader")));
+		//attachChild(rect);
 
 		// Text captions
 		String TextItem1 = "Play";
@@ -124,9 +143,10 @@ public class SceneMainMenu extends MhyhreScene {
 		registerTouchArea(mSpriteItem1);
 		registerTouchArea(mSpriteItem2);
 		registerTouchArea(mSpriteItem3);
+		
+
 	}
 
-	
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 

@@ -69,8 +69,8 @@ public class MainActivity extends SimpleBaseGameActivity {
 		SCREEN_WIDTH = 960;
 		SCREEN_HEIGHT = 540;
 		
-		HalfWidth = SCREEN_WIDTH/2.0f;
-		HalfHeight = SCREEN_HEIGHT/2.0f;
+		HalfWidth = SCREEN_WIDTH / 2.0f;
+		HalfHeight = SCREEN_HEIGHT / 2.0f;
 
 		camera = new Camera(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 

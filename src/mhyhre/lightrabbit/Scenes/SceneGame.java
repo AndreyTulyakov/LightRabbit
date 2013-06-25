@@ -21,7 +21,6 @@ import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
 import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -113,6 +112,9 @@ public class SceneGame extends MhyhreScene {
 		
 		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
 		
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 390, 0, 120, 384, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 460, 0, 4, 384, false));
+		
 		// Настройка геометрии
 		Vector3f posOffset = new Vector3f();
 		SetupSpriteBatch(posOffset);
@@ -121,7 +123,7 @@ public class SceneGame extends MhyhreScene {
 		// ATTACHING!!!
 		// Add 1 layout
 		
-		
+		/*
 		attachChild(UIBatch);
 		
 		// Add text layout
@@ -160,11 +162,11 @@ public class SceneGame extends MhyhreScene {
 		attachChild(spriteNext);
 		registerTouchArea(spriteNext);
 		
-		
+		*/
 		
 		sceneReady = new SceneGameReady(this);
 		attachChild(sceneReady);
-		//sceneReady.Show();
+		sceneReady.Show();
 		
 		
 		

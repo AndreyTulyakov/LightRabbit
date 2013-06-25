@@ -3,7 +3,6 @@ package mhyhre.lightrabbit.Scenes;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -15,7 +14,7 @@ public class SceneGameReady extends MhyhreScene {
 	
 	Background background;
 	
-	Sprite buttonStart, buttonBack;
+	Sprite buttonStart, buttonBack, spriteInfo;
 	Text textStart, textInfo;
 	
 	
@@ -27,16 +26,25 @@ public class SceneGameReady extends MhyhreScene {
 		setBackgroundEnabled(true);
 		setBackground(background);
 		
-		float centerW = MainActivity.getHalfWidth();	
-		float centerH = MainActivity.getHalfHeight();
+	
+		// Configure Info Message
+		float horizontalSpace = 400;
+		float centerW = MainActivity.getHalfWidth() - horizontalSpace/2;	
+		float centerH = MainActivity.getHalfHeight() - sceneGame.TextureRegions.get(5).getHeight()/2;
 		
-		float rw = 600, rh = 400; 
-		Rectangle rectInfo = new Rectangle(centerW - rw/2, centerH - rh/2 , rw, rh, MainActivity.Me.getVertexBufferObjectManager());
-		rectInfo.setColor(0.9f, 0.9f, 1.0f);
-		attachChild(rectInfo);
+		Sprite spriteInfoCenter = new Sprite(centerW+horizontalSpace/2 -2, centerH, sceneGame.TextureRegions.get(6), MainActivity.Me.getVertexBufferObjectManager());
+		spriteInfoCenter.setScale( horizontalSpace/sceneGame.TextureRegions.get(6).getWidth(), 1);
+		attachChild(spriteInfoCenter);
+		
+		Sprite spriteInfoLeft = new Sprite(centerW  - sceneGame.TextureRegions.get(5).getWidth(), centerH, sceneGame.TextureRegions.get(5), MainActivity.Me.getVertexBufferObjectManager());
+		attachChild(spriteInfoLeft);
+		
+		Sprite spriteInfoRight = new Sprite(centerW+horizontalSpace, centerH, sceneGame.TextureRegions.get(5), MainActivity.Me.getVertexBufferObjectManager());
+		spriteInfoRight.setFlippedHorizontal(true);
+		attachChild(spriteInfoRight);
 		
 		textInfo = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "Pairs of words: " + sceneGame.ItemCount, MainActivity.Me.getVertexBufferObjectManager());
-		textInfo.setPosition(centerW - textInfo.getWidth()/2, centerH - 100);
+		textInfo.setPosition(MainActivity.getHalfWidth() - textInfo.getWidth()/2, MainActivity.getHalfHeight() - 100);
 		attachChild(textInfo);
 	}
 	

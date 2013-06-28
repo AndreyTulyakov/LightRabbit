@@ -12,6 +12,7 @@
 
 package mhyhre.lightrabbit.Scenes;
 
+import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 
 import org.andengine.entity.scene.Scene;
@@ -112,8 +113,12 @@ public class SceneRoot extends Scene {
 				mSceneExit.Show();
 				break;
 
-			case Game:
+			case NewGame:
+				mSceneGame.setMaxLevel(5);
+				mSceneGame.setCurrentLevel(1);
+				mSceneGame.setGameState(GameState.Ready);
 				mSceneGame.Show();
+				Log.i(MainActivity.DebugID, "Level:" + mSceneGame.getCurrentLevel());
 				break;
 
 			default:
@@ -152,7 +157,7 @@ public class SceneRoot extends Scene {
 
 				break;
 
-			case Game:
+			case NewGame:
 				mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
 				break;
 

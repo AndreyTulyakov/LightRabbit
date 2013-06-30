@@ -18,6 +18,7 @@ import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
+import org.andengine.entity.scene.background.Background;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
@@ -30,7 +31,8 @@ public class SceneGame extends MhyhreScene {
 	
 	private GameState mode = GameState.Ready;
 	private boolean loaded = false;
-
+	
+	Background background;
 	SceneGameMessage sceneMessage;
 	SceneGameMemorize sceneMemorize;
 
@@ -42,11 +44,15 @@ public class SceneGame extends MhyhreScene {
 	long time = 100;
 	long lasttime;
 	
-	private int CurrentLevel = 0;
-	private int MaxLevel = 5;
+	private int currentLevel = 0;
+	private int MaxLevel = 10;
 
 
 	public SceneGame() {
+		
+		background = new Background(0.78f, 0.78f, 0.80f);
+		setBackgroundEnabled(true);
+		setBackground(background);
 
 		CreateTextureRegions();
 
@@ -56,6 +62,11 @@ public class SceneGame extends MhyhreScene {
 		sceneMemorize = new SceneGameMemorize(this);
 		attachChild(sceneMemorize);
 
+
+		
+		
+
+		
 		loaded = true;
 
 		setGameState(GameState.Ready);
@@ -131,6 +142,10 @@ public class SceneGame extends MhyhreScene {
 		switch (mode) {
 
 		case Ready:
+			if(currentLevel>MaxLevel){
+				SceneRoot.SetState(SceneStates.MainMenu);
+			}
+			
 			sceneMessage.displayStartScene();
 			sceneMessage.Show();
 			break;
@@ -152,7 +167,7 @@ public class SceneGame extends MhyhreScene {
 		}
 	}
 
-	public GameState getMode() {
+	public GameState getGameState() {
 		return mode;
 	}
 	
@@ -160,12 +175,12 @@ public class SceneGame extends MhyhreScene {
 	
 
 	public int getCurrentLevel(){
-		return CurrentLevel;
+		return currentLevel;
 	}
 	
 	public void setCurrentLevel(int arg){
 		if(arg>=0){
-			CurrentLevel = arg;
+			currentLevel = arg;
 		}
 	}
 	
@@ -173,10 +188,5 @@ public class SceneGame extends MhyhreScene {
 		return MaxLevel;
 	}
 	
-	public void setMaxLevel(int arg){
-		if(arg>0){
-			MaxLevel = arg;
-		}
-	}
 	
 }

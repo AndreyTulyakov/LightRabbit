@@ -4,7 +4,6 @@ import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -12,35 +11,38 @@ import org.andengine.input.touch.TouchEvent;
 public class SceneGameMessage extends MhyhreScene {
 
 	SceneGame sceneGame;
-
 	
-	Background background;
-	
-	Sprite buttonStart, buttonBack, spriteInfo;
+	Sprite spriteInfo;
 	Text textReady, textInfo, textLevelInfo;
 
 	
 	
 	public void displayStartScene(){
+		textReady.setText("Готовы?");
+		textReady.setPosition(MainActivity.getHalfWidth() - textReady.getWidth()/2, MainActivity.getHalfHeight() - 100);
+		
 		textLevelInfo.setText("Уровень: " + sceneGame.getCurrentLevel());
 		textLevelInfo.setPosition(MainActivity.getHalfWidth() - 150, MainActivity.getHalfHeight() + 20);
 		
 		textInfo.setText("Словосочетаний: " + (sceneGame.getCurrentLevel()+2));
 		textInfo.setPosition(MainActivity.getHalfWidth() - 150, MainActivity.getHalfHeight() + 100);
+		textInfo.setVisible(true);
 	}
 	
 	public void displayEndScene(){
+		textReady.setText("Результат");
+		textReady.setPosition(MainActivity.getHalfWidth() - textReady.getWidth()/2, MainActivity.getHalfHeight() - 100);
 		
+		textLevelInfo.setText("Ошибок: ");
+		textLevelInfo.setPosition(MainActivity.getHalfWidth() - 150, MainActivity.getHalfHeight() + 20);
+
+		textInfo.setVisible(false);
 	}
 	
 	
 	public SceneGameMessage(final SceneGame sceneGame) {
 		
 		this.sceneGame = sceneGame;
-		
-		background = new Background(0.78f, 0.78f, 0.80f);
-		setBackgroundEnabled(true);
-		setBackground(background);
 		
 	
 		// Configure Info Message
@@ -60,12 +62,8 @@ public class SceneGameMessage extends MhyhreScene {
 		attachChild(spriteInfoRight);
 		
 		
-		textReady = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "Готовы?", MainActivity.Me.getVertexBufferObjectManager());
-		textReady.setPosition(MainActivity.getHalfWidth() - textReady.getWidth()/2, MainActivity.getHalfHeight() - spriteInfoCenter.getHeight()/3.5f);
+		textReady = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "", 50, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(textReady);
-		
-		
-		// Задавать текст не в конструкторе!!!
 		
 		textLevelInfo = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "", 60, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(textLevelInfo);
@@ -78,10 +76,16 @@ public class SceneGameMessage extends MhyhreScene {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-
-					sceneGame.setGameState(GameState.Memorize);
 					MainActivity.mVibrator.vibrate(30);
+					
+					if(sceneGame.getGameState() == GameState.Ready){
+						sceneGame.setGameState(GameState.Memorize);
+					} else {
+						sceneGame.setCurrentLevel(sceneGame.getCurrentLevel()+1);
+						sceneGame.setGameState(GameState.Ready);
+					}				
 				}
 				return true;
 			}

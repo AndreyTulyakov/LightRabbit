@@ -2,6 +2,7 @@ package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
 
+import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
@@ -18,13 +19,15 @@ public class SceneGameShow extends MhyhreScene {
 
 	private int maxItemCount;
 	private int currentItemCount;
+	private int errorsCount = 0;
 
-	ArrayList<String> words;
+	
+	ArrayList<WordItem> wordItems;
 	ArrayList<Text> labels;
 	SpriteBatch UIBatch;
 	Font itemFont;
 
-	final float borderSize = 60;
+	final float borderSize = 100;
 	final float heightStep = 80;
 	final float centerOffset = 180;
 
@@ -42,7 +45,7 @@ public class SceneGameShow extends MhyhreScene {
 
 		// Text setup
 		itemFont = MainActivity.Res.getFont("Pixel");
-		words = new ArrayList<String>(maxItemCount);
+		wordItems = new ArrayList<WordItem>(maxItemCount);
 		labels = new ArrayList<Text>(maxItemCount);
 
 		// Labels setup
@@ -54,42 +57,63 @@ public class SceneGameShow extends MhyhreScene {
 
 	public void setWordsList(final ArrayList<String> inWords) {
 
-		if (inWords.size() > maxItemCount) {
+		if (inWords.size() > maxItemCount || inWords.size()%2 == 1) {
+			Log.e(MainActivity.DebugID, "Scene::setWordsList: strange list size");
 			return;
 		}
 
 		currentItemCount = inWords.size();
 
+		wordItems.clear();
+		
 		for (int i = 0; i < currentItemCount; i++) {
-			words.add(new String(inWords.get(i)));
+			wordItems.add(new WordItem(new String(inWords.get(i))));
 		}
 	}
 
 	public void update() {
 
+		ITextureRegion itemRegion = SceneGame.TextureRegions.get(0);
+		final float leftCenterOffset = MainActivity.getHalfWidth() - centerOffset;
+		final float rightCenterOffset = MainActivity.getHalfWidth() + centerOffset;
+		
+		float colorDelta = 0.01f;
+		
+		for (int i = 0; i < currentItemCount; i += 2) {
+			
+			// Left column
+			WordItem leftItem = wordItems.get(i);
+			leftItem.setX(leftCenterOffset);
+			leftItem.setY(borderSize + (i / 2) * heightStep);
+			leftItem.setWidth(itemRegion.getWidth());
+			leftItem.setHeight(itemRegion.getHeight());
+			leftItem.colorNegativeFill(colorDelta, 0.5f, 0.5f, 0.5f);
+			
+			// Right column
+			WordItem rightItem = wordItems.get(i + 1);
+			rightItem.setX(rightCenterOffset);
+			rightItem.setY(borderSize + (i / 2) * heightStep);
+			rightItem.setWidth(itemRegion.getWidth());
+			rightItem.setHeight(itemRegion.getHeight());
+			rightItem.colorNegativeFill(colorDelta, 0.5f, 0.5f, 0.5f);
+		}
+		
 		updateLabels();
 		updateUIBatch();
 	}
 
 	private void updateLabels() {
 
-		final float leftCenterOffset = MainActivity.getHalfWidth() - centerOffset;
-		final float rightCenterOffset = MainActivity.getHalfWidth() + centerOffset;
-		final float textBorderSize = borderSize - itemFont.getLineHeight() / 2;
+		final float textBorderSize = itemFont.getLineHeight() / 2;
 
-		for (int i = 0; i < currentItemCount; i += 2) {
+		for (int i = 0; i < currentItemCount; i++) {
 
-			// Left column
-			Text textLeft = labels.get(i);
-			textLeft.setText(words.get(i));
-			textLeft.setPosition(leftCenterOffset - textLeft.getWidth() / 2, textBorderSize + (i / 2) * heightStep);
-			textLeft.setVisible(true);
-
-			// Right column
-			Text textRight = labels.get(i + 1);
-			textRight.setText(words.get(i + 1));
-			textRight.setPosition(rightCenterOffset - textRight.getWidth() / 2, textBorderSize + (i / 2) * heightStep);
-			textRight.setVisible(true);
+			WordItem item = wordItems.get(i);
+			Text text = labels.get(i);
+			
+			text.setText(item.getWord());
+			text.setPosition(item.getX() - text.getWidth()/2, item.getY() - textBorderSize);
+			text.setVisible(true);
 		}
 
 		// Hide not used labels
@@ -100,21 +124,25 @@ public class SceneGameShow extends MhyhreScene {
 
 	private void updateUIBatch() {
 
-		ITextureRegion itemRegion = SceneGame.TextureRegions.get(0);
+		ITextureRegion itemTextureRegion = SceneGame.TextureRegions.get(0);
 
-		float leftCenterOffset = (MainActivity.getHalfWidth() - centerOffset) - itemRegion.getWidth() / 2;
-		float rightCenterOffset = (MainActivity.getHalfWidth() + centerOffset) - itemRegion.getWidth() / 2;
-		float SpecialBorderSize = borderSize - itemRegion.getHeight() / 2;
-
-		for (int i = 0; i < currentItemCount; i += 2) {
-
-			// Left column
-			UIBatch.draw(itemRegion, leftCenterOffset, SpecialBorderSize + (i / 2) * heightStep, itemRegion.getWidth(), itemRegion.getHeight(), 0, 1, 1, 1, 1);
-
-			// Right column
-			UIBatch.draw(itemRegion, rightCenterOffset, SpecialBorderSize + (i / 2) * heightStep, itemRegion.getWidth(), itemRegion.getHeight(), 0, 1, 1, 1, 1);
+		for (int i = 0; i < currentItemCount; i++) {
+			WordItem item = wordItems.get(i);
+			UIBatch.draw(itemTextureRegion, item.getRectX(), item.getRectY(), item.getWidth(), item.getHeight(), 0, item.getRed(), item.getGreen(), item.getBlue(), item.getAlpha());
 		}
-
+		
+		if(SceneGame.getMode() == GameState.Memorize){
+			
+			ITextureRegion equallRegion = SceneGame.TextureRegions.get(1);
+			int halfItemCount = currentItemCount/2;
+			float xPosition = MainActivity.getHalfWidth() - equallRegion.getWidth()/2;
+			float mBorder = borderSize - equallRegion.getHeight()/2;
+			
+			for (int i = 0; i < halfItemCount; i++) {
+				UIBatch.draw(equallRegion, xPosition, mBorder + i * heightStep, equallRegion.getWidth(), equallRegion.getHeight(), 0, 1, 1, 1, 1);
+			}
+		}
+		
 		UIBatch.submit();
 	}
 
@@ -133,7 +161,7 @@ public class SceneGameShow extends MhyhreScene {
 			lastY = event.getY();
 
 			if (oldTouchEvent != null && isSlidingMove == false) {
-				clickEvent(oldTouchEvent.getX(),oldTouchEvent.getY());
+				clickEvent(oldTouchEvent.getX()-getX(),oldTouchEvent.getY()-getY());
 			}
 		}
 
@@ -166,14 +194,30 @@ public class SceneGameShow extends MhyhreScene {
 			lastY = event.getY();
 		}
 
-		return super.onSceneTouchEvent(oldTouchEvent); 
+		return super.onSceneTouchEvent(event); 
 	}
 
 	private void clickEvent(float x, float y) {
 	
-		if (isPointInRect(x, y, 0, 0, 200, 200)) {
-			Log.i(MainActivity.DebugID, "Scene::clicked in rect: [" + x + ", " + y + "]");
-		}	
+		for (int i = 0; i < currentItemCount; i++) {
+
+			WordItem item = wordItems.get(i);
+		
+			if (isPointInRect(x, y, item.getRectX(), item.getRectY(), item.getWidth(), item.getHeight())) {
+				Log.i(MainActivity.DebugID, "Scene::clicked in rect: " + i);
+				
+				item.setBlue(1);
+				item.setGreen(1);
+				item.setRed(1);
+			}
+		}
+	}
+	
+	@Override
+	protected void onManagedUpdate(final float pSecondsElapsed) {
+
+		update();
+		super.onManagedUpdate(pSecondsElapsed);
 	}
 
 	private void scrollScene(float scrollValue) {
@@ -201,6 +245,18 @@ public class SceneGameShow extends MhyhreScene {
 			return false;
 
 		return true;
+	}
+
+	private void shuffleWords(){
+		
+	}
+	
+	public int getErrorsCount() {
+		return errorsCount;
+	}
+
+	public void setErrorsCount(int errorsCount) {
+		this.errorsCount = errorsCount;
 	}
 
 }

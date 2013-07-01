@@ -114,7 +114,7 @@ public class SceneRoot extends Scene {
 				break;
 
 			case NewGame:
-				mSceneGame.setCurrentLevel(5);
+				mSceneGame.setCurrentLevel(1);
 				mSceneGame.setGameState(GameState.Ready);
 				mSceneGame.Show();
 				Log.i(MainActivity.DebugID, "Level:" + mSceneGame.getCurrentLevel());

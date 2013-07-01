@@ -19,6 +19,7 @@ import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
@@ -30,10 +31,11 @@ public class SceneGame extends MhyhreScene {
 
 	public Dictionary dictionary = Dictionary.Instance();
 
-	private GameState mode = GameState.Ready;
+	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 	
 	SceneGameShow sceneMemorize;
+	SceneGameMessage sceneMessage;
 
 	// Resources
 	public static final String uiAtlasName = "User_Interface";
@@ -41,29 +43,83 @@ public class SceneGame extends MhyhreScene {
 	public static ArrayList<ITextureRegion> TextureRegions;
 	
 	private int currentLevel = 0;
-	final private int maxLevel = 30;
+	final private int maxLevel = 10;
 	final private int maxItemCount = (maxLevel+2) * 2;
 
 	public SceneGame() {
 		
 		CreateTextureRegions();
 
+		// Memorize Scene
 		sceneMemorize = new SceneGameShow(maxItemCount);
-		sceneMemorize.Show();
 		attachChild(sceneMemorize);
+		nextLevel();
+		
+		// Scene message
+		sceneMessage = new SceneGameMessage(this);
+		attachChild(sceneMessage);
+		
+		
 
+		Sprite spriteNext = new Sprite(MainActivity.getWidth() - (10 + TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
+					
+					
+					MainActivity.mVibrator.vibrate(30);
+					
+					switch(mode){
+					
+					case Ready:
+						setGameState(GameState.Memorize);
+						break;
+						
+					case Memorize:
+						setGameState(GameState.Recollect);
+						break;
+						
+					case Recollect:
+						setGameState(GameState.Result);
+						break;
+						
+					case Result:
+						nextLevel();
+						setGameState(GameState.Ready);
+						break;
+					}		
+				}
+				return true;
+			}
+		};
+		attachChild(spriteNext);
+		registerTouchArea(spriteNext);
+		
+		
+		loaded = true;
+		
+		setGameState(GameState.Ready);
+	}
+	
+	private void nextLevel(){
+		currentLevel++;
+
+		int currentItem = (getCurrentLevel() + 2) * 2;
+		
 		ArrayList<String> words = new ArrayList<String>();
-		for(int i=0; i<maxItemCount; i++){
+		for(int i=0; i<currentItem; i++){
 			words.add(dictionary.getRandomWord());
 		}
 		
 		sceneMemorize.setWordsList(words);
 		sceneMemorize.update();
+		sceneMemorize.setErrorsCount(0);
 		
-		
-
-		
-		loaded = true;
+		if(getCurrentLevel()>getMaxLevel()){
+			SceneRoot.SetState(SceneStates.MainMenu);
+		}
 	}
 
 	private static void CreateTextureRegions() {
@@ -91,7 +147,7 @@ public class SceneGame extends MhyhreScene {
 			switch (mode) {
 
 			case Ready:
-				
+				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
 				break;
 
 			case Memorize:
@@ -103,7 +159,7 @@ public class SceneGame extends MhyhreScene {
 				break;
 
 			case Result:
-				
+				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
 				break;
 			}		
 		}
@@ -128,44 +184,48 @@ public class SceneGame extends MhyhreScene {
 
 		this.mode = mode;
 
-		sceneMemorize.Show();
-		//sceneMemorize.Hide();
+		sceneMemorize.Hide();
+		sceneMessage.Hide();
 
 		switch (mode) {
 
 		case Ready:
-
+			sceneMessage.displayStartScene();
+			sceneMessage.Show();
 			break;
 
 		case Memorize:
-			
+			//sceneMemorize
+			sceneMemorize.Show();
 			break;
 
 		case Recollect:
-			
+			//sceneMemorize
+			sceneMemorize.Show();
 			break;
 
 		case Result:
-			
+			sceneMessage.displayEndScene(sceneMemorize.getErrorsCount());
+			sceneMessage.Show();
 			break;
 		}
 	}
 
-	public GameState getGameState() {
+	public static GameState getMode() {
 		return mode;
 	}
-	
-	
-	
 
 	public int getCurrentLevel(){
 		return currentLevel;
 	}
 	
 	public void setCurrentLevel(int arg){
-		if(arg>=0){
-			currentLevel = arg;
+		if(arg>0){
+			currentLevel = arg-1;
+		} else {
+			currentLevel = 0;
 		}
+		nextLevel();
 	}
 	
 	public int getMaxLevel(){

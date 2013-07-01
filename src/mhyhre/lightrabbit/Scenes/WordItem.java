@@ -7,25 +7,28 @@ public class WordItem {
 	float width, height;
 	float red, green, blue, alpha;
 
+	public WordItem(String word) {
+		this.word = word;
+		this.x = 0;
+		this.y = 0;
+		this.width = 0;
+		this.height = 0;
+		this.red = 1;
+		this.green = 1;
+		this.blue = 1;
+		this.alpha = 1;
+	}
+	
 	public WordItem(String word, float x, float y, float width, float height) {
 		this.word = word;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-	}
-
-	public WordItem(String word, float x, float y, float width, float height, float red, float green, float blue, float alpha) {
-		super();
-		this.word = word;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
-		this.alpha = alpha;
+		this.red = 1;
+		this.green = 1;
+		this.blue = 1;
+		this.alpha = 1;
 	}
 
 	public float getRed() {
@@ -99,5 +102,66 @@ public class WordItem {
 	public void setWord(String word) {
 		this.word = word;
 	}
+	
+	public float getRectX() {
+		return x-width/2;
+	}
+	
+	public float getRectY() {
+		return y-height/2;
+	}
 
+	public void colorPositiveFill(float delta){
+		colorPositiveFill(delta, 1, 1, 1);
+	}
+	
+	public void colorPositiveFill(float delta, float maxRed, float maxGreen, float maxBlue){
+		
+		if(red < maxRed){
+			red+=delta;
+		}
+		if(green < maxGreen){
+			green+=delta;
+		}
+		if(blue < maxBlue){
+			blue+=delta;
+		}
+		
+		if(red > maxRed){
+			red = maxRed;
+		}
+		if(green > maxGreen){
+			green = maxGreen;
+		}
+		if(blue > maxBlue){
+			blue = maxBlue;
+		}
+	}
+	
+	public void colorNegativeFill(float delta){
+		colorNegativeFill(delta, 0, 0, 0);
+	}
+	
+	public void colorNegativeFill(float delta, float minRed, float minGreen, float minBlue){
+		
+		if(red > minRed){
+			red-=delta;
+		}
+		if(green > minGreen){
+			green-=delta;
+		}
+		if(blue > minBlue){
+			blue-=delta;
+		}
+		
+		if(red < minRed){
+			red = minRed;
+		}
+		if(green < minGreen){
+			green = minGreen;
+		}
+		if(blue < minBlue){
+			blue = minBlue;
+		}
+	}
 }

@@ -131,11 +131,15 @@ public class SceneGameShow extends MhyhreScene {
 	@Override
     public boolean onSceneTouchEvent(final TouchEvent event) {
 			
-            float sensitivity = 5.0f;
+            float sensitivity = 10.0f;
             
             if(event.isActionUp()){
             	isTouchDown = false;
             	lastY = event.getY();
+            	
+            	if(oldTouchEvent != null && isSlidingMove == false){
+            		clickEvent(oldTouchEvent.getX(), oldTouchEvent.getY());
+            	}
             }
             
             if(event.isActionMove()){
@@ -154,7 +158,7 @@ public class SceneGameShow extends MhyhreScene {
             		}
             	}
             	
-            	if(isTouchDown == true){
+            	if(isTouchDown == true && isSlidingMove == true){
             		scrollScene(event.getY() - lastY);
             		lastY = event.getY();
             	}
@@ -171,6 +175,13 @@ public class SceneGameShow extends MhyhreScene {
             return super.onSceneTouchEvent(event);
     }
 	
+	private void clickEvent(float x, float y){
+		
+		if(isPointInRect(x, y, 0, 0, 200, 200)){
+			Log.i(MainActivity.DebugID, "Scene::clicked in rect: [" + x + ", " + y + "]");
+		}
+	}
+	
 	private void scrollScene(float scrollValue){
 		
 		setX(0);
@@ -186,7 +197,18 @@ public class SceneGameShow extends MhyhreScene {
 			setY(0);
 		}
 		
-		Log.i(MainActivity.DebugID, "Scene Y: " + getY());
+		
+	}
+	
+	private boolean isPointInRect(float pointX, float pointY, float x, float y, float w, float h){
+		
+		if(pointX < x || pointX > x+w)
+			return false;
+		
+		if(pointY < y || pointY > y+h)
+			return false;
+		
+		return true;
 	}
 
 }

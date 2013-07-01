@@ -133,7 +133,7 @@ public class SceneGameShow extends MhyhreScene {
 			lastY = event.getY();
 
 			if (oldTouchEvent != null && isSlidingMove == false) {
-				clickEvent(oldTouchEvent.getX(), oldTouchEvent.getY());
+				clickEvent(oldTouchEvent.getX(),oldTouchEvent.getY());
 			}
 		}
 
@@ -157,7 +157,6 @@ public class SceneGameShow extends MhyhreScene {
 				scrollScene(event.getY() - lastY);
 				lastY = event.getY();
 			}
-
 		}
 
 		if (event.isActionDown()) {
@@ -167,14 +166,14 @@ public class SceneGameShow extends MhyhreScene {
 			lastY = event.getY();
 		}
 
-		return super.onSceneTouchEvent(event);
+		return super.onSceneTouchEvent(oldTouchEvent); 
 	}
 
 	private void clickEvent(float x, float y) {
-
+	
 		if (isPointInRect(x, y, 0, 0, 200, 200)) {
 			Log.i(MainActivity.DebugID, "Scene::clicked in rect: [" + x + ", " + y + "]");
-		}
+		}	
 	}
 
 	private void scrollScene(float scrollValue) {

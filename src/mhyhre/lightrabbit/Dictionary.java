@@ -11,12 +11,25 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 public class Dictionary {
-
+	
+	static Dictionary instance = null;
 	private ArrayList<String> array;
 	Random random;
+	
+	
+	static public Dictionary Instance(){
+		if(instance == null){
+			try {
+				instance = new Dictionary("words.txbase");
+			} catch (IOException e) {
+				Log.i(MainActivity.DebugID, "Dictionary::cant load: " + e.getMessage());
+			}
+		}
+		return instance;
+	}
 
-	public Dictionary(String filename) throws IOException {
-
+	private Dictionary(String filename) throws IOException {
+		
 		String word;
 		array = new ArrayList<String>();
 

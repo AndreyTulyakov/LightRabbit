@@ -14,11 +14,11 @@ package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
 
+import mhyhre.lightrabbit.Dictionary;
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.scene.background.Background;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
@@ -28,51 +28,45 @@ import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
 
-	
+	public Dictionary dictionary = Dictionary.Instance();
+
 	private GameState mode = GameState.Ready;
 	private boolean loaded = false;
 	
-	Background background;
-	SceneGameMessage sceneMessage;
-	SceneGameMemorize sceneMemorize;
+	SceneGameShow sceneMemorize;
 
 	// Resources
-	public String uiAtlasName = "User_Interface";
+	public static final String uiAtlasName = "User_Interface";
 
-	public ArrayList<ITextureRegion> TextureRegions;
-
-	long time = 100;
-	long lasttime;
+	public static ArrayList<ITextureRegion> TextureRegions;
 	
 	private int currentLevel = 0;
-	private int MaxLevel = 10;
-
+	final private int maxLevel = 30;
+	final private int maxItemCount = (maxLevel+2) * 2;
 
 	public SceneGame() {
 		
-		background = new Background(0.78f, 0.78f, 0.80f);
-		setBackgroundEnabled(true);
-		setBackground(background);
-
 		CreateTextureRegions();
 
-		sceneMessage = new SceneGameMessage(this);
-		attachChild(sceneMessage);
-
-		sceneMemorize = new SceneGameMemorize(this);
+		sceneMemorize = new SceneGameShow(maxItemCount);
+		sceneMemorize.Show();
 		attachChild(sceneMemorize);
 
-
+		ArrayList<String> words = new ArrayList<String>();
+		for(int i=0; i<maxItemCount; i++){
+			words.add(dictionary.getRandomWord());
+		}
+		
+		sceneMemorize.setWordsList(words);
+		sceneMemorize.update();
 		
 		
 
 		
 		loaded = true;
-
-		setGameState(GameState.Ready);
 	}
 
-	private void CreateTextureRegions() {
+	private static void CreateTextureRegions() {
 
 		TextureRegions = new ArrayList<ITextureRegion>();
 		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
@@ -91,12 +85,13 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
+		sceneMemorize.onSceneTouchEvent(pSceneTouchEvent);
 		if (loaded == true) {
 			
 			switch (mode) {
 
 			case Ready:
-				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
+				
 				break;
 
 			case Memorize:
@@ -108,7 +103,7 @@ public class SceneGame extends MhyhreScene {
 				break;
 
 			case Result:
-				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
+				
 				break;
 			}		
 		}
@@ -120,9 +115,6 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
-		if (System.currentTimeMillis() - lasttime > time) {
-			lasttime = System.currentTimeMillis();
-		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 
@@ -136,33 +128,25 @@ public class SceneGame extends MhyhreScene {
 
 		this.mode = mode;
 
-		sceneMessage.Hide();
-		sceneMemorize.Hide();
+		sceneMemorize.Show();
+		//sceneMemorize.Hide();
 
 		switch (mode) {
 
 		case Ready:
-			if(currentLevel>MaxLevel){
-				SceneRoot.SetState(SceneStates.MainMenu);
-			}
-			
-			sceneMessage.displayStartScene();
-			sceneMessage.Show();
+
 			break;
 
 		case Memorize:
-			sceneMemorize.displayMemorizeScene();
-			sceneMemorize.Show();
+			
 			break;
 
 		case Recollect:
-			sceneMemorize.displayRecollectScene();
-			sceneMemorize.Show();
+			
 			break;
 
 		case Result:
-			sceneMessage.displayEndScene();
-			sceneMessage.Show();
+			
 			break;
 		}
 	}
@@ -185,7 +169,7 @@ public class SceneGame extends MhyhreScene {
 	}
 	
 	public int getMaxLevel(){
-		return MaxLevel;
+		return maxLevel;
 	}
 	
 	

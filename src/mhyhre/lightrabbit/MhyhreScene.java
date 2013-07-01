@@ -29,5 +29,6 @@ public class MhyhreScene extends CameraScene {
 		setVisible(false);
 		setIgnoreUpdate(true);
 	}
+
 	
 }

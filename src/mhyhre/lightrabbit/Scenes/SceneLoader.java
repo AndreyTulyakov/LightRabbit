@@ -16,7 +16,6 @@ import java.util.Random;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
-import mhyhre.lightrabbit.ShockwaveShaderProgram;
 
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
@@ -55,19 +54,12 @@ public class SceneLoader extends MhyhreScene {
 	private static Cloud CloudBase[] = new Cloud[CloudCount];
 
 	Random mRandom = new Random();
-	
-	ShockwaveShaderProgram program;
 
 	public SceneLoader() {
 
 		backGround = new Background(0.0f, 0.0f, 0.0f);
 		setBackground(backGround);
 		setBackgroundEnabled(true);
-		
-		program = new ShockwaveShaderProgram(ShockwaveShaderProgram.loadFile("s1.fshader"));
-		
-
-
 
 		MainActivity.Res.LoadResourcesForPreloader();
 

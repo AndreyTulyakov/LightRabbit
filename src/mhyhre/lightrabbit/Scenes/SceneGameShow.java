@@ -1,6 +1,7 @@
 package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
@@ -16,14 +17,29 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
 
 public class SceneGameShow extends MhyhreScene {
+	
+	
+	
+	class WordPair{
+		public String word1, word2;
+		
+		public WordPair(String w1, String w2) {
+			this.word1 = new String(w1);
+			this.word2 = new String(w2);
+		}
+	}
+	
 
+	SceneGame sceneGame;
+	
 	private int maxItemCount;
 	private int currentItemCount;
 	private int errorsCount = 0;
-
+	private int selectByProgramm;
 	
 	ArrayList<WordItem> wordItems;
 	ArrayList<Text> labels;
+	ArrayList<WordPair> wordPairs;
 	SpriteBatch UIBatch;
 	Font itemFont;
 
@@ -31,8 +47,10 @@ public class SceneGameShow extends MhyhreScene {
 	final float heightStep = 80;
 	final float centerOffset = 180;
 
-	public SceneGameShow(int maxItemCount) {
+	public SceneGameShow(final SceneGame sceneGame, int maxItemCount) {
 
+		this.sceneGame = sceneGame;
+		
 		Background background = new Background(0.78f, 0.78f, 0.80f);
 		setBackgroundEnabled(true);
 		setBackground(background);
@@ -47,6 +65,7 @@ public class SceneGameShow extends MhyhreScene {
 		itemFont = MainActivity.Res.getFont("Pixel");
 		wordItems = new ArrayList<WordItem>(maxItemCount);
 		labels = new ArrayList<Text>(maxItemCount);
+		wordPairs = new ArrayList<WordPair>(maxItemCount/2);
 
 		// Labels setup
 		for (int i = 0; i < maxItemCount; i++) {
@@ -57,6 +76,8 @@ public class SceneGameShow extends MhyhreScene {
 
 	public void setWordsList(final ArrayList<String> inWords) {
 
+		selectByProgramm = 0;
+		
 		if (inWords.size() > maxItemCount || inWords.size()%2 == 1) {
 			Log.e(MainActivity.DebugID, "Scene::setWordsList: strange list size");
 			return;
@@ -65,9 +86,15 @@ public class SceneGameShow extends MhyhreScene {
 		currentItemCount = inWords.size();
 
 		wordItems.clear();
+		wordPairs.clear();
 		
 		for (int i = 0; i < currentItemCount; i++) {
 			wordItems.add(new WordItem(new String(inWords.get(i))));
+		}
+		
+		for (int i = 0; i < currentItemCount; i+=2) {
+			wordPairs.add(new WordPair(inWords.get(i), inWords.get(i+1)));
+			Log.i(MainActivity.DebugID, "#### " + inWords.get(i) +" - "+ inWords.get(i+1));
 		}
 	}
 
@@ -87,7 +114,7 @@ public class SceneGameShow extends MhyhreScene {
 			leftItem.setY(borderSize + (i / 2) * heightStep);
 			leftItem.setWidth(itemRegion.getWidth());
 			leftItem.setHeight(itemRegion.getHeight());
-			leftItem.colorNegativeFill(colorDelta, 0.5f, 0.5f, 0.5f);
+			
 			
 			// Right column
 			WordItem rightItem = wordItems.get(i + 1);
@@ -95,7 +122,27 @@ public class SceneGameShow extends MhyhreScene {
 			rightItem.setY(borderSize + (i / 2) * heightStep);
 			rightItem.setWidth(itemRegion.getWidth());
 			rightItem.setHeight(itemRegion.getHeight());
-			rightItem.colorNegativeFill(colorDelta, 0.5f, 0.5f, 0.5f);
+			
+			
+			
+			
+			if(SceneGame.getMode() == GameState.Recollect){
+				if(selectByProgramm == i){
+					leftItem.setColor(0.8f, 0.8f, 1.0f);
+				} else {
+					leftItem.setColor(0.8f, 0.8f, 0.8f);
+				}
+				
+				if(rightItem.isEnabled() == true){
+
+					rightItem.desireColor(colorDelta, 1, 1, 1);
+				} else {
+					rightItem.desireColor(colorDelta, 0.8f, 0.8f, 0.8f);
+				}
+			} else {
+				leftItem.setColor(1.0f, 1.0f, 1.0f);
+				rightItem.setColor(1.0f, 1.0f, 1.0f);
+			}
 		}
 		
 		updateLabels();
@@ -199,19 +246,43 @@ public class SceneGameShow extends MhyhreScene {
 
 	private void clickEvent(float x, float y) {
 	
-		for (int i = 0; i < currentItemCount; i++) {
-
-			WordItem item = wordItems.get(i);
+		if(SceneGame.getMode() == GameState.Recollect){
+			
+			Log.i(MainActivity.DebugID, "CLICK!");
+			
+			for (int i = 1; i < currentItemCount; i+=2) {
+	
+				WordItem item = wordItems.get(i);
+				if(item.isEnabled() == true){
+					if (isPointInRect(x, y, item.getRectX(), item.getRectY(), item.getWidth(), item.getHeight())) {
+						
+						// if it's good click
+						if(wordPairs.get(selectByProgramm/2).word2.equals(item.getWord())){
+							
+							Log.i(MainActivity.DebugID, "Good click: " + wordPairs.get(selectByProgramm/2).word1 + " - " + item.getWord());
+							
+							item.setEnabled(false);
+							item.setColor(0.3f, 1.0f, 0.3f);
+							
+							selectByProgramm += 2;
+							if(selectByProgramm >= currentItemCount){
+								sceneGame.setGameState(GameState.Result);
+							}
+						} else {
+							
+							Log.i(MainActivity.DebugID, "Bad click: " + wordPairs.get(selectByProgramm/2).word1 + " - " + item.getWord());
 		
-			if (isPointInRect(x, y, item.getRectX(), item.getRectY(), item.getWidth(), item.getHeight())) {
-				Log.i(MainActivity.DebugID, "Scene::clicked in rect: " + i);
-				
-				item.setBlue(1);
-				item.setGreen(1);
-				item.setRed(1);
+							item.setColor(1.0f, 0.3f, 0.3f);
+							errorsCount++;
+						}
+						break;
+					}
+				}
 			}
 		}
 	}
+	
+
 	
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
@@ -247,8 +318,32 @@ public class SceneGameShow extends MhyhreScene {
 		return true;
 	}
 
-	private void shuffleWords(){
+	private void miniShuffle(int a, int b){
+		String word = wordItems.get(a).getWord();
+		wordItems.get(a).setWord(wordItems.get(b).getWord());
+		wordItems.get(b).setWord(word);
+	}
+	
+	public void shuffleWords(){
 		
+		Log.i(MainActivity.DebugID, "SceneGameShow::shuffleWords:");
+		printWordPairs();
+	
+		Random rand = new Random();
+
+		for(int i=1; i<currentItemCount; i+=2){
+			int b = 2*rand.nextInt((currentItemCount-1)/2) + 1;	
+			miniShuffle(i, b);
+		}
+		
+		Log.i(MainActivity.DebugID, "--------------------------------");
+		printWordPairs();
+	}
+	
+	public void printWordPairs(){
+		for(int i=0; i<currentItemCount; i+=2){
+			Log.i(MainActivity.DebugID, "[" + wordItems.get(i).getWord() + "-" + wordItems.get(i+1).getWord() + "]");
+		}
 	}
 	
 	public int getErrorsCount() {

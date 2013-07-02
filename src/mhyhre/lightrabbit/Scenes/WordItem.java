@@ -6,9 +6,18 @@ public class WordItem {
 	float x, y;
 	float width, height;
 	float red, green, blue, alpha;
+	boolean enabled = true;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public WordItem(String word) {
-		this.word = word;
+		this.word = word; // new String(word);
 		this.x = 0;
 		this.y = 0;
 		this.width = 0;
@@ -18,9 +27,9 @@ public class WordItem {
 		this.blue = 1;
 		this.alpha = 1;
 	}
-	
+
 	public WordItem(String word, float x, float y, float width, float height) {
-		this.word = word;
+		this.word = word; // new String(word);
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -29,6 +38,12 @@ public class WordItem {
 		this.green = 1;
 		this.blue = 1;
 		this.alpha = 1;
+	}
+
+	public void setColor(float red, float green, float blue) {
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
 	}
 
 	public float getRed() {
@@ -100,68 +115,38 @@ public class WordItem {
 	}
 
 	public void setWord(String word) {
-		this.word = word;
-	}
-	
-	public float getRectX() {
-		return x-width/2;
-	}
-	
-	public float getRectY() {
-		return y-height/2;
+		this.word = word; // new String(word);
 	}
 
-	public void colorPositiveFill(float delta){
-		colorPositiveFill(delta, 1, 1, 1);
+	public float getRectX() {
+		return x - width / 2;
 	}
-	
-	public void colorPositiveFill(float delta, float maxRed, float maxGreen, float maxBlue){
-		
-		if(red < maxRed){
-			red+=delta;
-		}
-		if(green < maxGreen){
-			green+=delta;
-		}
-		if(blue < maxBlue){
-			blue+=delta;
-		}
-		
-		if(red > maxRed){
-			red = maxRed;
-		}
-		if(green > maxGreen){
-			green = maxGreen;
-		}
-		if(blue > maxBlue){
-			blue = maxBlue;
-		}
+
+	public float getRectY() {
+		return y - height / 2;
 	}
-	
-	public void colorNegativeFill(float delta){
-		colorNegativeFill(delta, 0, 0, 0);
+
+	public void desireColor(float delta, float inRed, float inGreen, float inBlue) {
+		if (delta <= 0) {
+			return;
+		}
+		red = desire(delta, inRed, red);
+		green = desire(delta, inGreen, green);
+		blue = desire(delta, inBlue, blue);
 	}
-	
-	public void colorNegativeFill(float delta, float minRed, float minGreen, float minBlue){
-		
-		if(red > minRed){
-			red-=delta;
+
+	private float desire(float delta, float des, float real) {
+		float m = real - des;
+		if (m <= delta && m >= -delta) {
+			real = des;
 		}
-		if(green > minGreen){
-			green-=delta;
+		if (real > des) {
+			real -= delta;
 		}
-		if(blue > minBlue){
-			blue-=delta;
+		if (real < des) {
+			real += delta;
 		}
-		
-		if(red < minRed){
-			red = minRed;
-		}
-		if(green < minGreen){
-			green = minGreen;
-		}
-		if(blue < minBlue){
-			blue = minBlue;
-		}
+		return real;
 	}
+
 }

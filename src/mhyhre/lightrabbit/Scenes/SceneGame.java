@@ -51,9 +51,8 @@ public class SceneGame extends MhyhreScene {
 		CreateTextureRegions();
 
 		// Memorize Scene
-		sceneMemorize = new SceneGameShow(maxItemCount);
+		sceneMemorize = new SceneGameShow(this, maxItemCount);
 		attachChild(sceneMemorize);
-		nextLevel();
 		
 		// Scene message
 		sceneMessage = new SceneGameMessage(this);
@@ -141,7 +140,6 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
-		sceneMemorize.onSceneTouchEvent(pSceneTouchEvent);
 		if (loaded == true) {
 			
 			switch (mode) {
@@ -200,7 +198,7 @@ public class SceneGame extends MhyhreScene {
 			break;
 
 		case Recollect:
-			//sceneMemorize
+			sceneMemorize.shuffleWords();
 			sceneMemorize.Show();
 			break;
 

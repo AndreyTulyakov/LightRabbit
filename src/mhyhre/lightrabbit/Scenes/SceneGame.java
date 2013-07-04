@@ -105,12 +105,7 @@ public class SceneGame extends MhyhreScene {
 	private void nextLevel(){
 		currentLevel++;
 
-		int currentItem = (getCurrentLevel() + 2) * 2;
-		
-		ArrayList<String> words = new ArrayList<String>();
-		for(int i=0; i<currentItem; i++){
-			words.add(dictionary.getRandomWord());
-		}
+		ArrayList<String> words = getNewWordsList();
 		
 		sceneMemorize.setWordsList(words);
 		sceneMemorize.update();
@@ -119,6 +114,40 @@ public class SceneGame extends MhyhreScene {
 		if(getCurrentLevel()>getMaxLevel()){
 			SceneRoot.SetState(SceneStates.MainMenu);
 		}
+	}
+	
+	private ArrayList<String> getNewWordsList(){
+		
+		int currentItem = (getCurrentLevel() + 2) * 2;
+		
+		if(dictionary.size() <= currentItem){
+			Log.e(MainActivity.DebugID, "SceneGame: dictionary is too small");
+			return null;
+		}
+		
+		ArrayList<String> wordsList = new ArrayList<String>();
+			
+		boolean wordIsExist;
+		int i = 0;
+		
+		while( i<currentItem ){
+			String word = dictionary.getRandomWord();
+			wordIsExist = false;
+
+			for(String str: wordsList){
+				if(str.equals(word)){
+					wordIsExist = true;
+					break;
+				}
+			}
+			
+			if(wordIsExist == false){
+				wordsList.add(word);
+				i++;
+			}
+		}
+		
+		return wordsList;
 	}
 
 	private static void CreateTextureRegions() {

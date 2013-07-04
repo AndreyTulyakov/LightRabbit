@@ -40,6 +40,9 @@ public class Dictionary {
 			BufferedReader in = new BufferedReader(istream);
 
 			while ((word = in.readLine()) != null) {
+				if(word.isEmpty()){
+					continue;
+				}
 				array.add(word);
 			}
 			in.close();	

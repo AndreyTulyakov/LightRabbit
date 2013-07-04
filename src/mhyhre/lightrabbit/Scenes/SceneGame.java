@@ -34,7 +34,7 @@ public class SceneGame extends MhyhreScene {
 	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 	
-	SceneGameShow sceneMemorize;
+	SceneGameMemorize sceneMemorize;
 	SceneGameMessage sceneMessage;
 
 	// Resources
@@ -51,7 +51,7 @@ public class SceneGame extends MhyhreScene {
 		CreateTextureRegions();
 
 		// Memorize Scene
-		sceneMemorize = new SceneGameShow(this, maxItemCount);
+		sceneMemorize = new SceneGameMemorize(this, maxItemCount);
 		attachChild(sceneMemorize);
 		
 		// Scene message
@@ -88,6 +88,10 @@ public class SceneGame extends MhyhreScene {
 						nextLevel();
 						setGameState(GameState.Ready);
 						break;
+						
+					case Loss:
+						SceneRoot.SetState(SceneStates.MainMenu);
+						break;
 					}		
 				}
 				return true;
@@ -115,6 +119,7 @@ public class SceneGame extends MhyhreScene {
 			SceneRoot.SetState(SceneStates.MainMenu);
 		}
 	}
+	
 	
 	private ArrayList<String> getNewWordsList(){
 		
@@ -233,6 +238,11 @@ public class SceneGame extends MhyhreScene {
 
 		case Result:
 			sceneMessage.displayEndScene(sceneMemorize.getErrorsCount());
+			sceneMessage.Show();
+			break;
+			
+		case Loss:
+			sceneMessage.displayLosingScene(sceneMemorize.getErrorsCount());
 			sceneMessage.Show();
 			break;
 		}

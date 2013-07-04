@@ -16,7 +16,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 import android.util.Log;
 
-public class SceneGameShow extends MhyhreScene {
+public class SceneGameMemorize extends MhyhreScene {
 	
 	
 	
@@ -35,6 +35,7 @@ public class SceneGameShow extends MhyhreScene {
 	private int maxItemCount;
 	private int currentItemCount;
 	private int errorsCount = 0;
+	private int errorMaxCount = 2;
 	private int selectByProgramm;
 	
 	ArrayList<WordItem> wordItems;
@@ -47,7 +48,7 @@ public class SceneGameShow extends MhyhreScene {
 	final float heightStep = 80;
 	final float centerOffset = 180;
 
-	public SceneGameShow(final SceneGame sceneGame, int maxItemCount) {
+	public SceneGameMemorize(final SceneGame sceneGame, int maxItemCount) {
 
 		this.sceneGame = sceneGame;
 		
@@ -274,12 +275,17 @@ public class SceneGameShow extends MhyhreScene {
 		
 							item.setColor(1.0f, 0.3f, 0.3f);
 							errorsCount++;
+							
+							if(errorsCount > errorMaxCount){
+								sceneGame.setGameState(GameState.Loss);
+							}
 						}
 						break;
 					}
 				}
 			}
 		}
+
 	}
 	
 
@@ -352,6 +358,14 @@ public class SceneGameShow extends MhyhreScene {
 
 	public void setErrorsCount(int errorsCount) {
 		this.errorsCount = errorsCount;
+	}
+
+	public int getErrorMaxCount() {
+		return errorMaxCount;
+	}
+
+	public void setErrorMaxCount(int errorMaxCount) {
+		this.errorMaxCount = errorMaxCount;
 	}
 
 }

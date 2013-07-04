@@ -40,6 +40,17 @@ public class SceneGameMessage extends MhyhreScene {
 	}
 	
 	
+	public void displayLosingScene(int errorsCount){
+		textReady.setText("Проигрыш");
+		textReady.setPosition(MainActivity.getHalfWidth() - textReady.getWidth()/2, MainActivity.getHalfHeight() - 100);
+		
+		textLevelInfo.setText("Ошибок: " + errorsCount);
+		textLevelInfo.setPosition(MainActivity.getHalfWidth() - 150, MainActivity.getHalfHeight() + 20);
+
+		textInfo.setVisible(false);
+	}
+	
+
 	public SceneGameMessage(final SceneGame sceneGame) {
 		
 		this.sceneGame = sceneGame;

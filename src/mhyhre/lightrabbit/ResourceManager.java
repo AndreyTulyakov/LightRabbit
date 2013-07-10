@@ -15,6 +15,7 @@ package mhyhre.lightrabbit;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.andengine.BuildConfig;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.ITexture;
@@ -106,8 +107,7 @@ public class ResourceManager {
 		mFont.load();
 		fonts.put("Pixel White", mFont);
 
-		if (BuildConfig.DEBUG)
-			Log.i(MainActivity.DebugID, "ResourceManager::loadFonts: OK");
+		Log.i(MainActivity.DebugID, "ResourceManager::loadFonts: OK");
 	}
 
 	public void LoadResourcesForPreloader() {

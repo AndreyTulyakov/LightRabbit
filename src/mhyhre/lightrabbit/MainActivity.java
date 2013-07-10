@@ -15,6 +15,7 @@ package mhyhre.lightrabbit;
 import mhyhre.lightrabbit.Scenes.SceneRoot;
 import mhyhre.lightrabbit.Scenes.SceneStates;
 
+import org.andengine.BuildConfig;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
@@ -54,8 +55,8 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
-		if (BuildConfig.DEBUG)
-			Log.i(DebugID, "--------------------------------------------------");
+
+		Log.i(DebugID, "--------------------------------------------------");
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		mVibrator.vibrate(50);
 

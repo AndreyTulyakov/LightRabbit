@@ -34,6 +34,8 @@ public class SceneGame extends MhyhreScene {
 	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 	
+	Sprite spriteNext;
+	
 	SceneGameMemorize sceneMemorize;
 	SceneGameMessage sceneMessage;
 
@@ -60,7 +62,7 @@ public class SceneGame extends MhyhreScene {
 		
 		
 
-		Sprite spriteNext = new Sprite(MainActivity.getWidth() - (10 + TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteNext = new Sprite(MainActivity.getWidth() - (10 + TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -78,6 +80,7 @@ public class SceneGame extends MhyhreScene {
 						
 					case Memorize:
 						setGameState(GameState.Recollect);
+						enableNextButton(false);
 						break;
 						
 					case Recollect:
@@ -98,8 +101,7 @@ public class SceneGame extends MhyhreScene {
 			}
 		};
 		attachChild(spriteNext);
-		registerTouchArea(spriteNext);
-		
+		enableNextButton(true);
 		
 		loaded = true;
 		
@@ -117,6 +119,20 @@ public class SceneGame extends MhyhreScene {
 		
 		if(getCurrentLevel()>getMaxLevel()){
 			SceneRoot.SetState(SceneStates.MainMenu);
+		}
+	}
+	
+	public void enableNextButton(boolean arg){
+		if(arg==true){
+			spriteNext.setVisible(true);
+			spriteNext.setIgnoreUpdate(false);
+			registerTouchArea(spriteNext);
+			
+		}else{
+			spriteNext.setVisible(false);
+			spriteNext.setIgnoreUpdate(true);
+			unregisterTouchArea(spriteNext);
+			
 		}
 	}
 	
@@ -193,6 +209,11 @@ public class SceneGame extends MhyhreScene {
 			case Result:
 				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
 				break;
+			case Loss:
+				break;
+				
+			default:
+				break;
 			}		
 		}
 
@@ -214,7 +235,7 @@ public class SceneGame extends MhyhreScene {
 
 		Log.i(MainActivity.DebugID, "SceneGame::setGameState: " + mode.name());
 
-		this.mode = mode;
+		SceneGame.mode = mode;
 
 		sceneMemorize.Hide();
 		sceneMessage.Hide();

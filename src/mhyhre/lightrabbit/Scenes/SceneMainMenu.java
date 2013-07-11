@@ -32,21 +32,8 @@ public class SceneMainMenu extends MhyhreScene {
 
 	private Sprite mSpriteItem1;
 	private Sprite mSpriteItem2;
-	private Sprite mSpriteItem3;
+	private Sprite mSpriteItem3;	
 
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public SceneMainMenu() {
 

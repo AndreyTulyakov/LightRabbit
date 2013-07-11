@@ -267,7 +267,8 @@ public class SceneGameMemorize extends MhyhreScene {
 							
 							selectByProgramm += 2;
 							if(selectByProgramm >= currentItemCount){
-								sceneGame.setGameState(GameState.Result);
+								//sceneGame.setGameState(GameState.Result);
+								sceneGame.enableNextButton(true);
 							}
 						} else {
 							

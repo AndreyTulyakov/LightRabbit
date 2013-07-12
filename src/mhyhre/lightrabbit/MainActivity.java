@@ -85,7 +85,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 			Log.i(DebugID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);
 
 		EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels, metrics.heightPixels), camera);
-
+		mEngineOptions.getAudioOptions().setNeedsSound(true);
 		mEngineOptions.getTouchOptions().setNeedsMultiTouch(true);
 		return mEngineOptions;
 	}

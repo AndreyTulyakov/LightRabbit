@@ -12,9 +12,12 @@
 
 package mhyhre.lightrabbit;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.andengine.audio.sound.Sound;
+import org.andengine.audio.sound.SoundFactory;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.ITexture;
@@ -36,11 +39,13 @@ public class ResourceManager {
 	Map<String, ITextureRegion> regions;
 	Map<String, BitmapTextureAtlas> atlases;
 	Map<String, Font> fonts;
+	Map<String, Sound> sounds;
 
 	public ResourceManager() {
 		regions = new HashMap<String, ITextureRegion>();
 		atlases = new HashMap<String, BitmapTextureAtlas>();
 		fonts = new HashMap<String, Font>();
+		sounds = new HashMap<String, Sound>();
 	}
 
 	public ITextureRegion getTextureRegion(String key) {
@@ -60,6 +65,13 @@ public class ResourceManager {
 			Log.e(MainActivity.DebugID, "ResourceManager::getFont: invalid key - " + key);
 		return fonts.get(key);
 	}
+	
+	public Sound getSound(String key) {
+		if (!sounds.containsKey(key))
+			Log.e(MainActivity.DebugID, "ResourceManager::getSound: invalid key - " + key);
+		return sounds.get(key);
+	}
+
 
 	public void loadAtlases() {
 
@@ -84,6 +96,19 @@ public class ResourceManager {
 		regions.put("ButtonSound", region);
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
+	}
+	
+	public void loadSounds() {
+		SoundFactory.setAssetBasePath("sound/");
+		 try {
+			Sound snd = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), "untitled.ogg");
+			sounds.put("roboClick", snd);
+		 
+		 
+		 } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void loadFonts() {

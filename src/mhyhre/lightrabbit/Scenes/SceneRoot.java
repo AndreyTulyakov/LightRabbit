@@ -61,6 +61,7 @@ public class SceneRoot extends Scene {
 
 		MainActivity.Res.loadAtlases();
 		MainActivity.Res.loadFonts();
+		MainActivity.Res.loadSounds();
 
 		// Scenes Creating ------------------------------------------------
 		mSceneMainMenu = new SceneMainMenu();

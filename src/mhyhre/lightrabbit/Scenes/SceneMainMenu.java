@@ -168,7 +168,7 @@ public class SceneMainMenu extends MhyhreScene {
 					} else {
 						this.setAlpha(1.0f);
 						MainActivity.setSoundEnabled(true);
-						MainActivity.Res.getSound("roboClick").play();
+						MainActivity.Res.playSound("roboClick");
 					}
 					MainActivity.vibrate(40);
 				}

@@ -71,6 +71,14 @@ public class ResourceManager {
 			Log.e(MainActivity.DebugID, "ResourceManager::getSound: invalid key - " + key);
 		return sounds.get(key);
 	}
+	
+	public void playSound(String key) {
+		if (!sounds.containsKey(key))
+			Log.e(MainActivity.DebugID, "ResourceManager::getSound: invalid key - " + key);
+		if(MainActivity.isSoundEnabled()){
+			sounds.get(key).play();
+		}
+	}
 
 
 	public void loadAtlases() {

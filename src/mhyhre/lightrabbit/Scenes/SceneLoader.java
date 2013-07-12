@@ -114,7 +114,7 @@ public class SceneLoader extends MhyhreScene {
 				if (mCaptionTapScreen.isVisible()) {
 
 					if(AlphaTime2 > 0.3f && soundPlayed == false){
-						MainActivity.Res.getSound("switchOn").play();
+						MainActivity.Res.playSound("switchOn");
 						soundPlayed = true;
 					}
 					

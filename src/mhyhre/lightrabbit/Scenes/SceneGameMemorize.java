@@ -271,9 +271,9 @@ public class SceneGameMemorize extends MhyhreScene {
 							if(selectByProgramm >= currentItemCount){
 								sceneGame.enableNextButton(true);
 								if(sceneGame.getCurrentLevel()%2 == 0){
-									MainActivity.Res.getSound("yes1").play();
+									MainActivity.Res.playSound("yes1");
 								} else {
-									MainActivity.Res.getSound("yes2").play();
+									MainActivity.Res.playSound("yes2");
 								}
 								
 							}
@@ -287,7 +287,7 @@ public class SceneGameMemorize extends MhyhreScene {
 							if(errorsCount > errorMaxCount){
 								sceneGame.setGameState(GameState.Loss);
 							} else {
-								MainActivity.Res.getSound("error").play();
+								MainActivity.Res.playSound("error");
 							}
 						}
 						break;

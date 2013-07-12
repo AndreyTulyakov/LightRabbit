@@ -76,6 +76,12 @@ public class ResourceManager {
 		
 		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false);
 		regions.put("Button1", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 160, 70, 60, false);
+		regions.put("ButtonVibration", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 230, 70, 60, false);
+		regions.put("ButtonSound", region);
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
 	}

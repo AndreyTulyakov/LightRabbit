@@ -87,7 +87,7 @@ public class SceneLoader extends MhyhreScene {
 					unregisterTouchArea(TapRect);
 					Clicked = true;
 					Log.i(MainActivity.DebugID, "Splash Screen [ Tap ] button");
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 				}
 				return true;
 			}

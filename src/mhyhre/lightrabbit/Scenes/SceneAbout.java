@@ -64,7 +64,7 @@ public class SceneAbout extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 					SceneRoot.SetState(SceneStates.MainMenu);
 				}
 				return true;

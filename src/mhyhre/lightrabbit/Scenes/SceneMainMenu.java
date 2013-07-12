@@ -61,7 +61,7 @@ public class SceneMainMenu extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 		
 					Log.i(MainActivity.DebugID, "Main Menu [ New game ] button");
-					MainActivity.mVibrator.vibrate(30);	
+					MainActivity.vibrate(30);	
 					
 					
 					SceneRoot.SetState(SceneStates.NewGame);
@@ -76,7 +76,7 @@ public class SceneMainMenu extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 		
 					Log.i(MainActivity.DebugID, "Main Menu [ Options ] button");
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 					SceneRoot.SetState(SceneStates.About);
 				}
 				return true;
@@ -89,7 +89,7 @@ public class SceneMainMenu extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 		
 					Log.i(MainActivity.DebugID, "Main Menu [ Exit ] button");
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 					SceneRoot.SetState(SceneStates.Exit);
 				}
 				return true;
@@ -101,9 +101,9 @@ public class SceneMainMenu extends MhyhreScene {
 		float OffsetX = (MainActivity.getHalfWidth()*1.5f) - (mSpriteItem1.getWidth()/2.0f);
 		float OffsetY = MainActivity.getHeight()/6.0f;
 		
-		mSpriteItem1.setPosition(OffsetX, OffsetY*2);
-		mSpriteItem2.setPosition(OffsetX, OffsetY*3);
-		mSpriteItem3.setPosition(OffsetX, OffsetY*4);
+		mSpriteItem1.setPosition(OffsetX, OffsetY*1);
+		mSpriteItem2.setPosition(OffsetX, OffsetY*2);
+		mSpriteItem3.setPosition(OffsetX, OffsetY*3);
 		
 		float tx  = mSpriteItem1.getX()+mSpriteItem1.getWidth()/2;
 		float ty1 = mSpriteItem1.getY()+mSpriteItem1.getHeight()/2;
@@ -130,7 +130,53 @@ public class SceneMainMenu extends MhyhreScene {
 		registerTouchArea(mSpriteItem2);
 		registerTouchArea(mSpriteItem3);
 		
+		
+		OffsetX += (mSpriteItem1.getWidth()/2.0f);
+		
+		// Vibro, Sound enable/disable
+		
+		Sprite mSpriteVibro = new Sprite(0, 0, MainActivity.Res.getTextureRegion("ButtonVibration"), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					
+					if(MainActivity.isVibroEnabled() == true){
+						this.setAlpha(0.3f);
+						MainActivity.setVibroEnabled(false);
+					} else {
+						this.setAlpha(1.0f);
+						MainActivity.setVibroEnabled(true);
+					}
+					MainActivity.vibrate(30);
+				}
+				return true;
+			}
+		};
+		mSpriteVibro.setPosition(OffsetX-(mSpriteVibro.getWidth()+20), OffsetY*5);
+		attachChild(mSpriteVibro);
+		registerTouchArea(mSpriteVibro);
 
+		
+		Sprite mSpriteSound = new Sprite(0, 0, MainActivity.Res.getTextureRegion("ButtonSound"), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					
+					if(MainActivity.isSoundEnabled() == true){
+						this.setAlpha(0.3f);
+						MainActivity.setSoundEnabled(false);
+					} else {
+						this.setAlpha(1.0f);
+						MainActivity.setSoundEnabled(true);
+					}
+					MainActivity.vibrate(30);
+				}
+				return true;
+			}
+		};
+		mSpriteSound.setPosition(OffsetX+20, OffsetY*5);
+		attachChild(mSpriteSound);
+		registerTouchArea(mSpriteSound);
 	}
 
 	@Override

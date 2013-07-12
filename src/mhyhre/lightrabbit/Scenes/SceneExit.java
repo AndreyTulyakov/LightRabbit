@@ -56,7 +56,7 @@ public class SceneExit extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
 					Log.i(MainActivity.DebugID, "Exit Scene [ Exit ] pressed");
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 					MainActivity.Me.finish();
 				}
 				return true;
@@ -72,7 +72,7 @@ public class SceneExit extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
 					Log.i(MainActivity.DebugID, "Exit Scene [ Back ] pressed");
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 					SceneRoot.SetState(SceneStates.MainMenu);
 				}
 				return true;

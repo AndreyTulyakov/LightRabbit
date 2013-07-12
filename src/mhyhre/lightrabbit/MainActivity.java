@@ -41,8 +41,10 @@ public class MainActivity extends SimpleBaseGameActivity {
 	// singleton handle
 	public static MainActivity Me;
 
-	public static Vibrator mVibrator;
+	private static Vibrator mVibrator;
 	public static Camera camera;
+	
+
 
 	// screen sizes
 	private static int SCREEN_WIDTH, SCREEN_HEIGHT;	
@@ -52,6 +54,10 @@ public class MainActivity extends SimpleBaseGameActivity {
 	public static SceneRoot mSceneRoot;
 
 	AssetManager assetManager;
+	
+	static private boolean vibroEnabled = true;
+	static private boolean soundEnabled = true;
+	
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -149,5 +155,28 @@ public class MainActivity extends SimpleBaseGameActivity {
 	
 	public static float getHalfHeight(){
 		return HalfHeight;
+	}
+	
+
+	public static boolean isVibroEnabled() {
+		return vibroEnabled;
+	}
+
+	public static void setVibroEnabled(boolean vibroEnabled) {
+		MainActivity.vibroEnabled = vibroEnabled;
+	}
+
+	public static boolean isSoundEnabled() {
+		return soundEnabled;
+	}
+
+	public static void setSoundEnabled(boolean soundEnabled) {
+		MainActivity.soundEnabled = soundEnabled;
+	}
+
+	public static void vibrate(long milliseconds){
+		if(vibroEnabled){
+			mVibrator.vibrate(milliseconds);
+		}
 	}
 }

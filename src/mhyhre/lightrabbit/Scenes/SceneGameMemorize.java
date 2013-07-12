@@ -267,6 +267,7 @@ public class SceneGameMemorize extends MhyhreScene {
 							item.setColor(0.3f, 1.0f, 0.3f);
 							
 							selectByProgramm += 2;
+							MainActivity.vibrate(30);
 							if(selectByProgramm >= currentItemCount){
 								sceneGame.enableNextButton(true);
 							}
@@ -276,7 +277,7 @@ public class SceneGameMemorize extends MhyhreScene {
 		
 							item.setColor(1.0f, 0.3f, 0.3f);
 							errorsCount++;
-							
+							MainActivity.vibrate(60);
 							if(errorsCount > errorMaxCount){
 								sceneGame.setGameState(GameState.Loss);
 							}

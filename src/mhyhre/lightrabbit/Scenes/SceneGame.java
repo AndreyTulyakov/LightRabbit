@@ -70,7 +70,7 @@ public class SceneGame extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
 					
 					
-					MainActivity.mVibrator.vibrate(30);
+					MainActivity.vibrate(30);
 					
 					switch(mode){
 					

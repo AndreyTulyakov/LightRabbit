@@ -16,6 +16,7 @@ import java.util.Random;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.R;
 
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
@@ -67,8 +68,8 @@ public class SceneLoader extends MhyhreScene {
 		mCloudTR = TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas("tex_01"), 384, 0, 128, 128, false);
 
 		// Tap text
-		String TextMessage = "Just tap...";
-		mCaptionTapScreen = new Text(320, 400, MainActivity.Res.getFont("Pixel"), TextMessage, MainActivity.Me.getVertexBufferObjectManager());
+		String TextMessage = MainActivity.Me.getString(R.string.textTap);
+		mCaptionTapScreen = new Text(320, 400, MainActivity.Res.getFont("Furore"), TextMessage, MainActivity.Me.getVertexBufferObjectManager());
 		mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() - mCaptionTapScreen.getWidth() / 2, (MainActivity.getHeight()/ 5) * 4);
 		mCaptionTapScreen.setVisible(false);
 		mCaptionTapScreen.setAlpha(0.0f);

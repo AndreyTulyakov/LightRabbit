@@ -7,6 +7,7 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.font.IFont;
 
 public class SceneGameMessage extends MhyhreScene {
 
@@ -75,14 +76,14 @@ public class SceneGameMessage extends MhyhreScene {
 		spriteInfoRight.setFlippedHorizontal(true);
 		attachChild(spriteInfoRight);
 		
-		
-		textReady = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "", 50, MainActivity.Me.getVertexBufferObjectManager());
+		final IFont usedFont = MainActivity.Res.getFont("Furore");
+		textReady = new Text(0, 0, usedFont, "", 50, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(textReady);
 		
-		textLevelInfo = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "", 60, MainActivity.Me.getVertexBufferObjectManager());
+		textLevelInfo = new Text(0, 0, usedFont, "", 60, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(textLevelInfo);
 		
-		textInfo = new Text(0, 0, MainActivity.Res.getFont("Pixel"), "", 60, MainActivity.Me.getVertexBufferObjectManager());
+		textInfo = new Text(0, 0, usedFont, "", 60, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(textInfo);
 		
 

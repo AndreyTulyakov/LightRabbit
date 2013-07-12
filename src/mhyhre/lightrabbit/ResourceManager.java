@@ -15,7 +15,6 @@ package mhyhre.lightrabbit;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.andengine.BuildConfig;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.ITexture;
@@ -23,6 +22,7 @@ import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.TextureRegionFactory;
 
 import android.graphics.Color;
 import android.util.Log;
@@ -68,30 +68,14 @@ public class ResourceManager {
 
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 128, TextureOptions.BILINEAR);
-		region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "MenuButton.png", 0, 0);
-		atlas.load();
-
-		regions.put("Button1", region);
-		atlases.put("guiButtons", atlas);
-
 		// Создание текстурного атласа
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
 		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "User_Interface.png", 0, 0);
 		atlas.load();
 		atlases.put("User_Interface", atlas);
-
-		// ***
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Command_Icons.png", 0, 0);
-		atlas.load();
-		atlases.put("Command_Icons", atlas);
-
-		// ***
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 128, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tileset.png", 0, 0);
-		atlas.load();
-		atlases.put("tileset", atlas);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false);
+		regions.put("Button1", region);
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
 	}
@@ -103,9 +87,13 @@ public class ResourceManager {
 
 		final ITexture TextureFontPixelWhite = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
 
-		mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite, MainActivity.Me.getAssets(), "Hardpixel.OTF", 46, true, Color.WHITE);
+		mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite, MainActivity.Me.getAssets(), "Furore.otf", 32, true, Color.WHITE);
 		mFont.load();
-		fonts.put("Pixel White", mFont);
+		fonts.put("White Furore", mFont);
+		
+		
+		
+
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadFonts: OK");
 	}
@@ -119,11 +107,11 @@ public class ResourceManager {
 		FontFactory.setAssetBasePath("font/");
 
 		// press text
-		final ITexture TextureFontPixelBlack = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		final ITexture TextureFontFurore = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
 
-		mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelBlack, MainActivity.Me.getAssets(), "Hardpixel.OTF", 28, true, Color.BLACK);
+		mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontFurore, MainActivity.Me.getAssets(), "Furore.otf", 24, true, Color.BLACK);
 		mFont.load();
-		fonts.put("Pixel", mFont);
+		fonts.put("Furore", mFont);
 
 		// preloader texture;
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);

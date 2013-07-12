@@ -1,6 +1,15 @@
+
 <resources>
 
     <string name="app_name">Light Rabbit</string>
     <string name="title_activity_main">Light Rabbit</string>
+    <string name="QExit">Вы хотите выйти?</string>
+    <string name="MenuItem_Exit">Выход</string>
+    <string name="MenuItem_About">Об игре</string>
+    <string name="MenuItem_Play">Старт</string>
+    <string name="textBack">Назад</string>
+    <string name="textExit">Выход</string>
+    <string name="textAbout">Об игре</string>
+    <string name="textTap">Нажмите</string>
 
 </resources>

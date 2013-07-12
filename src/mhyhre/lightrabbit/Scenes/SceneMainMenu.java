@@ -11,6 +11,7 @@
  */
 
 package mhyhre.lightrabbit.Scenes;
+import mhyhre.lightrabbit.R;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
@@ -19,6 +20,7 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.font.IFont;
 
 import android.util.Log;
 
@@ -42,14 +44,15 @@ public class SceneMainMenu extends MhyhreScene {
 		setBackgroundEnabled(true);
 
 		// Text captions
-		String TextItem1 = "Play";
-		String TextItem3 = "About";
-		String TextItem4 = "Exit";
+		String TextItem1 = MainActivity.Me.getString(R.string.MenuItem_Play);
+		String TextItem3 = MainActivity.Me.getString(R.string.MenuItem_About);
+		String TextItem4 = MainActivity.Me.getString(R.string.MenuItem_Exit);
 
 		// Creating text
-		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("Pixel"), TextItem1,MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Pixel"), TextItem3,MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Pixel"), TextItem4,MainActivity.Me.getVertexBufferObjectManager());
+		final IFont usedFont = MainActivity.Res.getFont("Furore");
+		mCaptionItem1 = new Text(0, 0, usedFont, TextItem1,MainActivity.Me.getVertexBufferObjectManager());
+		mCaptionItem2 = new Text(0, 0, usedFont, TextItem3,MainActivity.Me.getVertexBufferObjectManager());
+		mCaptionItem3 = new Text(0, 0, usedFont, TextItem4,MainActivity.Me.getVertexBufferObjectManager());
 
 		// Creating sprites
 		mSpriteItem1 = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
@@ -95,8 +98,8 @@ public class SceneMainMenu extends MhyhreScene {
 		
 		
 		// Calculating positions
-		float OffsetY = MainActivity.getHeight()/5.0f;
-		float OffsetX = (MainActivity.getHalfWidth()) - (mSpriteItem1.getWidth()/2.0f);
+		float OffsetX = (MainActivity.getHalfWidth()*1.5f) - (mSpriteItem1.getWidth()/2.0f);
+		float OffsetY = MainActivity.getHeight()/6.0f;
 		
 		mSpriteItem1.setPosition(OffsetX, OffsetY*2);
 		mSpriteItem2.setPosition(OffsetX, OffsetY*3);

@@ -29,6 +29,7 @@ public class SceneGameMemorize extends MhyhreScene {
 		}
 	}
 	
+	public String itemFontName = "Furore";
 
 	SceneGame sceneGame;
 	
@@ -63,7 +64,7 @@ public class SceneGameMemorize extends MhyhreScene {
 		attachChild(UIBatch);
 
 		// Text setup
-		itemFont = MainActivity.Res.getFont("Pixel");
+		itemFont = MainActivity.Res.getFont(itemFontName);
 		wordItems = new ArrayList<WordItem>(maxItemCount);
 		labels = new ArrayList<Text>(maxItemCount);
 		wordPairs = new ArrayList<WordPair>(maxItemCount/2);
@@ -267,7 +268,6 @@ public class SceneGameMemorize extends MhyhreScene {
 							
 							selectByProgramm += 2;
 							if(selectByProgramm >= currentItemCount){
-								//sceneGame.setGameState(GameState.Result);
 								sceneGame.enableNextButton(true);
 							}
 						} else {

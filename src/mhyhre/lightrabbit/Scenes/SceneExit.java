@@ -12,9 +12,12 @@
 
 package mhyhre.lightrabbit.Scenes;
 
+import mhyhre.lightrabbit.R;
+
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -35,12 +38,12 @@ public class SceneExit extends MhyhreScene {
 	public SceneExit() {
 
 		setBackgroundEnabled(true);
-		setBackground(new Background(0.6f, 0.5f, 0.5f));
+		setBackground(new Background(0.9f, 0.9f, 1.0f));
 		
 		
-		String TextLoadCaption = "Do you want exit?";
-		String TextItem1 = "Back";
-		String TextItem2 = "Exit";
+		String strQExit = MainActivity.Me.getString(R.string.QExit);
+		String TextItem1 = MainActivity.Me.getString(R.string.textBack);
+		String TextItem2 = MainActivity.Me.getString(R.string.textExit);
 		
 		
 		// Creating sprite
@@ -76,11 +79,17 @@ public class SceneExit extends MhyhreScene {
 			}
 		};
 		
-		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("Pixel White"),
-				TextLoadCaption, MainActivity.Me.getVertexBufferObjectManager());
+		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("White Furore"),
+				strQExit, MainActivity.Me.getVertexBufferObjectManager());
 		mCaptionItem1.setPosition(
 				MainActivity.getHalfWidth() - mCaptionItem1.getWidth() / 2,
 				MainActivity.getHalfHeight() - mCaptionItem1.getHeight() / 2);
+		
+		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 120, MainActivity.Me.getVertexBufferObjectManager());
+		topRect.setColor(0.5f, 0.5f, 0.6f);
+		topRect.setHeight(mCaptionItem1.getHeight() + 80);
+		topRect.setY(mCaptionItem1.getY()+ mCaptionItem1.getHeight()/2 - topRect.getHeight()/2);
+		attachChild(topRect);
 
 
 		mExitButtonSprite.setColor(1.0f, 0.8f, 0.8f);
@@ -101,9 +110,9 @@ public class SceneExit extends MhyhreScene {
 
 		
 
-		mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Pixel"),
+		mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Furore"),
 				TextItem1, MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Pixel"),
+		mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Furore"),
 				TextItem2, MainActivity.Me.getVertexBufferObjectManager());
 		
 		mCaptionItem2.setPosition(

@@ -24,6 +24,8 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
@@ -43,21 +45,41 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 	private static Vibrator mVibrator;
 	public static Camera camera;
-	
-
 
 	// screen sizes
-	private static int SCREEN_WIDTH, SCREEN_HEIGHT;	
+	private static int SCREEN_WIDTH, SCREEN_HEIGHT;
 	private static float HalfWidth, HalfHeight;
 
 	public static ResourceManager Res;
 	public static SceneRoot mSceneRoot;
 
 	AssetManager assetManager;
-	
+
 	static private boolean vibroEnabled = true;
 	static private boolean soundEnabled = true;
+
+	public static String MY_PREF = "MY_PREF";
+
+	protected void savePreferences() {
+
+		int mode = Activity.MODE_PRIVATE;
+		SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
+
+		SharedPreferences.Editor editor = mySharedPreferences.edit();
+		editor.putBoolean("isVibroEnabled", isVibroEnabled());
+		editor.putBoolean("isSoundEnabled", isSoundEnabled());
+		editor.commit();
+	}
 	
+	public void loadPreferences() 
+	{
+
+	  int mode = Activity.MODE_PRIVATE;
+	  SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode); 
+
+	  setVibroEnabled( mySharedPreferences.getBoolean("isVibroEnabled", true));
+	  setSoundEnabled( mySharedPreferences.getBoolean("isSoundEnabled", true));
+	}
 
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -72,10 +94,12 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		
+		loadPreferences();
 
 		SCREEN_WIDTH = 960;
 		SCREEN_HEIGHT = 540;
-		
+
 		HalfWidth = SCREEN_WIDTH / 2.0f;
 		HalfHeight = SCREEN_HEIGHT / 2.0f;
 
@@ -135,28 +159,29 @@ public class MainActivity extends SimpleBaseGameActivity {
 	}
 
 	public void onDestroy() {
+		
+		savePreferences();
 		if (BuildConfig.DEBUG)
 			Log.i(DebugID, this.getClass().getSimpleName() + ".onDestroy");
 		super.onDestroy();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
-	
-	public static float getWidth(){
+
+	public static float getWidth() {
 		return SCREEN_WIDTH;
 	}
-	
-	public static float getHeight(){
+
+	public static float getHeight() {
 		return SCREEN_HEIGHT;
 	}
-	
-	public static float getHalfWidth(){
+
+	public static float getHalfWidth() {
 		return HalfWidth;
 	}
-	
-	public static float getHalfHeight(){
+
+	public static float getHalfHeight() {
 		return HalfHeight;
 	}
-	
 
 	public static boolean isVibroEnabled() {
 		return vibroEnabled;
@@ -174,8 +199,8 @@ public class MainActivity extends SimpleBaseGameActivity {
 		MainActivity.soundEnabled = soundEnabled;
 	}
 
-	public static void vibrate(long milliseconds){
-		if(vibroEnabled){
+	public static void vibrate(long milliseconds) {
+		if (vibroEnabled) {
 			mVibrator.vibrate(milliseconds);
 		}
 	}

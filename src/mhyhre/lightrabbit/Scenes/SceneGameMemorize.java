@@ -283,7 +283,7 @@ public class SceneGameMemorize extends MhyhreScene {
 		
 							item.setColor(1.0f, 0.3f, 0.3f);
 							errorsCount++;
-							MainActivity.vibrate(60);
+							MainActivity.vibrate(30);
 							if(errorsCount > errorMaxCount){
 								sceneGame.setGameState(GameState.Loss);
 							} else {

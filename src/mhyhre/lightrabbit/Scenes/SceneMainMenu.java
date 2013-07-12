@@ -178,6 +178,13 @@ public class SceneMainMenu extends MhyhreScene {
 		mSpriteSound.setPosition(OffsetX+20, OffsetY*5);
 		attachChild(mSpriteSound);
 		registerTouchArea(mSpriteSound);
+		
+		if(MainActivity.isVibroEnabled() == false){
+			mSpriteVibro.setAlpha(0.5f);
+		}
+		if(MainActivity.isSoundEnabled() == false){
+			mSpriteSound.setAlpha(0.5f);
+		}
 	}
 
 	@Override

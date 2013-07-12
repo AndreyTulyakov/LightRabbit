@@ -80,7 +80,6 @@ public class SceneGame extends MhyhreScene {
 						
 					case Memorize:
 						setGameState(GameState.Recollect);
-						enableNextButton(false);
 						break;
 						
 					case Recollect:
@@ -100,6 +99,7 @@ public class SceneGame extends MhyhreScene {
 				return true;
 			}
 		};
+		spriteNext.setVisible(false);
 		attachChild(spriteNext);
 		enableNextButton(true);
 		
@@ -123,12 +123,13 @@ public class SceneGame extends MhyhreScene {
 	}
 	
 	public void enableNextButton(boolean arg){
-		if(arg==true){
+		if(arg==true && spriteNext.isVisible() == false){
 			spriteNext.setVisible(true);
 			spriteNext.setIgnoreUpdate(false);
 			registerTouchArea(spriteNext);
 			
-		}else{
+		}else if(arg==false && spriteNext.isVisible() == true){
+			
 			spriteNext.setVisible(false);
 			spriteNext.setIgnoreUpdate(true);
 			unregisterTouchArea(spriteNext);
@@ -245,24 +246,28 @@ public class SceneGame extends MhyhreScene {
 		case Ready:
 			sceneMessage.displayStartScene();
 			sceneMessage.Show();
+			enableNextButton(true);
 			break;
 
 		case Memorize:
-			//sceneMemorize
 			sceneMemorize.Show();
+			enableNextButton(true);
 			break;
 
 		case Recollect:
+			enableNextButton(false);
 			sceneMemorize.shuffleWords();
 			sceneMemorize.Show();
 			break;
 
 		case Result:
+			enableNextButton(true);
 			sceneMessage.displayEndScene(sceneMemorize.getErrorsCount());
 			sceneMessage.Show();
 			break;
 			
 		case Loss:
+			enableNextButton(true);
 			sceneMessage.displayLosingScene(sceneMemorize.getErrorsCount());
 			sceneMessage.Show();
 			break;

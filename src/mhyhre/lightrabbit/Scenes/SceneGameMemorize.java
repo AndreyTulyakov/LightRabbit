@@ -270,6 +270,12 @@ public class SceneGameMemorize extends MhyhreScene {
 							MainActivity.vibrate(30);
 							if(selectByProgramm >= currentItemCount){
 								sceneGame.enableNextButton(true);
+								if(sceneGame.getCurrentLevel()%2 == 0){
+									MainActivity.Res.getSound("yes1").play();
+								} else {
+									MainActivity.Res.getSound("yes2").play();
+								}
+								
 							}
 						} else {
 							
@@ -280,6 +286,8 @@ public class SceneGameMemorize extends MhyhreScene {
 							MainActivity.vibrate(60);
 							if(errorsCount > errorMaxCount){
 								sceneGame.setGameState(GameState.Loss);
+							} else {
+								MainActivity.Res.getSound("error").play();
 							}
 						}
 						break;

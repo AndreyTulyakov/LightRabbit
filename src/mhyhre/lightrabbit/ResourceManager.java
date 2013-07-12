@@ -100,15 +100,23 @@ public class ResourceManager {
 	
 	public void loadSounds() {
 		SoundFactory.setAssetBasePath("sound/");
-		 try {
-			Sound snd = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), "untitled.ogg");
-			sounds.put("roboClick", snd);
-		 
-		 
-		 } catch (IOException e) {
-			// TODO Auto-generated catch block
+
+		addSound("untitled.ogg", "roboClick");
+		addSound("SwitchOn.ogg", "switchOn");
+		addSound("error.ogg", "error");
+		addSound("yes_1.ogg", "yes1");
+		addSound("yes_2.ogg", "yes2");
+	}
+	
+	private void addSound(String filename, String name){
+		Sound snd = null;
+		try {
+			snd = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), filename);
+		} catch (IOException e) {
+			Log.e(MainActivity.DebugID, "ResourceManager::addSound: " + e.getMessage());
 			e.printStackTrace();
 		}
+		sounds.put(name, snd);
 	}
 
 	public void loadFonts() {
@@ -122,10 +130,6 @@ public class ResourceManager {
 		mFont.load();
 		fonts.put("White Furore", mFont);
 		
-		
-		
-
-
 		Log.i(MainActivity.DebugID, "ResourceManager::loadFonts: OK");
 	}
 

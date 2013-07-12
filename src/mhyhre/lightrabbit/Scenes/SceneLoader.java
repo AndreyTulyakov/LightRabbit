@@ -36,6 +36,8 @@ public class SceneLoader extends MhyhreScene {
 	private float AlphaTime = 0.0f;
 	private float AlphaTime2 = -0.3f;
 	private float AlphaTime3 = 0.0f;
+	
+	boolean soundPlayed = false;
 
 	Background backGround;
 
@@ -111,6 +113,11 @@ public class SceneLoader extends MhyhreScene {
 
 				if (mCaptionTapScreen.isVisible()) {
 
+					if(AlphaTime2 > 0.3f && soundPlayed == false){
+						MainActivity.Res.getSound("switchOn").play();
+						soundPlayed = true;
+					}
+					
 					// Splash on - logo
 					if (AlphaTime2 < 0.99f) {
 						AlphaTime2 += 0.01f;

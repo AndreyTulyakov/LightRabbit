@@ -2,6 +2,7 @@ package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
@@ -20,12 +21,19 @@ public class SceneGameMemorize extends MhyhreScene {
 	
 	
 	
-	class WordPair{
-		public String word1, word2;
+	class WordTriple{
+		public String word1, word2, word3;
 		
-		public WordPair(String w1, String w2) {
+		public WordTriple(String w1, String w2) {
 			this.word1 = new String(w1);
 			this.word2 = new String(w2);
+			this.word3 = null;
+		}
+		
+		public WordTriple(String w1, String w2, String w3) {
+			this.word1 = new String(w1);
+			this.word2 = new String(w2);
+			this.word3 = new String(w3);
 		}
 	}
 	
@@ -41,7 +49,7 @@ public class SceneGameMemorize extends MhyhreScene {
 	
 	ArrayList<WordItem> wordItems;
 	ArrayList<Text> labels;
-	ArrayList<WordPair> wordPairs;
+	ArrayList<WordTriple> wordPairs;
 	SpriteBatch UIBatch;
 	Font itemFont;
 
@@ -67,7 +75,7 @@ public class SceneGameMemorize extends MhyhreScene {
 		itemFont = MainActivity.Res.getFont(itemFontName);
 		wordItems = new ArrayList<WordItem>(maxItemCount);
 		labels = new ArrayList<Text>(maxItemCount);
-		wordPairs = new ArrayList<WordPair>(maxItemCount/2);
+		wordPairs = new ArrayList<WordTriple>(maxItemCount/2);
 
 		// Labels setup
 		for (int i = 0; i < maxItemCount; i++) {
@@ -95,7 +103,7 @@ public class SceneGameMemorize extends MhyhreScene {
 		}
 		
 		for (int i = 0; i < currentItemCount; i+=2) {
-			wordPairs.add(new WordPair(inWords.get(i), inWords.get(i+1)));
+			wordPairs.add(new WordTriple(inWords.get(i), inWords.get(i+1)));
 			Log.i(MainActivity.DebugID, "#### " + inWords.get(i) +" - "+ inWords.get(i+1));
 		}
 	}

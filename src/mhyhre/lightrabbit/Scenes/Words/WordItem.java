@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.Scenes;
+package mhyhre.lightrabbit.Scenes.Words;
 
 public class WordItem {
 
@@ -7,6 +7,16 @@ public class WordItem {
 	float width, height;
 	float red, green, blue, alpha;
 	boolean enabled = true;
+	boolean errorState = false;
+
+
+	public boolean isErrorState() {
+		return errorState;
+	}
+
+	public void setErrorState(boolean errorState) {
+		this.errorState = errorState;
+	}
 
 	public boolean isEnabled() {
 		return enabled;

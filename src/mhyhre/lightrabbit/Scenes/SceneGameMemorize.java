@@ -2,11 +2,11 @@ package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
-
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.Scenes.Words.WordItem;
+import mhyhre.lightrabbit.Scenes.Words.WordTriple;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.batch.SpriteBatch;
@@ -20,23 +20,6 @@ import android.util.Log;
 public class SceneGameMemorize extends MhyhreScene {
 	
 	
-	
-	class WordTriple{
-		public String word1, word2, word3;
-		
-		public WordTriple(String w1, String w2) {
-			this.word1 = new String(w1);
-			this.word2 = new String(w2);
-			this.word3 = null;
-		}
-		
-		public WordTriple(String w1, String w2, String w3) {
-			this.word1 = new String(w1);
-			this.word2 = new String(w2);
-			this.word3 = new String(w3);
-		}
-	}
-	
 	public String itemFontName = "Furore";
 
 	SceneGame sceneGame;
@@ -45,7 +28,6 @@ public class SceneGameMemorize extends MhyhreScene {
 	private int currentItemCount;
 	private int errorsCount = 0;
 	private int errorMaxCount = 2;
-	private int selectByProgramm;
 	
 	ArrayList<WordItem> wordItems;
 	ArrayList<Text> labels;
@@ -85,8 +67,8 @@ public class SceneGameMemorize extends MhyhreScene {
 	}
 
 	public void setWordsList(final ArrayList<String> inWords) {
-
-		selectByProgramm = 0;
+		
+		rightlyPairCount = 0;
 		
 		if (inWords.size() > maxItemCount || inWords.size()%2 == 1) {
 			Log.e(MainActivity.DebugID, "Scene::setWordsList: strange list size");
@@ -137,18 +119,30 @@ public class SceneGameMemorize extends MhyhreScene {
 			
 			
 			if(SceneGame.getMode() == GameState.Recollect){
-				if(selectByProgramm == i){
-					leftItem.setColor(0.8f, 0.8f, 1.0f);
-				} else {
-					leftItem.setColor(0.8f, 0.8f, 0.8f);
-				}
 				
+				// FIXME: save colors
+								
 				if(rightItem.isEnabled() == true){
-
 					rightItem.desireColor(colorDelta, 1, 1, 1);
 				} else {
-					rightItem.desireColor(colorDelta, 0.8f, 0.8f, 0.8f);
+					rightItem.desireColor(colorDelta, 0.5f, 0.5f, 0.5f);
 				}
+				
+				if(leftItem.isEnabled() == true){
+					leftItem.desireColor(colorDelta, 1, 1, 1);
+				} else {
+					leftItem.desireColor(colorDelta, 0.5f, 0.5f, 0.5f);
+				}
+				
+				if(selectedLeft == i){
+					leftItem.setColor(0.8f, 0.8f, 1.0f);
+				}
+				
+				if(selectedRight == i+1){
+					rightItem.setColor(0.8f, 0.8f, 1.0f);
+				}
+				
+				
 			} else {
 				leftItem.setColor(1.0f, 1.0f, 1.0f);
 				rightItem.setColor(1.0f, 1.0f, 1.0f);
@@ -254,18 +248,98 @@ public class SceneGameMemorize extends MhyhreScene {
 		return super.onSceneTouchEvent(event); 
 	}
 
+	
+	int selectedLeft = -1;
+	int selectedRight = -1;
+	int rightlyPairCount = 0;
+			
 	private void clickEvent(float x, float y) {
 	
 		if(SceneGame.getMode() == GameState.Recollect){
 			
 			Log.i(MainActivity.DebugID, "CLICK!");
 			
-			for (int i = 1; i < currentItemCount; i+=2) {
-	
-				WordItem item = wordItems.get(i);
-				if(item.isEnabled() == true){
-					if (isPointInRect(x, y, item.getRectX(), item.getRectY(), item.getWidth(), item.getHeight())) {
+			int selectedItem = getItemSelected(x,y);
+			
+			if( selectedItem != -1 ){
+				
+				Log.i(MainActivity.DebugID, "Selected item:" + selectedItem);
+					
+				boolean isLeftSelected = (selectedItem%2 == 0);
+				
+				if(isLeftSelected){
+					selectedLeft = selectedItem;
+				} else {
+					selectedRight = selectedItem;
+				}
+				
+				// Time to check pair!
+				if(selectedLeft != -1 && selectedRight != -1){
+					
+					String word1 = wordItems.get(selectedLeft).getWord();
+					String word2 = wordItems.get(selectedRight).getWord();
+					
+					boolean isRightly = false;
+
+					for(WordTriple words: wordPairs){
+						if(words.word1.equals(word1)){
+							if(words.word2.equals(word2)){
+								isRightly = true;
+							}
+							break;
+						}
+					}
+
+					
+					if(isRightly){
 						
+						Log.i(MainActivity.DebugID, "Good click: " + word1 + " - " + word2);
+						
+						wordItems.get(selectedLeft).setEnabled(false);
+						wordItems.get(selectedRight).setEnabled(false);
+
+						wordItems.get(selectedLeft).setColor(0.3f, 1.0f, 0.3f);
+						wordItems.get(selectedRight).setColor(0.3f, 1.0f, 0.3f);
+						
+						selectedLeft = -1;
+						selectedRight = -1;
+						
+						rightlyPairCount++;
+						if(rightlyPairCount >= currentItemCount/2){
+							sceneGame.enableNextButton(true);
+							if(sceneGame.getCurrentLevel()%2 == 0){
+								MainActivity.Res.playSound("yes1");
+							} else {
+								MainActivity.Res.playSound("yes2");
+							}
+						}
+						
+					} else {
+						
+						Log.i(MainActivity.DebugID, "Bad click: " + word1 + " - " + word2);
+
+						wordItems.get(selectedLeft).setColor(1.0f, 0.3f, 0.3f);
+						wordItems.get(selectedRight).setColor(1.0f, 0.3f, 0.3f);
+						
+						
+						selectedLeft = -1;
+						selectedRight = -1;
+						
+						errorsCount++;
+						MainActivity.vibrate(30);
+						
+						if(errorsCount > errorMaxCount){
+							sceneGame.setGameState(GameState.Loss);
+						} else {
+							MainActivity.Res.playSound("error");
+						}
+					}
+				}
+			}
+			
+			
+			
+						/*
 						// if it's good click
 						if(wordPairs.get(selectByProgramm/2).word2.equals(item.getWord())){
 							
@@ -298,10 +372,7 @@ public class SceneGameMemorize extends MhyhreScene {
 								MainActivity.Res.playSound("error");
 							}
 						}
-						break;
-					}
-				}
-			}
+						*/
 		}
 
 	}
@@ -341,6 +412,22 @@ public class SceneGameMemorize extends MhyhreScene {
 
 		return true;
 	}
+	
+	private int getItemSelected(float x, float y){
+		
+		for (int i = 0; i < currentItemCount; i++) {
+			
+			WordItem item = wordItems.get(i);
+			
+			if(item.isEnabled() == true){
+				if (isPointInRect(x, y, item.getRectX(), item.getRectY(), item.getWidth(), item.getHeight())) {
+					
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
 
 	private void miniShuffle(int a, int b){
 		String word = wordItems.get(a).getWord();
@@ -357,6 +444,11 @@ public class SceneGameMemorize extends MhyhreScene {
 
 		for(int i=1; i<currentItemCount; i+=2){
 			int b = 2*rand.nextInt((currentItemCount-1)/2) + 1;	
+			miniShuffle(i, b);
+		}
+		
+		for(int i=0; i<currentItemCount; i+=2){
+			int b = 2*rand.nextInt((currentItemCount-1)/2);	
 			miniShuffle(i, b);
 		}
 		

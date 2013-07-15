@@ -38,6 +38,12 @@ public class SceneGameMemorize extends MhyhreScene {
 	final float borderSize = 100;
 	final float heightStep = 80;
 	final float centerOffset = 180;
+	
+	int selectedLeft = -1;
+	int selectedRight = -1;
+	int rightlyPairCount = 0;
+	
+	
 
 	public SceneGameMemorize(final SceneGame sceneGame, int maxItemCount) {
 
@@ -249,9 +255,8 @@ public class SceneGameMemorize extends MhyhreScene {
 	}
 
 	
-	int selectedLeft = -1;
-	int selectedRight = -1;
-	int rightlyPairCount = 0;
+
+	
 			
 	private void clickEvent(float x, float y) {
 	
@@ -268,9 +273,18 @@ public class SceneGameMemorize extends MhyhreScene {
 				boolean isLeftSelected = (selectedItem%2 == 0);
 				
 				if(isLeftSelected){
-					selectedLeft = selectedItem;
+					if(selectedLeft == selectedItem){
+						selectedLeft = -1;
+					} else {
+						selectedLeft = selectedItem;
+					}
+					
 				} else {
-					selectedRight = selectedItem;
+					if(selectedRight == selectedItem){
+						selectedRight = -1;
+					} else {
+						selectedRight = selectedItem;
+					}
 				}
 				
 				// Time to check pair!
@@ -336,43 +350,6 @@ public class SceneGameMemorize extends MhyhreScene {
 					}
 				}
 			}
-			
-			
-			
-						/*
-						// if it's good click
-						if(wordPairs.get(selectByProgramm/2).word2.equals(item.getWord())){
-							
-							Log.i(MainActivity.DebugID, "Good click: " + wordPairs.get(selectByProgramm/2).word1 + " - " + item.getWord());
-							
-							item.setEnabled(false);
-							item.setColor(0.3f, 1.0f, 0.3f);
-							
-							selectByProgramm += 2;
-							MainActivity.vibrate(30);
-							if(selectByProgramm >= currentItemCount){
-								sceneGame.enableNextButton(true);
-								if(sceneGame.getCurrentLevel()%2 == 0){
-									MainActivity.Res.playSound("yes1");
-								} else {
-									MainActivity.Res.playSound("yes2");
-								}
-								
-							}
-						} else {
-							
-							Log.i(MainActivity.DebugID, "Bad click: " + wordPairs.get(selectByProgramm/2).word1 + " - " + item.getWord());
-		
-							item.setColor(1.0f, 0.3f, 0.3f);
-							errorsCount++;
-							MainActivity.vibrate(30);
-							if(errorsCount > errorMaxCount){
-								sceneGame.setGameState(GameState.Loss);
-							} else {
-								MainActivity.Res.playSound("error");
-							}
-						}
-						*/
 		}
 
 	}

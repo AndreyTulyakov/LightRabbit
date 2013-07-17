@@ -36,6 +36,10 @@ public class SceneGame extends MhyhreScene {
 	
 	Sprite spriteNext;
 	
+	int globalErrorCount = 0;
+	final int globalErrorMaxCount = 3;
+
+
 	SceneGameMemorize sceneMemorize;
 	SceneGameMessage sceneMessage;
 
@@ -115,7 +119,6 @@ public class SceneGame extends MhyhreScene {
 		
 		sceneMemorize.setWordsList(words);
 		sceneMemorize.update();
-		sceneMemorize.setErrorsCount(0);
 		
 		if(getCurrentLevel()>getMaxLevel()){
 			SceneRoot.SetState(SceneStates.MainMenu);
@@ -262,13 +265,13 @@ public class SceneGame extends MhyhreScene {
 
 		case Result:
 			enableNextButton(true);
-			sceneMessage.displayEndScene(sceneMemorize.getErrorsCount());
+			sceneMessage.displayEndScene(getErrorCount());
 			sceneMessage.Show();
 			break;
 			
 		case Loss:
 			enableNextButton(true);
-			sceneMessage.displayLosingScene(sceneMemorize.getErrorsCount());
+			sceneMessage.displayLosingScene(getErrorCount());
 			sceneMessage.Show();
 			break;
 		}
@@ -294,6 +297,28 @@ public class SceneGame extends MhyhreScene {
 	public int getMaxLevel(){
 		return maxLevel;
 	}
+
+	public int getErrorCount() {
+		return globalErrorCount;
+	}
+
+	public void setErrorCount(int errorCount) {
+		globalErrorCount = errorCount;
+	}
 	
+	public void addError() {
+		globalErrorCount++;
+	}
 	
+	public boolean isOverErrorsLimit(){
+		if(globalErrorCount >= globalErrorMaxCount){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public int getErrorMaxCount() {
+		return globalErrorMaxCount;
+	}
 }

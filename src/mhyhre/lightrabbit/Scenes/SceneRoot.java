@@ -115,6 +115,7 @@ public class SceneRoot extends Scene {
 				break;
 
 			case NewGame:
+				mSceneGame.setErrorCount(0);
 				mSceneGame.setCurrentLevel(1);
 				mSceneGame.setGameState(GameState.Ready);
 				mSceneGame.Show();

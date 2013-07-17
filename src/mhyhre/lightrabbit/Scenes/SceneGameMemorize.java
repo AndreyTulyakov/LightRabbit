@@ -26,8 +26,6 @@ public class SceneGameMemorize extends MhyhreScene {
 	
 	private int maxItemCount;
 	private int currentItemCount;
-	private int errorsCount = 0;
-	private int errorMaxCount = 2;
 	
 	ArrayList<WordItem> wordItems;
 	ArrayList<Text> labels;
@@ -125,9 +123,7 @@ public class SceneGameMemorize extends MhyhreScene {
 			
 			
 			if(SceneGame.getMode() == GameState.Recollect){
-				
-				// FIXME: save colors
-								
+
 				if(rightItem.isEnabled() == true){
 					rightItem.desireColor(colorDelta, 1, 1, 1);
 				} else {
@@ -339,10 +335,10 @@ public class SceneGameMemorize extends MhyhreScene {
 						selectedLeft = -1;
 						selectedRight = -1;
 						
-						errorsCount++;
 						MainActivity.vibrate(30);
 						
-						if(errorsCount > errorMaxCount){
+						sceneGame.addError();
+						if(sceneGame.isOverErrorsLimit()){
 							sceneGame.setGameState(GameState.Loss);
 						} else {
 							MainActivity.Res.playSound("error");
@@ -437,22 +433,6 @@ public class SceneGameMemorize extends MhyhreScene {
 		for(int i=0; i<currentItemCount; i+=2){
 			Log.i(MainActivity.DebugID, "[" + wordItems.get(i).getWord() + "-" + wordItems.get(i+1).getWord() + "]");
 		}
-	}
-	
-	public int getErrorsCount() {
-		return errorsCount;
-	}
-
-	public void setErrorsCount(int errorsCount) {
-		this.errorsCount = errorsCount;
-	}
-
-	public int getErrorMaxCount() {
-		return errorMaxCount;
-	}
-
-	public void setErrorMaxCount(int errorMaxCount) {
-		this.errorMaxCount = errorMaxCount;
 	}
 
 }

@@ -102,6 +102,10 @@ public class ResourceManager {
 		
 		region = TextureRegionFactory.extractFromTexture(atlas, 0, 230, 70, 60, false);
 		regions.put("ButtonSound", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 1, 447, 64, 64, false);
+		regions.put("ParticlePoint", region);
+
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
 	}

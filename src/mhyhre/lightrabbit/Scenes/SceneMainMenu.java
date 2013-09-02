@@ -15,7 +15,6 @@ import mhyhre.lightrabbit.R;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
-import mhyhre.lightrabbit.Particles.ParticleManager;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -37,19 +36,12 @@ public class SceneMainMenu extends MhyhreScene {
 	private Sprite mSpriteItem2;
 	private Sprite mSpriteItem3;
 	
-	ParticleManager pm;
-
-	
 	public SceneMainMenu() {
 
 		mBackGround = new Background(0.2f, 0.6f, 0.7f);
 		setBackground(mBackGround);
 		setBackgroundEnabled(true);
-		
-		
-		pm = new ParticleManager(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(), MainActivity.Res.getTextureRegion("ParticlePoint"), 50);
-		attachChild(pm);
-		
+
 		
 		// Text captions
 		String TextItem1 = MainActivity.Me.getString(R.string.MenuItem_Play);
@@ -204,8 +196,7 @@ public class SceneMainMenu extends MhyhreScene {
 	
 	@Override
 	protected void onManagedUpdate(float pSecondsElapsed) {
-		
-		pm.update();
+
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 

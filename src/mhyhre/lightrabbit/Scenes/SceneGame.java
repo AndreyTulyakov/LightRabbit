@@ -13,12 +13,15 @@
 package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import mhyhre.lightrabbit.Dictionary;
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
+import org.andengine.entity.primitive.Polygon;
+import org.andengine.entity.primitive.Vector2;
+import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
@@ -29,204 +32,187 @@ import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
 
-	public Dictionary dictionary = Dictionary.Instance();
+	private Background mBackground;
 
 	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 	
-	Sprite spriteNext;
+	private Polygon waterPolygon;
+	private List<Vector2> waterCoordinates;
+	float[] vertexX1;
+	float[] vertexY1;
 	
-	int globalErrorCount = 0;
-	final int globalErrorMaxCount = 3;
+	private final int waterResolution = 20;
 
-
-	SceneGameMemorize sceneMemorize;
-	SceneGameMessage sceneMessage;
+	Sprite spriteNext;
 
 	// Resources
 	public static final String uiAtlasName = "User_Interface";
 
 	public static ArrayList<ITextureRegion> TextureRegions;
-	
-	private int currentLevel = 0;
-	final private int maxLevel = 10;
-	final private int maxItemCount = (maxLevel+2) * 2;
 
 	public SceneGame() {
-		
+
+		mBackground = new Background(0.40f, 0.88f, 0.99f);
+		setBackground(mBackground);
+		setBackgroundEnabled(true);
+
 		CreateTextureRegions();
+		
+		waterCoordinates = new ArrayList<Vector2>(waterResolution+2);
+		waterCoordinates.add(new Vector2(MainActivity.getWidth(), MainActivity.getHeight()));
+		waterCoordinates.add(new Vector2(0, MainActivity.getHeight()));
 
-		// Memorize Scene
-		sceneMemorize = new SceneGameMemorize(this, maxItemCount);
-		attachChild(sceneMemorize);
-		
-		// Scene message
-		sceneMessage = new SceneGameMessage(this);
-		attachChild(sceneMessage);
+		for(int i=0; i < waterResolution; i++){
+			
+			waterCoordinates.add(new Vector2(0, MainActivity.getHalfHeight()));
+		}
 		
 		
 
-		spriteNext = new Sprite(MainActivity.getWidth() - (10 + TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+		vertexX1 = new float[waterCoordinates.size()];
+		vertexY1 = new float[waterCoordinates.size()];
+
+		for (int i = 0; i < waterCoordinates.size(); i++) {
+			vertexX1[i] = waterCoordinates.get(i).x;
+			vertexY1[i] = waterCoordinates.get(i).y;
+		}
+
+		waterPolygon = new Polygon(0, 0, vertexX1, vertexY1,
+				MainActivity.Me.getVertexBufferObjectManager());
+		waterPolygon.setColor(0.50f, 0.75f, 1);
+		
+
+
+		this.attachChild(waterPolygon);
+
+		spriteNext = new Sprite(MainActivity.getWidth()
+				- (10 + TextureRegions.get(3).getWidth()), 10,
+				TextureRegions.get(3),
+				MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				
+
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
-					
-					
+
 					MainActivity.vibrate(30);
-					
-					switch(mode){
-					
+
+					switch (mode) {
+
 					case Ready:
 						setGameState(GameState.Memorize);
 						break;
-						
+
 					case Memorize:
 						setGameState(GameState.Recollect);
 						break;
-						
+
 					case Recollect:
 						setGameState(GameState.Result);
 						break;
-						
+
 					case Result:
-						nextLevel();
 						setGameState(GameState.Ready);
 						break;
-						
+
 					case Loss:
 						SceneRoot.SetState(SceneStates.MainMenu);
 						break;
-					}		
+					}
 				}
 				return true;
 			}
 		};
-		spriteNext.setVisible(false);
+		spriteNext.setVisible(true);
 		attachChild(spriteNext);
-		enableNextButton(true);
-		
+
 		loaded = true;
-		
+
 		setGameState(GameState.Ready);
-	}
-	
-	private void nextLevel(){
-		currentLevel++;
-
-		ArrayList<String> words = getNewWordsList();
 		
-		sceneMemorize.setWordsList(words);
-		sceneMemorize.update();
-		
-		if(getCurrentLevel()>getMaxLevel()){
-			SceneRoot.SetState(SceneStates.MainMenu);
-		}
-	}
-	
-	public void enableNextButton(boolean arg){
-		if(arg==true && spriteNext.isVisible() == false){
-			spriteNext.setVisible(true);
-			spriteNext.setIgnoreUpdate(false);
-			registerTouchArea(spriteNext);
-			
-		}else if(arg==false && spriteNext.isVisible() == true){
-			
-			spriteNext.setVisible(false);
-			spriteNext.setIgnoreUpdate(true);
-			unregisterTouchArea(spriteNext);
-			
-		}
-	}
-	
-	
-	private ArrayList<String> getNewWordsList(){
-		
-		int currentItem = (getCurrentLevel() + 2) * 2;
-		
-		if(dictionary.size() <= currentItem){
-			Log.e(MainActivity.DebugID, "SceneGame: dictionary is too small");
-			return null;
-		}
-		
-		ArrayList<String> wordsList = new ArrayList<String>();
-			
-		boolean wordIsExist;
-		int i = 0;
-		
-		while( i<currentItem ){
-			String word = dictionary.getRandomWord();
-			wordIsExist = false;
-
-			for(String str: wordsList){
-				if(str.equals(word)){
-					wordIsExist = true;
-					break;
-				}
-			}
-			
-			if(wordIsExist == false){
-				wordsList.add(word);
-				i++;
-			}
-		}
-		
-		return wordsList;
+		Log.i(MainActivity.DebugID, "Scene game created");
 	}
 
 	private static void CreateTextureRegions() {
 
 		TextureRegions = new ArrayList<ITextureRegion>();
-		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
+		BitmapTextureAtlas atlas = MainActivity.Res
+				.getTextureAtlas(uiAtlasName);
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 0,
+				310, 70, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 325,
+				0, 45, 70, false));
 
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 70, 74, 74, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 80, 70, 74, 74, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0,
+				70, 74, 74, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 80,
+				70, 74, 74, false));
 
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 160,
+				70, 74, 74, false));
 
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 390, 0, 120, 384, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 460, 0, 4, 384, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 390,
+				0, 120, 384, false));
+		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 460,
+				0, 4, 384, false));
 	}
 
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
 		if (loaded == true) {
-			
+
 			switch (mode) {
 
 			case Ready:
-				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
+
 				break;
 
 			case Memorize:
-				sceneMemorize.onSceneTouchEvent(pSceneTouchEvent);
+
 				break;
 
-			case Recollect:
-				sceneMemorize.onSceneTouchEvent(pSceneTouchEvent);
-				break;
-
-			case Result:
-				sceneMessage.onSceneTouchEvent(pSceneTouchEvent);
-				break;
-			case Loss:
-				break;
-				
 			default:
 				break;
-			}		
+			}
 		}
 
 		return super.onSceneTouchEvent(pSceneTouchEvent);
 	}
-
+	
+	private static float tick = 0;
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
+
+		tick+=0.1f;
+		
+		if(tick>Math.PI*2)
+			tick = 0.0f;
+		
+
+		
+		int increment = (int) (MainActivity.getWidth() / waterResolution);
+		
+		for(int i=0; i < waterCoordinates.size(); i++){
+
+			double vertexHeight = MainActivity.getHalfHeight() + 100*Math.sin( (i+tick) / (Math.PI*20) );
+			waterCoordinates.get(i).set(i*increment, (float) vertexHeight);
+			
+			Log.i(MainActivity.DebugID, "Updated " + i);
+		}
+
+		for (int i = 2; i < vertexX1.length; i++) {
+
+			float vertexHeight = (float) (MainActivity.getHalfHeight() + 100*Math.sin( (i+tick) / (Math.PI*20) ));
+
+			vertexX1[i] = 100;//waterCoordinates.get(i).x;
+			vertexY1[i] = vertexHeight;//vertexHeight;//waterCoordinates.get(i).y;
+		}
+
+		waterPolygon.updateVertices(vertexX1, vertexY1);
+		
 
 		super.onManagedUpdate(pSecondsElapsed);
 	}
@@ -241,38 +227,15 @@ public class SceneGame extends MhyhreScene {
 
 		SceneGame.mode = mode;
 
-		sceneMemorize.Hide();
-		sceneMessage.Hide();
-
 		switch (mode) {
 
 		case Ready:
-			sceneMessage.displayStartScene();
-			sceneMessage.Show();
-			enableNextButton(true);
 			break;
 
 		case Memorize:
-			sceneMemorize.Show();
-			enableNextButton(true);
 			break;
 
-		case Recollect:
-			enableNextButton(false);
-			sceneMemorize.shuffleWords();
-			sceneMemorize.Show();
-			break;
-
-		case Result:
-			enableNextButton(true);
-			sceneMessage.displayEndScene(getErrorCount());
-			sceneMessage.Show();
-			break;
-			
-		case Loss:
-			enableNextButton(true);
-			sceneMessage.displayLosingScene(getErrorCount());
-			sceneMessage.Show();
+		default:
 			break;
 		}
 	}
@@ -281,44 +244,4 @@ public class SceneGame extends MhyhreScene {
 		return mode;
 	}
 
-	public int getCurrentLevel(){
-		return currentLevel;
-	}
-	
-	public void setCurrentLevel(int arg){
-		if(arg>0){
-			currentLevel = arg-1;
-		} else {
-			currentLevel = 0;
-		}
-		nextLevel();
-	}
-	
-	public int getMaxLevel(){
-		return maxLevel;
-	}
-
-	public int getErrorCount() {
-		return globalErrorCount;
-	}
-
-	public void setErrorCount(int errorCount) {
-		globalErrorCount = errorCount;
-	}
-	
-	public void addError() {
-		globalErrorCount++;
-	}
-	
-	public boolean isOverErrorsLimit(){
-		if(globalErrorCount >= globalErrorMaxCount){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public int getErrorMaxCount() {
-		return globalErrorMaxCount;
-	}
 }

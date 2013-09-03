@@ -14,6 +14,7 @@ package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
@@ -42,7 +43,7 @@ public class SceneGame extends MhyhreScene {
 	float[] vertexX1;
 	float[] vertexY1;
 	
-	private final int waterResolution = 20;
+	private final int waterResolution = 17;
 
 	Sprite spriteNext;
 
@@ -59,17 +60,20 @@ public class SceneGame extends MhyhreScene {
 
 		CreateTextureRegions();
 		
-		waterCoordinates = new ArrayList<Vector2>(waterResolution+2);
+		
+		// Water coordinates list
+		waterCoordinates = new ArrayList<Vector2>();
 		waterCoordinates.add(new Vector2(MainActivity.getWidth(), MainActivity.getHeight()));
 		waterCoordinates.add(new Vector2(0, MainActivity.getHeight()));
 
+		Random rand = new Random();
+		
 		for(int i=0; i < waterResolution; i++){
 			
-			waterCoordinates.add(new Vector2(0, MainActivity.getHalfHeight()));
+			waterCoordinates.add(new Vector2(i*10, MainActivity.getHalfHeight() - rand.nextInt(100) ));
 		}
-		
-		
 
+		// Separate coordinates
 		vertexX1 = new float[waterCoordinates.size()];
 		vertexY1 = new float[waterCoordinates.size()];
 
@@ -81,10 +85,8 @@ public class SceneGame extends MhyhreScene {
 		waterPolygon = new Polygon(0, 0, vertexX1, vertexY1,
 				MainActivity.Me.getVertexBufferObjectManager());
 		waterPolygon.setColor(0.50f, 0.75f, 1);
-		
-
-
 		this.attachChild(waterPolygon);
+		
 
 		spriteNext = new Sprite(MainActivity.getWidth()
 				- (10 + TextureRegions.get(3).getWidth()), 10,
@@ -186,33 +188,50 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
-		tick+=0.1f;
+		tick+=0.02f;
 		
-		if(tick>Math.PI*2)
+		if(tick > Math.PI*2.0f)
 			tick = 0.0f;
-		
 
 		
-		int increment = (int) (MainActivity.getWidth() / waterResolution);
+		float step = MainActivity.getWidth() / (waterResolution-1);
 		
+		for (int i = 2; i < waterCoordinates.size(); i++) {
+			
+			float waveAngle = (float) ((i*2/Math.PI) + tick);
+			
+			float vertexHeight = (float) (MainActivity.getHalfHeight() + 30*Math.sin( waveAngle ));
+			
+			vertexX1[i] = (i-2) * step;
+			vertexY1[i] = vertexHeight;
+		}
+		
+		waterPolygon.updateVertices(vertexX1, vertexY1);
+
+		//waterPolygon.updateVertices(vertexX1, vertexY1);
+		
+		
+		/*
 		for(int i=0; i < waterCoordinates.size(); i++){
 
-			double vertexHeight = MainActivity.getHalfHeight() + 100*Math.sin( (i+tick) / (Math.PI*20) );
+			
 			waterCoordinates.get(i).set(i*increment, (float) vertexHeight);
 			
-			Log.i(MainActivity.DebugID, "Updated " + i);
+			//Log.i(MainActivity.DebugID, "Updated " + i);
 		}
 
-		for (int i = 2; i < vertexX1.length; i++) {
+		for (int i = 0; i < vertexX1.length-1; i+=2) {
 
-			float vertexHeight = (float) (MainActivity.getHalfHeight() + 100*Math.sin( (i+tick) / (Math.PI*20) ));
+			//float vertexHeight = (float) (MainActivity.getHalfHeight() + 100*Math.sin( (i+tick) / (Math.PI*20) ));
 
-			vertexX1[i] = 100;//waterCoordinates.get(i).x;
-			vertexY1[i] = vertexHeight;//vertexHeight;//waterCoordinates.get(i).y;
+			vertexX1[i] = i*10.0f;//waterCoordinates.get(i).x;
+			vertexY1[i] = i*10.0f;//vertexHeight;//waterCoordinates.get(i).y;
+			
+			//vertexX1[i+1] = 0.0f;//waterCoordinates.get(i).x;
+			//vertexY1[i+1] = MainActivity.getWidth();//vertexHeight;//waterCoordinates.get(i).y;
 		}
+*/
 
-		waterPolygon.updateVertices(vertexX1, vertexY1);
-		
 
 		super.onManagedUpdate(pSecondsElapsed);
 	}

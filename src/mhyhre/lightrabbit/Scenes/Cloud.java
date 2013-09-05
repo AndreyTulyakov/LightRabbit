@@ -12,7 +12,6 @@
 
 package mhyhre.lightrabbit.Scenes;
 
-
 /**
  * Cloud, simple model
  */

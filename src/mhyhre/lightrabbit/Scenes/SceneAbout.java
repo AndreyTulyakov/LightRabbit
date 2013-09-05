@@ -36,33 +36,28 @@ public class SceneAbout extends MhyhreScene {
 	public SceneAbout() {
 		setBackgroundEnabled(true);
 		setBackground(new Background(0.9f, 0.9f, 1.0f));
-	
+
 		String strText1 = MainActivity.Me.getString(R.string.textAbout);
 		textTop = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
 		textTop.setPosition(MainActivity.getHalfWidth() - textTop.getWidth() / 2.0f, 40);
 
-		
 		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 80, MainActivity.Me.getVertexBufferObjectManager());
 		topRect.setColor(0.5f, 0.5f, 0.6f);
 		topRect.setHeight(40 + 40 + textTop.getFont().getLineHeight());
-		
+
 		String strText2 = loadInfo("about.text");
 		textInfo = new Text(0, 0, MainActivity.Res.getFont("Furore"), strText2, MainActivity.Me.getVertexBufferObjectManager());
-		textInfo.setPosition( MainActivity.getHalfWidth() - textInfo.getWidth() / 2.0f, topRect.getHeight()+40);
-		
+		textInfo.setPosition(MainActivity.getHalfWidth() - textInfo.getWidth() / 2.0f, topRect.getHeight() + 40);
+
 		attachChild(topRect);
 		attachChild(textTop);
 		attachChild(textInfo);
-		
-		
+
 		String strBack = MainActivity.Me.getString(R.string.textBack);
-		
-		Sprite mBackButtonSprite = new Sprite(0, 0,
-				MainActivity.Res.getTextureRegion("Button1"),
-				MainActivity.Me.getVertexBufferObjectManager()) {
+
+		Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
-					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 					MainActivity.vibrate(30);
 					SceneRoot.SetState(SceneStates.MainMenu);
@@ -70,15 +65,10 @@ public class SceneAbout extends MhyhreScene {
 				return true;
 			}
 		};
-		mBackButtonSprite.setPosition(
-				MainActivity.getHalfWidth() - mBackButtonSprite.getWidth() / 2,
-				MainActivity.getHeight() - ((mBackButtonSprite.getHeight() / 2)+50));
-		
-		textBack = new Text(0, 0, MainActivity.Res.getFont("Furore"),
-				strBack, MainActivity.Me.getVertexBufferObjectManager());
-		textBack.setPosition(
-				MainActivity.getHalfWidth() - textBack.getWidth() / 2,
-				MainActivity.getHeight() - ((textBack.getHeight() / 2)+50));
+		mBackButtonSprite.setPosition(MainActivity.getHalfWidth() - mBackButtonSprite.getWidth() / 2, MainActivity.getHeight() - ((mBackButtonSprite.getHeight() / 2) + 50));
+
+		textBack = new Text(0, 0, MainActivity.Res.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
+		textBack.setPosition(MainActivity.getHalfWidth() - textBack.getWidth() / 2, MainActivity.getHeight() - ((textBack.getHeight() / 2) + 50));
 
 		attachChild(mBackButtonSprite);
 		registerTouchArea(mBackButtonSprite);
@@ -86,25 +76,25 @@ public class SceneAbout extends MhyhreScene {
 	}
 
 	private String loadInfo(String filename) {
-		
+
 		String text = "";
 
-        InputStream input;
-        try {
-            input = MainActivity.Me.getAssetManager().open(filename);
-             
-             int size = input.available();
-             byte[] buffer = new byte[size];
-             input.read(buffer);
-             input.close();
- 
-             text = new String(buffer);
-            
-        } catch (IOException e) {
-        	Log.e(MainActivity.DebugID, "SceneAbout::loadInfo: " + e.getMessage());
-            e.printStackTrace();
-        }
-        
+		InputStream input;
+		try {
+			input = MainActivity.Me.getAssetManager().open(filename);
+
+			int size = input.available();
+			byte[] buffer = new byte[size];
+			input.read(buffer);
+			input.close();
+
+			text = new String(buffer);
+
+		} catch (IOException e) {
+			Log.e(MainActivity.DebugID, "SceneAbout::loadInfo: " + e.getMessage());
+			e.printStackTrace();
+		}
+
 		return text;
 	}
 

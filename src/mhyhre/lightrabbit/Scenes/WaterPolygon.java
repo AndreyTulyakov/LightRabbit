@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import mhyhre.lightrabbit.MainActivity;
 
-import org.andengine.entity.primitive.Line;
 import org.andengine.entity.primitive.Polygon;
 import org.andengine.entity.primitive.Vector2;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-
-import android.util.Log;
 
 public class WaterPolygon extends Polygon {
 
@@ -21,8 +18,7 @@ public class WaterPolygon extends Polygon {
 	float waveRepeating = 1.5f;
 	float waveHeight = 50;
 	float waterLevel = 200;
-	
-	Line lineV, lineH;
+
 
 	public WaterPolygon(int resolution, VertexBufferObjectManager pVertexBufferObjectManager) {
 
@@ -57,12 +53,6 @@ public class WaterPolygon extends Polygon {
 			vertexX1[i] = waterCoordinates.get(i).x;
 			vertexY1[i] = waterCoordinates.get(i).y;
 		}
-		
-		lineH = new Line(0, 0, 0, 0, pVertexBufferObjectManager);
-		lineV = new Line(0, 0, 0, 0, pVertexBufferObjectManager);
-		
-		attachChild(lineH);
-		attachChild(lineV);
 	}
 
 	private static float tick = 0;
@@ -121,9 +111,6 @@ public class WaterPolygon extends Polygon {
 		float waveAngle = getWaveAngle(pX);
 
 		float vertexHeight = getHeightOnWave(waveAngle);
-		
-		lineH.setPosition(0, vertexHeight, MainActivity.getWidth(), vertexHeight);
-		lineV.setPosition(pX, 0 ,pX, MainActivity.getHeight());
 		
 		return vertexHeight;
 	}

@@ -2,6 +2,7 @@ package mhyhre.lightrabbit.game;
 
 import org.andengine.entity.primitive.Vector2;
 import org.andengine.entity.shape.RectangularShape;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.IVertexBufferObject;
 
 public class BulletUnit extends RectangularShape{
@@ -68,5 +69,17 @@ public class BulletUnit extends RectangularShape{
 	protected void onUpdateVertices() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean collideWithSpriteByCircle(Sprite spr, float radius){
+		
+		float dx = getX() - (spr.getX() + spr.getWidth()/2);
+		float dy = getY() - (spr.getY() + spr.getHeight()/2);
+		
+		float c = (dx*dx) + (dy*dy);
+		
+		if(c <= radius*radius)
+			return true;
+		return false;
 	}
 }

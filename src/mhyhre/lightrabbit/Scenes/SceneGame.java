@@ -42,7 +42,7 @@ public class SceneGame extends MhyhreScene {
 	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat, shark;
 	SpriteBatch healthIndicator, bulletBatch;
 
-	List<BulletUnit> bullets;
+	List<BulletUnit> mBullets;
 
 	private WaterPolygon water;
 
@@ -63,7 +63,7 @@ public class SceneGame extends MhyhreScene {
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
 
-		bullets = new LinkedList<BulletUnit>();
+		mBullets = new LinkedList<BulletUnit>();
 
 		CreateTextureRegions();
 
@@ -122,9 +122,9 @@ public class SceneGame extends MhyhreScene {
 					MainActivity.vibrate(30);
 
 					BulletUnit bullet = new BulletUnit(boat.getX() + 5, boat.getY(), 16);
-					bullet.setAccelerationByAngle(boat.getRotation()-20, 10);
+					bullet.setAccelerationByAngle(boat.getRotation()-10, 10);
 
-					bullets.add(bullet);
+					mBullets.add(bullet);
 				}
 
 				return true;
@@ -208,11 +208,11 @@ public class SceneGame extends MhyhreScene {
 		// Bullets
 		ITextureRegion bulletRegion = MainActivity.Res.getTextureRegion("bullet");
 
-		for (int i = 0; i < bullets.size(); i++) {
+		for (int i = 0; i < mBullets.size(); i++) {
 
-			BulletUnit bullet = bullets.get(i);
+			BulletUnit bullet = mBullets.get(i);
 
-			if (bullet.collidesWith(shark)) {
+			if (bullet.collideWithSpriteByCircle(shark, 20)) {
 				bullet.setSink(true);
 
 				shark.setX(1000);
@@ -225,12 +225,14 @@ public class SceneGame extends MhyhreScene {
 			bullet.update();
 
 			if (bullet.getY() > MainActivity.getHeight() || bullet.getY() < 0) {
-				bullets.remove(i);
+				mBullets.remove(i);
+				i--;
 				continue;
 			}
 
 			if (bullet.getX() > MainActivity.getWidth() || bullet.getX() < 0) {
-				bullets.remove(i);
+				mBullets.remove(i);
+				i--;
 				continue;
 			}
 
@@ -242,4 +244,6 @@ public class SceneGame extends MhyhreScene {
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 
+
+	
 }

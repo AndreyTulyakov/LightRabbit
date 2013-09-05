@@ -116,7 +116,6 @@ public class SceneRoot extends Scene {
 
 			case NewGame:
 
-				mSceneGame.setGameState(GameState.Ready);
 				mSceneGame.Show();
 				break;
 

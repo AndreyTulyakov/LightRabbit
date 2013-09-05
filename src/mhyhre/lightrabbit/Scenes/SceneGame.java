@@ -33,9 +33,12 @@ public class SceneGame extends MhyhreScene {
 	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 
-	Sprite spriteNext, boat;
+	Sprite spriteMoveRight, spriteMoveLeft, boat;
 
 	private WaterPolygon water;
+	
+	private float boatSpeed = 0;
+	private float boatAcseleration = 5;
 
 	// Resources
 	public static final String uiAtlasName = "User_Interface";
@@ -57,46 +60,48 @@ public class SceneGame extends MhyhreScene {
 		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(boat);
 
-		spriteNext = new Sprite(MainActivity.getWidth() - (10 + TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+		
+		spriteMoveLeft = new Sprite( 10, 10, TextureRegions.get(2), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
-
-					MainActivity.vibrate(30);
-
-					switch (mode) {
-
-					case Ready:
-						setGameState(GameState.Memorize);
-						break;
-
-					case Memorize:
-						setGameState(GameState.Recollect);
-						break;
-
-					case Recollect:
-						setGameState(GameState.Result);
-						break;
-
-					case Result:
-						setGameState(GameState.Ready);
-						break;
-
-					case Loss:
-						SceneRoot.SetState(SceneStates.MainMenu);
-						break;
-					}
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					boatSpeed = -boatAcseleration;		
 				}
+
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
+					boatSpeed = 0;
+				}
+				
 				return true;
 			}
 		};
-		spriteNext.setVisible(true);
-		attachChild(spriteNext);
+		spriteMoveLeft.setVisible(true);
+		attachChild(spriteMoveLeft);
+		registerTouchArea(spriteMoveLeft);
+		
+		spriteMoveRight = new Sprite( 10 + spriteMoveLeft.getWidth()+10, 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					boatSpeed = boatAcseleration;
+				}
+
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
+					boatSpeed = 0;
+				}
+				
+				return true;
+			}
+		};
+		spriteMoveRight.setVisible(true);
+		attachChild(spriteMoveRight);
+		registerTouchArea(spriteMoveRight);
+		
+
 
 		loaded = true;
-
-		setGameState(GameState.Ready);
 
 		Log.i(MainActivity.DebugID, "Scene game created");
 	}
@@ -122,19 +127,6 @@ public class SceneGame extends MhyhreScene {
 
 		if (loaded == true) {
 
-			switch (mode) {
-
-			case Ready:
-
-				break;
-
-			case Memorize:
-
-				break;
-
-			default:
-				break;
-			}
 		}
 
 		return super.onSceneTouchEvent(pSceneTouchEvent);
@@ -143,38 +135,20 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
+		if(boat.getX() > (MainActivity.getWidth() - 32 - boat.getWidth()) && boatSpeed > 0)
+			boatSpeed = 0;
 		
+		if(boat.getX() < 32 && boatSpeed<0)
+			boatSpeed = 0;
+		
+		boat.setX(boat.getX() + boatSpeed);
+
+
 		boat.setY(water.getYPositionOnWave(boat.getX() + boat.getWidth()/2)-boat.getHeight()/2 - 5);
 		boat.setRotation(water.getAngleOnWave(boat.getX())/2.0f);
 		
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 
-	public void setGameState(GameState mode) {
-
-		if (loaded == false) {
-			return;
-		}
-
-		Log.i(MainActivity.DebugID, "SceneGame::setGameState: " + mode.name());
-
-		SceneGame.mode = mode;
-
-		switch (mode) {
-
-		case Ready:
-			break;
-
-		case Memorize:
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	public static GameState getMode() {
-		return mode;
-	}
 
 }

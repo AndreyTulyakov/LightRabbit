@@ -1,11 +1,12 @@
 package mhyhre.lightrabbit.game;
 
+import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Vector2;
 import org.andengine.entity.shape.RectangularShape;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.IVertexBufferObject;
 
-public class BulletUnit extends RectangularShape{
+public class BulletUnit extends Entity {
 
 	public static final float sSinkSpeed = 1.0f;
 	public static final float sGravity = -0.15f;
@@ -13,9 +14,9 @@ public class BulletUnit extends RectangularShape{
 	private Vector2 mAcceleration;
 	boolean mSink;
 
-	public BulletUnit(float pX, float pY, float size) {
-		super(pX, pY, size, size, null);
-
+	public BulletUnit(float pX, float pY) {
+		super(pX,pY);
+		
 		mAcceleration = new Vector2(0, 0);
 		mSink = false;
 	}
@@ -50,7 +51,14 @@ public class BulletUnit extends RectangularShape{
 	public void update(){
 		
 		if(mSink){
+			
+			
 			mY += sSinkSpeed;
+			if(mAcceleration.x>0.1f){
+				mAcceleration.x/=1.15f;
+				mX += mAcceleration.x;
+			}
+			
 		}else{
 			mX += mAcceleration.x;
 			mY += mAcceleration.y;
@@ -58,23 +66,11 @@ public class BulletUnit extends RectangularShape{
 			mAcceleration.y -= sGravity;
 		}
 	}
-
-	@Override
-	public IVertexBufferObject getVertexBufferObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected void onUpdateVertices() {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	public boolean collideWithSpriteByCircle(Sprite spr, float radius){
+	public boolean collideWithCircle(float x, float y, float radius){
 		
-		float dx = getX() - (spr.getX() + spr.getWidth()/2);
-		float dy = getY() - (spr.getY() + spr.getHeight()/2);
+		float dx = getX() - (x);
+		float dy = getY() - (y);
 		
 		float c = (dx*dx) + (dy*dy);
 		

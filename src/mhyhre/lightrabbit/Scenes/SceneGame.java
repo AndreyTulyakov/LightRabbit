@@ -16,22 +16,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
+import mhyhre.lightrabbit.game.SharkUnit;
 
 import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.shape.IShape;
-import org.andengine.entity.shape.RectangularShape;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
-import org.andengine.opengl.vbo.IVertexBufferObject;
-
 import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
@@ -39,10 +37,11 @@ public class SceneGame extends MhyhreScene {
 	private Background mBackground;
 	private boolean loaded = false;
 
-	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat, shark;
-	SpriteBatch healthIndicator, bulletBatch;
+	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat;
+	SpriteBatch healthIndicator, bulletBatch, sharkBatch;
 
 	List<BulletUnit> mBullets;
+	List<SharkUnit> mSharks;
 
 	private WaterPolygon water;
 
@@ -64,6 +63,7 @@ public class SceneGame extends MhyhreScene {
 		setBackgroundEnabled(true);
 
 		mBullets = new LinkedList<BulletUnit>();
+		mSharks = new LinkedList<SharkUnit>();
 
 		CreateTextureRegions();
 
@@ -72,9 +72,6 @@ public class SceneGame extends MhyhreScene {
 
 		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(boat);
-
-		shark = new Sprite(900, 100, MainActivity.Res.getTextureRegion("shark_body"), MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(shark);
 
 		spriteMoveLeft = new Sprite(10, 10, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
@@ -121,7 +118,7 @@ public class SceneGame extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 					MainActivity.vibrate(30);
 
-					BulletUnit bullet = new BulletUnit(boat.getX() + 5, boat.getY(), 16);
+					BulletUnit bullet = new BulletUnit(boat.getX() + 5, boat.getY());
 					bullet.setAccelerationByAngle(boat.getRotation()-10, 10);
 
 					mBullets.add(bullet);
@@ -139,6 +136,9 @@ public class SceneGame extends MhyhreScene {
 
 		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("Bullet"), 50, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(bulletBatch);
+		
+		sharkBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("Shark"), 30, MainActivity.Me.getVertexBufferObjectManager());
+		attachChild(sharkBatch);
 
 		loaded = true;
 
@@ -182,6 +182,33 @@ public class SceneGame extends MhyhreScene {
 
 		boat.setX(boat.getX() + boatSpeed);
 
+
+		boat.setY(water.getYPositionOnWave(boat.getX() + boat.getWidth() / 2) - boat.getHeight() / 2 - 5);
+		boat.setRotation(water.getAngleOnWave(boat.getX()) / 2.0f);
+
+		// Generate new sharks
+		if(mSharks.size() < 1){
+			 Random rand = new Random();
+			 for(int i=0; i<rand.nextInt(5)+1; i++){
+				 SharkUnit shark = new SharkUnit();
+				 shark.setPosition(MainActivity.getWidth() + 10 + rand.nextInt(500), 0);
+				 shark.setSize(64, 64);
+				 mSharks.add(shark);
+			 }
+		}
+
+
+		
+		updateBullets();
+		updateSharks();
+		
+		updateHealthIndicator();
+
+		super.onManagedUpdate(pSecondsElapsed);
+	}
+	
+	
+	private void updateHealthIndicator(){
 		for (int i = 0; i < maxHealth; i++) {
 			if (i < currentHealth) {
 				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 300 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
@@ -191,20 +218,45 @@ public class SceneGame extends MhyhreScene {
 		}
 		healthIndicator.submit();
 
-		boat.setY(water.getYPositionOnWave(boat.getX() + boat.getWidth() / 2) - boat.getHeight() / 2 - 5);
-		boat.setRotation(water.getAngleOnWave(boat.getX()) / 2.0f);
+	}
+	
+	private void updateSharks(){
+		
+		ITextureRegion sharkRegion = MainActivity.Res.getTextureRegion("shark_body");
 
-		shark.setX(shark.getX() - 1);
-		shark.setY(water.getYPositionOnWave(shark.getX() + shark.getWidth() / 2) - shark.getHeight() / 2 + 10);
+		
+		for (int i = 0; i < mSharks.size(); i++) {
 
-		if (boat.collidesWith(shark) && shark.isVisible()) {
-			MainActivity.vibrate(20);
-			shark.setX(1000);
+			SharkUnit shark = mSharks.get(i);
 			
-			if(currentHealth>0)
-				currentHealth--;
+			shark.Update(water.getYPositionOnWave(shark.getCX()));
+			
+			if(shark.getY() > MainActivity.getHeight()){
+				mSharks.remove(i);
+				i--;
+				continue;
+			}
+			
+			if (collideCircleByCircle(boat, 20, shark.getCX(), shark.getCY(), 20)){
+				
+				if(shark.isSink() == false){
+					MainActivity.vibrate(30);
+					
+					if(currentHealth>0)
+						currentHealth--;
+					
+					shark.setSink(true);
+				}	
+			}
+			float b = shark.getBright();
+			sharkBatch.draw(sharkRegion, shark.getX(), shark.getY(), shark.getWidth(), shark.getHeight(), 0, b, b, b, b);
 		}
 
+		sharkBatch.submit();
+
+	}
+	
+	private void updateBullets(){
 		// Bullets
 		ITextureRegion bulletRegion = MainActivity.Res.getTextureRegion("bullet");
 
@@ -212,11 +264,14 @@ public class SceneGame extends MhyhreScene {
 
 			BulletUnit bullet = mBullets.get(i);
 
-			if (bullet.collideWithSpriteByCircle(shark, 20)) {
-				bullet.setSink(true);
-
-				shark.setX(1000);
+			for(SharkUnit shark : mSharks){
+				
+				if (bullet.collideWithCircle(shark.getCX(),shark.getCY(), 20)) {
+					bullet.setSink(true);
+					shark.setSink(true);
+				}
 			}
+			
 
 			if ( bullet.getY()-1 > water.getYPositionOnWave(bullet.getX())) {
 				bullet.setSink(true);
@@ -240,10 +295,20 @@ public class SceneGame extends MhyhreScene {
 		}
 
 		bulletBatch.submit();
-
-		super.onManagedUpdate(pSecondsElapsed);
 	}
 
+	public static boolean collideCircleByCircle(Sprite c1, float radius1, float x1, float y1, float radius2){
+		
+		float dx = (x1) - (c1.getX()+c1.getWidth()/2);
+		float dy = (y1) - (c1.getY()+c1.getHeight()/2);
+		float dist = dx*dx + dy*dy;
+		
+		float radiusSum = radius1+radius2;
+		if(dist <= radiusSum*radiusSum)
+			return true;
+		
+		return false;
+	}
 
 	
 }

@@ -144,7 +144,7 @@ public class SceneGame extends MhyhreScene {
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
 		
-		boat.setY(water.getYPositionOnWave(boat.getX())-boat.getHeight()/2 - 5);
+		boat.setY(water.getYPositionOnWave(boat.getX() + boat.getWidth()/2)-boat.getHeight()/2 - 5);
 		boat.setRotation(water.getAngleOnWave(boat.getX())/2.0f);
 		
 		super.onManagedUpdate(pSecondsElapsed);

@@ -13,6 +13,9 @@
 package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
@@ -33,7 +36,7 @@ public class SceneGame extends MhyhreScene {
 	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 
-	Sprite spriteMoveRight, spriteMoveLeft, boat;
+	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat;
 
 	private WaterPolygon water;
 	
@@ -43,7 +46,7 @@ public class SceneGame extends MhyhreScene {
 	// Resources
 	public static final String uiAtlasName = "User_Interface";
 
-	public static ArrayList<ITextureRegion> TextureRegions;
+	public static Map<String, ITextureRegion> TextureRegions;
 
 	public SceneGame() {
 
@@ -61,7 +64,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(boat);
 
 		
-		spriteMoveLeft = new Sprite( 10, 10, TextureRegions.get(2), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteMoveLeft = new Sprite( 10, 10, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -80,7 +83,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(spriteMoveLeft);
 		registerTouchArea(spriteMoveLeft);
 		
-		spriteMoveRight = new Sprite( 10 + spriteMoveLeft.getWidth()+10, 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteMoveRight = new Sprite( 10 + spriteMoveLeft.getWidth()+10, 10, TextureRegions.get("Right"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -100,6 +103,22 @@ public class SceneGame extends MhyhreScene {
 		registerTouchArea(spriteMoveRight);
 		
 
+		
+		spriteFire = new Sprite( MainActivity.getWidth()-100, 10, TextureRegions.get("Fire"), MainActivity.Me.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					MainActivity.vibrate(30);
+				}
+				
+				return true;
+			}
+		};
+		spriteFire.setVisible(true);
+		attachChild(spriteFire);
+		registerTouchArea(spriteFire);
+		
 
 		loaded = true;
 
@@ -108,18 +127,20 @@ public class SceneGame extends MhyhreScene {
 
 	private static void CreateTextureRegions() {
 
-		TextureRegions = new ArrayList<ITextureRegion>();
+		TextureRegions = new HashMap<String, ITextureRegion>();
 		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
+		
+		
+		
+		TextureRegions.put("Button",TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
+		TextureRegions.put("Equall",TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
 
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 0, 70, 74, 74, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 80, 70, 74, 74, false));
+		TextureRegions.put("Left",TextureRegionFactory.extractFromTexture(atlas, 0, 70, 74, 74, false));
+		TextureRegions.put("Right",TextureRegionFactory.extractFromTexture(atlas, 80, 70, 74, 74, false));
 
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
+		TextureRegions.put("Menu",TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
 
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 390, 0, 120, 384, false));
-		TextureRegions.add(TextureRegionFactory.extractFromTexture(atlas, 460, 0, 4, 384, false));
+		TextureRegions.put("Fire",TextureRegionFactory.extractFromTexture(atlas, 0, 512-64, 64, 64, false));
 	}
 
 	@Override

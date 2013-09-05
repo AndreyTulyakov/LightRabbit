@@ -88,8 +88,6 @@ public class WaterPolygon extends Polygon {
 			
 			float vertexHeight = getHeightOnWave(waveAngle);
 
-			Log.i("MHYHRE","angle:" + (int)waveAngle + " height" + (int)vertexHeight);
-			
 			vertexX1[i] = j * step;
 			vertexY1[i] = vertexHeight;
 		}

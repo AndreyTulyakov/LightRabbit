@@ -13,17 +13,10 @@
 package mhyhre.lightrabbit.Scenes;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.primitive.Line;
-import org.andengine.entity.primitive.Mesh.DrawMode;
-import org.andengine.entity.primitive.Polygon;
-import org.andengine.entity.primitive.Vector2;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;

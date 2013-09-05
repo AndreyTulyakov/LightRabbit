@@ -2,9 +2,6 @@ package mhyhre.lightrabbit.game;
 
 import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Vector2;
-import org.andengine.entity.shape.RectangularShape;
-import org.andengine.entity.sprite.Sprite;
-import org.andengine.opengl.vbo.IVertexBufferObject;
 
 public class BulletUnit extends Entity {
 

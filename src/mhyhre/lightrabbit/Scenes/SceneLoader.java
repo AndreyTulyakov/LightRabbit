@@ -22,7 +22,6 @@ import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -43,11 +42,10 @@ public class SceneLoader extends MhyhreScene {
 
 	public Text mCaptionTapScreen;
 
-	private ITextureRegion mSplashTextureRegion;
 	private ITextureRegion mCloudTR;
 
 	public Rectangle TapRect;
-	public Sprite mSpriteLogo;
+	public Text textGameLogo;
 	public SpriteBatch cloudsSpriteBatch;
 
 	private boolean Loaded = false;
@@ -66,7 +64,6 @@ public class SceneLoader extends MhyhreScene {
 
 		MainActivity.Res.LoadResourcesForPreloader();
 
-		mSplashTextureRegion = TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas("tex_01"), 0, 0, 384, 128, false);
 		mCloudTR = TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas("tex_01"), 384, 0, 128, 128, false);
 
 		// Tap text
@@ -76,10 +73,10 @@ public class SceneLoader extends MhyhreScene {
 		mCaptionTapScreen.setVisible(false);
 		mCaptionTapScreen.setAlpha(0.0f);
 
-		// creating a logo-sprite
-		mSpriteLogo = new Sprite(0, 0, mSplashTextureRegion, MainActivity.Me.getVertexBufferObjectManager());
-		mSpriteLogo.setPosition(MainActivity.getHalfWidth() - mSplashTextureRegion.getWidth() / 2, MainActivity.getHalfHeight() - mSplashTextureRegion.getHeight() / 2);
-		mSpriteLogo.setAlpha(0.0f);
+		textGameLogo = new Text(0, 0, MainActivity.Res.getFont("Furore48"), MainActivity.Me.getString(R.string.app_name), MainActivity.Me.getVertexBufferObjectManager());
+		textGameLogo.setPosition(MainActivity.getHalfWidth() - textGameLogo.getWidth() / 2, MainActivity.getHalfHeight() - textGameLogo.getHeight() / 2);
+		textGameLogo.setAlpha(0.0f);
+		
 
 		// tap-zone
 		TapRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()) {
@@ -100,7 +97,7 @@ public class SceneLoader extends MhyhreScene {
 
 		setupClouds();
 
-		attachChild(mSpriteLogo);
+		attachChild(textGameLogo);
 		attachChild(mCaptionTapScreen);
 		attachChild(TapRect);
 
@@ -122,9 +119,9 @@ public class SceneLoader extends MhyhreScene {
 					if (AlphaTime2 < 0.99f) {
 						AlphaTime2 += 0.01f;
 						if (AlphaTime2 < 0.0f) {
-							mSpriteLogo.setAlpha(0.0f);
+							textGameLogo.setAlpha(0.0f);
 						} else {
-							mSpriteLogo.setAlpha(AlphaTime2);
+							textGameLogo.setAlpha(AlphaTime2);
 
 							backGround.setColor(0.1f * AlphaTime2, 0.2f * AlphaTime2, 0.7f * AlphaTime2);
 

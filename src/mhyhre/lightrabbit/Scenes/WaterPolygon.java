@@ -17,7 +17,7 @@ public class WaterPolygon extends Polygon {
 	private final int waterResolution;
 	float waveRepeating = 1.5f;
 	float waveHeight = 50;
-	float waterLevel = 200;
+	float waterLevel = 220;
 
 
 	public WaterPolygon(int resolution, VertexBufferObjectManager pVertexBufferObjectManager) {

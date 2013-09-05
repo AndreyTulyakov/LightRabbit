@@ -49,7 +49,7 @@ public class SceneGame extends MhyhreScene {
 	int currentHealth = 3;
 
 	private float boatSpeed = 0;
-	private float boatAcseleration = 5;
+	private float boatAcseleration = 3;
 
 	// Resources
 	public static final String uiAtlasName = "User_Interface";
@@ -73,7 +73,7 @@ public class SceneGame extends MhyhreScene {
 		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(boat);
 
-		spriteMoveLeft = new Sprite(10, 10, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteMoveLeft = new Sprite(0,0, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -88,11 +88,12 @@ public class SceneGame extends MhyhreScene {
 				return true;
 			}
 		};
+		spriteMoveLeft.setPosition(40, MainActivity.getHeight() - (50 + spriteMoveLeft.getHeight()/2));
 		spriteMoveLeft.setVisible(true);
 		attachChild(spriteMoveLeft);
 		registerTouchArea(spriteMoveLeft);
 
-		spriteMoveRight = new Sprite(10 + spriteMoveLeft.getWidth() + 10, 10, TextureRegions.get("Right"), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteMoveRight = new Sprite(0, 0 , TextureRegions.get("Right"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -107,18 +108,19 @@ public class SceneGame extends MhyhreScene {
 				return true;
 			}
 		};
+		spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, MainActivity.getHeight() - (50 + spriteMoveRight.getHeight()/2));
 		spriteMoveRight.setVisible(true);
 		attachChild(spriteMoveRight);
 		registerTouchArea(spriteMoveRight);
 
-		spriteFire = new Sprite(MainActivity.getWidth() - 100, 10, TextureRegions.get("Fire"), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteFire = new Sprite(0, 0, TextureRegions.get("Fire"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 					MainActivity.vibrate(30);
 
-					BulletUnit bullet = new BulletUnit(boat.getX() + 5, boat.getY());
+					BulletUnit bullet = new BulletUnit(boat.getX() + boat.getWidth()-15, boat.getY());
 					bullet.setAccelerationByAngle(boat.getRotation()-10, 10);
 
 					mBullets.add(bullet);
@@ -127,6 +129,8 @@ public class SceneGame extends MhyhreScene {
 				return true;
 			}
 		};
+		
+		spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth()+40), MainActivity.getHeight() - (50 + spriteFire.getHeight()/2));
 		spriteFire.setVisible(true);
 		attachChild(spriteFire);
 		registerTouchArea(spriteFire);
@@ -153,12 +157,12 @@ public class SceneGame extends MhyhreScene {
 		TextureRegions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
 		TextureRegions.put("Equall", TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
 
-		TextureRegions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 70, 74, 74, false));
-		TextureRegions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 70, 74, 74, false));
+		TextureRegions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));
+		TextureRegions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 72, 80, 80, false));
 
 		TextureRegions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
 
-		TextureRegions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 0, 512 - 64, 64, 64, false));
+		TextureRegions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
 	}
 
 	@Override
@@ -211,9 +215,9 @@ public class SceneGame extends MhyhreScene {
 	private void updateHealthIndicator(){
 		for (int i = 0; i < maxHealth; i++) {
 			if (i < currentHealth) {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 300 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
+				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
 			} else {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 300 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
+				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
 			}
 		}
 		healthIndicator.submit();
@@ -231,7 +235,7 @@ public class SceneGame extends MhyhreScene {
 			
 			shark.Update(water.getYPositionOnWave(shark.getCX()));
 			
-			if(shark.getY() > MainActivity.getHeight()){
+			if(shark.getY() > MainActivity.getHeight() || shark.getCX()< -50){
 				mSharks.remove(i);
 				i--;
 				continue;

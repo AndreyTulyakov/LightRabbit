@@ -30,12 +30,10 @@ import org.andengine.opengl.texture.region.TextureRegionFactory;
 import android.graphics.Color;
 import android.util.Log;
 
-/**
- * Менеджер ресурсов.
- */
+
 public class ResourceManager {
 
-	/** Контейнеры */
+
 	Map<String, ITextureRegion> regions;
 	Map<String, BitmapTextureAtlas> atlases;
 	Map<String, Font> fonts;
@@ -88,7 +86,7 @@ public class ResourceManager {
 
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-		// Создание текстурного атласа
+		// Load ui graphics
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
 		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "User_Interface.png", 0, 0);
 		atlas.load();
@@ -106,6 +104,15 @@ public class ResourceManager {
 		region = TextureRegionFactory.extractFromTexture(atlas, 1, 447, 64, 64, false);
 		regions.put("ParticlePoint", region);
 
+		
+		//Load game graphics
+		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "boat.png", 0, 0);
+		atlas.load();
+		atlases.put("Boat", atlas);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas);
+		regions.put("boat_body", region);
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
 	}

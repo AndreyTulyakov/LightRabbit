@@ -33,7 +33,7 @@ public class SceneGame extends MhyhreScene {
 	private static GameState mode = GameState.Ready;
 	private boolean loaded = false;
 
-	Sprite spriteNext;
+	Sprite spriteNext, boat;
 
 	private WaterPolygon water;
 
@@ -52,6 +52,10 @@ public class SceneGame extends MhyhreScene {
 
 		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
 		this.attachChild(water);
+		
+		
+		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
+		attachChild(boat);
 
 		spriteNext = new Sprite(MainActivity.getWidth() - (10 + TextureRegions.get(3).getWidth()), 10, TextureRegions.get(3), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
@@ -139,6 +143,10 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
+		
+		boat.setY(water.getYPositionOnWave(boat.getX())-boat.getHeight()/2 - 5);
+		boat.setRotation(water.getAngleOnWave(boat.getX())/2.0f);
+		
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 

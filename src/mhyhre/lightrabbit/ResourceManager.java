@@ -113,6 +113,36 @@ public class ResourceManager {
 		
 		region = TextureRegionFactory.extractFromTexture(atlas);
 		regions.put("boat_body", region);
+		
+		
+		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Shark.png", 0, 0);
+		atlas.load();
+		atlases.put("Shark", atlas);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas);
+		regions.put("shark_body", region);
+		
+		
+		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 64, TextureOptions.BILINEAR);
+		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Hearts.png", 0, 0);
+		atlas.load();
+		atlases.put("Hearts", atlas);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 32, 32);
+		regions.put("heart", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 32, 0, 32, 32);
+		regions.put("heart_died", region);
+		
+		
+		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 16, 16, TextureOptions.BILINEAR);
+		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Bullet.png", 0, 0);
+		atlas.load();
+		atlases.put("Bullet", atlas);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas);
+		regions.put("bullet", region);
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
 	}

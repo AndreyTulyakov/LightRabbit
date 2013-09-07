@@ -43,17 +43,11 @@ public class SceneLoader extends MhyhreScene {
 
 	public Text mCaptionTapScreen;
 
-	private ITextureRegion mCloudTR;
-
 	public Rectangle TapRect;
 	public Text textGameLogo;
-	public SpriteBatch cloudsSpriteBatch;
 
 	private boolean Loaded = false;
 	private boolean Clicked = false;
-
-	final static int CloudCount = 20;
-	private static CloudUnit CloudBase[] = new CloudUnit[CloudCount];
 
 	Random mRandom = new Random();
 
@@ -64,8 +58,6 @@ public class SceneLoader extends MhyhreScene {
 		setBackgroundEnabled(true);
 
 		MainActivity.Res.LoadResourcesForPreloader();
-
-		mCloudTR = TextureRegionFactory.extractFromTexture(MainActivity.Res.getTextureAtlas("tex_01"), 384, 0, 128, 128, false);
 
 		// Tap text
 		String TextMessage = MainActivity.Me.getString(R.string.textTap);
@@ -96,8 +88,6 @@ public class SceneLoader extends MhyhreScene {
 		TapRect.setAlpha(AlphaTime3);
 		TapRect.setColor(0, 0, 0.1f);
 
-		setupClouds();
-
 		attachChild(textGameLogo);
 		attachChild(mCaptionTapScreen);
 		attachChild(TapRect);
@@ -126,9 +116,6 @@ public class SceneLoader extends MhyhreScene {
 
 							backGround.setColor(0.1f * AlphaTime2, 0.2f * AlphaTime2, 0.7f * AlphaTime2);
 
-							for (int i = 0; i < CloudCount; i++) {
-								CloudBase[i].SetColor(1, AlphaTime2, AlphaTime2);
-							}
 						}
 					}
 
@@ -159,30 +146,6 @@ public class SceneLoader extends MhyhreScene {
 
 	}
 
-	private void setupClouds() {
-
-		cloudsSpriteBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("tex_01"), CloudCount, MainActivity.Me.getVertexBufferObjectManager());
-		cloudsSpriteBatch.setPosition(0, 0);
-
-		for (int i = 0; i < CloudCount; i++) {
-			CloudBase[i] = new CloudUnit();
-			CloudBase[i].SetSize((float) mCloudTR.getWidth(), (float) mCloudTR.getHeight());
-			CloudBase[i].SetPosition((float) mRandom.nextInt((int) MainActivity.getWidth()) - 5.0f, MainActivity.getHalfHeight() + (float) mRandom.nextInt((int) MainActivity.getHalfHeight()) * 0.66f - 5.0f);
-
-			CloudBase[i].SetMoveSpeed((mRandom.nextFloat() * 0.5f) - 0.25f, (mRandom.nextFloat() * 0.2f) - 0.1f);
-			CloudBase[i].SetScale(3.0f + mRandom.nextFloat() * 3.0f);
-			CloudBase[i].SetRotation(mRandom.nextFloat() * 360.0f);
-
-			CloudBase[i].SetColor(1.f, 0.f, 0.f);
-
-			CloudBase[i].Update(0, MainActivity.getWidth(), 0, MainActivity.getHeight());
-
-			cloudsSpriteBatch.draw(this.mCloudTR, CloudBase[i].PosX, CloudBase[i].PosY, CloudBase[i].SizeX, CloudBase[i].SizeY, CloudBase[i].Rotation, CloudBase[i].Scale, CloudBase[i].Scale, CloudBase[i].Red, CloudBase[i].Green, CloudBase[i].Blue, 0.8f);
-		}
-
-		cloudsSpriteBatch.submit();
-		attachChild(cloudsSpriteBatch);
-	}
 
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
@@ -194,13 +157,6 @@ public class SceneLoader extends MhyhreScene {
 	protected void onManagedUpdate(float pSecondsElapsed) {
 
 		if (Loaded) {
-
-			for (int i = 0; i < CloudCount; i++) {
-				CloudBase[i].Update(0, MainActivity.getWidth(), 0, MainActivity.getHeight());
-
-				cloudsSpriteBatch.draw(this.mCloudTR, CloudBase[i].PosX, CloudBase[i].PosY, CloudBase[i].SizeX, CloudBase[i].SizeY, CloudBase[i].Rotation, CloudBase[i].Scale, CloudBase[i].Scale, CloudBase[i].Red, CloudBase[i].Green, CloudBase[i].Blue, 0.75f);
-			}
-			cloudsSpriteBatch.submit();
 
 		}
 

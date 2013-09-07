@@ -172,13 +172,13 @@ public class SceneGame extends MhyhreScene {
 		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(boat);
 		
-		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("Hearts"), 10, MainActivity.Me.getVertexBufferObjectManager());
+		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(healthIndicator);
 
-		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("Bullet"), 50, MainActivity.Me.getVertexBufferObjectManager());
+		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(bulletBatch);
 		
-		sharkBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("Shark"), 30, MainActivity.Me.getVertexBufferObjectManager());
+		sharkBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 30, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(sharkBatch);
 	}
 	

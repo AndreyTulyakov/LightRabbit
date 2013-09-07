@@ -104,45 +104,31 @@ public class ResourceManager {
 		region = TextureRegionFactory.extractFromTexture(atlas, 1, 447, 64, 64, false);
 		regions.put("ParticlePoint", region);
 
-		
-		//Load game graphics
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "boat.png", 0, 0);
+	
+
+		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
+		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
 		atlas.load();
-		atlases.put("Boat", atlas);
+		atlases.put("texture01", atlas);
 		
-		region = TextureRegionFactory.extractFromTexture(atlas);
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 80, 64, 64);
 		regions.put("boat_body", region);
 		
-		
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Shark.png", 0, 0);
-		atlas.load();
-		atlases.put("Shark", atlas);
-		
-		region = TextureRegionFactory.extractFromTexture(atlas);
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 64, 64);
 		regions.put("shark_body", region);
 		
-		
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 64, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Hearts.png", 0, 0);
-		atlas.load();
-		atlases.put("Hearts", atlas);
-		
-		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 32, 32);
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 160, 32, 32);
 		regions.put("heart", region);
 		
-		region = TextureRegionFactory.extractFromTexture(atlas, 32, 0, 32, 32);
+		region = TextureRegionFactory.extractFromTexture(atlas, 32, 160, 32, 32);
 		regions.put("heart_died", region);
-		
-		
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 16, 16, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Bullet.png", 0, 0);
-		atlas.load();
-		atlases.put("Bullet", atlas);
-		
-		region = TextureRegionFactory.extractFromTexture(atlas);
+
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 200, 16, 16);
 		regions.put("bullet", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 16, 200, 16, 16);
+		regions.put("bullet_boom", region);
+		
 		
 		// Clouds texture
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.BILINEAR);
@@ -218,13 +204,6 @@ public class ResourceManager {
 		mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontFurore, MainActivity.Me.getAssets(), "Furore.otf", 72, true, Color.BLACK);
 		mFont.load();
 		fonts.put("Furore48", mFont);
-
-		// preloader texture;
-		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
-		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
-		atlas.load();
-		atlases.put("tex_01", atlas);
-
 	}
 
 }

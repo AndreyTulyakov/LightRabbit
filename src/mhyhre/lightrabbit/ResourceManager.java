@@ -143,6 +143,24 @@ public class ResourceManager {
 		
 		region = TextureRegionFactory.extractFromTexture(atlas);
 		regions.put("bullet", region);
+		
+		// Clouds texture
+		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 128, TextureOptions.BILINEAR);
+		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Clouds.png", 0, 0);
+		atlas.load();
+		atlases.put("Clouds", atlas);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 48, 19);
+		regions.put("cloud1", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 22, 44, 18);
+		regions.put("cloud2", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 42, 36, 16);
+		regions.put("cloud3", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 60, 40, 16);
+		regions.put("cloud4", region);
 
 		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
 	}

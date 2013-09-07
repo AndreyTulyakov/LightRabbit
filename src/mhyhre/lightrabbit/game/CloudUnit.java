@@ -10,14 +10,15 @@
  *
  */
 
-package mhyhre.lightrabbit.Scenes;
+package mhyhre.lightrabbit.game;
 
 /**
  * Cloud, simple model
  */
 
-public class Cloud {
+public class CloudUnit {
 
+	public int type = 0;
 	public float SizeX = 0, SizeY = 0;
 	public float PosX = 0, PosY = 0;
 	public float SpeedX = 0, SpeedY = 0;

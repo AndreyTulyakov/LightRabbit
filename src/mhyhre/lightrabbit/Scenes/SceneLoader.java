@@ -17,6 +17,7 @@ import java.util.Random;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.game.CloudUnit;
 
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
@@ -52,7 +53,7 @@ public class SceneLoader extends MhyhreScene {
 	private boolean Clicked = false;
 
 	final static int CloudCount = 20;
-	private static Cloud CloudBase[] = new Cloud[CloudCount];
+	private static CloudUnit CloudBase[] = new CloudUnit[CloudCount];
 
 	Random mRandom = new Random();
 
@@ -164,7 +165,7 @@ public class SceneLoader extends MhyhreScene {
 		cloudsSpriteBatch.setPosition(0, 0);
 
 		for (int i = 0; i < CloudCount; i++) {
-			CloudBase[i] = new Cloud();
+			CloudBase[i] = new CloudUnit();
 			CloudBase[i].SetSize((float) mCloudTR.getWidth(), (float) mCloudTR.getHeight());
 			CloudBase[i].SetPosition((float) mRandom.nextInt((int) MainActivity.getWidth()) - 5.0f, MainActivity.getHalfHeight() + (float) mRandom.nextInt((int) MainActivity.getHalfHeight()) * 0.66f - 5.0f);
 

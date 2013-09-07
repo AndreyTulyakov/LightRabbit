@@ -25,7 +25,6 @@ public class WaterPolygon extends Polygon {
 		super(0, 0, new float[resolution + 3], new float[resolution + 3], pVertexBufferObjectManager);
 
 		setDrawMode(DrawMode.TRIANGLE_FAN);
-		//setDrawMode(DrawMode.LINE_LOOP);
 		waterResolution = resolution;
 
 		float step = MainActivity.getWidth() / (waterResolution - 1);

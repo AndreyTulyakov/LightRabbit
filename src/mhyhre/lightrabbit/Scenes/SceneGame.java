@@ -21,6 +21,7 @@ import java.util.Random;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
+import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.SharkUnit;
 
 import org.andengine.entity.scene.background.Background;
@@ -42,6 +43,8 @@ public class SceneGame extends MhyhreScene {
 
 	List<BulletUnit> mBullets;
 	List<SharkUnit> mSharks;
+	
+	CloudsManager mClouds;
 
 	private WaterPolygon water;
 
@@ -66,6 +69,9 @@ public class SceneGame extends MhyhreScene {
 		mSharks = new LinkedList<SharkUnit>();
 
 		CreateTextureRegions();
+		
+		mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
+		this.attachChild(mClouds);
 
 		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
 		this.attachChild(water);
@@ -121,7 +127,7 @@ public class SceneGame extends MhyhreScene {
 					MainActivity.vibrate(30);
 
 					BulletUnit bullet = new BulletUnit(boat.getX() + boat.getWidth()-15, boat.getY());
-					bullet.setAccelerationByAngle(boat.getRotation()-10, 10);
+					bullet.setAccelerationByAngle(boat.getRotation()-15, 8);
 
 					mBullets.add(bullet);
 				}

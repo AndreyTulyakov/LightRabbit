@@ -12,7 +12,6 @@
 
 package mhyhre.lightrabbit.Scenes;
 
-import mhyhre.lightrabbit.GameState;
 import mhyhre.lightrabbit.MainActivity;
 
 import org.andengine.entity.scene.Scene;

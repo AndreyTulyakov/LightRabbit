@@ -40,7 +40,7 @@ public class SceneGame extends MhyhreScene {
 
 	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat;
 	SpriteBatch healthIndicator, bulletBatch, sharkBatch;
-
+	
 	List<BulletUnit> mBullets;
 	List<SharkUnit> mSharks;
 	
@@ -174,12 +174,12 @@ public class SceneGame extends MhyhreScene {
 		
 		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(healthIndicator);
-
-		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(bulletBatch);
 		
 		sharkBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 30, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(sharkBatch);
+		
+		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
+		attachChild(bulletBatch);
 	}
 	
 	@Override
@@ -218,8 +218,6 @@ public class SceneGame extends MhyhreScene {
 			 }
 		}
 
-
-		
 		updateBullets();
 		updateSharks();
 		
@@ -279,15 +277,18 @@ public class SceneGame extends MhyhreScene {
 	private void updateBullets(){
 		// Bullets
 		ITextureRegion bulletRegion = MainActivity.Res.getTextureRegion("bullet");
-
+		ITextureRegion bulletBoomRegion = MainActivity.Res.getTextureRegion("bullet_boom");
+		ITextureRegion bulletResultRegion;
+		
 		for (int i = 0; i < mBullets.size(); i++) {
 
 			BulletUnit bullet = mBullets.get(i);
 
 			for(SharkUnit shark : mSharks){
 				
-				if (bullet.collideWithCircle(shark.getCX(),shark.getCY(), 20)) {
+				if (bullet.getBoom()>-1 && bullet.collideWithCircle(shark.getCX(),shark.getCY(), 20)) {
 					bullet.setSink(true);
+					bullet.setBoom(3);
 					shark.setSink(true);
 				}
 			}
@@ -311,7 +312,14 @@ public class SceneGame extends MhyhreScene {
 				continue;
 			}
 
-			bulletBatch.draw(bulletRegion, bullet.getX(), bullet.getY(), bulletRegion.getWidth(), bulletRegion.getHeight(), 1, 1, 1, 1, 1);
+			if(bullet.getBoom()>0){
+				bulletResultRegion = bulletBoomRegion;
+			}else{
+				bulletResultRegion = bulletRegion;
+			}
+			if(bullet.getBoom() != -1){
+				bulletBatch.draw(bulletResultRegion, bullet.getX(), bullet.getY(), bulletRegion.getWidth(), bulletRegion.getHeight(), 1, 1, 1, 1, 1);
+			}
 		}
 
 		bulletBatch.submit();

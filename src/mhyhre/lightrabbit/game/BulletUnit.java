@@ -10,12 +10,14 @@ public class BulletUnit extends Entity {
 	
 	private Vector2 mAcceleration;
 	boolean mSink;
+	int mBoom;
 
 	public BulletUnit(float pX, float pY) {
 		super(pX,pY);
 		
 		mAcceleration = new Vector2(0, 0);
 		mSink = false;
+		mBoom = 0;
 	}
 
 	public Vector2 getPosition() {
@@ -47,9 +49,17 @@ public class BulletUnit extends Entity {
 	
 	public void update(){
 		
+		if(mBoom > 0){
+			if(mBoom == 1){
+				mBoom = -1;
+			}else{
+				mBoom--;
+			}
+			
+		}
+			
+		
 		if(mSink){
-			
-			
 			mY += sSinkSpeed;
 			if(mAcceleration.x>0.1f){
 				mAcceleration.x/=1.15f;
@@ -74,5 +84,13 @@ public class BulletUnit extends Entity {
 		if(c <= radius*radius)
 			return true;
 		return false;
+	}
+
+	public int getBoom() {
+		return mBoom;
+	}
+
+	public void setBoom(int mBoom) {
+		this.mBoom = mBoom;
 	}
 }

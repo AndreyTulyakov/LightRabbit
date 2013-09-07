@@ -27,6 +27,7 @@ import mhyhre.lightrabbit.game.SharkUnit;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
+import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
@@ -43,6 +44,8 @@ public class SceneGame extends MhyhreScene {
 	
 	List<BulletUnit> mBullets;
 	List<SharkUnit> mSharks;
+	
+	Text textGold;
 	
 	CloudsManager mClouds;
 
@@ -95,6 +98,9 @@ public class SceneGame extends MhyhreScene {
 	
 	private void createGUI(){
 
+		textGold = new Text(220, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(1200), 20, MainActivity.Me.getVertexBufferObjectManager());
+		attachChild(textGold);
+		
 		spriteMoveLeft = new Sprite(0,0, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -212,7 +218,7 @@ public class SceneGame extends MhyhreScene {
 			 Random rand = new Random();
 			 for(int i=0; i<rand.nextInt(5)+1; i++){
 				 SharkUnit shark = new SharkUnit();
-				 shark.setPosition(MainActivity.getWidth() + 10 + rand.nextInt(500), 0);
+				 shark.setPosition(MainActivity.getWidth() + 10 + rand.nextInt((int) MainActivity.getWidth()), 0);
 				 shark.setSize(64, 64);
 				 mSharks.add(shark);
 			 }
@@ -257,17 +263,17 @@ public class SceneGame extends MhyhreScene {
 			
 			if (collideCircleByCircle(boat, 20, shark.getCX(), shark.getCY(), 20)){
 				
-				if(shark.isSink() == false){
+				if(shark.isDied() == false){
 					MainActivity.vibrate(30);
 					
 					if(currentHealth>0)
 						currentHealth--;
 					
-					shark.setSink(true);
+					shark.setDied(true);
 				}	
 			}
-			float b = shark.getBright();
-			sharkBatch.draw(sharkRegion, shark.getX(), shark.getY(), shark.getWidth(), shark.getHeight(), 0, b, b, b, b);
+			float bright = shark.getBright();
+			sharkBatch.draw(sharkRegion, shark.getX(), shark.getY(), shark.getWidth(), shark.getHeight(), 0, bright, bright, bright, bright);
 		}
 
 		sharkBatch.submit();
@@ -286,10 +292,10 @@ public class SceneGame extends MhyhreScene {
 
 			for(SharkUnit shark : mSharks){
 				
-				if (bullet.getBoom()>-1 && bullet.collideWithCircle(shark.getCX(),shark.getCY(), 20)) {
+				if (bullet.getBoom()==0 && bullet.collideWithCircle(shark.getCX(),shark.getCY(), 24)) {
 					bullet.setSink(true);
-					bullet.setBoom(3);
-					shark.setSink(true);
+					bullet.setBoom(6);
+					shark.setDied(true);
 				}
 			}
 			

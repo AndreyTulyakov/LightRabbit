@@ -54,17 +54,16 @@ public class BulletUnit extends Entity {
 				mBoom = -1;
 			}else{
 				mBoom--;
-			}
-			
+			}	
 		}
 			
-		
 		if(mSink){
 			mY += sSinkSpeed;
 			if(mAcceleration.x>0.1f){
 				mAcceleration.x/=1.15f;
 				mX += mAcceleration.x;
 			}
+			mX -= 1;
 			
 		}else{
 			mX += mAcceleration.x;

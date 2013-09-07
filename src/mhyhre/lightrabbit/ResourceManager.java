@@ -188,9 +188,6 @@ public class ResourceManager {
 
 	public void LoadResourcesForPreloader() {
 
-		BitmapTextureAtlas atlas;
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-
 		Font mFont;
 		FontFactory.setAssetBasePath("font/");
 

@@ -7,13 +7,12 @@ public class SharkUnit {
 	
 	float mX, mY;
 	float width, height;
-	boolean mSink;
 	float bright;
+	boolean mDied;
 	
 	public SharkUnit() {
 		mX = 0;
 		mY = 0;
-		mSink = false;
 		width = 0;
 		height = 0;
 		bright = 1;
@@ -72,13 +71,6 @@ public class SharkUnit {
 		this.height = height;
 	}
 
-	public boolean isSink() {
-		return mSink;
-	}
-
-	public void setSink(boolean mSink) {
-		this.mSink = mSink;
-	}
 	
 	public float getBright(){
 		return bright;
@@ -86,7 +78,7 @@ public class SharkUnit {
 
 	public void Update(float waterLevel){
 		
-		if(mSink){
+		if(mDied == true){
 			mX -= sSpeed;
 			mY += sSinkSpeed;
 			if(bright>0){
@@ -100,4 +92,14 @@ public class SharkUnit {
 
 		}
 	}
+
+	public boolean isDied() {
+		return mDied;
+	}
+
+	public void setDied(boolean mDied) {
+		this.mDied = mDied;
+	}
+
+	
 }

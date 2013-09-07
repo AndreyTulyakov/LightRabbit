@@ -21,7 +21,7 @@ final public class CloudsManager extends SpriteBatch {
 	private float mSkySeparator;
 
 	public CloudsManager(int pMaxCapacity, VertexBufferObjectManager vertexBufferObjectManager) {
-		super(0, 0, MainActivity.Res.getTextureAtlas("Clouds"), pMaxCapacity, vertexBufferObjectManager);
+		super(0, 0, MainActivity.Res.getTextureAtlas("Clouds"), pMaxCapacity+2, vertexBufferObjectManager);
 		
 		mClouds = new ArrayList<CloudUnit>();
 		
@@ -34,11 +34,11 @@ final public class CloudsManager extends SpriteBatch {
 		
 		mSkySeparator = MainActivity.getHeight()/7;
 		
-		mCloudStep = MainActivity.getWidth()/(pMaxCapacity - 1);
+		mCloudStep = MainActivity.getWidth()/(this.mCapacity - 2);
 		
 		CloudUnit cloud;
 		
-		for(int i=0; i < pMaxCapacity; i++){
+		for(int i=0; i < this.mCapacity; i++){
 			
 			cloud = new CloudUnit();	
 			cloud.type = getNextCloudType();
@@ -66,7 +66,7 @@ final public class CloudsManager extends SpriteBatch {
 			
 			if(cloud.PosX < -mCloudStep){		
 				cloud.type = getNextCloudType();
-				cloud.SetPosition( mCloudStep * this.mCapacity, mSkySeparator + mSkySeparator * (TYPE_COUNTER%2));
+				cloud.SetPosition( mCloudStep * (this.mCapacity-1), mSkySeparator + mSkySeparator * (TYPE_COUNTER%2));
 			}
 		}
 		
@@ -80,7 +80,7 @@ final public class CloudsManager extends SpriteBatch {
 			this.draw(mRegions[cloud.type],
 					cloud.PosX, cloud.PosY, 
 					mRegions[cloud.type].getWidth(), mRegions[cloud.type].getHeight(),
-					0, 4, 4, 1, 1, 1, 1);
+					0, 2, 2, 1, 1, 1, 1);
 		}
 		
 		submit();

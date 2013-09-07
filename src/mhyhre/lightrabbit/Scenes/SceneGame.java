@@ -59,25 +59,41 @@ public class SceneGame extends MhyhreScene {
 
 	public static Map<String, ITextureRegion> TextureRegions;
 
+	
 	public SceneGame() {
 
 		mBackground = new Background(0.40f, 0.88f, 0.99f);
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
 
-		mBullets = new LinkedList<BulletUnit>();
-		mSharks = new LinkedList<SharkUnit>();
+		createTextureRegions();
 
-		CreateTextureRegions();
+		createGameObjects();
 		
-		mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
-		this.attachChild(mClouds);
+		createGUI();
 
-		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
-		this.attachChild(water);
+		loaded = true;
 
-		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(boat);
+		Log.i(MainActivity.DebugID, "Scene game created");
+	}
+
+	private static void createTextureRegions() {
+
+		TextureRegions = new HashMap<String, ITextureRegion>();
+		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
+
+		TextureRegions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
+		TextureRegions.put("Equall", TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
+
+		TextureRegions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));
+		TextureRegions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 72, 80, 80, false));
+
+		TextureRegions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
+
+		TextureRegions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
+	}
+	
+	private void createGUI(){
 
 		spriteMoveLeft = new Sprite(0,0, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
@@ -140,7 +156,22 @@ public class SceneGame extends MhyhreScene {
 		spriteFire.setVisible(true);
 		attachChild(spriteFire);
 		registerTouchArea(spriteFire);
+	}
 
+	private void createGameObjects(){
+		
+		mBullets = new LinkedList<BulletUnit>();
+		mSharks = new LinkedList<SharkUnit>();
+		
+		mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
+		this.attachChild(mClouds);
+
+		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
+		this.attachChild(water);
+
+		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
+		attachChild(boat);
+		
 		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("Hearts"), 10, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(healthIndicator);
 
@@ -149,28 +180,8 @@ public class SceneGame extends MhyhreScene {
 		
 		sharkBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("Shark"), 30, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(sharkBatch);
-
-		loaded = true;
-
-		Log.i(MainActivity.DebugID, "Scene game created");
 	}
-
-	private static void CreateTextureRegions() {
-
-		TextureRegions = new HashMap<String, ITextureRegion>();
-		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
-
-		TextureRegions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
-		TextureRegions.put("Equall", TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
-
-		TextureRegions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));
-		TextureRegions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 72, 80, 80, false));
-
-		TextureRegions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
-
-		TextureRegions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
-	}
-
+	
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
@@ -216,8 +227,7 @@ public class SceneGame extends MhyhreScene {
 
 		super.onManagedUpdate(pSecondsElapsed);
 	}
-	
-	
+		
 	private void updateHealthIndicator(){
 		for (int i = 0; i < maxHealth; i++) {
 			if (i < currentHealth) {

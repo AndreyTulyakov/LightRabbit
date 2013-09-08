@@ -314,7 +314,7 @@ public class SceneGame extends MhyhreScene {
 
 			for(SharkUnit shark : mSharks){
 				
-				if (bullet.getBoom()==0 && bullet.collideWithCircle(shark.getCX(),shark.getCY(), 24)) {
+				if (bullet.getBoom()==0 && bullet.collideWithCircle(shark.getCX(),shark.getCY(), 25)) {
 					
 					if(shark.isDied() == false){	
 						totalGold += 50;

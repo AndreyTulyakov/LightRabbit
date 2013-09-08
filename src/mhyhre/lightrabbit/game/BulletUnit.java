@@ -60,7 +60,7 @@ public class BulletUnit extends Entity {
 		if(mSink){
 			mY += sSinkSpeed;
 			if(mAcceleration.x>0.1f){
-				mAcceleration.x/=1.15f;
+				mAcceleration.x/=1.05f;
 				mX += mAcceleration.x;
 			}
 			mX -= 1;

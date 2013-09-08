@@ -130,11 +130,14 @@ public class ResourceManager {
 		
 		region = TextureRegionFactory.extractFromTexture(atlas, 32, 160, 32, 32);
 		regions.put("heart_died", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 64, 160, 32, 32);
+		regions.put("gold", region);
 
 		region = TextureRegionFactory.extractFromTexture(atlas, 0, 200, 16, 16);
 		regions.put("bullet", region);
 		
-		region = TextureRegionFactory.extractFromTexture(atlas, 16, 200, 16, 16);
+		region = TextureRegionFactory.extractFromTexture(atlas, 16, 200, 32, 32);
 		regions.put("bullet_boom", region);
 		
 		region = TextureRegionFactory.extractFromTexture(atlas, 150, 0, 50, 50);

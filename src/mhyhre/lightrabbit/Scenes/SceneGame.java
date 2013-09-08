@@ -39,8 +39,10 @@ public class SceneGame extends MhyhreScene {
 
 	private Background mBackground;
 	private boolean loaded = false;
+	
 
-	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat;
+
+	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat, spriteGold;
 	SpriteBatch healthIndicator, bulletBatch, sharkBatch;
 	
 	List<BulletUnit> mBullets;
@@ -53,6 +55,7 @@ public class SceneGame extends MhyhreScene {
 
 	private WaterPolygon water;
 
+	private int totalGold = 100;
 	final int maxHealth = 3;
 	int currentHealth = 3;
 
@@ -100,8 +103,7 @@ public class SceneGame extends MhyhreScene {
 	
 	private void createGUI(){
 
-		textGold = new Text(220, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(1200), 20, MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(textGold);
+
 		
 		spriteMoveLeft = new Sprite(0,0, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
@@ -168,7 +170,7 @@ public class SceneGame extends MhyhreScene {
 
 	private void createGameObjects(){
 		
-
+		
 		
 		mBullets = new LinkedList<BulletUnit>();
 		mSharks = new LinkedList<SharkUnit>();
@@ -189,15 +191,22 @@ public class SceneGame extends MhyhreScene {
 		
 		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
 
+		spriteGold = new Sprite(300, 10, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
 		
+		textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(totalGold), 20, MainActivity.Me.getVertexBufferObjectManager());
+		textGold.setPosition(340, 22 - textGold.getHeight()/2);
 		
 		this.attachChild(mSkyes);
 		this.attachChild(mClouds);
-		this.attachChild(water);
-		attachChild(boat);
-		attachChild(healthIndicator);
 		attachChild(sharkBatch);
 		attachChild(bulletBatch);
+		attachChild(boat);
+		this.attachChild(water);
+		
+		attachChild(healthIndicator);
+		attachChild(spriteGold);
+		attachChild(textGold);
+		
 	}
 	
 	@Override
@@ -276,6 +285,7 @@ public class SceneGame extends MhyhreScene {
 			if (collideCircleByCircle(boat, 20, shark.getCX(), shark.getCY(), 20)){
 				
 				if(shark.isDied() == false){
+					
 					MainActivity.vibrate(30);
 					
 					if(currentHealth>0)
@@ -305,8 +315,14 @@ public class SceneGame extends MhyhreScene {
 			for(SharkUnit shark : mSharks){
 				
 				if (bullet.getBoom()==0 && bullet.collideWithCircle(shark.getCX(),shark.getCY(), 24)) {
+					
+					if(shark.isDied() == false){	
+						totalGold += 50;
+						textGold.setText(String.valueOf(totalGold));
+					}
+					
 					bullet.setSink(true);
-					bullet.setBoom(6);
+					bullet.setBoom(10);
 					shark.setDied(true);
 				}
 			}
@@ -336,7 +352,10 @@ public class SceneGame extends MhyhreScene {
 				bulletResultRegion = bulletRegion;
 			}
 			if(bullet.getBoom() != -1){
-				bulletBatch.draw(bulletResultRegion, bullet.getX(), bullet.getY(), bulletRegion.getWidth(), bulletRegion.getHeight(), 1, 1, 1, 1, 1);
+				bulletBatch.draw(bulletResultRegion,
+						bullet.getX()-bulletResultRegion.getWidth()/2, bullet.getY()-bulletResultRegion.getHeight()/2, 
+						bulletResultRegion.getWidth(), bulletResultRegion.getHeight(),
+						1, 1, 1, 1, 1);
 			}
 		}
 

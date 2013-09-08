@@ -14,7 +14,7 @@ import android.util.Log;
 public class SkyManager extends Entity {
 
 	// Per second
-	public final float mTimeSpeed = 0.02f;
+	public final float mTimeSpeed = 0.04f;
 	float mTime;
 
 	Sprite spriteSun;
@@ -38,7 +38,7 @@ public class SkyManager extends Entity {
 		mBackground = pBackground;
 		mWater = pWater;
 
-		mTime = (float) (Math.PI * 1.5f);
+		mTime = (float) (Math.PI * 1.7f);
 		mNight = false;
 
 		spriteSun = new Sprite(10, 10, MainActivity.Res.getTextureRegion("sun"), vertexBufferObjectManager);
@@ -97,7 +97,7 @@ public class SkyManager extends Entity {
 
 	private void desireColor(Color current, Color target) {
 
-		final float d = 0.01f;
+		final float d = 0.005f;
 		final float dgreen = 0.005f;
 		
 		if(isEqualColor(current, target, 0.02f)){

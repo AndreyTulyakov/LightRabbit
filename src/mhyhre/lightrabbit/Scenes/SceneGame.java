@@ -23,6 +23,7 @@ import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.SharkUnit;
+import mhyhre.lightrabbit.game.SkyManager;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -48,6 +49,7 @@ public class SceneGame extends MhyhreScene {
 	Text textGold;
 	
 	CloudsManager mClouds;
+	SkyManager mSkyes;
 
 	private WaterPolygon water;
 
@@ -65,7 +67,7 @@ public class SceneGame extends MhyhreScene {
 	
 	public SceneGame() {
 
-		mBackground = new Background(0.40f, 0.88f, 0.99f);
+		mBackground = new Background(0.8f, 0.8f, 0.8f);
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
 
@@ -166,25 +168,35 @@ public class SceneGame extends MhyhreScene {
 
 	private void createGameObjects(){
 		
+
+		
 		mBullets = new LinkedList<BulletUnit>();
 		mSharks = new LinkedList<SharkUnit>();
 		
 		mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
-		this.attachChild(mClouds);
-
+		
 		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
-		this.attachChild(water);
-
+		
 		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(boat);
+		
+		
 		
 		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(healthIndicator);
 		
 		sharkBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 30, MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(sharkBatch);
-		
+
 		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
+		
+		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
+
+		
+		
+		this.attachChild(mSkyes);
+		this.attachChild(mClouds);
+		this.attachChild(water);
+		attachChild(boat);
+		attachChild(healthIndicator);
+		attachChild(sharkBatch);
 		attachChild(bulletBatch);
 	}
 	

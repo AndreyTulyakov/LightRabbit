@@ -28,9 +28,9 @@ public class WaterPolygon extends Polygon {
 		waterResolution = resolution;
 
 		float step = MainActivity.getWidth() / (waterResolution - 1);
-
-		setColor(0, 0.2f, 1.0f, 0.2f);
-
+		
+		setColor(0.0f, 0.1f, 0.6f, 0.5f);
+		
 		// Water coordinates list
 		waterCoordinates = new ArrayList<Vector2>();
 

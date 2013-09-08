@@ -88,8 +88,7 @@ public class SharkUnit {
 			}
 		}else{
 			mX -= sSpeed;	
-			mY = (float) (waterLevel + 10 + 20 * Math.sin(mX/(Math.PI*4)));
-
+			mY = (float) (waterLevel + 5 + 20 * Math.sin(mX/(Math.PI*4)));
 		}
 	}
 

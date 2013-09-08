@@ -25,8 +25,8 @@ import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
-
 import android.graphics.Color;
 import android.util.Log;
 
@@ -35,12 +35,14 @@ public class ResourceManager {
 
 
 	Map<String, ITextureRegion> regions;
+	Map<String, ITiledTextureRegion> tiledRegions;
 	Map<String, BitmapTextureAtlas> atlases;
 	Map<String, Font> fonts;
 	Map<String, Sound> sounds;
 
 	public ResourceManager() {
 		regions = new HashMap<String, ITextureRegion>();
+		tiledRegions = new HashMap<String, ITiledTextureRegion>();
 		atlases = new HashMap<String, BitmapTextureAtlas>();
 		fonts = new HashMap<String, Font>();
 		sounds = new HashMap<String, Sound>();
@@ -50,6 +52,12 @@ public class ResourceManager {
 		if (!regions.containsKey(key))
 			Log.e(MainActivity.DebugID, "ResourceManager::getTextureRegion: invalid key - " + key);
 		return regions.get(key);
+	}
+	
+	public ITiledTextureRegion getTiledTextureRegion(String key) {
+		if (!tiledRegions.containsKey(key))
+			Log.e(MainActivity.DebugID, "ResourceManager::getTiledTextureRegion: invalid key - " + key);
+		return tiledRegions.get(key);
 	}
 
 	public BitmapTextureAtlas getTextureAtlas(String key) {
@@ -129,6 +137,11 @@ public class ResourceManager {
 		region = TextureRegionFactory.extractFromTexture(atlas, 16, 200, 16, 16);
 		regions.put("bullet_boom", region);
 		
+		region = TextureRegionFactory.extractFromTexture(atlas, 150, 0, 50, 50);
+		regions.put("sun", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 200, 0, 50, 50);
+		regions.put("moon", region);
 		
 		// Clouds texture
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.BILINEAR);

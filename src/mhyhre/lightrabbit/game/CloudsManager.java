@@ -2,8 +2,6 @@ package mhyhre.lightrabbit.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import mhyhre.lightrabbit.MainActivity;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;

@@ -9,8 +9,6 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
 
-import android.util.Log;
-
 public class SkyManager extends Entity {
 
 	// Per second

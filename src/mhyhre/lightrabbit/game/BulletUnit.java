@@ -11,9 +11,12 @@ public class BulletUnit extends Entity {
 	private Vector2 mAcceleration;
 	boolean mSink;
 	int mBoom;
+	int mBoomPower;
 
 	public BulletUnit(float pX, float pY) {
 		super(pX,pY);
+		
+		mBoomPower = 50;
 		
 		mAcceleration = new Vector2(0, 0);
 		mSink = false;
@@ -91,5 +94,9 @@ public class BulletUnit extends Entity {
 
 	public void setBoom(int mBoom) {
 		this.mBoom = mBoom;
+	}
+
+	public int getBoomPower() {
+		return mBoomPower;
 	}
 }

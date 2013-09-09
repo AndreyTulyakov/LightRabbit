@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.Scenes;
+package mhyhre.lightrabbit.game;
 
 import java.util.ArrayList;
 import java.util.List;

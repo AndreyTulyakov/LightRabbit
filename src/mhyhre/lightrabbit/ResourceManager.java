@@ -122,6 +122,12 @@ public class ResourceManager {
 		region = TextureRegionFactory.extractFromTexture(atlas, 0, 80, 64, 64);
 		regions.put("boat_body", region);
 		
+		region = TextureRegionFactory.extractFromTexture(atlas, 70, 80, 64, 24);
+		regions.put("pirate_boat", region);
+		
+		region = TextureRegionFactory.extractFromTexture(atlas, 128, 180, 128, 78);
+		regions.put("pirate_ship", region);		
+		
 		region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 64, 64);
 		regions.put("shark_body", region);
 		
@@ -145,6 +151,7 @@ public class ResourceManager {
 		
 		region = TextureRegionFactory.extractFromTexture(atlas, 200, 0, 50, 50);
 		regions.put("moon", region);
+		
 		
 		// Clouds texture
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.BILINEAR);

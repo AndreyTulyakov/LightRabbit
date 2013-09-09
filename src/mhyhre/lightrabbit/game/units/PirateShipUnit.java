@@ -1,19 +1,22 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.units;
 
-public class SharkUnit extends Enemy {
+import mhyhre.lightrabbit.game.Enemy;
+import mhyhre.lightrabbit.game.EnemyType;
+
+public class PirateShipUnit extends Enemy {
+
 
 	public static final float sSinkSpeed = 1.0f;
-	public static final float sSpeed = 1;
+	public static final float sSpeed = 0.3f;
 	
 	float bright;
 	float mWaterLevel;
 	
-	
-	public SharkUnit() {
-		super(EnemyType.SHARK, 150);
+	public PirateShipUnit() {
+		super(EnemyType.PIRATE_SHIP, 300);
 		
-
-		bright = 1;
+		setSize(128, 75);
+		bright=1;
 	}
 	
 	public float getBright(){
@@ -30,6 +33,7 @@ public class SharkUnit extends Enemy {
 
 	@Override
 	public void update() {
+		
 		if(mDied == true){
 			mX -= sSpeed;
 			mY += sSinkSpeed;
@@ -40,9 +44,8 @@ public class SharkUnit extends Enemy {
 			}
 		}else{
 			mX -= sSpeed;	
-			mY = (float) (mWaterLevel + 20 * Math.sin(mX/(Math.PI*4)));
+			mY = (float) (mWaterLevel-65);
 		}
 	}
 
-	
 }

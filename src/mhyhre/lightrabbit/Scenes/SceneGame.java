@@ -26,6 +26,7 @@ import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.EnemyType;
 import mhyhre.lightrabbit.game.SkyManager;
+import mhyhre.lightrabbit.game.WaterPolygon;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -168,8 +169,6 @@ public class SceneGame extends MhyhreScene {
 
 	private void createGameObjects(){
 		
-		
-		
 		mBullets = new LinkedList<BulletUnit>();
 
 		
@@ -188,7 +187,7 @@ public class SceneGame extends MhyhreScene {
 		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
 		
 		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
-
+		
 		spriteGold = new Sprite(300, 10, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
 		
 		textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(totalGold), 20, MainActivity.Me.getVertexBufferObjectManager());
@@ -199,7 +198,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(mEnemies);
 		attachChild(bulletBatch);
 		attachChild(boat);
-		this.attachChild(water);
+		attachChild(water);
 		
 		attachChild(healthIndicator);
 		attachChild(spriteGold);
@@ -228,10 +227,17 @@ public class SceneGame extends MhyhreScene {
 
 		// Generate new sharks
 		if(mEnemies.getEnemiesList().size() < 1){
+			
+			mEnemies.addNewEnemy(EnemyType.PIRATE_SHIP, 1000, 0);
+			
 			 Random rand = new Random();
-			 for(int i=0; i<rand.nextInt(5)+1; i++){
+			 float r = rand.nextInt(5)+1;
+			 for(int i=0; i< r ; i++){
 				 float x = MainActivity.getWidth() + 10 + rand.nextInt((int) MainActivity.getWidth());
 				 mEnemies.addNewEnemy(EnemyType.SHARK, x, 0);
+				 
+				 x = MainActivity.getWidth() + 10 + rand.nextInt((int) MainActivity.getWidth());
+				 mEnemies.addNewEnemy(EnemyType.PIRATE_BOAT, x, 0);
 			 }
 		}
 

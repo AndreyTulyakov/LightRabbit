@@ -1,7 +1,6 @@
 package mhyhre.lightrabbit.game;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.Scenes.WaterPolygon;
 
 import org.andengine.entity.Entity;
 import org.andengine.entity.scene.background.IBackground;

@@ -12,9 +12,12 @@ import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import android.util.Log;
+
 public class EnemiesManager extends SpriteBatch {
 
 	public static final int ENEMIES_MAX_COUND = 100;
+	private boolean waitState = false;
 
 	WaterPolygon mWater;
 	List<Enemy> mEnemies;
@@ -27,6 +30,12 @@ public class EnemiesManager extends SpriteBatch {
 	}
 
 	public void update() {
+		
+		if(waitState == true){
+			if(mEnemies.size() == 0){
+				waitState = false;
+			}
+		}
 		
 		ITextureRegion sharkRegion = MainActivity.Res.getTextureRegion("shark_body");
 		ITextureRegion pirateBoatRegion = MainActivity.Res.getTextureRegion("pirate_boat");
@@ -101,31 +110,41 @@ public class EnemiesManager extends SpriteBatch {
 	}
 
 
-	public void addNewEnemy(EnemyType enemyType, float centerX, float centerY) {
+	public void addNewEnemy( GameEvent event){
 
-		if(mEnemies.size() < ENEMIES_MAX_COUND){
+		
+		if(mEnemies.size() < ENEMIES_MAX_COUND && waitState == false ){
 			
-			switch (enemyType) {
+
+			Log.i(MainActivity.DebugID, "addNewEnemy:" + event.getType().getValue() + " Enemy count:" + mEnemies.size());
+			
+			float xpos = event.getPosition().x + MainActivity.getWidth();
+			
+			switch (event.getType()) {
 	
-			case PIRATE_BOAT:
+			case NEW_PIRATE_BOAT:
 				PirateBoatUnit pirateBoat = new PirateBoatUnit();
-				pirateBoat.setCenteredPosition(centerX, centerY);
+				pirateBoat.setPosition(xpos,0);
 				mEnemies.add(pirateBoat);
 				break;
 	
-			case PIRATE_SHIP:
+			case NEW_PIRATE_SHIP:
 				PirateShipUnit pirateShip = new PirateShipUnit();
-				pirateShip.setCenteredPosition(centerX, centerY);
+				pirateShip.setPosition(xpos,0);
 				mEnemies.add(pirateShip);
 				break;
 	
-			case SHARK:
+			case NEW_SHARK:
 				SharkUnit shark = new SharkUnit();
-				shark.setCenteredPosition(centerX, centerY);
+				shark.setPosition(xpos,0);
 				mEnemies.add(shark);
 				break;
-	
-			case UNDEFINED:
+
+			case WAIT:
+				waitState = true;
+				break;
+				
+			default:
 				break;
 			}
 		}
@@ -133,6 +152,14 @@ public class EnemiesManager extends SpriteBatch {
 
 	public List<Enemy> getEnemiesList() {
 		return mEnemies;
+	}
+
+	public boolean isWaitState() {
+		return waitState;
+	}
+
+	public void setWaitState(boolean waitState) {
+		this.waitState = waitState;
 	}
 
 }

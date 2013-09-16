@@ -60,10 +60,10 @@ public class SceneMainMenu extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "Main Menu [ New game ] button");
+					Log.i(MainActivity.DebugID, "Main Menu 1 button");
 					MainActivity.vibrate(30);
 
-					SceneRoot.SetState(SceneStates.NewGame);
+					MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
 				}
 				return true;
 			}
@@ -76,7 +76,7 @@ public class SceneMainMenu extends MhyhreScene {
 
 					Log.i(MainActivity.DebugID, "Main Menu [ Options ] button");
 					MainActivity.vibrate(30);
-					SceneRoot.SetState(SceneStates.About);
+					MainActivity.getRootScene().SetState(SceneStates.About);
 				}
 				return true;
 			}
@@ -89,7 +89,7 @@ public class SceneMainMenu extends MhyhreScene {
 
 					Log.i(MainActivity.DebugID, "Main Menu [ Exit ] button");
 					MainActivity.vibrate(30);
-					SceneRoot.SetState(SceneStates.Exit);
+					MainActivity.getRootScene().SetState(SceneStates.Exit);
 				}
 				return true;
 			}

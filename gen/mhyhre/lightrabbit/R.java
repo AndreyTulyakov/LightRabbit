@@ -26,6 +26,7 @@ public final class R {
         public static final int MenuItem_Play=0x7f040005;
         public static final int QExit=0x7f040002;
         public static final int app_name=0x7f040000;
+        public static final int selectLevel=0x7f04000a;
         public static final int textAbout=0x7f040008;
         public static final int textBack=0x7f040006;
         public static final int textExit=0x7f040007;

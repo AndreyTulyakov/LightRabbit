@@ -127,7 +127,7 @@ public class SceneLoader extends MhyhreScene {
 					// Splash off scene by rect
 					if (AlphaTime3 >= 1.0f) {
 						unregisterUpdateHandler(pTimerHandler);
-						SceneRoot.SetState(SceneStates.MainMenu);
+						MainActivity.getRootScene().SetState(SceneStates.MainMenu);
 					} else {
 						AlphaTime3 += 0.1f;
 					}

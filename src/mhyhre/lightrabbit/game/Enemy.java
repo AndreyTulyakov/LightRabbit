@@ -1,5 +1,7 @@
 package mhyhre.lightrabbit.game;
 
+import org.andengine.entity.primitive.Vector2;
+
 public abstract class Enemy {
 
 
@@ -76,6 +78,11 @@ public abstract class Enemy {
 	public void setCenteredPosition(float pX, float pY) {
 		mX = pX - mWidth/2;
 		mY = pY - mHeight/2;
+	}
+	
+	public void setPosition(Vector2 pos) {
+		mX = pos.x;
+		mY = pos.y;
 	}
 
 	public float getWidth() {

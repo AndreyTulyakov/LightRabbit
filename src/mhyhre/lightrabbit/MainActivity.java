@@ -45,6 +45,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 	private static Vibrator mVibrator;
 	public static Camera camera;
+	public static int unlockedLevels = 1;
 
 	// screen sizes
 	private static int SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -66,9 +67,15 @@ public class MainActivity extends SimpleBaseGameActivity {
 		SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
 
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
+		editor.putInt("appVersion", 2);
 		editor.putBoolean("isVibroEnabled", isVibroEnabled());
 		editor.putBoolean("isSoundEnabled", isSoundEnabled());
+		editor.putInt("unlockedLevels", getUnlockedLevels());
 		editor.commit();
+	}
+	
+	public static SceneRoot getRootScene(){
+		return mSceneRoot;
 	}
 	
 	public void loadPreferences() 
@@ -76,9 +83,10 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 	  int mode = Activity.MODE_PRIVATE;
 	  SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode); 
-
+	  
 	  setVibroEnabled( mySharedPreferences.getBoolean("isVibroEnabled", true));
 	  setSoundEnabled( mySharedPreferences.getBoolean("isSoundEnabled", true));
+	  setUnlockedLevels( mySharedPreferences.getInt("unlockedLevels", 1));
 	}
 
 	@Override
@@ -203,5 +211,13 @@ public class MainActivity extends SimpleBaseGameActivity {
 		if (vibroEnabled) {
 			mVibrator.vibrate(milliseconds);
 		}
+	}
+
+	public static int getUnlockedLevels() {
+		return unlockedLevels;
+	}
+
+	public static void setUnlockedLevels(int unlockedLevels) {
+		MainActivity.unlockedLevels = unlockedLevels;
 	}
 }

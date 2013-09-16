@@ -112,7 +112,8 @@ public class ResourceManager {
 		region = TextureRegionFactory.extractFromTexture(atlas, 1, 447, 64, 64, false);
 		regions.put("ParticlePoint", region);
 
-	
+		region = TextureRegionFactory.extractFromTexture(atlas, 0, 360, 104, 144, false);
+		regions.put("LevelCell", region);
 
 		atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
 		BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);

@@ -24,21 +24,12 @@ public class SceneRoot extends Scene {
 	// STATES
 	private static SceneStates state = SceneStates.None;
 
-	public static final int STATE_SPLASH = 0;
-	public static final int STATE_MAIN_MENU = 1;
-	public static final int STATE_NEW_GAME = 2;
-	public static final int STATE_LOAD_GAME = 3;
-	public static final int STATE_ABOUT = 4;
-	public static final int STATE_EXIT = 5;
-	public static final int STATE_LOADING = 6;
-	public static final int STATE_GAME = 7;
-	public static final int STATE_NEVERWIN = 8;
-
-	public static SceneLoader mSceneLoader;
-	public static SceneMainMenu mSceneMainMenu;
-	public static SceneAbout mSceneAbout;
-	public static SceneExit mSceneExit;
-	public static SceneGame mSceneGame;
+	public SceneLoader mSceneLoader;
+	public SceneMainMenu mSceneMainMenu;
+	public SceneAbout mSceneAbout;
+	public SceneExit mSceneExit;
+	public SceneGame mSceneGame;
+	public SceneLevelSelector mSceneLevelSelector;
 
 	public static boolean Preloaded = false;
 
@@ -66,13 +57,15 @@ public class SceneRoot extends Scene {
 		mSceneMainMenu = new SceneMainMenu();
 		mSceneAbout = new SceneAbout();
 		mSceneExit = new SceneExit();
+		mSceneLevelSelector = new SceneLevelSelector();
 
-		mSceneGame = new SceneGame();
+		mSceneGame = null;
 
 		attachChild(mSceneMainMenu);
 		attachChild(mSceneAbout);
 		attachChild(mSceneExit);
-		attachChild(mSceneGame);
+		attachChild(mSceneLevelSelector);
+		
 		// ---------------------------------------------------------------
 
 		Preloaded = true;
@@ -83,7 +76,8 @@ public class SceneRoot extends Scene {
 
 	}
 
-	public static void SetState(SceneStates pState) {
+
+	public void SetState(SceneStates pState) {
 
 		state = pState;
 
@@ -94,7 +88,9 @@ public class SceneRoot extends Scene {
 			mSceneMainMenu.Hide();
 			mSceneAbout.Hide();
 			mSceneExit.Hide();
-			mSceneGame.Hide();
+			mSceneLevelSelector.Hide();
+			
+			if(mSceneGame != null) mSceneGame.Hide();
 
 			switch (state) {
 			case Splash:
@@ -103,6 +99,10 @@ public class SceneRoot extends Scene {
 
 			case MainMenu:
 				mSceneMainMenu.Show();
+				break;
+				
+			case LevelSelector:
+				mSceneLevelSelector.Show();
 				break;
 
 			case About:
@@ -113,8 +113,14 @@ public class SceneRoot extends Scene {
 				mSceneExit.Show();
 				break;
 
-			case NewGame:
-
+			case Game:
+				if(mSceneGame != null){
+					this.detachChild(mSceneGame);
+					mSceneGame = null;
+				}
+				
+				mSceneGame = new SceneGame();
+				this.attachChild(mSceneGame);
 				mSceneGame.Show();
 				break;
 
@@ -123,6 +129,7 @@ public class SceneRoot extends Scene {
 				break;
 			}
 		}
+		
 	}
 
 	public static SceneStates GetState() {
@@ -142,6 +149,10 @@ public class SceneRoot extends Scene {
 				mSceneMainMenu.onSceneTouchEvent(pSceneTouchEvent);
 				break;
 
+			case LevelSelector:
+				mSceneLevelSelector.onSceneTouchEvent(pSceneTouchEvent);
+				break;
+				
 			case About:
 				mSceneAbout.onSceneTouchEvent(pSceneTouchEvent);
 				break;
@@ -150,11 +161,7 @@ public class SceneRoot extends Scene {
 				mSceneExit.onSceneTouchEvent(pSceneTouchEvent);
 				break;
 
-			case Loading:
-
-				break;
-
-			case NewGame:
+			case Game:
 				mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
 				break;
 
@@ -177,11 +184,11 @@ public class SceneRoot extends Scene {
 			SetState(SceneStates.Exit);
 			break;
 
-		case NewGame:
-			SetState(SceneStates.MainMenu);
+		case Game:
+			SetState(SceneStates.LevelSelector);
 			break;
-
-		case LoadGame:
+			
+		case LevelSelector:
 			SetState(SceneStates.MainMenu);
 			break;
 
@@ -190,18 +197,6 @@ public class SceneRoot extends Scene {
 			break;
 
 		case Exit:
-			SetState(SceneStates.MainMenu);
-			break;
-
-		case Loading:
-
-			break;
-
-		case Game:
-			SetState(SceneStates.MainMenu);
-			break;
-
-		case NoWin:
 			SetState(SceneStates.MainMenu);
 			break;
 

@@ -11,5 +11,6 @@
     <string name="textExit">Выход</string>
     <string name="textAbout">Об игре</string>
     <string name="textTap">Нажмите</string>
+    <string name="selectLevel">Выберите уровень</string>
 
 </resources>

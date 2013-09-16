@@ -64,7 +64,7 @@ public class SceneExit extends MhyhreScene {
 
 					Log.i(MainActivity.DebugID, "Exit Scene [ Back ] pressed");
 					MainActivity.vibrate(30);
-					SceneRoot.SetState(SceneStates.MainMenu);
+					MainActivity.getRootScene().SetState(SceneStates.MainMenu);
 				}
 				return true;
 			}

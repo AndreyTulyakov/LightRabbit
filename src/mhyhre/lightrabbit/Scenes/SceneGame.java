@@ -12,13 +12,11 @@
 
 package mhyhre.lightrabbit.Scenes;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
@@ -34,12 +32,14 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
-import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.ITextureRegion;
-import org.andengine.opengl.texture.region.TextureRegionFactory;
 import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
+	
+	boolean mLoaded = false;
+	boolean mPause = false;
+
 
 	private Background mBackground;
 
@@ -67,10 +67,7 @@ public class SceneGame extends MhyhreScene {
 	private float boatSpeed = 0;
 	private float boatAcseleration = 3;
 
-	// Resources
-	public static final String uiAtlasName = "User_Interface";
 
-	public Map<String, ITextureRegion> TextureRegions;
 
 	public SceneGame() {
 
@@ -78,37 +75,40 @@ public class SceneGame extends MhyhreScene {
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
 
-		createTextureRegions();
-
 		createGameObjects();
 
 		createGUI();
 
 		mEventManager = new GameEventManager();
-		mEventManager.loadLevel(1);
+
 
 		Log.i(MainActivity.DebugID, "Scene game created");
 	}
+	
+	
+	public void load(int levelNumber){
+		
+		mEventManager.loadEvents(levelNumber);
+		
+		mLoaded = true;
+		
 
-	private void createTextureRegions() {
-
-		TextureRegions = new HashMap<String, ITextureRegion>();
-		BitmapTextureAtlas atlas = MainActivity.Res.getTextureAtlas(uiAtlasName);
-
-		TextureRegions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
-		TextureRegions.put("Equall", TextureRegionFactory.extractFromTexture(atlas, 325, 0, 45, 70, false));
-
-		TextureRegions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));
-		TextureRegions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 72, 80, 80, false));
-
-		TextureRegions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
-
-		TextureRegions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
 	}
+	
+	public void start(){
+		
+		mPause = false;
+	}
+	
+	public void pause(){
+		
+		mPause = true;
+	}
+
 
 	private void createGUI() {
 
-		spriteMoveLeft = new Sprite(0, 0, TextureRegions.get("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteMoveLeft = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -128,7 +128,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(spriteMoveLeft);
 		registerTouchArea(spriteMoveLeft);
 
-		spriteMoveRight = new Sprite(0, 0, TextureRegions.get("Right"), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteMoveRight = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -148,7 +148,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(spriteMoveRight);
 		registerTouchArea(spriteMoveRight);
 
-		spriteFire = new Sprite(0, 0, TextureRegions.get("Fire"), MainActivity.Me.getVertexBufferObjectManager()) {
+		spriteFire = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 
@@ -213,6 +213,8 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
+		if(!mLoaded) return true;
+		
 		mMessageManager.onSceneTouchEvent(pSceneTouchEvent);
 		if (mMessageManager.isActiveMessage() == false) {
 			return super.onSceneTouchEvent(pSceneTouchEvent);
@@ -227,10 +229,23 @@ public class SceneGame extends MhyhreScene {
 		
 		if(gameIsEnded == false){
 			gameIsEnded = true;
-			mMessageManager.showDialog(0);
+			
+			if(mEventManager.getUncompleteEventsCount() == 0){
+				mMessageManager.showEndDialog(MainActivity.Me.getString(R.string.passLevel));
+			}else{
+				mMessageManager.showEndDialog(MainActivity.Me.getString(R.string.youWasDied));
+			}
+			
+			
 		} else {
 			if(mMessageManager.isActiveMessage() == false){
-				MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
+				
+				if(mEventManager.getUncompleteEventsCount() == 0){
+					MainActivity.getRootScene().SetState(SceneStates.Win);
+				}else{
+					MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
+				}
+				
 			}
 		}
 	}
@@ -238,6 +253,9 @@ public class SceneGame extends MhyhreScene {
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
+		if(!mLoaded) return;
+		if(mPause) return;
+		
 		updatePlayer();
 
 		timeCounter += pSecondsElapsed;
@@ -257,7 +275,7 @@ public class SceneGame extends MhyhreScene {
 				}
 			} else {
 
-				if (timeCounter > (gameEvent.getStartTime() * 0.001f - halfRange)) {
+				if (timeCounter > (gameEvent.getStartTime() * 0.1f - halfRange)) {
 
 					if (mEnemies.isWaitState()) {
 						timeCounter = 0;

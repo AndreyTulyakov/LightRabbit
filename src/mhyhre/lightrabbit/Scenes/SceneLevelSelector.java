@@ -16,6 +16,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 public class SceneLevelSelector extends MhyhreScene {
 
+	int lastLevelSelection = 0;
+	
 	List<LevelItem> mItems;
 
 	SpriteBatch iconsBatch;
@@ -44,6 +46,10 @@ public class SceneLevelSelector extends MhyhreScene {
 		configureLevelsItem();
 		comfigureLevelsCaption();
 
+	}
+	
+	public int getLastLevelSelection(){
+		return lastLevelSelection;
 	}
 
 	private void comfigureLevelsCaption() {
@@ -125,7 +131,8 @@ public class SceneLevelSelector extends MhyhreScene {
 			for (LevelItem item : mItems) {
 				if(item.isCollided(pSceneTouchEvent.getX(), pSceneTouchEvent.getY()) && item.isLocked() == false){
 					
-					MainActivity.getRootScene().SetState(SceneStates.Game);
+					lastLevelSelection = item.getLevelNumber();
+					MainActivity.getRootScene().SetState(SceneStates.GameLoading);
 				}
 			}
 		}

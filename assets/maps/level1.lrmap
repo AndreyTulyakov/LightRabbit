@@ -1,15 +1,15 @@
 <!DOCTYPE LRMapFile>
 <EventSequence>
  <triger id="Shark">
-  <time>100</time>
-  <position>200</position>
+  <time>1</time>
+  <position>2</position>
  </triger>
  <triger id="Shark">
-  <time>100</time>
+  <time>1</time>
   <position>300</position>
  </triger>
  <triger id="Shark">
-  <time>100</time>
+  <time>1</time>
   <position>500</position>
  </triger>
  <triger id="Wait">

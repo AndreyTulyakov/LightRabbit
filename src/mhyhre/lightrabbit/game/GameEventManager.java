@@ -13,21 +13,25 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class GameEventManager {
 
-	List<GameEvent> events;
+	List<GameEvent> events = null;
 	
 	public GameEventManager() {
 		events = new LinkedList<GameEvent>();
 	}
 	
-	public void loadLevel(int number){
+	public void loadEvents(int number){
 		events.clear();
 		
 		if(number >= 0){
 			String filename = "maps/level" + number + ".lrmap";
-			LoadXMLMap(filename);
+			loadFromXmlFile(filename);
 		}
-		
-		
+
+	}
+	
+	public void clearEventList(){
+
+		events.clear();
 	}
 	
 	// use after current event complete
@@ -62,7 +66,7 @@ public class GameEventManager {
 		return events;
 	}
 	
-	public void LoadXMLMap(String filename){
+	public void loadFromXmlFile(String filename){
 		
 		XmlPullParserFactory pullParserFactory;
 

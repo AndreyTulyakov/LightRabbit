@@ -45,7 +45,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 	private static Vibrator mVibrator;
 	public static Camera camera;
-	public static int unlockedLevels = 1;
+	public static int unlockedLevels = 8;
 
 	// screen sizes
 	private static int SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -86,7 +86,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 	  
 	  setVibroEnabled( mySharedPreferences.getBoolean("isVibroEnabled", true));
 	  setSoundEnabled( mySharedPreferences.getBoolean("isSoundEnabled", true));
-	  setUnlockedLevels( mySharedPreferences.getInt("unlockedLevels", 1));
+	  //setUnlockedLevels( mySharedPreferences.getInt("unlockedLevels", 1));
 	}
 
 	@Override

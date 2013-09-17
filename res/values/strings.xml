@@ -12,5 +12,9 @@
     <string name="textAbout">Об игре</string>
     <string name="textTap">Нажмите</string>
     <string name="selectLevel">Выберите уровень</string>
+    <string name="loading">Загрузка...</string>
+    <string name="tapForContinue">Нажмите для продолжения...</string>
+    <string name="youWasDied">Вы умерли</string>
+    <string name="passLevel">Ввы прошли уровень!</string>
 
 </resources>

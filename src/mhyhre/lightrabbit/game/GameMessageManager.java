@@ -12,7 +12,7 @@ import mhyhre.lightrabbit.MhyhreScene;
 
 public class GameMessageManager extends MhyhreScene  {
 	
-	Text testText;
+	Text textMessage;
 	Rectangle clickRect;
 	
 	boolean activeMessage = false;
@@ -20,11 +20,7 @@ public class GameMessageManager extends MhyhreScene  {
 	public GameMessageManager() {
 		setBackgroundEnabled(false);
 		
-		
-		testText = new Text(100,100,MainActivity.Res.getFont("Furore"),"TEST TEXT",MainActivity.Me.getVertexBufferObjectManager());
-
-		
-		clickRect = new Rectangle(100, 100, 100, 100, MainActivity.Me.getVertexBufferObjectManager()) {
+		clickRect = new Rectangle(100, 100, MainActivity.getWidth()-200, MainActivity.getHeight()-200, MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -38,21 +34,28 @@ public class GameMessageManager extends MhyhreScene  {
 				return true;
 			}
 		};
-		clickRect.setColor(0, 0.3f, 0.8f);
+		clickRect.setColor(0.9f, 0.9f, 1.0f,0.5f);
 		registerTouchArea(clickRect);
 		
+		
+		textMessage = new Text(100,100,MainActivity.Res.getFont("Furore"),"",100 ,MainActivity.Me.getVertexBufferObjectManager());
+
+		
 		attachChild(clickRect);
-		attachChild(testText);
+		attachChild(textMessage);
 	}
 	
 	public void loadDialogs(int dialogBaseIndex){
 		
 	}
 	
-	public boolean showDialog(int id){
+	public boolean showEndDialog(String text){
 		
 		this.Show();
 		setIgnoreUpdate(false);
+		
+		textMessage.setText(text);
+		textMessage.setPosition(MainActivity.getHalfWidth() - textMessage.getWidth()/2, MainActivity.getHalfHeight() - textMessage.getHeight()/2);
 		
 		activeMessage = true;
 		

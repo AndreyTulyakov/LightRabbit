@@ -30,6 +30,7 @@ public class SceneRoot extends Scene {
 	public SceneExit mSceneExit;
 	public SceneGame mSceneGame;
 	public SceneLevelSelector mSceneLevelSelector;
+	public SceneGameLoading mSceneGameLoading;
 
 	public static boolean Preloaded = false;
 
@@ -58,6 +59,7 @@ public class SceneRoot extends Scene {
 		mSceneAbout = new SceneAbout();
 		mSceneExit = new SceneExit();
 		mSceneLevelSelector = new SceneLevelSelector();
+		mSceneGameLoading = new SceneGameLoading();
 
 		mSceneGame = null;
 
@@ -65,6 +67,7 @@ public class SceneRoot extends Scene {
 		attachChild(mSceneAbout);
 		attachChild(mSceneExit);
 		attachChild(mSceneLevelSelector);
+		attachChild(mSceneGameLoading);
 		
 		// ---------------------------------------------------------------
 
@@ -89,6 +92,7 @@ public class SceneRoot extends Scene {
 			mSceneAbout.Hide();
 			mSceneExit.Hide();
 			mSceneLevelSelector.Hide();
+			mSceneGameLoading.Hide();
 			
 			if(mSceneGame != null) mSceneGame.Hide();
 
@@ -112,16 +116,45 @@ public class SceneRoot extends Scene {
 			case Exit:
 				mSceneExit.Show();
 				break;
-
-			case Game:
+				
+			case GameLoading:
+				
+				mSceneGameLoading.setLoaded(false);
+				
+				detachChild(mSceneGameLoading);
+				
 				if(mSceneGame != null){
 					this.detachChild(mSceneGame);
 					mSceneGame = null;
 				}
 				
 				mSceneGame = new SceneGame();
+				mSceneGame.load(mSceneLevelSelector.getLastLevelSelection());
+				mSceneGame.onManagedUpdate(0);
+				mSceneGame.pause();
+				
 				this.attachChild(mSceneGame);
+				this.attachChild(mSceneGameLoading);
+				
+				mSceneGameLoading.Show();
 				mSceneGame.Show();
+				
+				mSceneGameLoading.setLoaded(true);
+				
+				break;
+
+			case Game:
+				
+				if(mSceneGame != null){
+					
+					mSceneGame.Show();
+					mSceneGame.start();
+				}
+				break;
+				
+			case Win:
+				MainActivity.setUnlockedLevels(mSceneLevelSelector.getLastLevelSelection()+1);
+				SetState(SceneStates.LevelSelector);
 				break;
 
 			default:
@@ -160,6 +193,10 @@ public class SceneRoot extends Scene {
 			case Exit:
 				mSceneExit.onSceneTouchEvent(pSceneTouchEvent);
 				break;
+				
+			case GameLoading:
+				mSceneGameLoading.onSceneTouchEvent(pSceneTouchEvent);
+				break;
 
 			case Game:
 				mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
@@ -182,6 +219,10 @@ public class SceneRoot extends Scene {
 
 		case MainMenu:
 			SetState(SceneStates.Exit);
+			break;
+			
+		case GameLoading:
+			
 			break;
 
 		case Game:

@@ -120,6 +120,7 @@ public class SceneRoot extends Scene {
 			case GameLoading:
 				
 				mSceneGameLoading.setLoaded(false);
+				mSceneGameLoading.setShownLevelNumber(mSceneLevelSelector.getLastLevelSelection());
 				
 				detachChild(mSceneGameLoading);
 				

@@ -16,5 +16,6 @@
     <string name="tapForContinue">Нажмите для продолжения...</string>
     <string name="youWasDied">Вы умерли</string>
     <string name="passLevel">Вы прошли уровень!</string>
+    <string name="level">Уровень</string>
 
 </resources>

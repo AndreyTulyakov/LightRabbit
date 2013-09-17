@@ -16,6 +16,7 @@ public class SceneGameLoading extends MhyhreScene {
 
 	private Rectangle mRotationRect;
 	private Text mCaption;
+	private Text mLevelNumber;
 
 	private boolean mLoaded = false;
 
@@ -41,13 +42,16 @@ public class SceneGameLoading extends MhyhreScene {
 			}
 		};
 		backRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-		backRect.setColor(0.0f,0.0f,0.1f,0.5f);
+		backRect.setColor(0.0f,0.0f,0.1f,0.8f);
 		attachChild(backRect);
 		registerTouchArea(backRect);
 
 		mCaption = new Text(0, 0, MainActivity.Res.getFont("Furore"), MainActivity.Me.getString(R.string.tapForContinue), 100, MainActivity.Me.getVertexBufferObjectManager());
 		mCaption.setPosition(10 + mCaption.getWidth()/2, 30 + mCaption.getHeight()/2);
 
+		mLevelNumber = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
+		mLevelNumber.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+		
 		float h = mCaption.getHeight() + 40;
 
 		mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mCaption.getY(), MainActivity.getWidth(), h, MainActivity.Me.getVertexBufferObjectManager());
@@ -55,7 +59,8 @@ public class SceneGameLoading extends MhyhreScene {
 
 		attachChild(mRotationRect);
 		attachChild(mCaption);
-
+		attachChild(mLevelNumber);
+		
 		setLoaded(false);
 	}
 
@@ -84,5 +89,9 @@ public class SceneGameLoading extends MhyhreScene {
 	public void setLoaded(boolean mLoaded) {
 		this.mLoaded = mLoaded;
 
+	}
+	
+	public void setShownLevelNumber(int levelNumber){
+		mLevelNumber.setText(MainActivity.Me.getString(R.string.level) + ": " + levelNumber);
 	}
 }

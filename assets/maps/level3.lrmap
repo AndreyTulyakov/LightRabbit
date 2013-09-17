@@ -1,0 +1,27 @@
+<!DOCTYPE LRMapFile>
+<EventSequence>
+ <triger id="Shark">
+  <time>0</time>
+  <position>0</position>
+ </triger>
+ <triger id="Wait">
+  <time>0</time>
+  <position>0</position>
+ </triger>
+ <triger id="Pirate boat">
+  <time>0</time>
+  <position>0</position>
+ </triger>
+ <triger id="Wait">
+  <time>0</time>
+  <position>0</position>
+ </triger>
+ <triger id="Pirate ship">
+  <time>0</time>
+  <position>0</position>
+ </triger>
+ <triger id="Wait">
+  <time>0</time>
+  <position>0</position>
+ </triger>
+</EventSequence>

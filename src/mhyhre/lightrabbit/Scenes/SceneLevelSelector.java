@@ -19,6 +19,8 @@ public class SceneLevelSelector extends MhyhreScene {
 	int lastLevelSelection = 0;
 	
 	List<LevelItem> mItems;
+	
+	int touchDownToLevel = -1;
 
 	SpriteBatch iconsBatch;
 
@@ -40,7 +42,7 @@ public class SceneLevelSelector extends MhyhreScene {
 		levelCellRegion = MainActivity.Res.getTextureRegion("LevelCell");
 
 		textCaption = new Text(0, 0, MainActivity.Res.getFont("White Furore"), MainActivity.Me.getString(R.string.selectLevel), MainActivity.Me.getVertexBufferObjectManager());
-		textCaption.setPosition(MainActivity.getHalfWidth() - textCaption.getWidth() / 2, 50);
+		textCaption.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 50);
 		attachChild(textCaption);
 
 		configureLevelsItem();
@@ -61,7 +63,7 @@ public class SceneLevelSelector extends MhyhreScene {
 				LevelItem item = mItems.get(number);
 				
 				Text caption = new Text(0, 0, MainActivity.Res.getFont("Furore"), "" + (number+1), MainActivity.Me.getVertexBufferObjectManager());
-				caption.setPosition(item.getX()-caption.getWidth()/2, item.getY()-caption.getHeight()/2);
+				caption.setPosition(item.getX(), item.getY());
 				attachChild(caption);
 			}
 		}
@@ -74,7 +76,7 @@ public class SceneLevelSelector extends MhyhreScene {
 		float xStep = (levelCellRegion.getWidth() + HORIZONTAL_DISTANCE);
 		float yStep = (levelCellRegion.getHeight()+VERTICAL_DISTANCE);
 		float xStart = MainActivity.getHalfWidth() - (xStep * ((LEVELS_COUNT/2) -1)/2);
-		float yStart = MainActivity.getHalfHeight() - yStep/2 + 50;
+		float yStart = MainActivity.getHalfHeight() - yStep/2 - 50;
 
 		// Fill list
 		
@@ -89,7 +91,7 @@ public class SceneLevelSelector extends MhyhreScene {
 				LevelItem item = new LevelItem( 0, 0, levelCellRegion.getWidth(), levelCellRegion.getHeight(), j*LEVELS_COUNT/2 + i + 1);
 
 				item.setX( xStart + i * xStep);
-				item.setY( yStart + yStep*j );
+				item.setY( yStart + yStep*(1-j) );
 				
 				if (item.getLevelNumber() > MainActivity.getUnlockedLevels())
 					item.setLocked(true);
@@ -113,7 +115,7 @@ public class SceneLevelSelector extends MhyhreScene {
 			else
 				rgbMod = 1.0f;
 			
-			iconsBatch.draw(levelCellRegion, item.getLeftTopX(), item.getLeftTopY(), item.getWidth(), item.getHeight(), 0, rgbMod, rgbMod, rgbMod, 1);
+			iconsBatch.draw(levelCellRegion, item.getLeftX(), item.getDownY(), item.getWidth(), item.getHeight(), 0, rgbMod, rgbMod, rgbMod, 1);
 		}
 
 
@@ -126,17 +128,23 @@ public class SceneLevelSelector extends MhyhreScene {
 	public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
 		
 
-		if(pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP )
+		if(pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN )
 		{
 			for (LevelItem item : mItems) {
 				if(item.isCollided(pSceneTouchEvent.getX(), pSceneTouchEvent.getY()) && item.isLocked() == false){
-					
+
 					lastLevelSelection = item.getLevelNumber();
 					MainActivity.getRootScene().SetState(SceneStates.GameLoading);
 				}
 			}
 		}
-		
+
 		return super.onSceneTouchEvent(pSceneTouchEvent);
+	}
+	
+	@Override
+	public void Show() {
+		touchDownToLevel =-1;
+		super.Show();
 	}
 }

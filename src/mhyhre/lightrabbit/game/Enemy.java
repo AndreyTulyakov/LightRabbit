@@ -10,7 +10,10 @@ public abstract class Enemy {
 	protected boolean mDied;
 	protected float mX, mY;
 	protected float mWidth, mHeight;
+	protected float radius = 0;
 	
+
+
 	public Enemy(EnemyType pType, int pMaxHealth) {
 		mHealth = pMaxHealth;
 		mEnemyType = pType;
@@ -44,14 +47,6 @@ public abstract class Enemy {
 	public void setSize(float w, float h){
 		mWidth = w;
 		mHeight = h;
-	}
-
-	public float getCX(){
-		return mX+mWidth/2.0f;
-	}
-
-	public float getCY(){
-		return mY+mHeight/2.0f;
 	}
 	
 	public float getX() {
@@ -105,4 +100,11 @@ public abstract class Enemy {
 		return mEnemyType;
 	}
 	
+	public float getRadius() {
+		return radius;
+	}
+
+	public void setRadius(float radius) {
+		this.radius = radius;
+	}
 }

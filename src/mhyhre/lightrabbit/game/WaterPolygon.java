@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mhyhre.lightrabbit.MainActivity;
 
+import org.andengine.entity.primitive.DrawMode;
 import org.andengine.entity.primitive.Polygon;
 import org.andengine.entity.primitive.Vector2;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -34,15 +35,15 @@ public class WaterPolygon extends Polygon {
 		// Water coordinates list
 		waterCoordinates = new ArrayList<Vector2>();
 
-		waterCoordinates.add(new Vector2(MainActivity.getHalfWidth(), MainActivity.getHeight()));
-		waterCoordinates.add(new Vector2(0, MainActivity.getHeight()));
+		waterCoordinates.add(new Vector2(MainActivity.getHalfWidth(), 0));
+		waterCoordinates.add(new Vector2(0, 0));
 
 		for (int i = 0; i < waterResolution; i++) {
 
 			waterCoordinates.add(new Vector2(i * step, MainActivity.getHalfHeight()));
 		}
 
-		waterCoordinates.add(new Vector2(MainActivity.getWidth(), MainActivity.getHeight()));
+		waterCoordinates.add(new Vector2(MainActivity.getWidth(), 0));
 
 		// Separate coordinates
 		vertexX1 = new float[waterCoordinates.size()];
@@ -101,7 +102,7 @@ public class WaterPolygon extends Polygon {
 	}
 	
 	private float getHeightOnWave(float angle){
-		float vertexHeight = (float) (MainActivity.getHeight() - waterLevel + waveHeight * Math.sin(angle));
+		float vertexHeight = (float) (waterLevel - waveHeight * Math.sin(angle));
 		return vertexHeight;
 	}
 	

@@ -96,21 +96,16 @@ public class SceneMainMenu extends MhyhreScene {
 		};
 
 		// Calculating positions
-		float OffsetX = (MainActivity.getHalfWidth() * 1.5f) - (mSpriteItem1.getWidth() / 2.0f);
+		float OffsetX = MainActivity.getHalfWidth() * 1.5f;
 		float OffsetY = MainActivity.getHeight() / 6.0f;
 
-		mSpriteItem1.setPosition(OffsetX, OffsetY * 1);
+		mSpriteItem1.setPosition(OffsetX, OffsetY * 3);
 		mSpriteItem2.setPosition(OffsetX, OffsetY * 2);
-		mSpriteItem3.setPosition(OffsetX, OffsetY * 3);
+		mSpriteItem3.setPosition(OffsetX, OffsetY * 1);
 
-		float tx = mSpriteItem1.getX() + mSpriteItem1.getWidth() / 2;
-		float ty1 = mSpriteItem1.getY() + mSpriteItem1.getHeight() / 2;
-		float ty2 = mSpriteItem2.getY() + mSpriteItem2.getHeight() / 2;
-		float ty3 = mSpriteItem3.getY() + mSpriteItem3.getHeight() / 2;
-
-		mCaptionItem1.setPosition(tx - mCaptionItem1.getWidth() / 2, ty1 - mCaptionItem1.getHeight() / 2);
-		mCaptionItem2.setPosition(tx - mCaptionItem2.getWidth() / 2, ty2 - mCaptionItem2.getHeight() / 2);
-		mCaptionItem3.setPosition(tx - mCaptionItem3.getWidth() / 2, ty3 - mCaptionItem3.getHeight() / 2);
+		mCaptionItem1.setPosition(mSpriteItem1);
+		mCaptionItem2.setPosition(mSpriteItem2);
+		mCaptionItem3.setPosition(mSpriteItem3);
 
 		// Attaching
 
@@ -126,8 +121,6 @@ public class SceneMainMenu extends MhyhreScene {
 		registerTouchArea(mSpriteItem1);
 		registerTouchArea(mSpriteItem2);
 		registerTouchArea(mSpriteItem3);
-
-		OffsetX += (mSpriteItem1.getWidth() / 2.0f);
 
 		// Vibro, Sound enable/disable
 
@@ -148,7 +141,7 @@ public class SceneMainMenu extends MhyhreScene {
 				return true;
 			}
 		};
-		mSpriteVibro.setPosition(OffsetX - (mSpriteVibro.getWidth() + 20), OffsetY * 5);
+		mSpriteVibro.setPosition(OffsetX/4 - 50, OffsetY * 1);
 		attachChild(mSpriteVibro);
 		registerTouchArea(mSpriteVibro);
 
@@ -170,7 +163,7 @@ public class SceneMainMenu extends MhyhreScene {
 				return true;
 			}
 		};
-		mSpriteSound.setPosition(OffsetX + 20, OffsetY * 5);
+		mSpriteSound.setPosition(OffsetX/4 + 50, OffsetY * 1);
 		attachChild(mSpriteSound);
 		registerTouchArea(mSpriteSound);
 

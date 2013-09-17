@@ -123,7 +123,7 @@ public class SceneGame extends MhyhreScene {
 				return true;
 			}
 		};
-		spriteMoveLeft.setPosition(40, MainActivity.getHeight() - (50 + spriteMoveLeft.getHeight() / 2));
+		spriteMoveLeft.setPosition(60, 50);
 		spriteMoveLeft.setVisible(true);
 		attachChild(spriteMoveLeft);
 		registerTouchArea(spriteMoveLeft);
@@ -143,7 +143,7 @@ public class SceneGame extends MhyhreScene {
 				return true;
 			}
 		};
-		spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, MainActivity.getHeight() - (50 + spriteMoveRight.getHeight() / 2));
+		spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, 50);
 		spriteMoveRight.setVisible(true);
 		attachChild(spriteMoveRight);
 		registerTouchArea(spriteMoveRight);
@@ -155,7 +155,7 @@ public class SceneGame extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 					MainActivity.vibrate(30);
 
-					BulletUnit bullet = new BulletUnit(boat.getX() + boat.getWidth() - 15, boat.getY());
+					BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
 					bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
 
 					mBullets.add(bullet);
@@ -165,7 +165,7 @@ public class SceneGame extends MhyhreScene {
 			}
 		};
 
-		spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), MainActivity.getHeight() - (50 + spriteFire.getHeight() / 2));
+		spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
 		spriteFire.setVisible(true);
 		attachChild(spriteFire);
 		registerTouchArea(spriteFire);
@@ -307,17 +307,20 @@ public class SceneGame extends MhyhreScene {
 			boatSpeed = 0;
 
 		boat.setX(boat.getX() + boatSpeed);
-		boat.setY(water.getYPositionOnWave(boat.getX() + boat.getWidth() / 2) - boat.getHeight() / 2 - 5);
+		boat.setY(water.getYPositionOnWave(boat.getX()) + 5);
 		boat.setRotation(water.getAngleOnWave(boat.getX()) / 2.0f);
 	}
 
 	private void updateHealthIndicator() {
 
+		healthIndicator.setY(MainActivity.getHeight());
+		float height = - (10 + MainActivity.Res.getTextureRegion("heart").getHeight());
+		
 		for (int i = 0; i < maxHealth; i++) {
 			if (i < currentHealth) {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
+				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
 			} else {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, 10, 32, 32, 0, 1, 1, 1, 1);
+				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
 			}
 		}
 		healthIndicator.submit();
@@ -332,7 +335,7 @@ public class SceneGame extends MhyhreScene {
 
 		for (Enemy enemy : mEnemies.getEnemiesList()) {
 
-			if (collideCircleByCircle(boat, 20, enemy.getCX(), enemy.getCY(), 20)) {
+			if (collideCircleByCircle(boat, 20, enemy.getX(), enemy.getY(), 20)) {
 
 				if (enemy.isDied() == false) {
 
@@ -359,7 +362,7 @@ public class SceneGame extends MhyhreScene {
 
 			for (Enemy enemy : mEnemies.getEnemiesList()) {
 
-				if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getCX(), enemy.getCY(), 25)) {
+				if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getX(), enemy.getY(), enemy.getRadius())) {
 
 					if (enemy.isDied() == false) {
 
@@ -379,13 +382,13 @@ public class SceneGame extends MhyhreScene {
 				}
 			}
 
-			if (bullet.getY() - 1 > water.getYPositionOnWave(bullet.getX())) {
+			if (bullet.getY() < water.getYPositionOnWave(bullet.getX())) {
 				bullet.setSink(true);
 			}
 
 			bullet.update();
 
-			if (bullet.getY() > MainActivity.getHeight() || bullet.getY() < 0) {
+			if (bullet.getY() < 0) {
 				mBullets.remove(i);
 				i--;
 				continue;
@@ -404,6 +407,7 @@ public class SceneGame extends MhyhreScene {
 			}
 			if (bullet.getBoom() != -1) {
 				bulletBatch.draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2, bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
+	
 			}
 		}
 

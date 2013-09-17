@@ -5,7 +5,7 @@ import mhyhre.lightrabbit.game.EnemyType;
 
 public class SharkUnit extends Enemy {
 
-	public static final float sSinkSpeed = 1.0f;
+	public static final float sSinkSpeed = -1.0f;
 	public static final float sSpeed = 1;
 	
 	float bright;
@@ -17,6 +17,7 @@ public class SharkUnit extends Enemy {
 		super(EnemyType.SHARK, 40);
 		bright = 1;
 		setSize(64, 64);
+		setRadius(25);
 	}
 	
 	public float getBright(){
@@ -46,7 +47,7 @@ public class SharkUnit extends Enemy {
 			}
 		}else{
 			mX -= sSpeed;	
-			mY = (float) (mWaterLevel + 20 * Math.sin(mX/(Math.PI*4)));
+			mY = (float) (mWaterLevel - 20 * Math.sin(mX/(Math.PI*4)));
 		}
 	}
 

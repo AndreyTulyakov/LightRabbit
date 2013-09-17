@@ -7,29 +7,50 @@ import mhyhre.lightrabbit.R;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
-import org.andengine.util.color.Color;
+import org.andengine.util.adt.color.Color;
+
+import android.util.Log;
+
 
 public class SceneGameLoading extends MhyhreScene {
 
 	private Rectangle mRotationRect;
 	private Text mCaption;
 
-	private boolean mTouchDown = false;
 	private boolean mLoaded = false;
 
 	public SceneGameLoading() {
 		setBackgroundEnabled(false);
 		
-		Rectangle backRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager());
+		Rectangle backRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()){
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+					
+					if (mLoaded) {
+
+						MainActivity.getRootScene().SetState(SceneStates.Game);
+						
+						setLoaded(false);
+					}
+					
+					Log.i(MainActivity.DebugID, "SceneGameLoading: Start game");
+					MainActivity.vibrate(30);
+				}
+				return true;
+			}
+		};
+		backRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		backRect.setColor(0.0f,0.0f,0.1f,0.5f);
 		attachChild(backRect);
+		registerTouchArea(backRect);
 
-		mCaption = new Text(0, 0, MainActivity.Res.getFont("Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
-		mCaption.setPosition(10, MainActivity.getHeight() - (mCaption.getHeight() + 10));
+		mCaption = new Text(0, 0, MainActivity.Res.getFont("Furore"), MainActivity.Me.getString(R.string.tapForContinue), 100, MainActivity.Me.getVertexBufferObjectManager());
+		mCaption.setPosition(10 + mCaption.getWidth()/2, 30 + mCaption.getHeight()/2);
 
-		float h = mCaption.getHeight() + 20;
+		float h = mCaption.getHeight() + 40;
 
-		mRotationRect = new Rectangle(0, MainActivity.getHeight() - h, MainActivity.getWidth(), h, MainActivity.Me.getVertexBufferObjectManager());
+		mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mCaption.getY(), MainActivity.getWidth(), h, MainActivity.Me.getVertexBufferObjectManager());
 		mRotationRect.setColor(Color.WHITE);
 
 		attachChild(mRotationRect);
@@ -44,36 +65,16 @@ public class SceneGameLoading extends MhyhreScene {
 	protected void onManagedUpdate(float pSecondsElapsed) {
 
 		if (mLoaded) {
-			rectAlpha += 0.05f;
+			rectAlpha += 0.03f;
 			if (rectAlpha >= Math.PI) {
 				rectAlpha = 0;
 			}
-			mRotationRect.setAlpha((float) Math.cos(rectAlpha));
+			mRotationRect.setAlpha((float)(1.0f - Math.sin(rectAlpha)));
 		} else {
 			rectAlpha = 0;
 			mRotationRect.setAlpha(1);
 		}
 		super.onManagedUpdate(pSecondsElapsed);
-	}
-
-	@Override
-	public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
-
-		if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-			mTouchDown = true;
-		}
-
-		if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
-			if (mTouchDown && mLoaded) {
-				mTouchDown = false;
-
-				setLoaded(false);
-
-				MainActivity.getRootScene().SetState(SceneStates.Game);
-			}
-		}
-
-		return super.onSceneTouchEvent(pSceneTouchEvent);
 	}
 
 	public boolean isLoaded() {
@@ -83,10 +84,5 @@ public class SceneGameLoading extends MhyhreScene {
 	public void setLoaded(boolean mLoaded) {
 		this.mLoaded = mLoaded;
 
-		if (mLoaded) {
-			mCaption.setText(MainActivity.Me.getString(R.string.tapForContinue));
-		} else {
-			mCaption.setText(MainActivity.Me.getString(R.string.loading));
-		}
 	}
 }

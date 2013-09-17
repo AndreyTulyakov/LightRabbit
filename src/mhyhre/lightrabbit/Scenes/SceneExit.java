@@ -71,22 +71,22 @@ public class SceneExit extends MhyhreScene {
 		};
 
 		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strQExit, MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionItem1.setPosition(MainActivity.getHalfWidth() - mCaptionItem1.getWidth() / 2, MainActivity.getHalfHeight() - mCaptionItem1.getHeight() / 2);
+		mCaptionItem1.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
 		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 120, MainActivity.Me.getVertexBufferObjectManager());
+		topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		topRect.setColor(0.5f, 0.5f, 0.6f);
 		topRect.setHeight(mCaptionItem1.getHeight() + 80);
-		topRect.setY(mCaptionItem1.getY() + mCaptionItem1.getHeight() / 2 - topRect.getHeight() / 2);
 		attachChild(topRect);
 
 		mExitButtonSprite.setColor(1.0f, 0.8f, 0.8f);
 		mBackButtonSprite.setColor(0.8f, 0.8f, 1.0f);
 
 		float OffsetX = MainActivity.getWidth() / 3.0f;
-		float OffsetY = MainActivity.getHeight() - mExitButtonSprite.getHeight() * 1.5f;
+		float OffsetY = mExitButtonSprite.getHeight() * 1.5f;
 
-		mBackButtonSprite.setPosition(OffsetX * 1 - mBackButtonSprite.getWidth() / 2, OffsetY);
-		mExitButtonSprite.setPosition(OffsetX * 2 - mExitButtonSprite.getWidth() / 2, OffsetY);
+		mBackButtonSprite.setPosition(OffsetX * 1, OffsetY);
+		mExitButtonSprite.setPosition(OffsetX * 2, OffsetY);
 
 		attachChild(mExitButtonSprite);
 		registerTouchArea(mExitButtonSprite);
@@ -96,9 +96,8 @@ public class SceneExit extends MhyhreScene {
 		mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem1, MainActivity.Me.getVertexBufferObjectManager());
 		mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem2, MainActivity.Me.getVertexBufferObjectManager());
 
-		mCaptionItem2.setPosition(mBackButtonSprite.getX() + mBackButtonSprite.getWidth() / 2 - mCaptionItem2.getWidth() / 2, mBackButtonSprite.getY() + mBackButtonSprite.getHeight() / 2 - mCaptionItem2.getHeight() / 2);
-
-		mCaptionItem3.setPosition(mExitButtonSprite.getX() + mExitButtonSprite.getWidth() / 2 - mCaptionItem3.getWidth() / 2, mExitButtonSprite.getY() + mExitButtonSprite.getHeight() / 2 - mCaptionItem3.getHeight() / 2);
+		mCaptionItem2.setPosition(mBackButtonSprite);
+		mCaptionItem3.setPosition(mExitButtonSprite);
 
 		attachChild(mCaptionItem1);
 		attachChild(mCaptionItem2);

@@ -6,7 +6,7 @@ import org.andengine.entity.Entity;
 import org.andengine.entity.scene.background.IBackground;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.util.color.Color;
+import org.andengine.util.adt.color.Color;
 
 public class SkyManager extends Entity {
 
@@ -71,17 +71,18 @@ public class SkyManager extends Entity {
 		float radius = 250;
 
 		float dx = (float) (1.3f * radius * Math.cos(mTime));
-		float dy = (float) (radius * Math.sin(mTime));
+		float dy = -(float) (radius * Math.sin(mTime));
 
 		spriteSun.setPosition(MainActivity.getHalfWidth() + dx, MainActivity.getHalfHeight() + dy);
 		spriteMoon.setPosition(MainActivity.getHalfWidth() - dx, MainActivity.getHalfHeight() - dy);
 
 		if (dy < 100 && dy > 0) {
-			spriteMoon.setAlpha( dy / 100.0f);
+			spriteSun.setAlpha( dy / 100.0f);
 		}
 		
 		if (dy > -100 && dy < 0) {
-			spriteSun.setAlpha( -dy / 100.0f);
+			
+			spriteMoon.setAlpha( -dy / 100.0f);
 		}
 
 		if (spriteSun.getAlpha() > 1)

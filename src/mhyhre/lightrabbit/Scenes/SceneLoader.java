@@ -40,7 +40,6 @@ public class SceneLoader extends MhyhreScene {
 	public Rectangle TapRect;
 	public Text textGameLogo;
 
-	private boolean Loaded = false;
 	private boolean Clicked = false;
 
 	Random mRandom = new Random();
@@ -55,13 +54,13 @@ public class SceneLoader extends MhyhreScene {
 
 		// Tap text
 		String TextMessage = MainActivity.Me.getString(R.string.textTap);
-		mCaptionTapScreen = new Text(320, 400, MainActivity.Res.getFont("Furore"), TextMessage, MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() - mCaptionTapScreen.getWidth() / 2, (MainActivity.getHeight() / 5) * 4);
+		mCaptionTapScreen = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextMessage, MainActivity.Me.getVertexBufferObjectManager());
+		mCaptionTapScreen.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 5) * 1);
 		mCaptionTapScreen.setVisible(false);
 		mCaptionTapScreen.setAlpha(0.0f);
 
 		textGameLogo = new Text(0, 0, MainActivity.Res.getFont("Furore48"), MainActivity.Me.getString(R.string.app_name), MainActivity.Me.getVertexBufferObjectManager());
-		textGameLogo.setPosition(MainActivity.getHalfWidth() - textGameLogo.getWidth() / 2, MainActivity.getHalfHeight() - textGameLogo.getHeight() / 2);
+		textGameLogo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		textGameLogo.setAlpha(0.0f);
 		
 
@@ -78,6 +77,7 @@ public class SceneLoader extends MhyhreScene {
 				return true;
 			}
 		};
+		TapRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		TapRect.setVisible(false);
 		TapRect.setAlpha(AlphaTime3);
 		TapRect.setColor(0, 0, 0.1f);
@@ -85,8 +85,6 @@ public class SceneLoader extends MhyhreScene {
 		attachChild(textGameLogo);
 		attachChild(mCaptionTapScreen);
 		attachChild(TapRect);
-
-		Loaded = true;
 
 		// Alpha Timer
 		registerUpdateHandler(new TimerHandler(0.02f, true, new ITimerCallback() {
@@ -138,23 +136,6 @@ public class SceneLoader extends MhyhreScene {
 			}
 		}));
 
-	}
-
-
-	@Override
-	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
-
-		return super.onSceneTouchEvent(pSceneTouchEvent);
-	}
-
-	@Override
-	protected void onManagedUpdate(float pSecondsElapsed) {
-
-		if (Loaded) {
-
-		}
-
-		super.onManagedUpdate(pSecondsElapsed);
 	}
 
 }

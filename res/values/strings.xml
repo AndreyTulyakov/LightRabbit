@@ -15,6 +15,6 @@
     <string name="loading">Загрузка...</string>
     <string name="tapForContinue">Нажмите для продолжения...</string>
     <string name="youWasDied">Вы умерли</string>
-    <string name="passLevel">Ввы прошли уровень!</string>
+    <string name="passLevel">Вы прошли уровень!</string>
 
 </resources>

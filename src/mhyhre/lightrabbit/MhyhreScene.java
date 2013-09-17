@@ -20,12 +20,12 @@ public class MhyhreScene extends CameraScene {
 		Hide();
 	}
 	
-	final public void Show() {
+	public void Show() {
 		setVisible(true);
 		setIgnoreUpdate(false);
 	}
 
-	final public void Hide() {
+	public void Hide() {
 		setVisible(false);
 		setIgnoreUpdate(true);
 	}

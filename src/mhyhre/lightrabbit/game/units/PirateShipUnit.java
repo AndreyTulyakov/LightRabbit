@@ -6,7 +6,7 @@ import mhyhre.lightrabbit.game.EnemyType;
 public class PirateShipUnit extends Enemy {
 
 
-	public static final float sSinkSpeed = 1.0f;
+	public static final float sSinkSpeed = -1.0f;
 	public static final float sSpeed = 0.3f;
 	
 	float bright;
@@ -17,6 +17,7 @@ public class PirateShipUnit extends Enemy {
 		
 		setSize(128, 75);
 		bright=1;
+		setRadius(45);
 	}
 	
 	public float getBright(){
@@ -44,7 +45,7 @@ public class PirateShipUnit extends Enemy {
 			}
 		}else{
 			mX -= sSpeed;	
-			mY = (float) (mWaterLevel-65);
+			mY = (float) (mWaterLevel);
 		}
 	}
 

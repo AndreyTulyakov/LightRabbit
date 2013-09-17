@@ -40,7 +40,7 @@ final public class CloudsManager extends SpriteBatch {
 			
 			cloud = new CloudUnit();	
 			cloud.type = getNextCloudType();
-			cloud.SetPosition( mCloudStep * i, mSkySeparator + mSkySeparator * (TYPE_COUNTER%2));
+			cloud.SetPosition( mCloudStep * i, mSkySeparator*5.5f - mSkySeparator * (TYPE_COUNTER%2));
 			mClouds.add(cloud);
 		}
 	}
@@ -64,7 +64,7 @@ final public class CloudsManager extends SpriteBatch {
 			
 			if(cloud.PosX < -mCloudStep){		
 				cloud.type = getNextCloudType();
-				cloud.SetPosition( mCloudStep * (this.mCapacity-1), mSkySeparator + mSkySeparator * (TYPE_COUNTER%2));
+				cloud.SetPosition( mCloudStep * (this.mCapacity-1), mSkySeparator*6 - mSkySeparator * (TYPE_COUNTER%2));
 			}
 		}
 		

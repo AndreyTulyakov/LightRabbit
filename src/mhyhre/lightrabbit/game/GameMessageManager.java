@@ -20,7 +20,7 @@ public class GameMessageManager extends MhyhreScene  {
 	public GameMessageManager() {
 		setBackgroundEnabled(false);
 		
-		clickRect = new Rectangle(100, 100, MainActivity.getWidth()-200, MainActivity.getHeight()-200, MainActivity.Me.getVertexBufferObjectManager()) {
+		clickRect = new Rectangle(0, 0, MainActivity.getWidth()-200, MainActivity.getHeight()-200, MainActivity.Me.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -34,6 +34,7 @@ public class GameMessageManager extends MhyhreScene  {
 				return true;
 			}
 		};
+		clickRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		clickRect.setColor(0.9f, 0.9f, 1.0f,0.5f);
 		registerTouchArea(clickRect);
 		
@@ -55,7 +56,7 @@ public class GameMessageManager extends MhyhreScene  {
 		setIgnoreUpdate(false);
 		
 		textMessage.setText(text);
-		textMessage.setPosition(MainActivity.getHalfWidth() - textMessage.getWidth()/2, MainActivity.getHalfHeight() - textMessage.getHeight()/2);
+		textMessage.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		
 		activeMessage = true;
 		

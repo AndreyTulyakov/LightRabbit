@@ -112,6 +112,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 		HalfHeight = SCREEN_HEIGHT / 2.0f;
 
 		camera = new Camera(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+		
 
 		if (BuildConfig.DEBUG)
 			Log.i(DebugID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);

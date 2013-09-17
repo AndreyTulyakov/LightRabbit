@@ -34,20 +34,22 @@ public class SceneAbout extends MhyhreScene {
 	private Text textBack;
 
 	public SceneAbout() {
+		
 		setBackgroundEnabled(true);
 		setBackground(new Background(0.9f, 0.9f, 1.0f));
 
 		String strText1 = MainActivity.Me.getString(R.string.textAbout);
 		textTop = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
-		textTop.setPosition(MainActivity.getHalfWidth() - textTop.getWidth() / 2.0f, 40);
+		textTop.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight()-40);
 
-		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 80, MainActivity.Me.getVertexBufferObjectManager());
+		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 1, MainActivity.Me.getVertexBufferObjectManager());
 		topRect.setColor(0.5f, 0.5f, 0.6f);
 		topRect.setHeight(40 + 40 + textTop.getFont().getLineHeight());
+		topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight()-topRect.getHeight()/2);
 
 		String strText2 = loadInfo("about.text");
 		textInfo = new Text(0, 0, MainActivity.Res.getFont("Furore"), strText2, MainActivity.Me.getVertexBufferObjectManager());
-		textInfo.setPosition(MainActivity.getHalfWidth() - textInfo.getWidth() / 2.0f, topRect.getHeight() + 40);
+		textInfo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
 		attachChild(topRect);
 		attachChild(textTop);
@@ -65,10 +67,11 @@ public class SceneAbout extends MhyhreScene {
 				return true;
 			}
 		};
-		mBackButtonSprite.setPosition(MainActivity.getHalfWidth() - mBackButtonSprite.getWidth() / 2, MainActivity.getHeight() - ((mBackButtonSprite.getHeight() / 2) + 50));
+		
+		mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
 
 		textBack = new Text(0, 0, MainActivity.Res.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
-		textBack.setPosition(MainActivity.getHalfWidth() - textBack.getWidth() / 2, MainActivity.getHeight() - ((textBack.getHeight() / 2) + 50));
+		textBack.setPosition(mBackButtonSprite);
 
 		attachChild(mBackButtonSprite);
 		registerTouchArea(mBackButtonSprite);

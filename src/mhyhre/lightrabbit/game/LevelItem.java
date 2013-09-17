@@ -21,11 +21,11 @@ public class LevelItem {
 		mLocked = false;
 	}
 	
-	public float getLeftTopX(){
+	public float getLeftX(){
 		return mX - mWidth/2;
 	}
 	
-	public float getLeftTopY(){
+	public float getDownY(){
 		return mY - mHeight/2;
 	}
 

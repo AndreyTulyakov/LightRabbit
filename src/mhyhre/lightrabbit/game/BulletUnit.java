@@ -5,7 +5,7 @@ import org.andengine.entity.primitive.Vector2;
 
 public class BulletUnit extends Entity {
 
-	public static final float sSinkSpeed = 1.0f;
+	public static final float sSinkSpeed = -1.0f;
 	public static final float sGravity = -0.15f;
 	
 	private Vector2 mAcceleration;
@@ -38,7 +38,7 @@ public class BulletUnit extends Entity {
 
 	public void setAccelerationByAngle(float angleGrad, float power) {
 		float radAngle = (float) Math.toRadians(angleGrad);
-		mAcceleration.set((float) Math.cos(radAngle), (float) Math.sin(radAngle));
+		mAcceleration.set((float) Math.cos(radAngle), (float) -Math.sin(radAngle));
 		mAcceleration.mul(power);	
 	}
 	
@@ -72,7 +72,7 @@ public class BulletUnit extends Entity {
 			mX += mAcceleration.x;
 			mY += mAcceleration.y;
 			
-			mAcceleration.y -= sGravity;
+			mAcceleration.y += sGravity;
 		}
 	}
 	

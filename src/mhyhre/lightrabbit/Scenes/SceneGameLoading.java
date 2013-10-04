@@ -15,7 +15,7 @@ import android.util.Log;
 public class SceneGameLoading extends MhyhreScene {
 
 	private Rectangle mRotationRect;
-	private Text mCaption;
+	private Text mTextPress;
 	private Text mLevelNumber;
 
 	private boolean mLoaded = false;
@@ -42,23 +42,23 @@ public class SceneGameLoading extends MhyhreScene {
 			}
 		};
 		backRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-		backRect.setColor(0.0f,0.0f,0.1f,0.8f);
+		backRect.setColor(0.0f,0.0f,0.1f,0.75f);
 		attachChild(backRect);
 		registerTouchArea(backRect);
 
-		mCaption = new Text(0, 0, MainActivity.Res.getFont("Furore"), MainActivity.Me.getString(R.string.tapForContinue), 100, MainActivity.Me.getVertexBufferObjectManager());
-		mCaption.setPosition(10 + mCaption.getWidth()/2, 30 + mCaption.getHeight()/2);
+		mTextPress = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100, MainActivity.Me.getVertexBufferObjectManager());
+		mTextPress.setPosition(MainActivity.getHalfWidth(), 30 + mTextPress.getHeight()/2);
 
 		mLevelNumber = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
 		mLevelNumber.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		
-		float h = mCaption.getHeight() + 40;
+		float h = mTextPress.getHeight() + 40;
 
-		mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mCaption.getY(), MainActivity.getWidth(), h, MainActivity.Me.getVertexBufferObjectManager());
-		mRotationRect.setColor(Color.WHITE);
+		mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mTextPress.getY(), MainActivity.getWidth(), h, MainActivity.Me.getVertexBufferObjectManager());
+		mRotationRect.setColor(Color.BLACK);
 
 		attachChild(mRotationRect);
-		attachChild(mCaption);
+		attachChild(mTextPress);
 		attachChild(mLevelNumber);
 		
 		setLoaded(false);
@@ -74,11 +74,9 @@ public class SceneGameLoading extends MhyhreScene {
 			if (rectAlpha >= Math.PI) {
 				rectAlpha = 0;
 			}
-			mRotationRect.setAlpha((float)(1.0f - Math.sin(rectAlpha)));
-		} else {
-			rectAlpha = 0;
-			mRotationRect.setAlpha(1);
+			mTextPress.setAlpha((float)(1.0f - Math.sin(rectAlpha)));
 		}
+		
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 

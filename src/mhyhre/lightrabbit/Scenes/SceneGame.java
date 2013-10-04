@@ -21,11 +21,11 @@ import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
-import mhyhre.lightrabbit.game.GameEvent;
-import mhyhre.lightrabbit.game.GameEventManager;
 import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
+import mhyhre.lightrabbit.game.events.Event;
+import mhyhre.lightrabbit.game.events.EventManager;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -53,7 +53,7 @@ public class SceneGame extends MhyhreScene {
 	CloudsManager mClouds;
 	SkyManager mSkyes;
 	EnemiesManager mEnemies;
-	GameEventManager mEventManager;
+	EventManager mEventManager;
 	GameMessageManager mMessageManager;
 
 	private WaterPolygon water;
@@ -79,7 +79,7 @@ public class SceneGame extends MhyhreScene {
 
 		createGUI();
 
-		mEventManager = new GameEventManager();
+		mEventManager = new EventManager();
 
 
 		Log.i(MainActivity.DebugID, "Scene game created");
@@ -261,7 +261,7 @@ public class SceneGame extends MhyhreScene {
 		timeCounter += pSecondsElapsed;
 		float halfRange = 0.050f;
 
-		GameEvent gameEvent = mEventManager.getCurrentEvent();
+		Event gameEvent = mEventManager.getCurrentEvent();
 
 		if (mMessageManager.isActiveMessage() == false) {
 
@@ -275,7 +275,7 @@ public class SceneGame extends MhyhreScene {
 				}
 			} else {
 
-				if (timeCounter > (gameEvent.getStartTime() * 0.1f - halfRange)) {
+				if (timeCounter > (gameEvent.getIntArg() - halfRange)) {
 
 					if (mEnemies.isWaitState()) {
 						timeCounter = 0;

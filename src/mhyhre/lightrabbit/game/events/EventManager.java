@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.events;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,19 +11,19 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class GameEventManager {
+public class EventManager {
 
-	List<GameEvent> events = null;
+	List<Event> events = null;
 	
-	public GameEventManager() {
-		events = new LinkedList<GameEvent>();
+	public EventManager() {
+		events = new LinkedList<Event>();
 	}
 	
 	public void loadEvents(int number){
 		events.clear();
 		
 		if(number >= 0){
-			String filename = "maps/level" + number + ".lrmap";
+			String filename = "maps/map" + number + ".lrmap";
 			loadFromXmlFile(filename);
 		}
 
@@ -53,7 +53,7 @@ public class GameEventManager {
 		return events.size();
 	}
 	
-	public GameEvent getCurrentEvent(){
+	public Event getCurrentEvent(){
 		
 		if(events.size() > 0){
 			return events.get(0);
@@ -62,7 +62,7 @@ public class GameEventManager {
 		return null;
 	}
 	
-	public List<GameEvent> getEventsList(){
+	public List<Event> getEventsList(){
 		return events;
 	}
 	
@@ -96,11 +96,14 @@ public class GameEventManager {
 	{
 		
         int eventType = parser.getEventType();
-        GameEvent currentEvent = null;
+        Event currentEvent = null;
 
         while (eventType != XmlPullParser.END_DOCUMENT){
         	
             String name = null;
+            
+            
+            /*
             switch (eventType){
             
                 case XmlPullParser.START_DOCUMENT:
@@ -109,11 +112,12 @@ public class GameEventManager {
                     
                 case XmlPullParser.START_TAG:
                 	
+                	
                     name = parser.getName();
                     
                     if (name.equals(new String("triger"))){
                     	
-                        currentEvent = new GameEvent();
+                        currentEvent = new Event();
                         String id = parser.getAttributeValue(null, "id");
                         currentEvent.setType(id);
 
@@ -137,6 +141,7 @@ public class GameEventManager {
                     	events.add(currentEvent);
                     } 
             }
+            */
             eventType = parser.next();
         }
 

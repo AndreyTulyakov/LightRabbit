@@ -21,7 +21,6 @@ import android.util.Log;
 
 public class SceneRoot extends Scene {
 
-	// STATES
 	private static SceneStates state = SceneStates.None;
 
 	public SceneLoader mSceneLoader;
@@ -36,7 +35,6 @@ public class SceneRoot extends Scene {
 
 	public SceneRoot() {
 		setBackgroundEnabled(false);
-
 	}
 
 	public void Initialize() {
@@ -46,9 +44,6 @@ public class SceneRoot extends Scene {
 		attachChild(mSceneLoader);
 
 		SetState(SceneStates.Splash);
-		// Thread for menu loading
-
-		Log.i(MainActivity.DebugID, "Splash Timer");
 
 		MainActivity.Res.loadAtlases();
 		MainActivity.Res.loadFonts();
@@ -74,8 +69,6 @@ public class SceneRoot extends Scene {
 		Preloaded = true;
 		mSceneLoader.mCaptionTapScreen.setVisible(true);
 		mSceneLoader.registerTouchArea(mSceneLoader.TapRect);
-
-		// TODO add timer ~1 sec for more smooth cloud loader
 
 	}
 
@@ -130,7 +123,7 @@ public class SceneRoot extends Scene {
 				}
 				
 				mSceneGame = new SceneGame();
-				mSceneGame.load(mSceneLevelSelector.getLastLevelSelection());
+				//mSceneGame.load(mSceneLevelSelector.getLastLevelSelection());
 				mSceneGame.onManagedUpdate(0);
 				mSceneGame.pause();
 				

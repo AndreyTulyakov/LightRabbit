@@ -42,11 +42,10 @@ public class SceneLoader extends MhyhreScene {
 
 	private boolean Clicked = false;
 
-	Random mRandom = new Random();
 
 	public SceneLoader() {
 
-		backGround = new Background(0.0f, 0.0f, 0.0f);
+		backGround = new Background(0.2f, 0.3f, 1.0f);
 		setBackground(backGround);
 		setBackgroundEnabled(true);
 
@@ -71,7 +70,7 @@ public class SceneLoader extends MhyhreScene {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN && !Clicked) {
 					unregisterTouchArea(TapRect);
 					Clicked = true;
-					Log.i(MainActivity.DebugID, "Splash Screen [ Tap ] button");
+					Log.i(MainActivity.DEBUG_ID, "Splash Screen [ Tap ] button");
 					MainActivity.vibrate(30);
 				}
 				return true;
@@ -80,7 +79,7 @@ public class SceneLoader extends MhyhreScene {
 		TapRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 		TapRect.setVisible(false);
 		TapRect.setAlpha(AlphaTime3);
-		TapRect.setColor(0, 0, 0.1f);
+		TapRect.setColor(0f, 0.2f, 0.0f);
 
 		attachChild(textGameLogo);
 		attachChild(mCaptionTapScreen);
@@ -105,9 +104,6 @@ public class SceneLoader extends MhyhreScene {
 							textGameLogo.setAlpha(0.0f);
 						} else {
 							textGameLogo.setAlpha(AlphaTime2);
-
-							backGround.setColor(0.1f * AlphaTime2, 0.2f * AlphaTime2, 0.7f * AlphaTime2);
-
 						}
 					}
 

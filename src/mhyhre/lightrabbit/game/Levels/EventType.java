@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game.events;
+package mhyhre.lightrabbit.game.Levels;
 
 public enum EventType {
 	

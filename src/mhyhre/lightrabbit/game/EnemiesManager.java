@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.events.Event;
+import mhyhre.lightrabbit.game.Levels.Event;
 import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
 import mhyhre.lightrabbit.game.units.SharkUnit;
@@ -117,7 +117,7 @@ public class EnemiesManager extends SpriteBatch {
 		if(mEnemies.size() < ENEMIES_MAX_COUND && waitState == false ){
 			
 
-			Log.i(MainActivity.DebugID, "addNewEnemy:" + event.getType().getValue() + " Enemy count:" + mEnemies.size());
+			Log.i(MainActivity.DEBUG_ID, "addNewEnemy:" + event.getType().getValue() + " Enemy count:" + mEnemies.size());
 	
 /*			
 			

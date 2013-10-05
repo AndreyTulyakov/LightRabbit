@@ -7,6 +7,7 @@ import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.game.LevelItem;
+import mhyhre.lightrabbit.game.Levels.LevelsList;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.batch.SpriteBatch;
@@ -26,17 +27,26 @@ public class SceneLevelSelector extends MhyhreScene {
 
 	private Text textCaption;
 
-	private final int LEVELS_COUNT = 8;
-	private final float VERTICAL_DISTANCE = 50;
+	private int levelsCount = 0;
 	private final float HORIZONTAL_DISTANCE = 80;
+	
+	
+	LevelsList levelsList;
+	
+	
 
 	ITextureRegion levelCellRegion;
 
 	public SceneLevelSelector() {
+		
+		levelsList = new LevelsList(MainActivity.MAPS_LIST_FILENAME);
+		levelsList.printList();
+		levelsCount = levelsList.getLevelsCount();
+		
 		setBackgroundEnabled(true);
 		setBackground(new Background(0.5f, 0.6f, 0.9f));
 
-		iconsBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("User_Interface"), LEVELS_COUNT, MainActivity.Me.getVertexBufferObjectManager());
+		iconsBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("User_Interface"), levelsCount, MainActivity.Me.getVertexBufferObjectManager());
 		attachChild(iconsBatch);
 
 		levelCellRegion = MainActivity.Res.getTextureRegion("LevelCell");
@@ -46,7 +56,7 @@ public class SceneLevelSelector extends MhyhreScene {
 		attachChild(textCaption);
 
 		configureLevelsItem();
-		comfigureLevelsCaption();
+		configureLevelsCaption();
 
 	}
 	
@@ -54,51 +64,54 @@ public class SceneLevelSelector extends MhyhreScene {
 		return lastLevelSelection;
 	}
 
-	private void comfigureLevelsCaption() {
-		
-		for (int j = 0; j < 2; j++) {
-			for (int i = 0; i < LEVELS_COUNT/2; i++) {
+	private void configureLevelsCaption() {
+
+			for (int i = 0; i < levelsCount; i++) {
+
+				LevelItem item = mItems.get(i);
 				
-				int number = j*LEVELS_COUNT/2 + i;
-				LevelItem item = mItems.get(number);
-				
-				Text caption = new Text(0, 0, MainActivity.Res.getFont("Furore"), "" + (number+1), MainActivity.Me.getVertexBufferObjectManager());
+				Text caption = new Text(0, 0, MainActivity.Res.getFont("Furore"), "" + (i+1), MainActivity.Me.getVertexBufferObjectManager());
 				caption.setPosition(item.getX(), item.getY());
 				attachChild(caption);
+				
+				Text desc = new Text(0, 0, MainActivity.Res.getFont("Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+				desc.setPosition(item.getX(), item.getY() - (10 + MainActivity.Res.getFont("Furore").getLineHeight()));
+				desc.setText(levelsList.getPageCaption(levelsList.getLevel(i).pageId));
+				
+				attachChild(desc);
 			}
-		}
+
 	}
 
 	private void configureLevelsItem() {
 		
 		
 		// Positioning
+		float hStep = 40;
 		float xStep = (levelCellRegion.getWidth() + HORIZONTAL_DISTANCE);
-		float yStep = (levelCellRegion.getHeight()+VERTICAL_DISTANCE);
-		float xStart = MainActivity.getHalfWidth() - (xStep * ((LEVELS_COUNT/2) -1)/2);
-		float yStart = MainActivity.getHalfHeight() - yStep/2 - 50;
+		float xStart = MainActivity.getHalfWidth() - (xStep * ((levelsCount-1)/2.0f));
+		float yStart = MainActivity.getHalfHeight() + hStep*levelsCount/2;
 
 		// Fill list
 		
 		if(mItems != null)
 			mItems.clear();
 		
-		mItems = new ArrayList<LevelItem>(LEVELS_COUNT);
+		mItems = new ArrayList<LevelItem>(levelsCount);
 
-		for (int j = 0; j < 2; j++) {
-			for (int i = 0; i < LEVELS_COUNT/2; i++) {
+			for (int i = 0; i < levelsCount; i++) {
 
-				LevelItem item = new LevelItem( 0, 0, levelCellRegion.getWidth(), levelCellRegion.getHeight(), j*LEVELS_COUNT/2 + i + 1);
+				LevelItem item = new LevelItem( 0, 0, levelCellRegion.getWidth(), levelCellRegion.getHeight(), i+1);
 
 				item.setX( xStart + i * xStep);
-				item.setY( yStart + yStep*(1-j) );
+				item.setY( yStart - hStep * i);
 				
 				if (item.getLevelNumber() > MainActivity.getUnlockedLevels())
 					item.setLocked(true);
 				
 				mItems.add(item);
 			}
-		}
+
 		
 	}
 

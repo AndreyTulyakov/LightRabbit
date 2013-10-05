@@ -49,7 +49,7 @@ public class SceneExit extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "Exit Scene [ Exit ] pressed");
+					Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Exit ] pressed");
 					MainActivity.vibrate(30);
 					MainActivity.Me.finish();
 				}
@@ -62,7 +62,7 @@ public class SceneExit extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "Exit Scene [ Back ] pressed");
+					Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Back ] pressed");
 					MainActivity.vibrate(30);
 					MainActivity.getRootScene().SetState(SceneStates.MainMenu);
 				}

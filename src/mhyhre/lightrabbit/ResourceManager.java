@@ -50,37 +50,37 @@ public class ResourceManager {
 
 	public ITextureRegion getTextureRegion(String key) {
 		if (!regions.containsKey(key))
-			Log.e(MainActivity.DebugID, "ResourceManager::getTextureRegion: invalid key - " + key);
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::getTextureRegion: invalid key - " + key);
 		return regions.get(key);
 	}
 	
 	public ITiledTextureRegion getTiledTextureRegion(String key) {
 		if (!tiledRegions.containsKey(key))
-			Log.e(MainActivity.DebugID, "ResourceManager::getTiledTextureRegion: invalid key - " + key);
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::getTiledTextureRegion: invalid key - " + key);
 		return tiledRegions.get(key);
 	}
 
 	public BitmapTextureAtlas getTextureAtlas(String key) {
 		if (!atlases.containsKey(key))
-			Log.e(MainActivity.DebugID, "ResourceManager::getTextureAtlas: invalid key - " + key);
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::getTextureAtlas: invalid key - " + key);
 		return atlases.get(key);
 	}
 
 	public Font getFont(String key) {
 		if (!fonts.containsKey(key))
-			Log.e(MainActivity.DebugID, "ResourceManager::getFont: invalid key - " + key);
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::getFont: invalid key - " + key);
 		return fonts.get(key);
 	}
 	
 	public Sound getSound(String key) {
 		if (!sounds.containsKey(key))
-			Log.e(MainActivity.DebugID, "ResourceManager::getSound: invalid key - " + key);
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::getSound: invalid key - " + key);
 		return sounds.get(key);
 	}
 	
 	public void playSound(String key) {
 		if (!sounds.containsKey(key))
-			Log.e(MainActivity.DebugID, "ResourceManager::getSound: invalid key - " + key);
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::getSound: invalid key - " + key);
 		if(MainActivity.isSoundEnabled()){
 			sounds.get(key).play();
 		}
@@ -184,7 +184,7 @@ public class ResourceManager {
 		region = TextureRegionFactory.extractFromTexture(atlas, 0, 150, 90, 45);
 		regions.put("cloud4", region);
 
-		Log.i(MainActivity.DebugID, "ResourceManager::loadAtlases: OK");
+		Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadAtlases: OK");
 	}
 	
 	public void loadSounds() {
@@ -202,7 +202,7 @@ public class ResourceManager {
 		try {
 			snd = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), filename);
 		} catch (IOException e) {
-			Log.e(MainActivity.DebugID, "ResourceManager::addSound: " + e.getMessage());
+			Log.e(MainActivity.DEBUG_ID, "ResourceManager::addSound: " + e.getMessage());
 			e.printStackTrace();
 		}
 		sounds.put(name, snd);
@@ -225,7 +225,7 @@ public class ResourceManager {
 		mFont.load();
 		fonts.put("White Furore 24", mFont);	
 		
-		Log.i(MainActivity.DebugID, "ResourceManager::loadFonts: OK");
+		Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadFonts: OK");
 	}
 
 	public void LoadResourcesForPreloader() {

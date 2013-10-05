@@ -60,7 +60,7 @@ public class SceneMainMenu extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "Main Menu 1 button");
+					Log.i(MainActivity.DEBUG_ID, "Main Menu 1 button");
 					MainActivity.vibrate(30);
 
 					MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
@@ -74,7 +74,7 @@ public class SceneMainMenu extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "Main Menu [ Options ] button");
+					Log.i(MainActivity.DEBUG_ID, "Main Menu [ Options ] button");
 					MainActivity.vibrate(30);
 					MainActivity.getRootScene().SetState(SceneStates.About);
 				}
@@ -87,7 +87,7 @@ public class SceneMainMenu extends MhyhreScene {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "Main Menu [ Exit ] button");
+					Log.i(MainActivity.DEBUG_ID, "Main Menu [ Exit ] button");
 					MainActivity.vibrate(30);
 					MainActivity.getRootScene().SetState(SceneStates.Exit);
 				}

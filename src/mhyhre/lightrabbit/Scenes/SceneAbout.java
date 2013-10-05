@@ -94,7 +94,7 @@ public class SceneAbout extends MhyhreScene {
 			text = new String(buffer);
 
 		} catch (IOException e) {
-			Log.e(MainActivity.DebugID, "SceneAbout::loadInfo: " + e.getMessage());
+			Log.e(MainActivity.DEBUG_ID, "SceneAbout::loadInfo: " + e.getMessage());
 			e.printStackTrace();
 		}
 

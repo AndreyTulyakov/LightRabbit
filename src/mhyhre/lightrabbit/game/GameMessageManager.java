@@ -25,7 +25,7 @@ public class GameMessageManager extends MhyhreScene  {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DebugID, "GameMessageManager: clickRect");
+					Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
 					MainActivity.vibrate(30);
 					Hide();
 					setIgnoreUpdate(true);

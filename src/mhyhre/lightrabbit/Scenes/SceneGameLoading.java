@@ -3,6 +3,7 @@ package mhyhre.lightrabbit.Scenes;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.game.Levels.LevelsList;
 
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.text.Text;
@@ -19,8 +20,14 @@ public class SceneGameLoading extends MhyhreScene {
 	private Text mLevelNumber;
 
 	private boolean mLoaded = false;
+	
+
+	
 
 	public SceneGameLoading() {
+		
+
+		
 		setBackgroundEnabled(false);
 		
 		Rectangle backRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()){
@@ -35,7 +42,7 @@ public class SceneGameLoading extends MhyhreScene {
 						setLoaded(false);
 					}
 					
-					Log.i(MainActivity.DebugID, "SceneGameLoading: Start game");
+					Log.i(MainActivity.DEBUG_ID, "SceneGameLoading: Start game");
 					MainActivity.vibrate(30);
 				}
 				return true;

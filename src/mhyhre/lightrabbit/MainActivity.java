@@ -38,7 +38,9 @@ import android.view.KeyEvent;
 
 public class MainActivity extends SimpleBaseGameActivity {
 
-	public static String DebugID = "MHYHRE";
+	public static final String DEBUG_ID = "LRABBIT";
+	public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
+	
 
 	// singleton handle
 	public static MainActivity Me;
@@ -92,7 +94,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 
-		Log.i(DebugID, "--------------------------------------------------");
+		Log.i(DEBUG_ID, "--------------------------------------------------");
 		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 		mVibrator.vibrate(50);
 
@@ -115,7 +117,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 		
 
 		if (BuildConfig.DEBUG)
-			Log.i(DebugID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);
+			Log.i(DEBUG_ID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);
 
 		EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels, metrics.heightPixels), camera);
 		mEngineOptions.getAudioOptions().setNeedsSound(true);
@@ -126,13 +128,13 @@ public class MainActivity extends SimpleBaseGameActivity {
 	@Override
 	public void onCreateResources() {
 		if (BuildConfig.DEBUG)
-			Log.i(DebugID, this.getClass().getSimpleName() + ".onCreateResources");
+			Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateResources");
 	}
 
 	@Override
 	public Scene onCreateScene() {
 		if (BuildConfig.DEBUG)
-			Log.i(DebugID, this.getClass().getSimpleName() + ".onCreateScene");
+			Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 
 		Res = new ResourceManager();
@@ -148,7 +150,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (BuildConfig.DEBUG)
-				Log.i(DebugID, this.getClass().getSimpleName() + ".onKeyDown: KEYCODE_BACK");
+				Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onKeyDown: KEYCODE_BACK");
 		}
 		return super.onKeyDown(keyCode, event);
 	}
@@ -171,7 +173,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 		
 		savePreferences();
 		if (BuildConfig.DEBUG)
-			Log.i(DebugID, this.getClass().getSimpleName() + ".onDestroy");
+			Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onDestroy");
 		super.onDestroy();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}

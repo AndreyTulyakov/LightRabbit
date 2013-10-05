@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game.events;
+package mhyhre.lightrabbit.game.Levels;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,14 +19,14 @@ public class EventManager {
 		events = new LinkedList<Event>();
 	}
 	
-	public void loadEvents(int number){
+	public void loadEvents(String mapFilename){
 		events.clear();
 		
-		if(number >= 0){
-			String filename = "maps/map" + number + ".lrmap";
-			loadFromXmlFile(filename);
+		if(!mapFilename.isEmpty()){
+			
+			EventsLoader loader = new EventsLoader(mapFilename);
+			events = loader.getEventsList();
 		}
-
 	}
 	
 	public void clearEventList(){
@@ -98,12 +98,13 @@ public class EventManager {
         int eventType = parser.getEventType();
         Event currentEvent = null;
 
+        /*
         while (eventType != XmlPullParser.END_DOCUMENT){
         	
             String name = null;
             
             
-            /*
+            
             switch (eventType){
             
                 case XmlPullParser.START_DOCUMENT:
@@ -141,10 +142,10 @@ public class EventManager {
                     	events.add(currentEvent);
                     } 
             }
-            */
+            
             eventType = parser.next();
         }
-
+*/
 	}
 
 }

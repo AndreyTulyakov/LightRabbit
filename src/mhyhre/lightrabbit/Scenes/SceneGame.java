@@ -21,11 +21,12 @@ import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
+import mhyhre.lightrabbit.game.GameHUD;
 import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
-import mhyhre.lightrabbit.game.events.Event;
-import mhyhre.lightrabbit.game.events.EventManager;
+import mhyhre.lightrabbit.game.Levels.Event;
+import mhyhre.lightrabbit.game.Levels.EventManager;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -37,24 +38,29 @@ import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
 	
-	boolean mLoaded = false;
+	
+	boolean mLoaded = true;
 	boolean mPause = false;
 
 
 	private Background mBackground;
 
-	Sprite spriteMoveRight, spriteMoveLeft, spriteFire, boat, spriteGold;
-	SpriteBatch healthIndicator, bulletBatch;
+	Sprite boat;
+	SpriteBatch bulletBatch;
+	
+	GameHUD HUD;
 
 	List<BulletUnit> mBullets;
 
-	Text textGold;
+
 
 	CloudsManager mClouds;
 	SkyManager mSkyes;
 	EnemiesManager mEnemies;
 	EventManager mEventManager;
 	GameMessageManager mMessageManager;
+	
+	
 
 	private WaterPolygon water;
 
@@ -74,25 +80,24 @@ public class SceneGame extends MhyhreScene {
 		mBackground = new Background(0.8f, 0.8f, 0.8f);
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
+		
+		HUD = new GameHUD();
 
 		createGameObjects();
 
-		createGUI();
 
 		mEventManager = new EventManager();
-
-
-		Log.i(MainActivity.DebugID, "Scene game created");
+		
+		attachChild(HUD);
+		
+		Log.i(MainActivity.DEBUG_ID, "Scene game created");
 	}
 	
 	
-	public void load(int levelNumber){
+	public void load(String levelName){
 		
-		mEventManager.loadEvents(levelNumber);
-		
+		mEventManager.loadEvents(levelName);
 		mLoaded = true;
-		
-
 	}
 	
 	public void start(){
@@ -105,72 +110,6 @@ public class SceneGame extends MhyhreScene {
 		mPause = true;
 	}
 
-
-	private void createGUI() {
-
-		spriteMoveLeft = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					boatSpeed = -boatAcseleration;
-				}
-
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
-					boatSpeed = 0;
-				}
-
-				return true;
-			}
-		};
-		spriteMoveLeft.setPosition(60, 50);
-		spriteMoveLeft.setVisible(true);
-		attachChild(spriteMoveLeft);
-		registerTouchArea(spriteMoveLeft);
-
-		spriteMoveRight = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					boatSpeed = boatAcseleration;
-				}
-
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_UP) {
-					boatSpeed = 0;
-				}
-
-				return true;
-			}
-		};
-		spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, 50);
-		spriteMoveRight.setVisible(true);
-		attachChild(spriteMoveRight);
-		registerTouchArea(spriteMoveRight);
-
-		spriteFire = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					MainActivity.vibrate(30);
-
-					BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
-					bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
-
-					mBullets.add(bullet);
-				}
-
-				return true;
-			}
-		};
-
-		spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
-		spriteFire.setVisible(true);
-		attachChild(spriteFire);
-		registerTouchArea(spriteFire);
-	}
-
 	private void createGameObjects() {
 
 		mBullets = new LinkedList<BulletUnit>();
@@ -181,18 +120,12 @@ public class SceneGame extends MhyhreScene {
 
 		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
 
-		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
-
 		mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
 
 		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
 
 		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
 
-		spriteGold = new Sprite(300, 10, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
-
-		textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(totalGold), 20, MainActivity.Me.getVertexBufferObjectManager());
-		textGold.setPosition(340, 22 - textGold.getHeight() / 2);
 
 		mMessageManager = new GameMessageManager();
 		mMessageManager.Hide();
@@ -204,9 +137,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(boat);
 		attachChild(water);
 
-		attachChild(healthIndicator);
-		attachChild(spriteGold);
-		attachChild(textGold);
+
 		attachChild(mMessageManager);
 	}
 
@@ -214,6 +145,8 @@ public class SceneGame extends MhyhreScene {
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
 		if(!mLoaded) return true;
+		
+		HUD.onSceneTouchEvent(pSceneTouchEvent);
 		
 		mMessageManager.onSceneTouchEvent(pSceneTouchEvent);
 		if (mMessageManager.isActiveMessage() == false) {
@@ -223,38 +156,13 @@ public class SceneGame extends MhyhreScene {
 	}
 
 
-	private boolean gameIsEnded = false;
-	
-	public void endGame() {
-		
-		if(gameIsEnded == false){
-			gameIsEnded = true;
-			
-			if(mEventManager.getUncompleteEventsCount() == 0){
-				mMessageManager.showEndDialog(MainActivity.Me.getString(R.string.passLevel));
-			}else{
-				mMessageManager.showEndDialog(MainActivity.Me.getString(R.string.youWasDied));
-			}
-			
-			
-		} else {
-			if(mMessageManager.isActiveMessage() == false){
-				
-				if(mEventManager.getUncompleteEventsCount() == 0){
-					MainActivity.getRootScene().SetState(SceneStates.Win);
-				}else{
-					MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
-				}
-				
-			}
-		}
-	}
-
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
-		if(!mLoaded) return;
-		if(mPause) return;
+		//if(!mLoaded) return;
+		//if(mPause) return;
+		
+		updateControll();
 		
 		updatePlayer();
 
@@ -270,8 +178,7 @@ public class SceneGame extends MhyhreScene {
 				
 				// if all enemies destroyed
 				if (mEnemies.isWaitState() == false) {
-					
-					endGame();
+
 				}
 			} else {
 
@@ -294,7 +201,7 @@ public class SceneGame extends MhyhreScene {
 
 		enemiesSharks();
 
-		updateHealthIndicator();
+		HUD.updateHealthIndicator(currentHealth, maxHealth);
 
 		super.onManagedUpdate(pSecondsElapsed);
 	}
@@ -311,25 +218,6 @@ public class SceneGame extends MhyhreScene {
 		boat.setRotation(water.getAngleOnWave(boat.getX()) / 2.0f);
 	}
 
-	private void updateHealthIndicator() {
-
-		healthIndicator.setY(MainActivity.getHeight());
-		float height = - (10 + MainActivity.Res.getTextureRegion("heart").getHeight());
-		
-		for (int i = 0; i < maxHealth; i++) {
-			if (i < currentHealth) {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
-			} else {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
-			}
-		}
-		healthIndicator.submit();
-
-		if (currentHealth < 1) {
-			endGame();
-		}
-
-	}
 
 	private void enemiesSharks() {
 
@@ -373,7 +261,7 @@ public class SceneGame extends MhyhreScene {
 							enemy.setDied(true);
 
 							totalGold += 50;
-							textGold.setText(String.valueOf(totalGold));
+							HUD.updateGoldIndicator(totalGold);
 						}
 					}
 
@@ -425,6 +313,33 @@ public class SceneGame extends MhyhreScene {
 			return true;
 
 		return false;
+	}
+
+	private void updateControll(){
+		
+		
+		if(HUD.isKeyDown(GameHUD.Buttons.LEFT)){
+			boatSpeed = -boatAcseleration;
+			return;
+		}
+		
+		if(HUD.isKeyDown(GameHUD.Buttons.RIGHT)){
+			boatSpeed = boatAcseleration;
+			return;
+		}
+		
+		boatSpeed = 0;
+		
+		if(HUD.isKeyDown(GameHUD.Buttons.FIRE)){
+			
+			MainActivity.vibrate(30);
+
+			BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
+			bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
+
+			mBullets.add(bullet);
+		}
+		
 	}
 
 }

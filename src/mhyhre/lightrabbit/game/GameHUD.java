@@ -124,16 +124,21 @@ public class GameHUD extends MhyhreScene {
 	
 	
 	private void updateCollisionStates(){
-	
-		
+
 		resetStates();
 		
 		for(int i = 0; i<touchPoints.length; i++){
 			
 			if(touchPoints[i].used == true){
-				states[Buttons.LEFT.ordinal()]  |= collided(spriteMoveLeft, BUTTON_RADIUS, touchPoints[i].x, touchPoints[i].y);
-				states[Buttons.RIGHT.ordinal()] |= collided(spriteMoveRight, BUTTON_RADIUS, touchPoints[i].x, touchPoints[i].y);	
-				states[Buttons.FIRE.ordinal()]  |= collided(spriteFire, BUTTON_RADIUS, touchPoints[i].x, touchPoints[i].y);
+				
+				states[Buttons.LEFT.ordinal()]  |=
+						Collisions.spriteByCircle(spriteMoveLeft, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
+				
+				states[Buttons.RIGHT.ordinal()] |=
+						Collisions.spriteByCircle(spriteMoveRight, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);	
+				
+				states[Buttons.FIRE.ordinal()]  |=
+						Collisions.spriteByCircle(spriteFire, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
 			}
 		}
 	}
@@ -148,16 +153,6 @@ public class GameHUD extends MhyhreScene {
 		return states[code.ordinal()];
 	}
 
-	public static boolean collided(Sprite spr, float radius, float x2, float y2) {
 
-		float dx = spr.getX() - x2;
-		float dy = spr.getY() - y2;
-		float dist = dx * dx + dy * dy;
-
-		if (dist <= radius * radius)
-			return true;
-
-		return false;
-	}
 
 }

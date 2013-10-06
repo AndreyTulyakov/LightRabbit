@@ -19,6 +19,7 @@ import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
+import mhyhre.lightrabbit.game.Collisions;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.GameHUD;
@@ -37,20 +38,18 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
-	
-	
+
 	boolean mLoaded = true;
 	boolean mPause = false;
-	
 
 	private final float reloadingTime = 1.0f;
-
+	private final int maxBulletsOnScreen = 50;
 
 	private Background mBackground;
 
 	Sprite boat;
 	SpriteBatch bulletBatch;
-	
+
 	GameHUD HUD;
 
 	List<BulletUnit> mBullets;
@@ -61,8 +60,6 @@ public class SceneGame extends MhyhreScene {
 	EnemiesManager mEnemies;
 	EventManager mEventManager;
 	GameMessageManager mMessageManager;
-	
-	
 
 	private WaterPolygon water;
 
@@ -75,40 +72,36 @@ public class SceneGame extends MhyhreScene {
 	private float boatSpeed = 0;
 	private float boatAcseleration = 3;
 
-
-
 	public SceneGame() {
 
 		mBackground = new Background(0.8f, 0.8f, 0.8f);
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
-		
+
 		HUD = new GameHUD();
 
 		createGameObjects();
 
-
 		mEventManager = new EventManager();
-		
+
 		attachChild(HUD);
-		
+
 		Log.i(MainActivity.DEBUG_ID, "Scene game created");
 	}
-	
-	
-	public void load(String levelName){
-		
+
+	public void load(String levelName) {
+
 		mEventManager.loadEvents(levelName);
 		mLoaded = true;
 	}
-	
-	public void start(){
-		
+
+	public void start() {
+
 		mPause = false;
 	}
-	
-	public void pause(){
-		
+
+	public void pause() {
+
 		mPause = true;
 	}
 
@@ -124,10 +117,9 @@ public class SceneGame extends MhyhreScene {
 
 		mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
 
-		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 50, MainActivity.Me.getVertexBufferObjectManager());
+		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), maxBulletsOnScreen, MainActivity.Me.getVertexBufferObjectManager());
 
 		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
-
 
 		mMessageManager = new GameMessageManager();
 		mMessageManager.Hide();
@@ -139,17 +131,17 @@ public class SceneGame extends MhyhreScene {
 		attachChild(boat);
 		attachChild(water);
 
-
 		attachChild(mMessageManager);
 	}
 
 	@Override
 	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
-		if(!mLoaded) return true;
-		
+		if (!mLoaded)
+			return true;
+
 		HUD.onSceneTouchEvent(pSceneTouchEvent);
-		
+
 		mMessageManager.onSceneTouchEvent(pSceneTouchEvent);
 		if (mMessageManager.isActiveMessage() == false) {
 			return super.onSceneTouchEvent(pSceneTouchEvent);
@@ -157,15 +149,14 @@ public class SceneGame extends MhyhreScene {
 		return true;
 	}
 
-
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
-		//if(!mLoaded) return;
-		//if(mPause) return;
-		
+		// if(!mLoaded) return;
+		// if(mPause) return;
+
 		updateControll();
-		
+
 		updatePlayer();
 
 		timeCounter += pSecondsElapsed;
@@ -177,7 +168,7 @@ public class SceneGame extends MhyhreScene {
 
 			// if all events complete
 			if (gameEvent == null) {
-				
+
 				// if all enemies destroyed
 				if (mEnemies.isWaitState() == false) {
 
@@ -196,7 +187,7 @@ public class SceneGame extends MhyhreScene {
 				}
 			}
 		}
-		
+
 		updateBullets();
 
 		mEnemies.update();
@@ -220,12 +211,11 @@ public class SceneGame extends MhyhreScene {
 		boat.setRotation(water.getAngleOnWave(boat.getX()) / 2.0f);
 	}
 
-
 	private void enemiesSharks() {
 
 		for (Enemy enemy : mEnemies.getEnemiesList()) {
 
-			if (collideCircleByCircle(boat, 20, enemy.getX(), enemy.getY(), 20)) {
+			if (Collisions.sptireCircleByCircle(boat, 20, enemy.getX(), enemy.getY(), 20)) {
 
 				if (enemy.isDied() == false) {
 
@@ -296,54 +286,48 @@ public class SceneGame extends MhyhreScene {
 				bulletResultRegion = bulletRegion;
 			}
 			if (bullet.getBoom() != -1) {
-				bulletBatch.draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2, bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
-	
+				bulletBatch.draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2,
+						bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
+
 			}
 		}
 
 		bulletBatch.submit();
 	}
 
-	public static boolean collideCircleByCircle(Sprite c1, float radius1, float x1, float y1, float radius2) {
 
-		float dx = (x1) - (c1.getX() + c1.getWidth() / 2);
-		float dy = (y1) - (c1.getY() + c1.getHeight() / 2);
-		float dist = dx * dx + dy * dy;
 
-		float radiusSum = radius1 + radius2;
-		if (dist <= radiusSum * radiusSum)
-			return true;
+	private void updateControll() {
 
-		return false;
-	}
-
-	
-	private void updateControll(){
-		
 		boatSpeed = 0;
-		
-		if(HUD.isKeyDown(GameHUD.Buttons.LEFT)){
+
+		if (HUD.isKeyDown(GameHUD.Buttons.LEFT)) {
 			boatSpeed -= boatAcseleration;
 		}
-		
-		if(HUD.isKeyDown(GameHUD.Buttons.RIGHT)){
+
+		if (HUD.isKeyDown(GameHUD.Buttons.RIGHT)) {
 			boatSpeed += boatAcseleration;
 		}
-		
-		if(HUD.isKeyDown(GameHUD.Buttons.FIRE)){
-			
-			if(timeCounter - lastFireTime > reloadingTime){
-				MainActivity.vibrate(30);
-	
-				BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
-				bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
-	
-				mBullets.add(bullet);
-				
-				lastFireTime = timeCounter;
+
+		if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
+
+			if (timeCounter - lastFireTime > reloadingTime) {
+
+				if (mBullets.size() < maxBulletsOnScreen) {
+
+					MainActivity.vibrate(30);
+
+					BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
+					bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
+
+					mBullets.add(bullet);
+
+					lastFireTime = timeCounter;
+
+				}
 			}
 		}
-		
+
 	}
 
 }

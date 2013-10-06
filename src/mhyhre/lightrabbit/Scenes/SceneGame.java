@@ -41,6 +41,9 @@ public class SceneGame extends MhyhreScene {
 	
 	boolean mLoaded = true;
 	boolean mPause = false;
+	
+
+	private final float reloadingTime = 1.0f;
 
 
 	private Background mBackground;
@@ -51,8 +54,7 @@ public class SceneGame extends MhyhreScene {
 	GameHUD HUD;
 
 	List<BulletUnit> mBullets;
-
-
+	float lastFireTime = 0;
 
 	CloudsManager mClouds;
 	SkyManager mSkyes;
@@ -315,6 +317,7 @@ public class SceneGame extends MhyhreScene {
 		return false;
 	}
 
+	
 	private void updateControll(){
 		
 		boatSpeed = 0;
@@ -329,12 +332,16 @@ public class SceneGame extends MhyhreScene {
 		
 		if(HUD.isKeyDown(GameHUD.Buttons.FIRE)){
 			
-			MainActivity.vibrate(30);
-
-			BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
-			bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
-
-			mBullets.add(bullet);
+			if(timeCounter - lastFireTime > reloadingTime){
+				MainActivity.vibrate(30);
+	
+				BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
+				bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
+	
+				mBullets.add(bullet);
+				
+				lastFireTime = timeCounter;
+			}
 		}
 		
 	}

@@ -317,18 +317,15 @@ public class SceneGame extends MhyhreScene {
 
 	private void updateControll(){
 		
+		boatSpeed = 0;
 		
 		if(HUD.isKeyDown(GameHUD.Buttons.LEFT)){
-			boatSpeed = -boatAcseleration;
-			return;
+			boatSpeed -= boatAcseleration;
 		}
 		
 		if(HUD.isKeyDown(GameHUD.Buttons.RIGHT)){
-			boatSpeed = boatAcseleration;
-			return;
+			boatSpeed += boatAcseleration;
 		}
-		
-		boatSpeed = 0;
 		
 		if(HUD.isKeyDown(GameHUD.Buttons.FIRE)){
 			

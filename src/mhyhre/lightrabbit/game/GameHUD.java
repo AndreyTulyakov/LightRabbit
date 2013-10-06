@@ -8,9 +8,13 @@ import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
+import android.graphics.Point;
+import android.graphics.PointF;
+import android.util.Log;
+
 public class GameHUD extends MhyhreScene {
-	
-	public enum Buttons{
+
+	public enum Buttons {
 		LEFT, RIGHT, JUMP, FIRE;
 	}
 
@@ -18,22 +22,29 @@ public class GameHUD extends MhyhreScene {
 	SpriteBatch healthIndicator;
 	Sprite spriteMoveRight, spriteMoveLeft, spriteFire;
 	Text textGold;
-	
+
 	boolean states[];
 	private static final float BUTTON_RADIUS = 50;
 	
-	
+	TouchPoint[] touchPoints;
+
 	public GameHUD() {
+
 		setBackgroundEnabled(false);
 		Show();
-		
+
 		states = new boolean[16];
-			
+		
+		touchPoints = new TouchPoint[10];
+		for(int i = 0; i<touchPoints.length; i++){
+			touchPoints[i] = new TouchPoint();
+		}
+
 		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
 
 		spriteGold = new Sprite(0, 0, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
 		spriteGold.setPosition(250, MainActivity.getHeight() - 28);
-		
+
 		textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
 		updateGoldIndicator(0);
 
@@ -55,20 +66,19 @@ public class GameHUD extends MhyhreScene {
 		spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
 		spriteFire.setVisible(true);
 		attachChild(spriteFire);
-		
+
 	}
-	
-	public void updateGoldIndicator(int value){
+
+	public void updateGoldIndicator(int value) {
 		textGold.setText(String.valueOf(value));
-		textGold.setPosition(spriteGold.getX() + spriteGold.getWidth()/2 + 10 + textGold.getWidth()/2, MainActivity.getHeight() - 24);
+		textGold.setPosition(spriteGold.getX() + spriteGold.getWidth() / 2 + 10 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
 	}
-	
 
 	public void updateHealthIndicator(int currentHealth, int maxHealth) {
 
 		healthIndicator.setY(MainActivity.getHeight());
-		float height = - (10 + MainActivity.Res.getTextureRegion("heart").getHeight());
-		
+		float height = -(10 + MainActivity.Res.getTextureRegion("heart").getHeight());
+
 		for (int i = 0; i < maxHealth; i++) {
 			if (i < currentHealth) {
 				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
@@ -78,51 +88,67 @@ public class GameHUD extends MhyhreScene {
 		}
 		healthIndicator.submit();
 	}
+
 	
+	private class TouchPoint{
+		boolean used;
+		float x,y;
+	}
 	
-	
+
+
 	@Override
 	public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
-		
 
-		if(pSceneTouchEvent.isActionCancel() || pSceneTouchEvent.isActionOutside() || pSceneTouchEvent.isActionUp()){
-			resetStates();
+		int pId = pSceneTouchEvent.getPointerID();
+		
+		if(pId < 0 && pId >= touchPoints.length)
+			return false;
+
+		if (pSceneTouchEvent.isActionCancel() || pSceneTouchEvent.isActionOutside() || pSceneTouchEvent.isActionUp()) {
+			touchPoints[pId].used = false;
+			updateCollisionStates();
 		}
-		
-		if(pSceneTouchEvent.isActionMove() || pSceneTouchEvent.isActionDown()){
+
+		if (pSceneTouchEvent.isActionMove() || pSceneTouchEvent.isActionDown()) {
+
+			touchPoints[pId].used = true;
+			touchPoints[pId].x = pSceneTouchEvent.getX();
+			touchPoints[pId].y = pSceneTouchEvent.getY();
 			
-			resetStates();
-			
-			// Check radial collisions
-			if(collideCircleByPoint(spriteMoveLeft, BUTTON_RADIUS, pSceneTouchEvent.getX(), pSceneTouchEvent.getY())){
-				states[Buttons.LEFT.ordinal()] = true;
-			}
-			
-			if(collideCircleByPoint(spriteMoveRight, BUTTON_RADIUS, pSceneTouchEvent.getX(), pSceneTouchEvent.getY())){
-				states[Buttons.RIGHT.ordinal()] = true;
-			}
-			
-			if(collideCircleByPoint(spriteFire, BUTTON_RADIUS, pSceneTouchEvent.getX(), pSceneTouchEvent.getY())){
-				states[Buttons.FIRE.ordinal()] = true;
-			}
-			
+			updateCollisionStates();
 		}
-		
-		
+
 		return super.onSceneTouchEvent(pSceneTouchEvent);
 	}
 	
-	public void resetStates(){
-		for(int i=0; i<states.length; i++){
+	
+	private void updateCollisionStates(){
+	
+		
+		resetStates();
+		
+		for(int i = 0; i<touchPoints.length; i++){
+			
+			if(touchPoints[i].used == true){
+				states[Buttons.LEFT.ordinal()]  |= collided(spriteMoveLeft, BUTTON_RADIUS, touchPoints[i].x, touchPoints[i].y);
+				states[Buttons.RIGHT.ordinal()] |= collided(spriteMoveRight, BUTTON_RADIUS, touchPoints[i].x, touchPoints[i].y);	
+				states[Buttons.FIRE.ordinal()]  |= collided(spriteFire, BUTTON_RADIUS, touchPoints[i].x, touchPoints[i].y);
+			}
+		}
+	}
+
+	public void resetStates() {
+		for (int i = 0; i < states.length; i++) {
 			states[i] = false;
 		}
 	}
-	
-	public boolean isKeyDown(Buttons code){
+
+	public boolean isKeyDown(Buttons code) {
 		return states[code.ordinal()];
 	}
-	
-	public static boolean collideCircleByPoint(Sprite spr, float radius, float x2, float y2) {
+
+	public static boolean collided(Sprite spr, float radius, float x2, float y2) {
 
 		float dx = spr.getX() - x2;
 		float dy = spr.getY() - y2;
@@ -133,6 +159,5 @@ public class GameHUD extends MhyhreScene {
 
 		return false;
 	}
-	
-	
+
 }

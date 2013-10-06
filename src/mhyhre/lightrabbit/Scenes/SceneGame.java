@@ -70,7 +70,7 @@ public class SceneGame extends MhyhreScene {
 	float timeCounter = 0;
 
 	private float boatSpeed = 0;
-	private float boatAcseleration = 3;
+	private float boatAcceleration = 3;
 
 	public SceneGame() {
 
@@ -155,7 +155,7 @@ public class SceneGame extends MhyhreScene {
 		// if(!mLoaded) return;
 		// if(mPause) return;
 
-		updateControll();
+		updateControlls();
 
 		updatePlayer();
 
@@ -297,16 +297,16 @@ public class SceneGame extends MhyhreScene {
 
 
 
-	private void updateControll() {
+	private void updateControlls() {
 
 		boatSpeed = 0;
 
 		if (HUD.isKeyDown(GameHUD.Buttons.LEFT)) {
-			boatSpeed -= boatAcseleration;
+			boatSpeed -= boatAcceleration;
 		}
 
 		if (HUD.isKeyDown(GameHUD.Buttons.RIGHT)) {
-			boatSpeed += boatAcseleration;
+			boatSpeed += boatAcceleration;
 		}
 
 		if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {

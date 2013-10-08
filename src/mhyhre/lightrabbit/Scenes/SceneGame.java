@@ -16,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
-import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.Collisions;
@@ -28,11 +27,10 @@ import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.Levels.Event;
 import mhyhre.lightrabbit.game.Levels.EventManager;
+import mhyhre.lightrabbit.game.units.Player;
 
 import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
-import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
@@ -42,18 +40,16 @@ public class SceneGame extends MhyhreScene {
 	boolean mLoaded = true;
 	boolean mPause = false;
 
-	private final float reloadingTime = 1.0f;
+
 	private final int maxBulletsOnScreen = 50;
 
 	private Background mBackground;
 
-	Sprite boat;
 	SpriteBatch bulletBatch;
 
 	GameHUD HUD;
 
 	List<BulletUnit> mBullets;
-	float lastFireTime = 0;
 
 	CloudsManager mClouds;
 	SkyManager mSkyes;
@@ -63,14 +59,13 @@ public class SceneGame extends MhyhreScene {
 
 	private WaterPolygon water;
 
-	private int totalGold = 100;
-	final int maxHealth = 3;
-	int currentHealth = 3;
+
 
 	float timeCounter = 0;
 
-	private float boatSpeed = 0;
-	private float boatAcceleration = 3;
+
+	
+	Player mPlayer;
 
 	public SceneGame() {
 
@@ -113,7 +108,7 @@ public class SceneGame extends MhyhreScene {
 
 		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
 
-		boat = new Sprite(100, 100, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
+		mPlayer = new Player(100);
 
 		mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
 
@@ -128,7 +123,7 @@ public class SceneGame extends MhyhreScene {
 		attachChild(mClouds);
 		attachChild(mEnemies);
 		attachChild(bulletBatch);
-		attachChild(boat);
+		attachChild(mPlayer);
 		attachChild(water);
 
 		attachChild(mMessageManager);
@@ -157,7 +152,7 @@ public class SceneGame extends MhyhreScene {
 
 		updateControlls();
 
-		updatePlayer();
+		mPlayer.update(water);
 
 		timeCounter += pSecondsElapsed;
 		float halfRange = 0.050f;
@@ -194,35 +189,24 @@ public class SceneGame extends MhyhreScene {
 
 		enemiesSharks();
 
-		HUD.updateHealthIndicator(currentHealth, maxHealth);
+		HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
 
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 
-	private void updatePlayer() {
-		if (boat.getX() > (MainActivity.getWidth() - 32 - boat.getWidth()) && boatSpeed > 0)
-			boatSpeed = 0;
-
-		if (boat.getX() < 32 && boatSpeed < 0)
-			boatSpeed = 0;
-
-		boat.setX(boat.getX() + boatSpeed);
-		boat.setY(water.getYPositionOnWave(boat.getX()) + 5);
-		boat.setRotation(water.getAngleOnWave(boat.getX()) / 2.0f);
-	}
 
 	private void enemiesSharks() {
 
 		for (Enemy enemy : mEnemies.getEnemiesList()) {
 
-			if (Collisions.sptireCircleByCircle(boat, 20, enemy.getX(), enemy.getY(), 20)) {
+			if (Collisions.sptireCircleByCircle(mPlayer, 20, enemy.getX(), enemy.getY(), 20)) {
 
 				if (enemy.isDied() == false) {
 
 					MainActivity.vibrate(30);
 
-					if (currentHealth > 0)
-						currentHealth--;
+					if (mPlayer.getCurrentHealth() > 0)
+						mPlayer.setCurrentHealth(mPlayer.getCurrentHealth()-1);
 
 					enemy.setDied(true);
 				}
@@ -252,8 +236,8 @@ public class SceneGame extends MhyhreScene {
 
 							enemy.setDied(true);
 
-							totalGold += 50;
-							HUD.updateGoldIndicator(totalGold);
+							mPlayer.setTotalGold(mPlayer.getTotalGold()+50);
+							HUD.updateGoldIndicator(mPlayer.getTotalGold());
 						}
 					}
 
@@ -297,33 +281,27 @@ public class SceneGame extends MhyhreScene {
 
 
 
+	
 	private void updateControlls() {
 
-		boatSpeed = 0;
+		mPlayer.setBoatSpeed(0);
 
 		if (HUD.isKeyDown(GameHUD.Buttons.LEFT)) {
-			boatSpeed -= boatAcceleration;
+			mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() - mPlayer.getBoatAcceleration());
 		}
 
 		if (HUD.isKeyDown(GameHUD.Buttons.RIGHT)) {
-			boatSpeed += boatAcceleration;
+			mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() + mPlayer.getBoatAcceleration());
 		}
 
 		if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
+			
+			if (mBullets.size() < maxBulletsOnScreen) {
 
-			if (timeCounter - lastFireTime > reloadingTime) {
-
-				if (mBullets.size() < maxBulletsOnScreen) {
-
-					MainActivity.vibrate(30);
-
-					BulletUnit bullet = new BulletUnit(boat.getX(), boat.getY() + 15);
-					bullet.setAccelerationByAngle(boat.getRotation() - 15, 8);
-
+				BulletUnit bullet = mPlayer.fire(timeCounter);
+				
+				if(bullet!=null){
 					mBullets.add(bullet);
-
-					lastFireTime = timeCounter;
-
 				}
 			}
 		}

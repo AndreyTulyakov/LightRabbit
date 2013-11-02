@@ -20,8 +20,14 @@ import android.util.Log;
 
 public class CharacterBase {
 
+	private static final String CHARACTER = "character";
+	private static final String ID = "id";
+	private static final String ICON = "icon";
+	private static final String NAME = "name";
+	
 	Map<Integer, Character> characters;
 
+	
 	public CharacterBase(String filename) {
 
 		characters = new HashMap<Integer, Character>();
@@ -58,11 +64,6 @@ public class CharacterBase {
 	}
 
 	
-	private static final String CHARACTER = "character";
-	private static final String ID = "id";
-	private static final String ICON = "icon";
-	private static final String NAME = "name";
-	
 	private void parseXml(Element rootElement) {
 
 		NodeList items = rootElement.getElementsByTagName(CHARACTER);
@@ -79,7 +80,6 @@ public class CharacterBase {
 
 			characters.put(id, character);
 		}
-
 	}
 
 }

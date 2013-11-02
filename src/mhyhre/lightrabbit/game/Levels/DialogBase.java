@@ -39,9 +39,9 @@ public class DialogBase {
 		
 		try {
 			InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
-			DocumentBuilder docBuilder = dbf.newDocumentBuilder();
-
+			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = dbf.newDocumentBuilder();
 			Document doc = docBuilder.parse(is);
 
 			Element root = doc.getDocumentElement();
@@ -62,9 +62,9 @@ public class DialogBase {
 		}
 		
 		Log.i(MainActivity.DEBUG_ID, " ");
-		Log.i(MainActivity.DEBUG_ID, "\nDialog base " + filename + " loaded and contain:");
+		Log.i(MainActivity.DEBUG_ID, "Dialog base " + filename + " loaded and contain:");
 		for (final Map.Entry<Integer, Dialog> entry : dialogs.entrySet()) {
-			Log.i(MainActivity.DEBUG_ID, "  ID: "+ entry.getKey() + " \t" + entry.getValue());
+			Log.i(MainActivity.DEBUG_ID, "  ID: "+ entry.getKey() + " " + entry.getValue());
 		}
 	}
 	

@@ -36,15 +36,13 @@ public class DialogBase {
 	public DialogBase(String filename) {
 		
 		dialogs = new HashMap<Integer, Dialog>();
-
-		Document doc = null;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		
 		try {
 			InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
 			DocumentBuilder docBuilder = dbf.newDocumentBuilder();
 
-			doc = docBuilder.parse(is);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			Document doc = docBuilder.parse(is);
 
 			Element root = doc.getDocumentElement();
 			

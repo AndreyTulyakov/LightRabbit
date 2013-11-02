@@ -52,4 +52,20 @@ public class Dialog {
 		this.mFastMessage = mFast;
 	}
 
+	public void putReplic(int id, Replic replic)
+	{
+		replics.put(id, replic);
+	}
+	
+
+	@Override
+	public String toString() {
+		
+		String result = "DIALOG: \"" + mCaption + "\" FAST:" + mFastMessage + "\n";
+		
+		for (final Map.Entry<Integer, Replic> entry : replics.entrySet()) {
+			result += "\n" + "    Replic ID:"+ entry.getKey() + " " + entry.getValue();
+		}
+		return result;
+	}
 }

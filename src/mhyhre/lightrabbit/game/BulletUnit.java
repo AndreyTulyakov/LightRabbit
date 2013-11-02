@@ -31,7 +31,6 @@ public class BulletUnit extends Entity {
 		return new Vector2(mAcceleration);
 	}
 
-
 	public void setAcceleration(float pX, float pY) {
 		mAcceleration.set(pX, pY);
 	}

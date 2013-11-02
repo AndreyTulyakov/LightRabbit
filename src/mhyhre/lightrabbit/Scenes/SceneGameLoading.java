@@ -3,8 +3,6 @@ package mhyhre.lightrabbit.Scenes;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.game.Levels.LevelsList;
-
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -17,7 +15,8 @@ public class SceneGameLoading extends MhyhreScene {
 
 	private Rectangle mRotationRect;
 	private Text mTextPress;
-	private Text mLevelNumber;
+	private Text mLevelName;
+	private Text mLevelChapter;
 
 	private boolean mLoaded = false;
 	
@@ -56,8 +55,14 @@ public class SceneGameLoading extends MhyhreScene {
 		mTextPress = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100, MainActivity.Me.getVertexBufferObjectManager());
 		mTextPress.setPosition(MainActivity.getHalfWidth(), 30 + mTextPress.getHeight()/2);
 
-		mLevelNumber = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
-		mLevelNumber.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+		mLevelChapter = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
+		mLevelChapter.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+		
+		mLevelName = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
+		mLevelName.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight()  - 80);
+		
+
+		
 		
 		float h = mTextPress.getHeight() + 40;
 
@@ -66,7 +71,8 @@ public class SceneGameLoading extends MhyhreScene {
 
 		attachChild(mRotationRect);
 		attachChild(mTextPress);
-		attachChild(mLevelNumber);
+		attachChild(mLevelName);
+		attachChild(mLevelChapter);
 		
 		setLoaded(false);
 	}
@@ -96,7 +102,11 @@ public class SceneGameLoading extends MhyhreScene {
 
 	}
 	
-	public void setShownLevelNumber(int levelNumber){
-		mLevelNumber.setText(MainActivity.Me.getString(R.string.level) + ": " + levelNumber);
+	public void setLevelName(String levelName){
+		mLevelName.setText(levelName);
+	}
+	
+	public void setLevelChapter(String levelChapter){
+		mLevelChapter.setText(levelChapter);
 	}
 }

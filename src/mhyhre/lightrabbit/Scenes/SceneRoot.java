@@ -113,8 +113,7 @@ public class SceneRoot extends Scene {
 			case GameLoading:
 				
 				mSceneGameLoading.setLoaded(false);
-				mSceneGameLoading.setShownLevelNumber(mSceneLevelSelector.getLastLevelSelection());
-				
+
 				detachChild(mSceneGameLoading);
 				
 				if(mSceneGame != null){
@@ -122,10 +121,12 @@ public class SceneRoot extends Scene {
 					mSceneGame = null;
 				}
 				
-				mSceneGame = new SceneGame();
-				//mSceneGame.load(mSceneLevelSelector.getLastLevelSelection());
+				mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().filename);
 				mSceneGame.onManagedUpdate(0);
 				mSceneGame.pause();
+				
+				mSceneGameLoading.setLevelName(mSceneGame.level.getName());
+				mSceneGameLoading.setLevelChapter(mSceneGame.level.getChapter());
 				
 				this.attachChild(mSceneGame);
 				this.attachChild(mSceneGameLoading);
@@ -147,7 +148,7 @@ public class SceneRoot extends Scene {
 				break;
 				
 			case Win:
-				MainActivity.setUnlockedLevels(mSceneLevelSelector.getLastLevelSelection()+1);
+
 				SetState(SceneStates.LevelSelector);
 				break;
 

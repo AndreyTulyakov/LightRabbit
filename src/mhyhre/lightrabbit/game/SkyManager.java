@@ -12,8 +12,11 @@ public class SkyManager extends Entity {
 
 	// Per second
 	public final float mTimeSpeed = 0.04f;
+	
+	// Time in range [0, PI*2]
 	float mTime;
 
+	
 	Sprite spriteSun;
 	Sprite spriteMoon;
 
@@ -134,6 +137,11 @@ public class SkyManager extends Entity {
 		}
 		
 		return false;
+	}
+	
+	// Use 0-23 values to set hours
+	public void setCurrentTime(int time){
+		mTime = (float) ((time%24 * Math.PI*2) / 24.0f);
 	}
 
 }

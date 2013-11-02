@@ -1,24 +1,20 @@
 package mhyhre.lightrabbit.game;
 
+import mhyhre.lightrabbit.MainActivity;
+import android.util.Log;
+
 
 public class LevelItem {
 	
 	float mX, mY;
 	float mWidth, mHeight;
 	boolean mLocked;
-	int mLevelNumber;
 	
-	public int getLevelNumber() {
-		return mLevelNumber;
-	}
-
-	public LevelItem(float x, float y, float width, float height, int levelNumber) {
-		mX = x;
-		mY = y;
-		mWidth = width;
-		mHeight = height;
-		mLevelNumber = levelNumber;
-		mLocked = false;
+	public String filename;
+	public String label;
+	
+	public LevelItem() {
+		
 	}
 	
 	public float getLeftX(){
@@ -80,5 +76,9 @@ public class LevelItem {
 			}
 		}
 		return false;
+	}
+	
+	public void print(){
+		Log.i(MainActivity.DEBUG_ID, "Level:" + label + "filename:" + filename);
 	}
 }

@@ -1,17 +1,31 @@
 package mhyhre.lightrabbit.game.Levels;
 
+import mhyhre.lightrabbit.MainActivity;
+import android.util.Log;
+
 public class Event {
 
 	private EventType mType;
 	private int mId;
-	private int mIntArg;
-	String mStrArg;
+	private int mIntegerArg;
+	String mStringArg;
 	
 	public Event() {
 		mType = EventType.NONE; 
 		mId = -1;
-		mIntArg = 0;
-		mStrArg = "";
+		mIntegerArg = 0;
+		mStringArg = "";
+	}
+	
+
+	public void setType(String typeName){
+		
+		try{
+			mType = EventType.valueOf(typeName);
+			
+		}catch(IllegalArgumentException e){
+			mType = EventType.NONE;
+		}
 	}
 	
 	public EventType getType() {
@@ -22,16 +36,16 @@ public class Event {
 		return mId;
 	}
 
-	public String getStrArg() {
-		return mStrArg;
+	public String getStringArg() {
+		return mStringArg;
 	}
 
-	public int getIntArg() {
-		return mIntArg;
+	public int getIntegerArg() {
+		return mIntegerArg;
 	}
 
 	public void setIntArg(int arg) {
-		mIntArg = arg;
+		mIntegerArg = arg;
 	}
 	
 	public void setId(int arg) {
@@ -39,7 +53,12 @@ public class Event {
 	}
 
 	public void setStrArg(String arg) {
-		mStrArg = arg;
+		mStringArg = arg;
 	}
+	
+	public void print(){
+		Log.i(MainActivity.DEBUG_ID, "Event: " + mType + " id:" + mId + " int-arg:" + mIntegerArg + " str-arg:" + mStringArg);
+	}
+	
 	
 }

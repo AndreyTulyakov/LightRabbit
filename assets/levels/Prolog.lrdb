@@ -1,0 +1,25 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+  <dialog fast="true" id="1" caption="За много лет до..">
+   <replic actor_id="0" next_id="0" id="1">120-й год от рождения Василия Пупкина</replic>
+  </dialog>
+  <dialog fast="false" id="2" caption="Диалог 1">
+   <replic actor_id="1" next_id="2" id="1">Капитан, мы приближаемся к городу...</replic>
+   <replic actor_id="2" next_id="0" id="2">Полный вперед!</replic>
+  </dialog>
+  <dialog fast="false" id="3" caption="Диалог 2">
+   <replic actor_id="1" next_id="2" id="1">Капитан, по курсу 2 акулы!</replic>
+   <replic actor_id="2" next_id="0" id="2">Уничтожить!</replic>
+  </dialog>
+  <dialog fast="false" id="4" caption="Диалог 3">
+   <replic actor_id="1" next_id="2" id="1">Капитан, их тут целая стая!</replic>
+   <replic actor_id="2" next_id="0" id="2">Ты предлагаешь мне с ними побеседовать?</replic>
+  </dialog>
+  <dialog fast="false" id="5" caption="Готово">
+   <replic actor_id="1" next_id="2" id="1">Готово сэр!</replic>
+   <replic actor_id="2" next_id="0" id="2">Хорошо, новый курс - в город!</replic>
+  </dialog>
+ </Dialogs>
+</Root>

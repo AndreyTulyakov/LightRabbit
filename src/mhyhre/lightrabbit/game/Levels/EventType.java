@@ -2,34 +2,23 @@ package mhyhre.lightrabbit.game.Levels;
 
 public enum EventType {
 	
-	NONE("None"),
+	NONE,
 	
-	UNIT_ADD("Unit Add"),
-	UNIT_KILL("Unit Kill"),
-	UNIT_REMOVE("Unit Remove"),
-	UNIT_HEALTH("Unit Health"),
-	UNIT_SPEED("Unit Speed"),
+	UNIT_ADD,
+	UNIT_KILL,
+	UNIT_REMOVE,
+	UNIT_HEALTH,
+	UNIT_SPEED,
 	
-	MSSG_SHOW("Mssg Show"),
+	MSSG_SHOW,
 	
-	GAME_WATER_LEVEL("Game WaterLevel"),
-	GAME_WAVE_HEIGHT("Game WaveHeight"),
-	GAME_STOP_TIME("Game StopTime"),
-	GAME_START_TIME("Game StartTime"),
-	GAME_TIME("Game Time"),
-	GAME_WEATHER("Game Weather"),
-	GAME_SHOW_FOG("Game ShowFog"),
-	GAME_WAIT_SECONDS("Game WaitSeconds"),
-	GAME_WAIT_ENEMIES_EXIST("Game WaitWhileEnemiesExist");
-	
-	
-    private String value;
-
-    EventType(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+	GAME_WATER_LEVEL,
+	GAME_WAVE_HEIGHT,
+	GAME_STOP_TIME,
+	GAME_START_TIME,
+	GAME_TIME,
+	GAME_WEATHER,
+	GAME_SHOW_FOG,
+	GAME_WAIT_SECONDS,
+	GAME_WAIT_ENEMIES_EXIST;
 }

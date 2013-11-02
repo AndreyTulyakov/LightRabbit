@@ -14,6 +14,7 @@ package mhyhre.lightrabbit.Scenes;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
@@ -26,7 +27,7 @@ import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.Levels.Event;
-import mhyhre.lightrabbit.game.Levels.EventManager;
+import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
 import org.andengine.entity.scene.background.Background;
@@ -40,8 +41,7 @@ public class SceneGame extends MhyhreScene {
 	boolean mLoaded = true;
 	boolean mPause = false;
 
-
-	private final int maxBulletsOnScreen = 50;
+	private final int MAX_BULLETS_ON_SCREEN = 50;
 
 	private Background mBackground;
 
@@ -54,39 +54,32 @@ public class SceneGame extends MhyhreScene {
 	CloudsManager mClouds;
 	SkyManager mSkyes;
 	EnemiesManager mEnemies;
-	EventManager mEventManager;
 	GameMessageManager mMessageManager;
+	Player mPlayer;
 
 	private WaterPolygon water;
 
-
-
 	float timeCounter = 0;
 
-
+	Level level;
 	
-	Player mPlayer;
 
-	public SceneGame() {
+	public SceneGame(String levelFileName) {
 
 		mBackground = new Background(0.8f, 0.8f, 0.8f);
 		setBackground(mBackground);
 		setBackgroundEnabled(true);
+		
+		level = new Level(levelFileName);
 
 		HUD = new GameHUD();
 
 		createGameObjects();
-
-		mEventManager = new EventManager();
+		configureGameObjects();
 
 		attachChild(HUD);
 
 		Log.i(MainActivity.DEBUG_ID, "Scene game created");
-	}
-
-	public void load(String levelName) {
-
-		mEventManager.loadEvents(levelName);
 		mLoaded = true;
 	}
 
@@ -100,6 +93,11 @@ public class SceneGame extends MhyhreScene {
 		mPause = true;
 	}
 
+	private void configureGameObjects() {
+
+		mSkyes.setCurrentTime(level.getStartTime());
+	}
+	
 	private void createGameObjects() {
 
 		mBullets = new LinkedList<BulletUnit>();
@@ -112,7 +110,7 @@ public class SceneGame extends MhyhreScene {
 
 		mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
 
-		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), maxBulletsOnScreen, MainActivity.Me.getVertexBufferObjectManager());
+		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.Me.getVertexBufferObjectManager());
 
 		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
 
@@ -157,7 +155,7 @@ public class SceneGame extends MhyhreScene {
 		timeCounter += pSecondsElapsed;
 		float halfRange = 0.050f;
 
-		Event gameEvent = mEventManager.getCurrentEvent();
+		Event gameEvent = level.getCurrentEvent();
 
 		if (mMessageManager.isActiveMessage() == false) {
 
@@ -170,12 +168,12 @@ public class SceneGame extends MhyhreScene {
 				}
 			} else {
 
-				if (timeCounter > (gameEvent.getIntArg() - halfRange)) {
+				if (timeCounter > (gameEvent.getIntegerArg() - halfRange)) {
 
 					if (mEnemies.isWaitState()) {
 						timeCounter = 0;
 					} else {
-						mEventManager.nextEvent();
+						level.nextEvent();
 					}
 
 					mEnemies.addNewEnemy(gameEvent);
@@ -296,7 +294,7 @@ public class SceneGame extends MhyhreScene {
 
 		if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
 			
-			if (mBullets.size() < maxBulletsOnScreen) {
+			if (mBullets.size() < MAX_BULLETS_ON_SCREEN) {
 
 				BulletUnit bullet = mPlayer.fire(timeCounter);
 				

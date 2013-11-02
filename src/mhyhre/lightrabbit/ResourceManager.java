@@ -225,6 +225,13 @@ public class ResourceManager {
 		mFont.load();
 		fonts.put("White Furore 24", mFont);	
 		
+		
+		final ITexture TextureFontPixelWhite16 = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+
+		mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite24, MainActivity.Me.getAssets(), "Furore.otf", 16, true, Color.WHITE);
+		mFont.load();
+		fonts.put("White Furore 16", mFont);	
+		
 		Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadFonts: OK");
 	}
 

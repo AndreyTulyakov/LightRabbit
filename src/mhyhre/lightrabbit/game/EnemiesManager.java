@@ -117,7 +117,7 @@ public class EnemiesManager extends SpriteBatch {
 		if(mEnemies.size() < ENEMIES_MAX_COUND && waitState == false ){
 			
 
-			Log.i(MainActivity.DEBUG_ID, "addNewEnemy:" + event.getType().getValue() + " Enemy count:" + mEnemies.size());
+			Log.i(MainActivity.DEBUG_ID, "addNewEnemy:" + event.getType().name() + " Enemy count:" + mEnemies.size());
 	
 /*			
 			

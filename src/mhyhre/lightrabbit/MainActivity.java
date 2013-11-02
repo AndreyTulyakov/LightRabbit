@@ -41,6 +41,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 	public static final String DEBUG_ID = "LRABBIT";
 	public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
 	
+	public static final String LEVELS_FOLDER = "levels/";
 
 	// singleton handle
 	public static MainActivity Me;

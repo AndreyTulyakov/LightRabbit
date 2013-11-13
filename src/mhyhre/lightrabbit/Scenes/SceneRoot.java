@@ -17,8 +17,6 @@ import mhyhre.lightrabbit.MainActivity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
 
-import android.util.Log;
-
 public class SceneRoot extends Scene {
 
     private static SceneStates state = SceneStates.None;

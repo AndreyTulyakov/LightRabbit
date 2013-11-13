@@ -78,7 +78,7 @@ public class ResourceManager {
 
     public void playSound(String key) {
         if (!sounds.containsKey(key))
-            Log.e(MainActivity.DEBUG_ID, "ResourceManager::getSound: invalid key - " + key);
+            Log.e(MainActivity.DEBUG_ID, "ResourceManager::playSound: invalid key - " + key);
         if (MainActivity.isSoundEnabled()) {
             sounds.get(key).play();
         }
@@ -221,8 +221,6 @@ public class ResourceManager {
                 Color.WHITE);
         mFont.load();
         fonts.put("White Furore 24", mFont);
-
-        final ITexture TextureFontPixelWhite16 = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
 
         mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite24, MainActivity.Me.getAssets(), "Furore.otf", 16, true,
                 Color.WHITE);

@@ -2,7 +2,6 @@ package mhyhre.lightrabbit.game.Levels;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 public class DialogBase {
@@ -33,8 +33,11 @@ public class DialogBase {
     Map<Integer, Dialog> dialogs;
     private String characterBaseFilename;
 
+    @SuppressLint("UseSparseArrays")
     public DialogBase(String filename) {
+        
         dialogs = new HashMap<Integer, Dialog>();
+        
         try {
             InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
 
@@ -47,13 +50,10 @@ public class DialogBase {
 
         } catch (IOException e) {
             Log.w(MainActivity.DEBUG_ID, "DialogBase IO:" + e);
-
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
-
         } catch (SAXException e) {
             e.printStackTrace();
-
         }
 
         Log.i(MainActivity.DEBUG_ID, " ");

@@ -12,8 +12,6 @@
 
 package mhyhre.lightrabbit.Scenes;
 
-import java.util.Random;
-
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;

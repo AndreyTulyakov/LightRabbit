@@ -8,10 +8,6 @@ import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.util.Log;
-
 public class GameHUD extends MhyhreScene {
 
     public enum Buttons {

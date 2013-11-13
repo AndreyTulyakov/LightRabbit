@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 public class CharacterBase {
@@ -27,6 +28,7 @@ public class CharacterBase {
 
     Map<Integer, Character> characters;
 
+    @SuppressLint("UseSparseArrays")
     public CharacterBase(String filename) {
 
         characters = new HashMap<Integer, Character>();

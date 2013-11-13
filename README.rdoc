@@ -1,7 +1,7 @@
 ==Light Rabbit
 Android game in development
 
-Copyright (C) 2013 Andrew Tulay
+Copyright (C) 2013 Andrey Tulyakov
 @mail: mhyhre@gmail.com
 This work is licensed under a Creative Commons 
 Attribution-NonCommercial-NoDerivs 3.0 Unported License.

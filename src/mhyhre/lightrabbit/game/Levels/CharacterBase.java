@@ -20,66 +20,64 @@ import android.util.Log;
 
 public class CharacterBase {
 
-	private static final String CHARACTER = "character";
-	private static final String ID = "id";
-	private static final String ICON = "icon";
-	private static final String NAME = "name";
-	
-	Map<Integer, Character> characters;
+    private static final String CHARACTER = "character";
+    private static final String ID = "id";
+    private static final String ICON = "icon";
+    private static final String NAME = "name";
 
-	
-	public CharacterBase(String filename) {
+    Map<Integer, Character> characters;
 
-		characters = new HashMap<Integer, Character>();
+    public CharacterBase(String filename) {
 
-		try {
-			InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
+        characters = new HashMap<Integer, Character>();
 
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = dbf.newDocumentBuilder();
+        try {
+            InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
 
-			Document doc = docBuilder.parse(is);
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = dbf.newDocumentBuilder();
 
-			Element root = doc.getDocumentElement();
-			root.normalize();
+            Document doc = docBuilder.parse(is);
 
-			parseXml(root);
+            Element root = doc.getDocumentElement();
+            root.normalize();
 
-		} catch (IOException e) {
-			Log.w(MainActivity.DEBUG_ID, "CharacterBase IO:" + e);
+            parseXml(root);
 
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+        } catch (IOException e) {
+            Log.w(MainActivity.DEBUG_ID, "CharacterBase IO:" + e);
 
-		} catch (SAXException e) {
-			e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
 
-		}
-		
-		Log.i(MainActivity.DEBUG_ID, " ");
-		Log.i(MainActivity.DEBUG_ID, "Character base " + filename + " loaded and contain " +characters.size()+ " elements:");
-		for (final Map.Entry<Integer, Character> entry : characters.entrySet()) {
-			Log.i(MainActivity.DEBUG_ID, "  ID: "+ entry.getKey() + " " + entry.getValue());
-		}
-	}
+        } catch (SAXException e) {
+            e.printStackTrace();
 
-	
-	private void parseXml(Element rootElement) {
+        }
 
-		NodeList items = rootElement.getElementsByTagName(CHARACTER);
+        Log.i(MainActivity.DEBUG_ID, " ");
+        Log.i(MainActivity.DEBUG_ID, "Character base " + filename + " loaded and contain " + characters.size() + " elements:");
+        for (final Map.Entry<Integer, Character> entry : characters.entrySet()) {
+            Log.i(MainActivity.DEBUG_ID, "  ID: " + entry.getKey() + " " + entry.getValue());
+        }
+    }
 
-		for (int i = 0; i < items.getLength(); i++) {
+    private void parseXml(Element rootElement) {
 
-			Element element = (Element) items.item(i);
+        NodeList items = rootElement.getElementsByTagName(CHARACTER);
 
-			int id = Integer.parseInt(element.getAttribute(ID));
+        for (int i = 0; i < items.getLength(); i++) {
 
-			Character character = new Character();
-			character.setName(element.getAttribute(NAME));
-			character.setIconName(element.getAttribute(ICON));
+            Element element = (Element) items.item(i);
 
-			characters.put(id, character);
-		}
-	}
+            int id = Integer.parseInt(element.getAttribute(ID));
+
+            Character character = new Character();
+            character.setName(element.getAttribute(NAME));
+            character.setIconName(element.getAttribute(ICON));
+
+            characters.put(id, character);
+        }
+    }
 
 }

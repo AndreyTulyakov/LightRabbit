@@ -11,116 +11,111 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 public class WaterPolygon extends Polygon {
 
-	private List<Vector2> waterCoordinates;
-	float[] vertexX1;
-	float[] vertexY1;
+    private List<Vector2> waterCoordinates;
+    float[] vertexX1;
+    float[] vertexY1;
 
-	private final int waterResolution;
-	float waveRepeating = 1.5f;
-	float waveHeight = 50;
-	float waterLevel = 220;
+    private final int waterResolution;
+    float waveRepeating = 1.5f;
+    float waveHeight = 50;
+    float waterLevel = 220;
 
+    public WaterPolygon(int resolution, VertexBufferObjectManager pVertexBufferObjectManager) {
 
-	public WaterPolygon(int resolution, VertexBufferObjectManager pVertexBufferObjectManager) {
+        super(0, 0, new float[resolution + 3], new float[resolution + 3], pVertexBufferObjectManager);
 
-		super(0, 0, new float[resolution + 3], new float[resolution + 3], pVertexBufferObjectManager);
+        setDrawMode(DrawMode.TRIANGLE_FAN);
+        waterResolution = resolution;
 
-		setDrawMode(DrawMode.TRIANGLE_FAN);
-		waterResolution = resolution;
+        float step = MainActivity.getWidth() / (waterResolution - 1);
 
-		float step = MainActivity.getWidth() / (waterResolution - 1);
-		
-		setColor(0.0f, 0.1f, 0.6f, 0.5f);
-		
-		// Water coordinates list
-		waterCoordinates = new ArrayList<Vector2>();
+        setColor(0.0f, 0.1f, 0.6f, 0.5f);
 
-		waterCoordinates.add(new Vector2(MainActivity.getHalfWidth(), 0));
-		waterCoordinates.add(new Vector2(0, 0));
+        // Water coordinates list
+        waterCoordinates = new ArrayList<Vector2>();
 
-		for (int i = 0; i < waterResolution; i++) {
+        waterCoordinates.add(new Vector2(MainActivity.getHalfWidth(), 0));
+        waterCoordinates.add(new Vector2(0, 0));
 
-			waterCoordinates.add(new Vector2(i * step, MainActivity.getHalfHeight()));
-		}
+        for (int i = 0; i < waterResolution; i++) {
 
-		waterCoordinates.add(new Vector2(MainActivity.getWidth(), 0));
+            waterCoordinates.add(new Vector2(i * step, MainActivity.getHalfHeight()));
+        }
 
-		// Separate coordinates
-		vertexX1 = new float[waterCoordinates.size()];
-		vertexY1 = new float[waterCoordinates.size()];
+        waterCoordinates.add(new Vector2(MainActivity.getWidth(), 0));
 
-		for (int i = 0; i < waterCoordinates.size(); i++) {
-			vertexX1[i] = waterCoordinates.get(i).x;
-			vertexY1[i] = waterCoordinates.get(i).y;
-		}
-	}
+        // Separate coordinates
+        vertexX1 = new float[waterCoordinates.size()];
+        vertexY1 = new float[waterCoordinates.size()];
 
-	private static float tick = 0;
+        for (int i = 0; i < waterCoordinates.size(); i++) {
+            vertexX1[i] = waterCoordinates.get(i).x;
+            vertexY1[i] = waterCoordinates.get(i).y;
+        }
+    }
 
-	@Override
-	protected void onManagedUpdate(float pSecondsElapsed) {
+    private static float tick = 0;
 
+    @Override
+    protected void onManagedUpdate(float pSecondsElapsed) {
 
-		tick += 0.02f;
+        tick += 0.02f;
 
-		if (tick > Math.PI * 2.0f)
-			tick = 0.0f;
+        if (tick > Math.PI * 2.0f)
+            tick = 0.0f;
 
-		float step = MainActivity.getWidth() / (waterResolution - 1);
+        float step = MainActivity.getWidth() / (waterResolution - 1);
 
-		int startWaveOffset = 2;
+        int startWaveOffset = 2;
 
+        for (int i = startWaveOffset; i < vertexX1.length - 1; i++) {
 
-		for (int i = startWaveOffset; i < vertexX1.length - 1; i++) {
+            int j = i - startWaveOffset;
+            float waveAngle = getWaveAngle(j * step);
 
-			int j = i - startWaveOffset;
-			float waveAngle = getWaveAngle(j * step);
-			
-			float vertexHeight = getHeightOnWave(waveAngle);
+            float vertexHeight = getHeightOnWave(waveAngle);
 
-			vertexX1[i] = j * step;
-			vertexY1[i] = vertexHeight;
-		}
+            vertexX1[i] = j * step;
+            vertexY1[i] = vertexHeight;
+        }
 
-		updateVertices(vertexX1, vertexY1);
+        updateVertices(vertexX1, vertexY1);
 
-		super.onManagedUpdate(pSecondsElapsed);
-	}
+        super.onManagedUpdate(pSecondsElapsed);
+    }
 
-	public float getWaveRepeating() {
-		return waveRepeating;
-	}
+    public float getWaveRepeating() {
+        return waveRepeating;
+    }
 
-	public void setWaveRepeating(float waveRepeating) {
-		this.waveRepeating = waveRepeating;
-	}
-	
-	private float getWaveAngle(float i){
-		float c = (i/(MainActivity.getWidth() / (waterResolution-1)));
-		float waveAngle = (float) ((c * waveRepeating / (Math.PI)) + tick);
-		return waveAngle;
-	}
-	
-	private float getHeightOnWave(float angle){
-		float vertexHeight = (float) (waterLevel - waveHeight * Math.sin(angle));
-		return vertexHeight;
-	}
-	
-	public float getYPositionOnWave(float pX){
+    public void setWaveRepeating(float waveRepeating) {
+        this.waveRepeating = waveRepeating;
+    }
 
-		float waveAngle = getWaveAngle(pX);
+    private float getWaveAngle(float i) {
+        float c = (i / (MainActivity.getWidth() / (waterResolution - 1)));
+        float waveAngle = (float) ((c * waveRepeating / (Math.PI)) + tick);
+        return waveAngle;
+    }
 
-		float vertexHeight = getHeightOnWave(waveAngle);
-		
-		return vertexHeight;
-	}
+    private float getHeightOnWave(float angle) {
+        float vertexHeight = (float) (waterLevel - waveHeight * Math.sin(angle));
+        return vertexHeight;
+    }
 
-	
-	public float getAngleOnWave(float pX){
-		double waveAngle = getWaveAngle(pX) - Math.PI/2;
-		waveAngle = Math.sin(waveAngle) * -45;
-		return (float) waveAngle;
-	}
-	
-	
+    public float getYPositionOnWave(float pX) {
+
+        float waveAngle = getWaveAngle(pX);
+
+        float vertexHeight = getHeightOnWave(waveAngle);
+
+        return vertexHeight;
+    }
+
+    public float getAngleOnWave(float pX) {
+        double waveAngle = getWaveAngle(pX) - Math.PI / 2;
+        waveAngle = Math.sin(waveAngle) * -45;
+        return (float) waveAngle;
+    }
+
 }

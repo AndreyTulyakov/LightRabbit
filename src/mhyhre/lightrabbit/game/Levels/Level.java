@@ -17,109 +17,104 @@ import org.xml.sax.SAXException;
 
 public class Level {
 
-	private static final String EVENT = "Event";
-	private static final String COMMAND = "command";
-	private static final String ID = "id";
-	private static final String INT_ARG = "arg_int";
-	private static final String STRING_ARG = "arg_str";
-	
-	private static final String LEVEL_CHAPTER = "Chapter";	
-	private static final String LEVEL_NAME = "Name";
-	private static final String LEVEL_BACKSTORY = "Backstory";
-	private static final String LEVEL_DIALOGBASE = "DialogBase";
-	private static final String LEVEL_STARTTIME = "Time";
-	
+    private static final String EVENT = "Event";
+    private static final String COMMAND = "command";
+    private static final String ID = "id";
+    private static final String INT_ARG = "arg_int";
+    private static final String STRING_ARG = "arg_str";
 
-	private String mName;
-	private String mChapter;
-	private String mStory;
-	private String mDialogBaseFilename;
-	private int mStartTime;
+    private static final String LEVEL_CHAPTER = "Chapter";
+    private static final String LEVEL_NAME = "Name";
+    private static final String LEVEL_BACKSTORY = "Backstory";
+    private static final String LEVEL_DIALOGBASE = "DialogBase";
+    private static final String LEVEL_STARTTIME = "Time";
 
+    private String mName;
+    private String mChapter;
+    private String mStory;
+    private String mDialogBaseFilename;
+    private int mStartTime;
 
-	private List<Event> events;
-	private int currentEventIndex = 0;
-	
-	DialogBase dialogBase;
-	CharacterBase characterBase;
-	
+    private List<Event> events;
+    private int currentEventIndex = 0;
 
-	public Level(String filename) {
+    DialogBase dialogBase;
+    CharacterBase characterBase;
 
-		events = new ArrayList<Event>();
+    public Level(String filename) {
 
-		Document doc = null;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		
-		try {
-			InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
-			DocumentBuilder docBuilder = dbf.newDocumentBuilder();
+        events = new ArrayList<Event>();
 
-			doc = docBuilder.parse(is);
+        Document doc = null;
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-			Element root = doc.getDocumentElement();
-			
-			root.normalize();
-			
-			LoadFromXml(root);
+        try {
+            InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
+            DocumentBuilder docBuilder = dbf.newDocumentBuilder();
 
-		} catch (IOException e) {
-			e.printStackTrace();
+            doc = docBuilder.parse(is);
 
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+            Element root = doc.getDocumentElement();
 
-		} catch (SAXException e) {
-			e.printStackTrace();
+            root.normalize();
 
-		}
-		
-		for(Event event: events){
-			event.print();
-		}
-		if(events != null){
-			events.get(currentEventIndex);
-		}
-		
-		dialogBase = new DialogBase(mDialogBaseFilename);
-		characterBase = new CharacterBase(dialogBase.getCharacterBaseFilename());
-	}
+            LoadFromXml(root);
 
-	private void LoadFromXml(Element rootElement) {
+        } catch (IOException e) {
+            e.printStackTrace();
 
-		loadHeaderFromXML(rootElement);
-		loadEventsFromXML(rootElement);
-	}
-	
-	
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
 
-	private void loadHeaderFromXML(Element rootElement){
-		
-		mChapter = getString(LEVEL_CHAPTER, rootElement);
-		mName = getString(LEVEL_NAME, rootElement);
-		mStory = getString(LEVEL_BACKSTORY, rootElement);
-		mDialogBaseFilename = getString(LEVEL_DIALOGBASE, rootElement);
-		mStartTime = Integer.parseInt(getString(LEVEL_STARTTIME, rootElement));
-	}
-	
-	private void loadEventsFromXML(Element rootElement){
-		NodeList items = rootElement.getElementsByTagName(EVENT);
+        } catch (SAXException e) {
+            e.printStackTrace();
 
-		for (int i = 0; i < items.getLength(); i++) {
+        }
 
-			Element element = (Element) items.item(i);
+        for (Event event : events) {
+            event.print();
+        }
+        if (events != null) {
+            events.get(currentEventIndex);
+        }
 
-			Event event = new Event();
-			event.setType(element.getAttribute(COMMAND));
-			event.setId(Integer.parseInt(element.getAttribute(ID)));
-			event.setIntArg(Integer.parseInt(element.getAttribute(INT_ARG)));
-			event.setStrArg(element.getAttribute(STRING_ARG));
+        dialogBase = new DialogBase(mDialogBaseFilename);
+        characterBase = new CharacterBase(dialogBase.getCharacterBaseFilename());
+    }
 
-			events.add(event);
-		}
-	}
-	
-	public static String getString(String tagName, Element element) {
+    private void LoadFromXml(Element rootElement) {
+
+        loadHeaderFromXML(rootElement);
+        loadEventsFromXML(rootElement);
+    }
+
+    private void loadHeaderFromXML(Element rootElement) {
+
+        mChapter = getString(LEVEL_CHAPTER, rootElement);
+        mName = getString(LEVEL_NAME, rootElement);
+        mStory = getString(LEVEL_BACKSTORY, rootElement);
+        mDialogBaseFilename = getString(LEVEL_DIALOGBASE, rootElement);
+        mStartTime = Integer.parseInt(getString(LEVEL_STARTTIME, rootElement));
+    }
+
+    private void loadEventsFromXML(Element rootElement) {
+        NodeList items = rootElement.getElementsByTagName(EVENT);
+
+        for (int i = 0; i < items.getLength(); i++) {
+
+            Element element = (Element) items.item(i);
+
+            Event event = new Event();
+            event.setType(element.getAttribute(COMMAND));
+            event.setId(Integer.parseInt(element.getAttribute(ID)));
+            event.setIntArg(Integer.parseInt(element.getAttribute(INT_ARG)));
+            event.setStrArg(element.getAttribute(STRING_ARG));
+
+            events.add(event);
+        }
+    }
+
+    public static String getString(String tagName, Element element) {
         NodeList list = element.getElementsByTagName(tagName);
         if (list != null && list.getLength() > 0) {
             NodeList subList = list.item(0).getChildNodes();
@@ -132,40 +127,40 @@ public class Level {
         return null;
     }
 
-	public List<Event> getEventsList() {
-		return events;
-	}
+    public List<Event> getEventsList() {
+        return events;
+    }
 
-	public String getName() {
-		return mName;
-	}
-	
-	public String getChapter() {
-		return mChapter;
-	}
+    public String getName() {
+        return mName;
+    }
 
-	public String getBackstory() {
-		return mStory;
-	}
-	
-	public void nextEvent(){
-		currentEventIndex++;
-	}
-	
-	public Event getCurrentEvent(){
-		
-		if(currentEventIndex >= 0 && currentEventIndex < events.size()){
-			return events.get(currentEventIndex);
-		}		
-		return null;
-	}
+    public String getChapter() {
+        return mChapter;
+    }
 
-	public int getStartTime() {
-		return mStartTime;
-	}
+    public String getBackstory() {
+        return mStory;
+    }
 
-	public String getDialogBaseFilename() {
-		return mDialogBaseFilename;
-	}
+    public void nextEvent() {
+        currentEventIndex++;
+    }
+
+    public Event getCurrentEvent() {
+
+        if (currentEventIndex >= 0 && currentEventIndex < events.size()) {
+            return events.get(currentEventIndex);
+        }
+        return null;
+    }
+
+    public int getStartTime() {
+        return mStartTime;
+    }
+
+    public String getDialogBaseFilename() {
+        return mDialogBaseFilename;
+    }
 
 }

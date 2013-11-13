@@ -21,224 +21,224 @@ import android.util.Log;
 
 public class SceneRoot extends Scene {
 
-	private static SceneStates state = SceneStates.None;
+    private static SceneStates state = SceneStates.None;
 
-	public SceneLoader mSceneLoader;
-	public SceneMainMenu mSceneMainMenu;
-	public SceneAbout mSceneAbout;
-	public SceneExit mSceneExit;
-	public SceneGame mSceneGame;
-	public SceneLevelSelector mSceneLevelSelector;
-	public SceneGameLoading mSceneGameLoading;
+    public SceneLoader mSceneLoader;
+    public SceneMainMenu mSceneMainMenu;
+    public SceneAbout mSceneAbout;
+    public SceneExit mSceneExit;
+    public SceneGame mSceneGame;
+    public SceneLevelSelector mSceneLevelSelector;
+    public SceneGameLoading mSceneGameLoading;
 
-	public static boolean Preloaded = false;
+    public static boolean Preloaded = false;
 
-	public SceneRoot() {
-		setBackgroundEnabled(false);
-	}
+    public SceneRoot() {
+        setBackgroundEnabled(false);
+    }
 
-	public void Initialize() {
+    public void Initialize() {
 
-		mSceneLoader = new SceneLoader();
-		mSceneLoader.Show();
-		attachChild(mSceneLoader);
+        mSceneLoader = new SceneLoader();
+        mSceneLoader.Show();
+        attachChild(mSceneLoader);
 
-		SetState(SceneStates.Splash);
+        SetState(SceneStates.Splash);
 
-		MainActivity.Res.loadAtlases();
-		MainActivity.Res.loadFonts();
-		MainActivity.Res.loadSounds();
+        MainActivity.Res.loadAtlases();
+        MainActivity.Res.loadFonts();
+        MainActivity.Res.loadSounds();
 
-		// Scenes Creating ------------------------------------------------
-		mSceneMainMenu = new SceneMainMenu();
-		mSceneAbout = new SceneAbout();
-		mSceneExit = new SceneExit();
-		mSceneLevelSelector = new SceneLevelSelector();
-		mSceneGameLoading = new SceneGameLoading();
+        // Scenes Creating ------------------------------------------------
+        mSceneMainMenu = new SceneMainMenu();
+        mSceneAbout = new SceneAbout();
+        mSceneExit = new SceneExit();
+        mSceneLevelSelector = new SceneLevelSelector();
+        mSceneGameLoading = new SceneGameLoading();
 
-		mSceneGame = null;
+        mSceneGame = null;
 
-		attachChild(mSceneMainMenu);
-		attachChild(mSceneAbout);
-		attachChild(mSceneExit);
-		attachChild(mSceneLevelSelector);
-		attachChild(mSceneGameLoading);
-		
-		// ---------------------------------------------------------------
+        attachChild(mSceneMainMenu);
+        attachChild(mSceneAbout);
+        attachChild(mSceneExit);
+        attachChild(mSceneLevelSelector);
+        attachChild(mSceneGameLoading);
 
-		Preloaded = true;
-		mSceneLoader.mCaptionTapScreen.setVisible(true);
-		mSceneLoader.registerTouchArea(mSceneLoader.TapRect);
+        // ---------------------------------------------------------------
 
-	}
+        Preloaded = true;
+        mSceneLoader.mCaptionTapScreen.setVisible(true);
+        mSceneLoader.registerTouchArea(mSceneLoader.TapRect);
 
+    }
 
-	public void SetState(SceneStates pState) {
+    public void SetState(SceneStates pState) {
 
-		state = pState;
+        state = pState;
 
-		if (Preloaded) {
+        if (Preloaded) {
 
-			// Hide all scenes.
-			mSceneLoader.Hide();
-			mSceneMainMenu.Hide();
-			mSceneAbout.Hide();
-			mSceneExit.Hide();
-			mSceneLevelSelector.Hide();
-			mSceneGameLoading.Hide();
-			
-			if(mSceneGame != null) mSceneGame.Hide();
+            // Hide all scenes.
+            mSceneLoader.Hide();
+            mSceneMainMenu.Hide();
+            mSceneAbout.Hide();
+            mSceneExit.Hide();
+            mSceneLevelSelector.Hide();
+            mSceneGameLoading.Hide();
 
-			switch (state) {
-			case Splash:
-				mSceneLoader.Show();
-				break;
+            if (mSceneGame != null)
+                mSceneGame.Hide();
 
-			case MainMenu:
-				mSceneMainMenu.Show();
-				break;
-				
-			case LevelSelector:
-				mSceneLevelSelector.Show();
-				break;
+            switch (state) {
+            case Splash:
+                mSceneLoader.Show();
+                break;
 
-			case About:
-				mSceneAbout.Show();
-				break;
+            case MainMenu:
+                mSceneMainMenu.Show();
+                break;
 
-			case Exit:
-				mSceneExit.Show();
-				break;
-				
-			case GameLoading:
-				
-				mSceneGameLoading.setLoaded(false);
+            case LevelSelector:
+                mSceneLevelSelector.Show();
+                break;
 
-				detachChild(mSceneGameLoading);
-				
-				if(mSceneGame != null){
-					this.detachChild(mSceneGame);
-					mSceneGame = null;
-				}
-				
-				mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().filename);
-				mSceneGame.onManagedUpdate(0);
-				mSceneGame.pause();
-				
-				mSceneGameLoading.setLevelName(mSceneGame.level.getName());
-				mSceneGameLoading.setLevelChapter(mSceneGame.level.getChapter());
-				
-				this.attachChild(mSceneGame);
-				this.attachChild(mSceneGameLoading);
-				
-				mSceneGameLoading.Show();
-				mSceneGame.Show();
-				
-				mSceneGameLoading.setLoaded(true);
-				
-				break;
+            case About:
+                mSceneAbout.Show();
+                break;
 
-			case Game:
-				
-				if(mSceneGame != null){
-					
-					mSceneGame.Show();
-					mSceneGame.start();
-				}
-				break;
-				
-			case Win:
+            case Exit:
+                mSceneExit.Show();
+                break;
 
-				SetState(SceneStates.LevelSelector);
-				break;
+            case GameLoading:
 
-			default:
+                mSceneGameLoading.setLoaded(false);
 
-				break;
-			}
-		}
-		
-	}
+                detachChild(mSceneGameLoading);
 
-	public static SceneStates GetState() {
-		return state;
-	}
+                if (mSceneGame != null) {
+                    this.detachChild(mSceneGame);
+                    mSceneGame = null;
+                }
 
-	@Override
-	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
+                mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().filename);
+                mSceneGame.onManagedUpdate(0);
+                mSceneGame.pause();
 
-		if (Preloaded) {
-			switch (state) {
-			case Splash:
-				mSceneLoader.onSceneTouchEvent(pSceneTouchEvent);
-				break;
+                mSceneGameLoading.setLevelName(mSceneGame.level.getName());
+                mSceneGameLoading.setLevelChapter(mSceneGame.level.getChapter());
 
-			case MainMenu:
-				mSceneMainMenu.onSceneTouchEvent(pSceneTouchEvent);
-				break;
+                this.attachChild(mSceneGame);
+                this.attachChild(mSceneGameLoading);
 
-			case LevelSelector:
-				mSceneLevelSelector.onSceneTouchEvent(pSceneTouchEvent);
-				break;
-				
-			case About:
-				mSceneAbout.onSceneTouchEvent(pSceneTouchEvent);
-				break;
+                mSceneGameLoading.Show();
+                mSceneGame.Show();
 
-			case Exit:
-				mSceneExit.onSceneTouchEvent(pSceneTouchEvent);
-				break;
-				
-			case GameLoading:
-				mSceneGameLoading.onSceneTouchEvent(pSceneTouchEvent);
-				break;
+                mSceneGameLoading.setLoaded(true);
 
-			case Game:
-				mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
-				break;
+                break;
 
-			default:
-				break;
+            case Game:
 
-			}
-		}
-		return super.onSceneTouchEvent(pSceneTouchEvent);
-	}
+                if (mSceneGame != null) {
 
-	public void onSceneBackPress() {
+                    mSceneGame.Show();
+                    mSceneGame.start();
+                }
+                break;
 
-		switch (state) {
-		case Splash:
+            case Win:
 
-			break;
+                SetState(SceneStates.LevelSelector);
+                break;
 
-		case MainMenu:
-			SetState(SceneStates.Exit);
-			break;
-			
-		case GameLoading:
-			
-			break;
+            default:
 
-		case Game:
-			SetState(SceneStates.LevelSelector);
-			break;
-			
-		case LevelSelector:
-			SetState(SceneStates.MainMenu);
-			break;
+                break;
+            }
+        }
 
-		case About:
-			SetState(SceneStates.MainMenu);
-			break;
+    }
 
-		case Exit:
-			SetState(SceneStates.MainMenu);
-			break;
+    public static SceneStates GetState() {
+        return state;
+    }
 
-		default:
-			break;
-		}
-	}
+    @Override
+    public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
+
+        if (Preloaded) {
+            switch (state) {
+            case Splash:
+                mSceneLoader.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            case MainMenu:
+                mSceneMainMenu.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            case LevelSelector:
+                mSceneLevelSelector.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            case About:
+                mSceneAbout.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            case Exit:
+                mSceneExit.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            case GameLoading:
+                mSceneGameLoading.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            case Game:
+                mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
+                break;
+
+            default:
+                break;
+
+            }
+        }
+        return super.onSceneTouchEvent(pSceneTouchEvent);
+    }
+
+    public void onSceneBackPress() {
+
+        switch (state) {
+        case Splash:
+
+            break;
+
+        case MainMenu:
+            SetState(SceneStates.Exit);
+            break;
+
+        case GameLoading:
+
+            break;
+
+        case Game:
+            SetState(SceneStates.LevelSelector);
+            break;
+
+        case LevelSelector:
+            SetState(SceneStates.MainMenu);
+            break;
+
+        case About:
+            SetState(SceneStates.MainMenu);
+            break;
+
+        case Exit:
+            SetState(SceneStates.MainMenu);
+            break;
+
+        default:
+            break;
+        }
+    }
 
 }

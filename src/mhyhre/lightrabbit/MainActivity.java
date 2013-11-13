@@ -38,190 +38,189 @@ import android.view.KeyEvent;
 
 public class MainActivity extends SimpleBaseGameActivity {
 
-	public static final String DEBUG_ID = "LRABBIT";
-	public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
-	
-	public static final String LEVELS_FOLDER = "levels/";
+    public static final String DEBUG_ID = "LRABBIT";
+    public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
 
-	// singleton handle
-	public static MainActivity Me;
+    public static final String LEVELS_FOLDER = "levels/";
 
-	private static Vibrator mVibrator;
-	public static Camera camera;
-	public static int unlockedLevels = 8;
+    // singleton handle
+    public static MainActivity Me;
 
-	// screen sizes
-	private static int SCREEN_WIDTH, SCREEN_HEIGHT;
-	private static float HalfWidth, HalfHeight;
+    private static Vibrator mVibrator;
+    public static Camera camera;
+    public static int unlockedLevels = 8;
 
-	public static ResourceManager Res;
-	public static SceneRoot mSceneRoot;
+    // screen sizes
+    private static int SCREEN_WIDTH, SCREEN_HEIGHT;
+    private static float HalfWidth, HalfHeight;
 
-	AssetManager assetManager;
+    public static ResourceManager Res;
+    public static SceneRoot mSceneRoot;
 
-	static private boolean vibroEnabled = true;
-	static private boolean soundEnabled = true;
+    AssetManager assetManager;
 
-	public static String MY_PREF = "MY_PREF";
+    static private boolean vibroEnabled = true;
+    static private boolean soundEnabled = true;
 
-	protected void savePreferences() {
+    public static String MY_PREF = "MY_PREF";
 
-		int mode = Activity.MODE_PRIVATE;
-		SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
+    protected void savePreferences() {
 
-		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putInt("appVersion", 2);
-		editor.putBoolean("isVibroEnabled", isVibroEnabled());
-		editor.putBoolean("isSoundEnabled", isSoundEnabled());
-		editor.putInt("unlockedLevels", getUnlockedLevels());
-		editor.commit();
-	}
-	
-	public static SceneRoot getRootScene(){
-		return mSceneRoot;
-	}
-	
-	public void loadPreferences() 
-	{
+        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
 
-	  int mode = Activity.MODE_PRIVATE;
-	  SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode); 
-	  
-	  setVibroEnabled( mySharedPreferences.getBoolean("isVibroEnabled", true));
-	  setSoundEnabled( mySharedPreferences.getBoolean("isSoundEnabled", true));
-	  //setUnlockedLevels( mySharedPreferences.getInt("unlockedLevels", 1));
-	}
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putInt("appVersion", 2);
+        editor.putBoolean("isVibroEnabled", isVibroEnabled());
+        editor.putBoolean("isSoundEnabled", isSoundEnabled());
+        editor.putInt("unlockedLevels", getUnlockedLevels());
+        editor.commit();
+    }
 
-	@Override
-	public EngineOptions onCreateEngineOptions() {
+    public static SceneRoot getRootScene() {
+        return mSceneRoot;
+    }
 
-		Log.i(DEBUG_ID, "--------------------------------------------------");
-		mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-		mVibrator.vibrate(50);
+    public void loadPreferences() {
 
-		Me = this;
+        int mode = Activity.MODE_PRIVATE;
+        SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
 
-		assetManager = getAssets();
+        setVibroEnabled(mySharedPreferences.getBoolean("isVibroEnabled", true));
+        setSoundEnabled(mySharedPreferences.getBoolean("isSoundEnabled", true));
+        // setUnlockedLevels( mySharedPreferences.getInt("unlockedLevels", 1));
+    }
 
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		
-		loadPreferences();
+    @Override
+    public EngineOptions onCreateEngineOptions() {
 
-		SCREEN_WIDTH = 960;
-		SCREEN_HEIGHT = 540;
+        Log.i(DEBUG_ID, "--------------------------------------------------");
+        mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        mVibrator.vibrate(50);
 
-		HalfWidth = SCREEN_WIDTH / 2.0f;
-		HalfHeight = SCREEN_HEIGHT / 2.0f;
+        Me = this;
 
-		camera = new Camera(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-		
+        assetManager = getAssets();
 
-		if (BuildConfig.DEBUG)
-			Log.i(DEBUG_ID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-		EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels, metrics.heightPixels), camera);
-		mEngineOptions.getAudioOptions().setNeedsSound(true);
-		mEngineOptions.getTouchOptions().setNeedsMultiTouch(true);
-		return mEngineOptions;
-	}
+        loadPreferences();
 
-	@Override
-	public void onCreateResources() {
-		if (BuildConfig.DEBUG)
-			Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateResources");
-	}
+        SCREEN_WIDTH = 960;
+        SCREEN_HEIGHT = 540;
 
-	@Override
-	public Scene onCreateScene() {
-		if (BuildConfig.DEBUG)
-			Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
-		this.mEngine.registerUpdateHandler(new FPSLogger());
+        HalfWidth = SCREEN_WIDTH / 2.0f;
+        HalfHeight = SCREEN_HEIGHT / 2.0f;
 
-		Res = new ResourceManager();
+        camera = new Camera(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		mSceneRoot = new SceneRoot();
-		mSceneRoot.Initialize();
+        if (BuildConfig.DEBUG)
+            Log.i(DEBUG_ID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);
 
-		return mSceneRoot;
-	}
+        EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels,
+                metrics.heightPixels), camera);
+        mEngineOptions.getAudioOptions().setNeedsSound(true);
+        mEngineOptions.getTouchOptions().setNeedsMultiTouch(true);
+        return mEngineOptions;
+    }
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+    @Override
+    public void onCreateResources() {
+        if (BuildConfig.DEBUG)
+            Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateResources");
+    }
 
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (BuildConfig.DEBUG)
-				Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onKeyDown: KEYCODE_BACK");
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+    @Override
+    public Scene onCreateScene() {
+        if (BuildConfig.DEBUG)
+            Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
+        this.mEngine.registerUpdateHandler(new FPSLogger());
 
-	@Override
-	public void onBackPressed() {
+        Res = new ResourceManager();
 
-		if (SceneRoot.GetState() == SceneStates.Splash) {
-			super.onBackPressed();
-		} else {
-			mSceneRoot.onSceneBackPress();
-		}
-	}
+        mSceneRoot = new SceneRoot();
+        mSceneRoot.Initialize();
 
-	public AssetManager getAssetManager() {
-		return assetManager;
-	}
+        return mSceneRoot;
+    }
 
-	public void onDestroy() {
-		
-		savePreferences();
-		if (BuildConfig.DEBUG)
-			Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onDestroy");
-		super.onDestroy();
-		android.os.Process.killProcess(android.os.Process.myPid());
-	}
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-	public static float getWidth() {
-		return SCREEN_WIDTH;
-	}
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (BuildConfig.DEBUG)
+                Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onKeyDown: KEYCODE_BACK");
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
-	public static float getHeight() {
-		return SCREEN_HEIGHT;
-	}
+    @Override
+    public void onBackPressed() {
 
-	public static float getHalfWidth() {
-		return HalfWidth;
-	}
+        if (SceneRoot.GetState() == SceneStates.Splash) {
+            super.onBackPressed();
+        } else {
+            mSceneRoot.onSceneBackPress();
+        }
+    }
 
-	public static float getHalfHeight() {
-		return HalfHeight;
-	}
+    public AssetManager getAssetManager() {
+        return assetManager;
+    }
 
-	public static boolean isVibroEnabled() {
-		return vibroEnabled;
-	}
+    public void onDestroy() {
 
-	public static void setVibroEnabled(boolean vibroEnabled) {
-		MainActivity.vibroEnabled = vibroEnabled;
-	}
+        savePreferences();
+        if (BuildConfig.DEBUG)
+            Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onDestroy");
+        super.onDestroy();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 
-	public static boolean isSoundEnabled() {
-		return soundEnabled;
-	}
+    public static float getWidth() {
+        return SCREEN_WIDTH;
+    }
 
-	public static void setSoundEnabled(boolean soundEnabled) {
-		MainActivity.soundEnabled = soundEnabled;
-	}
+    public static float getHeight() {
+        return SCREEN_HEIGHT;
+    }
 
-	public static void vibrate(long milliseconds) {
-		if (vibroEnabled) {
-			mVibrator.vibrate(milliseconds);
-		}
-	}
+    public static float getHalfWidth() {
+        return HalfWidth;
+    }
 
-	public static int getUnlockedLevels() {
-		return unlockedLevels;
-	}
+    public static float getHalfHeight() {
+        return HalfHeight;
+    }
 
-	public static void setUnlockedLevels(int unlockedLevels) {
-		MainActivity.unlockedLevels = unlockedLevels;
-	}
+    public static boolean isVibroEnabled() {
+        return vibroEnabled;
+    }
+
+    public static void setVibroEnabled(boolean vibroEnabled) {
+        MainActivity.vibroEnabled = vibroEnabled;
+    }
+
+    public static boolean isSoundEnabled() {
+        return soundEnabled;
+    }
+
+    public static void setSoundEnabled(boolean soundEnabled) {
+        MainActivity.soundEnabled = soundEnabled;
+    }
+
+    public static void vibrate(long milliseconds) {
+        if (vibroEnabled) {
+            mVibrator.vibrate(milliseconds);
+        }
+    }
+
+    public static int getUnlockedLevels() {
+        return unlockedLevels;
+    }
+
+    public static void setUnlockedLevels(int unlockedLevels) {
+        MainActivity.unlockedLevels = unlockedLevels;
+    }
 }

@@ -38,272 +38,267 @@ import android.util.Log;
 
 public class SceneGame extends MhyhreScene {
 
-	boolean mLoaded = true;
-	boolean mPause = false;
+    boolean mLoaded = true;
+    boolean mPause = false;
 
-	private final int MAX_BULLETS_ON_SCREEN = 50;
+    private final int MAX_BULLETS_ON_SCREEN = 50;
 
-	private Background mBackground;
+    private Background mBackground;
 
-	SpriteBatch bulletBatch;
+    SpriteBatch bulletBatch;
 
-	GameHUD HUD;
+    GameHUD HUD;
 
-	List<BulletUnit> mBullets;
+    List<BulletUnit> mBullets;
 
-	CloudsManager mClouds;
-	SkyManager mSkyes;
-	EnemiesManager mEnemies;
-	GameMessageManager mMessageManager;
-	Player mPlayer;
+    CloudsManager mClouds;
+    SkyManager mSkyes;
+    EnemiesManager mEnemies;
+    GameMessageManager mMessageManager;
+    Player mPlayer;
 
-	private WaterPolygon water;
+    private WaterPolygon water;
 
-	float timeCounter = 0;
+    float timeCounter = 0;
 
-	Level level;
-	
+    Level level;
 
-	public SceneGame(String levelFileName) {
+    public SceneGame(String levelFileName) {
 
-		mBackground = new Background(0.8f, 0.8f, 0.8f);
-		setBackground(mBackground);
-		setBackgroundEnabled(true);
-		
-		level = new Level(levelFileName);
+        mBackground = new Background(0.8f, 0.8f, 0.8f);
+        setBackground(mBackground);
+        setBackgroundEnabled(true);
 
-		HUD = new GameHUD();
+        level = new Level(levelFileName);
 
-		createGameObjects();
-		configureGameObjects();
+        HUD = new GameHUD();
 
-		attachChild(HUD);
+        createGameObjects();
+        configureGameObjects();
 
-		Log.i(MainActivity.DEBUG_ID, "Scene game created");
-		mLoaded = true;
-	}
+        attachChild(HUD);
 
-	public void start() {
+        Log.i(MainActivity.DEBUG_ID, "Scene game created");
+        mLoaded = true;
+    }
 
-		mPause = false;
-	}
+    public void start() {
 
-	public void pause() {
+        mPause = false;
+    }
 
-		mPause = true;
-	}
+    public void pause() {
 
-	private void configureGameObjects() {
+        mPause = true;
+    }
 
-		mSkyes.setCurrentTime(level.getStartTime());
-	}
-	
-	private void createGameObjects() {
+    private void configureGameObjects() {
 
-		mBullets = new LinkedList<BulletUnit>();
+        mSkyes.setCurrentTime(level.getStartTime());
+    }
 
-		mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
+    private void createGameObjects() {
 
-		water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
+        mBullets = new LinkedList<BulletUnit>();
 
-		mPlayer = new Player(100);
+        mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
 
-		mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
+        water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
 
-		bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.Me.getVertexBufferObjectManager());
+        mPlayer = new Player(100);
 
-		mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
+        mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
 
-		mMessageManager = new GameMessageManager();
-		mMessageManager.Hide();
+        bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.Me.getVertexBufferObjectManager());
 
-		attachChild(mSkyes);
-		attachChild(mClouds);
-		attachChild(mEnemies);
-		attachChild(bulletBatch);
-		attachChild(mPlayer);
-		attachChild(water);
+        mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
 
-		attachChild(mMessageManager);
-	}
+        mMessageManager = new GameMessageManager();
+        mMessageManager.Hide();
 
-	@Override
-	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
+        attachChild(mSkyes);
+        attachChild(mClouds);
+        attachChild(mEnemies);
+        attachChild(bulletBatch);
+        attachChild(mPlayer);
+        attachChild(water);
 
-		if (!mLoaded)
-			return true;
+        attachChild(mMessageManager);
+    }
 
-		HUD.onSceneTouchEvent(pSceneTouchEvent);
+    @Override
+    public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
-		mMessageManager.onSceneTouchEvent(pSceneTouchEvent);
-		if (mMessageManager.isActiveMessage() == false) {
-			return super.onSceneTouchEvent(pSceneTouchEvent);
-		}
-		return true;
-	}
+        if (!mLoaded)
+            return true;
 
-	@Override
-	protected void onManagedUpdate(final float pSecondsElapsed) {
+        HUD.onSceneTouchEvent(pSceneTouchEvent);
 
-		// if(!mLoaded) return;
-		// if(mPause) return;
+        mMessageManager.onSceneTouchEvent(pSceneTouchEvent);
+        if (mMessageManager.isActiveMessage() == false) {
+            return super.onSceneTouchEvent(pSceneTouchEvent);
+        }
+        return true;
+    }
 
-		updateControlls();
+    @Override
+    protected void onManagedUpdate(final float pSecondsElapsed) {
 
-		mPlayer.update(water);
+        // if(!mLoaded) return;
+        // if(mPause) return;
 
-		timeCounter += pSecondsElapsed;
-		float halfRange = 0.050f;
+        updateControlls();
 
-		Event gameEvent = level.getCurrentEvent();
+        mPlayer.update(water);
 
-		if (mMessageManager.isActiveMessage() == false) {
+        timeCounter += pSecondsElapsed;
+        float halfRange = 0.050f;
 
-			// if all events complete
-			if (gameEvent == null) {
+        Event gameEvent = level.getCurrentEvent();
 
-				// if all enemies destroyed
-				if (mEnemies.isWaitState() == false) {
+        if (mMessageManager.isActiveMessage() == false) {
 
-				}
-			} else {
+            // if all events complete
+            if (gameEvent == null) {
 
-				if (timeCounter > (gameEvent.getIntegerArg() - halfRange)) {
+                // if all enemies destroyed
+                if (mEnemies.isWaitState() == false) {
 
-					if (mEnemies.isWaitState()) {
-						timeCounter = 0;
-					} else {
-						level.nextEvent();
-					}
+                }
+            } else {
 
-					mEnemies.addNewEnemy(gameEvent);
-				}
-			}
-		}
+                if (timeCounter > (gameEvent.getIntegerArg() - halfRange)) {
 
-		updateBullets();
+                    if (mEnemies.isWaitState()) {
+                        timeCounter = 0;
+                    } else {
+                        level.nextEvent();
+                    }
 
-		mEnemies.update();
+                    mEnemies.addNewEnemy(gameEvent);
+                }
+            }
+        }
 
-		enemiesSharks();
+        updateBullets();
 
-		HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
+        mEnemies.update();
 
-		super.onManagedUpdate(pSecondsElapsed);
-	}
+        enemiesSharks();
 
+        HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
 
-	private void enemiesSharks() {
+        super.onManagedUpdate(pSecondsElapsed);
+    }
 
-		for (Enemy enemy : mEnemies.getEnemiesList()) {
+    private void enemiesSharks() {
 
-			if (Collisions.sptireCircleByCircle(mPlayer, 20, enemy.getX(), enemy.getY(), 20)) {
+        for (Enemy enemy : mEnemies.getEnemiesList()) {
 
-				if (enemy.isDied() == false) {
+            if (Collisions.sptireCircleByCircle(mPlayer, 20, enemy.getX(), enemy.getY(), 20)) {
 
-					MainActivity.vibrate(30);
+                if (enemy.isDied() == false) {
 
-					if (mPlayer.getCurrentHealth() > 0)
-						mPlayer.setCurrentHealth(mPlayer.getCurrentHealth()-1);
+                    MainActivity.vibrate(30);
 
-					enemy.setDied(true);
-				}
-			}
-		}
-	}
+                    if (mPlayer.getCurrentHealth() > 0)
+                        mPlayer.setCurrentHealth(mPlayer.getCurrentHealth() - 1);
 
-	private void updateBullets() {
-		// Bullets
-		ITextureRegion bulletRegion = MainActivity.Res.getTextureRegion("bullet");
-		ITextureRegion bulletBoomRegion = MainActivity.Res.getTextureRegion("bullet_boom");
-		ITextureRegion bulletResultRegion;
+                    enemy.setDied(true);
+                }
+            }
+        }
+    }
 
-		for (int i = 0; i < mBullets.size(); i++) {
+    private void updateBullets() {
+        // Bullets
+        ITextureRegion bulletRegion = MainActivity.Res.getTextureRegion("bullet");
+        ITextureRegion bulletBoomRegion = MainActivity.Res.getTextureRegion("bullet_boom");
+        ITextureRegion bulletResultRegion;
 
-			BulletUnit bullet = mBullets.get(i);
+        for (int i = 0; i < mBullets.size(); i++) {
 
-			for (Enemy enemy : mEnemies.getEnemiesList()) {
+            BulletUnit bullet = mBullets.get(i);
 
-				if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getX(), enemy.getY(), enemy.getRadius())) {
+            for (Enemy enemy : mEnemies.getEnemiesList()) {
 
-					if (enemy.isDied() == false) {
+                if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getX(), enemy.getY(), enemy.getRadius())) {
 
-						enemy.setHealth(enemy.getHealth() - bullet.getBoomPower());
+                    if (enemy.isDied() == false) {
 
-						if (enemy.getHealth() <= 0) {
+                        enemy.setHealth(enemy.getHealth() - bullet.getBoomPower());
 
-							enemy.setDied(true);
+                        if (enemy.getHealth() <= 0) {
 
-							mPlayer.setTotalGold(mPlayer.getTotalGold()+50);
-							HUD.updateGoldIndicator(mPlayer.getTotalGold());
-						}
-					}
+                            enemy.setDied(true);
 
-					bullet.setSink(true);
-					bullet.setBoom(10);
-				}
-			}
+                            mPlayer.setTotalGold(mPlayer.getTotalGold() + 50);
+                            HUD.updateGoldIndicator(mPlayer.getTotalGold());
+                        }
+                    }
 
-			if (bullet.getY() < water.getYPositionOnWave(bullet.getX())) {
-				bullet.setSink(true);
-			}
+                    bullet.setSink(true);
+                    bullet.setBoom(10);
+                }
+            }
 
-			bullet.update();
+            if (bullet.getY() < water.getYPositionOnWave(bullet.getX())) {
+                bullet.setSink(true);
+            }
 
-			if (bullet.getY() < 0) {
-				mBullets.remove(i);
-				i--;
-				continue;
-			}
+            bullet.update();
 
-			if (bullet.getX() > MainActivity.getWidth() || bullet.getX() < 0) {
-				mBullets.remove(i);
-				i--;
-				continue;
-			}
+            if (bullet.getY() < 0) {
+                mBullets.remove(i);
+                i--;
+                continue;
+            }
 
-			if (bullet.getBoom() > 0) {
-				bulletResultRegion = bulletBoomRegion;
-			} else {
-				bulletResultRegion = bulletRegion;
-			}
-			if (bullet.getBoom() != -1) {
-				bulletBatch.draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2,
-						bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
+            if (bullet.getX() > MainActivity.getWidth() || bullet.getX() < 0) {
+                mBullets.remove(i);
+                i--;
+                continue;
+            }
 
-			}
-		}
+            if (bullet.getBoom() > 0) {
+                bulletResultRegion = bulletBoomRegion;
+            } else {
+                bulletResultRegion = bulletRegion;
+            }
+            if (bullet.getBoom() != -1) {
+                bulletBatch.draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2,
+                        bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
 
-		bulletBatch.submit();
-	}
+            }
+        }
 
+        bulletBatch.submit();
+    }
 
+    private void updateControlls() {
 
-	
-	private void updateControlls() {
+        mPlayer.setBoatSpeed(0);
 
-		mPlayer.setBoatSpeed(0);
+        if (HUD.isKeyDown(GameHUD.Buttons.LEFT)) {
+            mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() - mPlayer.getBoatAcceleration());
+        }
 
-		if (HUD.isKeyDown(GameHUD.Buttons.LEFT)) {
-			mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() - mPlayer.getBoatAcceleration());
-		}
+        if (HUD.isKeyDown(GameHUD.Buttons.RIGHT)) {
+            mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() + mPlayer.getBoatAcceleration());
+        }
 
-		if (HUD.isKeyDown(GameHUD.Buttons.RIGHT)) {
-			mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() + mPlayer.getBoatAcceleration());
-		}
+        if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
 
-		if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
-			
-			if (mBullets.size() < MAX_BULLETS_ON_SCREEN) {
+            if (mBullets.size() < MAX_BULLETS_ON_SCREEN) {
 
-				BulletUnit bullet = mPlayer.fire(timeCounter);
-				
-				if(bullet!=null){
-					mBullets.add(bullet);
-				}
-			}
-		}
+                BulletUnit bullet = mPlayer.fire(timeCounter);
 
-	}
+                if (bullet != null) {
+                    mBullets.add(bullet);
+                }
+            }
+        }
+
+    }
 
 }

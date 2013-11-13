@@ -27,86 +27,86 @@ import android.util.Log;
 
 public class SceneExit extends MhyhreScene {
 
-	Sprite mExitButtonSprite;
-	Sprite mBackButtonSprite;
+    Sprite mExitButtonSprite;
+    Sprite mBackButtonSprite;
 
-	private Text mCaptionItem1;
-	private Text mCaptionItem2;
-	private Text mCaptionItem3;
+    private Text mCaptionItem1;
+    private Text mCaptionItem2;
+    private Text mCaptionItem3;
 
-	public SceneExit() {
+    public SceneExit() {
 
-		setBackgroundEnabled(true);
-		setBackground(new Background(0.9f, 0.9f, 1.0f));
+        setBackgroundEnabled(true);
+        setBackground(new Background(0.9f, 0.9f, 1.0f));
 
-		String strQExit = MainActivity.Me.getString(R.string.QExit);
-		String TextItem1 = MainActivity.Me.getString(R.string.textBack);
-		String TextItem2 = MainActivity.Me.getString(R.string.textExit);
+        String strQExit = MainActivity.Me.getString(R.string.QExit);
+        String TextItem1 = MainActivity.Me.getString(R.string.textBack);
+        String TextItem2 = MainActivity.Me.getString(R.string.textExit);
 
-		// Creating sprite
-		mExitButtonSprite = new Sprite(0, 94, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+        // Creating sprite
+        mExitButtonSprite = new Sprite(0, 94, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+            @Override
+            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Exit ] pressed");
-					MainActivity.vibrate(30);
-					MainActivity.Me.finish();
-				}
-				return true;
-			}
-		};
+                    Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Exit ] pressed");
+                    MainActivity.vibrate(30);
+                    MainActivity.Me.finish();
+                }
+                return true;
+            }
+        };
 
-		mBackButtonSprite = new Sprite(0, 154, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+        mBackButtonSprite = new Sprite(0, 154, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+            @Override
+            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-					Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Back ] pressed");
-					MainActivity.vibrate(30);
-					MainActivity.getRootScene().SetState(SceneStates.MainMenu);
-				}
-				return true;
-			}
-		};
+                    Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Back ] pressed");
+                    MainActivity.vibrate(30);
+                    MainActivity.getRootScene().SetState(SceneStates.MainMenu);
+                }
+                return true;
+            }
+        };
 
-		mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strQExit, MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionItem1.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+        mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strQExit, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionItem1.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
-		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 120, MainActivity.Me.getVertexBufferObjectManager());
-		topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-		topRect.setColor(0.5f, 0.5f, 0.6f);
-		topRect.setHeight(mCaptionItem1.getHeight() + 80);
-		attachChild(topRect);
+        Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 120, MainActivity.Me.getVertexBufferObjectManager());
+        topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+        topRect.setColor(0.5f, 0.5f, 0.6f);
+        topRect.setHeight(mCaptionItem1.getHeight() + 80);
+        attachChild(topRect);
 
-		mExitButtonSprite.setColor(1.0f, 0.8f, 0.8f);
-		mBackButtonSprite.setColor(0.8f, 0.8f, 1.0f);
+        mExitButtonSprite.setColor(1.0f, 0.8f, 0.8f);
+        mBackButtonSprite.setColor(0.8f, 0.8f, 1.0f);
 
-		float OffsetX = MainActivity.getWidth() / 3.0f;
-		float OffsetY = mExitButtonSprite.getHeight() * 1.5f;
+        float OffsetX = MainActivity.getWidth() / 3.0f;
+        float OffsetY = mExitButtonSprite.getHeight() * 1.5f;
 
-		mBackButtonSprite.setPosition(OffsetX * 1, OffsetY);
-		mExitButtonSprite.setPosition(OffsetX * 2, OffsetY);
+        mBackButtonSprite.setPosition(OffsetX * 1, OffsetY);
+        mExitButtonSprite.setPosition(OffsetX * 2, OffsetY);
 
-		attachChild(mExitButtonSprite);
-		registerTouchArea(mExitButtonSprite);
-		attachChild(mBackButtonSprite);
-		registerTouchArea(mBackButtonSprite);
+        attachChild(mExitButtonSprite);
+        registerTouchArea(mExitButtonSprite);
+        attachChild(mBackButtonSprite);
+        registerTouchArea(mBackButtonSprite);
 
-		mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem1, MainActivity.Me.getVertexBufferObjectManager());
-		mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem2, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem1, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem2, MainActivity.Me.getVertexBufferObjectManager());
 
-		mCaptionItem2.setPosition(mBackButtonSprite);
-		mCaptionItem3.setPosition(mExitButtonSprite);
+        mCaptionItem2.setPosition(mBackButtonSprite);
+        mCaptionItem3.setPosition(mExitButtonSprite);
 
-		attachChild(mCaptionItem1);
-		attachChild(mCaptionItem2);
-		attachChild(mCaptionItem3);
-	}
+        attachChild(mCaptionItem1);
+        attachChild(mCaptionItem2);
+        attachChild(mCaptionItem3);
+    }
 
-	@Override
-	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
+    @Override
+    public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
-		return super.onSceneTouchEvent(pSceneTouchEvent);
-	}
+        return super.onSceneTouchEvent(pSceneTouchEvent);
+    }
 }

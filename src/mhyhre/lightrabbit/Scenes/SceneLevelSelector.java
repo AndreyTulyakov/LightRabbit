@@ -26,169 +26,167 @@ import android.util.Log;
 
 public class SceneLevelSelector extends MhyhreScene {
 
-	List<LevelItem> mItems;
+    List<LevelItem> mItems;
 
-	int touchDownToLevel = -1;
+    int touchDownToLevel = -1;
 
-	SpriteBatch iconsBatch;
+    SpriteBatch iconsBatch;
 
-	private Text textCaption;
-	LevelItem selectedLevel;
+    private Text textCaption;
+    LevelItem selectedLevel;
 
-	private final float HORIZONTAL_DISTANCE = 80;
+    private final float HORIZONTAL_DISTANCE = 80;
 
-	ITextureRegion levelCellRegion;
-	
-	
+    ITextureRegion levelCellRegion;
 
-	public SceneLevelSelector() {
+    public SceneLevelSelector() {
 
-		setBackgroundEnabled(true);
-		setBackground(new Background(0.5f, 0.6f, 0.9f));
+        setBackgroundEnabled(true);
+        setBackground(new Background(0.5f, 0.6f, 0.9f));
 
-		mItems = new ArrayList<LevelItem>();
+        mItems = new ArrayList<LevelItem>();
 
-		loadLevelsList(MainActivity.MAPS_LIST_FILENAME);
+        loadLevelsList(MainActivity.MAPS_LIST_FILENAME);
 
-		iconsBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("User_Interface"), mItems.size(), MainActivity.Me.getVertexBufferObjectManager());
-		attachChild(iconsBatch);
+        iconsBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("User_Interface"), mItems.size(), MainActivity.Me.getVertexBufferObjectManager());
+        attachChild(iconsBatch);
 
-		levelCellRegion = MainActivity.Res.getTextureRegion("LevelCell");
+        levelCellRegion = MainActivity.Res.getTextureRegion("LevelCell");
 
-		textCaption = new Text(0, 0, MainActivity.Res.getFont("White Furore"), MainActivity.Me.getString(R.string.selectLevel),
-				MainActivity.Me.getVertexBufferObjectManager());
-		textCaption.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 50);
-		attachChild(textCaption);
+        textCaption = new Text(0, 0, MainActivity.Res.getFont("White Furore"), MainActivity.Me.getString(R.string.selectLevel),
+                MainActivity.Me.getVertexBufferObjectManager());
+        textCaption.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 50);
+        attachChild(textCaption);
 
-		configureLevelsItem();
-		configureLevelsCaption();
+        configureLevelsItem();
+        configureLevelsCaption();
 
-	}
+    }
 
-	public LevelItem getSelectedLevel() {
-		return selectedLevel;
-	}
+    public LevelItem getSelectedLevel() {
+        return selectedLevel;
+    }
 
-	private void loadLevelsList(String listFilename) {
+    private void loadLevelsList(String listFilename) {
 
-		try {
-			InputStream is = MainActivity.Me.getAssets().open(listFilename);
+        try {
+            InputStream is = MainActivity.Me.getAssets().open(listFilename);
 
-			parseLevelListXml(is);
+            parseLevelListXml(is);
 
-		} catch (IOException e) {
-			Log.e(MainActivity.DEBUG_ID, "Level list loading: " + e);
+        } catch (IOException e) {
+            Log.e(MainActivity.DEBUG_ID, "Level list loading: " + e);
 
-		}
-	}
+        }
+    }
 
-	private void parseLevelListXml(InputStream is) {
+    private void parseLevelListXml(InputStream is) {
 
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document dom = builder.parse(is);
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document dom = builder.parse(is);
 
-			Element root = dom.getDocumentElement();
+            Element root = dom.getDocumentElement();
 
-			Log.i(MainActivity.DEBUG_ID, "Start parsing");
+            Log.i(MainActivity.DEBUG_ID, "Start parsing");
 
-			NodeList items = root.getElementsByTagName("level");
-			Log.i(MainActivity.DEBUG_ID, "Levels count:" + items.getLength());
+            NodeList items = root.getElementsByTagName("level");
+            Log.i(MainActivity.DEBUG_ID, "Levels count:" + items.getLength());
 
-			for (int i = 0; i < items.getLength(); i++) {
+            for (int i = 0; i < items.getLength(); i++) {
 
-				Node levelNode = items.item(i);
+                Node levelNode = items.item(i);
 
-				LevelItem levelItem = new LevelItem();
-				levelItem.filename = levelNode.getTextContent();
-				levelItem.label = levelNode.getAttributes().getNamedItem("label").getNodeValue();
-				mItems.add(levelItem);
-			}
+                LevelItem levelItem = new LevelItem();
+                levelItem.filename = levelNode.getTextContent();
+                levelItem.label = levelNode.getAttributes().getNamedItem("label").getNodeValue();
+                mItems.add(levelItem);
+            }
 
-			Log.i(MainActivity.DEBUG_ID, "Good parsing!");
+            Log.i(MainActivity.DEBUG_ID, "Good parsing!");
 
-		} catch (Exception e) {
-			Log.e(MainActivity.DEBUG_ID, "Level list - parseXml: " + e);
-		}
+        } catch (Exception e) {
+            Log.e(MainActivity.DEBUG_ID, "Level list - parseXml: " + e);
+        }
 
-	}
+    }
 
-	private void configureLevelsCaption() {
+    private void configureLevelsCaption() {
 
-		for (int i = 0; i < mItems.size(); i++) {
+        for (int i = 0; i < mItems.size(); i++) {
 
-			LevelItem item = mItems.get(i);
+            LevelItem item = mItems.get(i);
 
-			Text caption = new Text(0, 0, MainActivity.Res.getFont("Furore"), mItems.get(i).label, MainActivity.Me.getVertexBufferObjectManager());
-			caption.setPosition(item.getX(), item.getY() - (item.getHeight() / 2 + 20));
-			attachChild(caption);
-		}
+            Text caption = new Text(0, 0, MainActivity.Res.getFont("Furore"), mItems.get(i).label, MainActivity.Me.getVertexBufferObjectManager());
+            caption.setPosition(item.getX(), item.getY() - (item.getHeight() / 2 + 20));
+            attachChild(caption);
+        }
 
-	}
+    }
 
-	private void configureLevelsItem() {
+    private void configureLevelsItem() {
 
-		// Positioning
-		float hStep = 40;
-		float xStep = (levelCellRegion.getWidth() + HORIZONTAL_DISTANCE);
-		float xStart = MainActivity.getHalfWidth() - (xStep * ((mItems.size() - 1) / 2.0f));
-		float yStart = MainActivity.getHalfHeight() + hStep * mItems.size() / 2;
+        // Positioning
+        float hStep = 40;
+        float xStep = (levelCellRegion.getWidth() + HORIZONTAL_DISTANCE);
+        float xStart = MainActivity.getHalfWidth() - (xStep * ((mItems.size() - 1) / 2.0f));
+        float yStart = MainActivity.getHalfHeight() + hStep * mItems.size() / 2;
 
-		for (int i = 0; i < mItems.size(); i++) {
+        for (int i = 0; i < mItems.size(); i++) {
 
-			LevelItem item = mItems.get(i);
+            LevelItem item = mItems.get(i);
 
-			item.setWidth(levelCellRegion.getWidth());
-			item.setHeight(levelCellRegion.getHeight());
+            item.setWidth(levelCellRegion.getWidth());
+            item.setHeight(levelCellRegion.getHeight());
 
-			item.setX(xStart + i * xStep);
-			item.setY(yStart - hStep * i);
+            item.setX(xStart + i * xStep);
+            item.setY(yStart - hStep * i);
 
-		}
+        }
 
-	}
+    }
 
-	@Override
-	protected void onManagedUpdate(float pSecondsElapsed) {
+    @Override
+    protected void onManagedUpdate(float pSecondsElapsed) {
 
-		float rgbMod = 1.0f;
+        float rgbMod = 1.0f;
 
-		for (LevelItem item : mItems) {
+        for (LevelItem item : mItems) {
 
-			if (item.isLocked())
-				rgbMod = 0.9f;
-			else
-				rgbMod = 1.0f;
+            if (item.isLocked())
+                rgbMod = 0.9f;
+            else
+                rgbMod = 1.0f;
 
-			iconsBatch.draw(levelCellRegion, item.getLeftX(), item.getDownY(), item.getWidth(), item.getHeight(), 0, rgbMod, rgbMod, rgbMod, 1);
-		}
+            iconsBatch.draw(levelCellRegion, item.getLeftX(), item.getDownY(), item.getWidth(), item.getHeight(), 0, rgbMod, rgbMod, rgbMod, 1);
+        }
 
-		iconsBatch.submit();
+        iconsBatch.submit();
 
-		super.onManagedUpdate(pSecondsElapsed);
-	}
+        super.onManagedUpdate(pSecondsElapsed);
+    }
 
-	@Override
-	public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
+    @Override
+    public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
 
-		if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-			for (LevelItem item : mItems) {
-				if (item.isCollided(pSceneTouchEvent.getX(), pSceneTouchEvent.getY()) && item.isLocked() == false) {
+        if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+            for (LevelItem item : mItems) {
+                if (item.isCollided(pSceneTouchEvent.getX(), pSceneTouchEvent.getY()) && item.isLocked() == false) {
 
-					selectedLevel = item;
-					MainActivity.getRootScene().SetState(SceneStates.GameLoading);
-				}
-			}
-		}
+                    selectedLevel = item;
+                    MainActivity.getRootScene().SetState(SceneStates.GameLoading);
+                }
+            }
+        }
 
-		return super.onSceneTouchEvent(pSceneTouchEvent);
-	}
+        return super.onSceneTouchEvent(pSceneTouchEvent);
+    }
 
-	@Override
-	public void Show() {
-		touchDownToLevel = -1;
-		super.Show();
-	}
+    @Override
+    public void Show() {
+        touchDownToLevel = -1;
+        super.Show();
+    }
 }

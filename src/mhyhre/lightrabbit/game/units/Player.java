@@ -8,82 +8,82 @@ import org.andengine.entity.sprite.Sprite;
 
 public class Player extends Sprite {
 
-	private float mAcceleration = 3;
-	private float mSpeed = 0;
-	private final float GUN_RELOADING_TIME = 0.5f;
-	private float lastFireTime = 0;
-	
-	private int totalGold = 100;
-	final int maxHealth = 3;
-	int currentHealth = 3;
+    private float mAcceleration = 3;
+    private float mSpeed = 0;
+    private final float GUN_RELOADING_TIME = 0.5f;
+    private float lastFireTime = 0;
 
-	public Player(float xPosition) {
-		super(xPosition, 0, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
-		// TODO Auto-generated constructor stub
-	}
+    private int totalGold = 100;
+    final int maxHealth = 3;
+    int currentHealth = 3;
 
-	public void update(WaterPolygon water) {
-		if (getX() > (MainActivity.getWidth() - 32 - getWidth()) && mSpeed > 0)
-			mSpeed = 0;
+    public Player(float xPosition) {
+        super(xPosition, 0, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
+        // TODO Auto-generated constructor stub
+    }
 
-		if (getX() < 32 && mSpeed < 0)
-			mSpeed = 0;
+    public void update(WaterPolygon water) {
+        if (getX() > (MainActivity.getWidth() - 32 - getWidth()) && mSpeed > 0)
+            mSpeed = 0;
 
-		setX(getX() + mSpeed);
-		setY(water.getYPositionOnWave(getX()) + 5);
-		setRotation(water.getAngleOnWave(getX()) / 2.0f);
-	}
+        if (getX() < 32 && mSpeed < 0)
+            mSpeed = 0;
 
-	public float getBoatSpeed() {
-		return mSpeed;
-	}
+        setX(getX() + mSpeed);
+        setY(water.getYPositionOnWave(getX()) + 5);
+        setRotation(water.getAngleOnWave(getX()) / 2.0f);
+    }
 
-	public float getBoatAcceleration() {
-		return mAcceleration;
-	}
+    public float getBoatSpeed() {
+        return mSpeed;
+    }
 
-	public void setBoatSpeed(float boatSpeed) {
-		this.mSpeed = boatSpeed;
-	}
+    public float getBoatAcceleration() {
+        return mAcceleration;
+    }
 
-	public float getGunReloadingTime() {
-		return GUN_RELOADING_TIME;
-	}
+    public void setBoatSpeed(float boatSpeed) {
+        this.mSpeed = boatSpeed;
+    }
 
-	public BulletUnit fire(float fireTime) {
+    public float getGunReloadingTime() {
+        return GUN_RELOADING_TIME;
+    }
 
-		if (fireTime - lastFireTime > getGunReloadingTime()) {
+    public BulletUnit fire(float fireTime) {
 
-			MainActivity.vibrate(30);
+        if (fireTime - lastFireTime > getGunReloadingTime()) {
 
-			BulletUnit bullet = new BulletUnit(getX(), getY() + 15);
-			bullet.setAccelerationByAngle(getRotation() - 15, 8);
+            MainActivity.vibrate(30);
 
-			lastFireTime = fireTime;
+            BulletUnit bullet = new BulletUnit(getX(), getY() + 15);
+            bullet.setAccelerationByAngle(getRotation() - 15, 8);
 
-			return bullet;
-		}
+            lastFireTime = fireTime;
 
-		return null;
-	}
+            return bullet;
+        }
 
-	public int getMaxHealth() {
-		return maxHealth;
-	}
+        return null;
+    }
 
-	public int getCurrentHealth() {
-		return currentHealth;
-	}
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
-	public void setCurrentHealth(int currentHealth) {
-		this.currentHealth = currentHealth;
-	}
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
 
-	public int getTotalGold() {
-		return totalGold;
-	}
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
 
-	public void setTotalGold(int totalGold) {
-		this.totalGold = totalGold;
-	}
+    public int getTotalGold() {
+        return totalGold;
+    }
+
+    public void setTotalGold(int totalGold) {
+        this.totalGold = totalGold;
+    }
 }

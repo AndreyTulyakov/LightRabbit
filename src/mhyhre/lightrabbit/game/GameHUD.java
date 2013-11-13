@@ -14,145 +14,136 @@ import android.util.Log;
 
 public class GameHUD extends MhyhreScene {
 
-	public enum Buttons {
-		LEFT, RIGHT, JUMP, FIRE;
-	}
+    public enum Buttons {
+        LEFT, RIGHT, JUMP, FIRE;
+    }
 
-	Sprite spriteGold;
-	SpriteBatch healthIndicator;
-	Sprite spriteMoveRight, spriteMoveLeft, spriteFire;
-	Text textGold;
+    Sprite spriteGold;
+    SpriteBatch healthIndicator;
+    Sprite spriteMoveRight, spriteMoveLeft, spriteFire;
+    Text textGold;
 
-	boolean states[];
-	private static final float BUTTON_RADIUS = 50;
-	
-	TouchPoint[] touchPoints;
+    boolean states[];
+    private static final float BUTTON_RADIUS = 50;
 
-	public GameHUD() {
+    TouchPoint[] touchPoints;
 
-		setBackgroundEnabled(false);
-		Show();
+    public GameHUD() {
 
-		states = new boolean[16];
-		
-		touchPoints = new TouchPoint[10];
-		for(int i = 0; i<touchPoints.length; i++){
-			touchPoints[i] = new TouchPoint();
-		}
+        setBackgroundEnabled(false);
+        Show();
 
-		healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
+        states = new boolean[16];
 
-		spriteGold = new Sprite(0, 0, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
-		spriteGold.setPosition(250, MainActivity.getHeight() - 28);
+        touchPoints = new TouchPoint[10];
+        for (int i = 0; i < touchPoints.length; i++) {
+            touchPoints[i] = new TouchPoint();
+        }
 
-		textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
-		updateGoldIndicator(0);
+        healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
 
-		attachChild(healthIndicator);
-		attachChild(spriteGold);
-		attachChild(textGold);
+        spriteGold = new Sprite(0, 0, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteGold.setPosition(250, MainActivity.getHeight() - 28);
 
-		spriteMoveLeft = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager());
-		spriteMoveLeft.setPosition(60, 50);
-		spriteMoveLeft.setVisible(true);
-		attachChild(spriteMoveLeft);
+        textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
+        updateGoldIndicator(0);
 
-		spriteMoveRight = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
-		spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, 50);
-		spriteMoveRight.setVisible(true);
-		attachChild(spriteMoveRight);
+        attachChild(healthIndicator);
+        attachChild(spriteGold);
+        attachChild(textGold);
 
-		spriteFire = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
-		spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
-		spriteFire.setVisible(true);
-		attachChild(spriteFire);
+        spriteMoveLeft = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteMoveLeft.setPosition(60, 50);
+        spriteMoveLeft.setVisible(true);
+        attachChild(spriteMoveLeft);
 
-	}
+        spriteMoveRight = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, 50);
+        spriteMoveRight.setVisible(true);
+        attachChild(spriteMoveRight);
 
-	public void updateGoldIndicator(int value) {
-		textGold.setText(String.valueOf(value));
-		textGold.setPosition(spriteGold.getX() + spriteGold.getWidth() / 2 + 10 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
-	}
+        spriteFire = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
+        spriteFire.setVisible(true);
+        attachChild(spriteFire);
 
-	public void updateHealthIndicator(int currentHealth, int maxHealth) {
+    }
 
-		healthIndicator.setY(MainActivity.getHeight());
-		float height = -(10 + MainActivity.Res.getTextureRegion("heart").getHeight());
+    public void updateGoldIndicator(int value) {
+        textGold.setText(String.valueOf(value));
+        textGold.setPosition(spriteGold.getX() + spriteGold.getWidth() / 2 + 10 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
+    }
 
-		for (int i = 0; i < maxHealth; i++) {
-			if (i < currentHealth) {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
-			} else {
-				healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
-			}
-		}
-		healthIndicator.submit();
-	}
+    public void updateHealthIndicator(int currentHealth, int maxHealth) {
 
-	
-	private class TouchPoint{
-		boolean used;
-		float x,y;
-	}
-	
+        healthIndicator.setY(MainActivity.getHeight());
+        float height = -(10 + MainActivity.Res.getTextureRegion("heart").getHeight());
 
+        for (int i = 0; i < maxHealth; i++) {
+            if (i < currentHealth) {
+                healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
+            } else {
+                healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
+            }
+        }
+        healthIndicator.submit();
+    }
 
-	@Override
-	public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
+    private class TouchPoint {
+        boolean used;
+        float x, y;
+    }
 
-		int pId = pSceneTouchEvent.getPointerID();
-		
-		if(pId < 0 && pId >= touchPoints.length)
-			return false;
+    @Override
+    public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
 
-		if (pSceneTouchEvent.isActionCancel() || pSceneTouchEvent.isActionOutside() || pSceneTouchEvent.isActionUp()) {
-			touchPoints[pId].used = false;
-			updateCollisionStates();
-		}
+        int pId = pSceneTouchEvent.getPointerID();
 
-		if (pSceneTouchEvent.isActionMove() || pSceneTouchEvent.isActionDown()) {
+        if (pId < 0 && pId >= touchPoints.length)
+            return false;
 
-			touchPoints[pId].used = true;
-			touchPoints[pId].x = pSceneTouchEvent.getX();
-			touchPoints[pId].y = pSceneTouchEvent.getY();
-			
-			updateCollisionStates();
-		}
+        if (pSceneTouchEvent.isActionCancel() || pSceneTouchEvent.isActionOutside() || pSceneTouchEvent.isActionUp()) {
+            touchPoints[pId].used = false;
+            updateCollisionStates();
+        }
 
-		return super.onSceneTouchEvent(pSceneTouchEvent);
-	}
-	
-	
-	private void updateCollisionStates(){
+        if (pSceneTouchEvent.isActionMove() || pSceneTouchEvent.isActionDown()) {
 
-		resetStates();
-		
-		for(int i = 0; i<touchPoints.length; i++){
-			
-			if(touchPoints[i].used == true){
-				
-				states[Buttons.LEFT.ordinal()]  |=
-						Collisions.spriteByCircle(spriteMoveLeft, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
-				
-				states[Buttons.RIGHT.ordinal()] |=
-						Collisions.spriteByCircle(spriteMoveRight, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);	
-				
-				states[Buttons.FIRE.ordinal()]  |=
-						Collisions.spriteByCircle(spriteFire, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
-			}
-		}
-	}
+            touchPoints[pId].used = true;
+            touchPoints[pId].x = pSceneTouchEvent.getX();
+            touchPoints[pId].y = pSceneTouchEvent.getY();
 
-	public void resetStates() {
-		for (int i = 0; i < states.length; i++) {
-			states[i] = false;
-		}
-	}
+            updateCollisionStates();
+        }
 
-	public boolean isKeyDown(Buttons code) {
-		return states[code.ordinal()];
-	}
+        return super.onSceneTouchEvent(pSceneTouchEvent);
+    }
 
+    private void updateCollisionStates() {
 
+        resetStates();
+
+        for (int i = 0; i < touchPoints.length; i++) {
+
+            if (touchPoints[i].used == true) {
+
+                states[Buttons.LEFT.ordinal()] |= Collisions.spriteByCircle(spriteMoveLeft, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
+
+                states[Buttons.RIGHT.ordinal()] |= Collisions.spriteByCircle(spriteMoveRight, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
+
+                states[Buttons.FIRE.ordinal()] |= Collisions.spriteByCircle(spriteFire, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
+            }
+        }
+    }
+
+    public void resetStates() {
+        for (int i = 0; i < states.length; i++) {
+            states[i] = false;
+        }
+    }
+
+    public boolean isKeyDown(Buttons code) {
+        return states[code.ordinal()];
+    }
 
 }

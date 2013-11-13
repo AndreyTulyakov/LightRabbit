@@ -10,103 +10,96 @@ import org.andengine.util.adt.color.Color;
 
 import android.util.Log;
 
-
 public class SceneGameLoading extends MhyhreScene {
 
-	private Rectangle mRotationRect;
-	private Text mTextPress;
-	private Text mLevelName;
-	private Text mLevelChapter;
+    private Rectangle mRotationRect;
+    private Text mTextPress;
+    private Text mLevelName;
+    private Text mLevelChapter;
 
-	private boolean mLoaded = false;
-	
+    private boolean mLoaded = false;
 
-	
+    public SceneGameLoading() {
 
-	public SceneGameLoading() {
-		
+        setBackgroundEnabled(false);
 
-		
-		setBackgroundEnabled(false);
-		
-		Rectangle backRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()){
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					
-					if (mLoaded) {
+        Rectangle backRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()) {
+            @Override
+            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-						MainActivity.getRootScene().SetState(SceneStates.Game);
-						
-						setLoaded(false);
-					}
-					
-					Log.i(MainActivity.DEBUG_ID, "SceneGameLoading: Start game");
-					MainActivity.vibrate(30);
-				}
-				return true;
-			}
-		};
-		backRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-		backRect.setColor(0.0f,0.0f,0.1f,0.75f);
-		attachChild(backRect);
-		registerTouchArea(backRect);
+                    if (mLoaded) {
 
-		mTextPress = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100, MainActivity.Me.getVertexBufferObjectManager());
-		mTextPress.setPosition(MainActivity.getHalfWidth(), 30 + mTextPress.getHeight()/2);
+                        MainActivity.getRootScene().SetState(SceneStates.Game);
 
-		mLevelChapter = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
-		mLevelChapter.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-		
-		mLevelName = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), "" , 100, MainActivity.Me.getVertexBufferObjectManager());
-		mLevelName.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight()  - 80);
-		
+                        setLoaded(false);
+                    }
 
-		
-		
-		float h = mTextPress.getHeight() + 40;
+                    Log.i(MainActivity.DEBUG_ID, "SceneGameLoading: Start game");
+                    MainActivity.vibrate(30);
+                }
+                return true;
+            }
+        };
+        backRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+        backRect.setColor(0.0f, 0.0f, 0.1f, 0.75f);
+        attachChild(backRect);
+        registerTouchArea(backRect);
 
-		mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mTextPress.getY(), MainActivity.getWidth(), h, MainActivity.Me.getVertexBufferObjectManager());
-		mRotationRect.setColor(Color.BLACK);
+        mTextPress = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100,
+                MainActivity.Me.getVertexBufferObjectManager());
+        mTextPress.setPosition(MainActivity.getHalfWidth(), 30 + mTextPress.getHeight() / 2);
 
-		attachChild(mRotationRect);
-		attachChild(mTextPress);
-		attachChild(mLevelName);
-		attachChild(mLevelChapter);
-		
-		setLoaded(false);
-	}
+        mLevelChapter = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+        mLevelChapter.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
-	float rectAlpha = 0;
+        mLevelName = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+        mLevelName.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight() - 80);
 
-	@Override
-	protected void onManagedUpdate(float pSecondsElapsed) {
+        float h = mTextPress.getHeight() + 40;
 
-		if (mLoaded) {
-			rectAlpha += 0.03f;
-			if (rectAlpha >= Math.PI) {
-				rectAlpha = 0;
-			}
-			mTextPress.setAlpha((float)(1.0f - Math.sin(rectAlpha)));
-		}
-		
-		super.onManagedUpdate(pSecondsElapsed);
-	}
+        mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mTextPress.getY(), MainActivity.getWidth(), h,
+                MainActivity.Me.getVertexBufferObjectManager());
+        mRotationRect.setColor(Color.BLACK);
 
-	public boolean isLoaded() {
-		return mLoaded;
-	}
+        attachChild(mRotationRect);
+        attachChild(mTextPress);
+        attachChild(mLevelName);
+        attachChild(mLevelChapter);
 
-	public void setLoaded(boolean mLoaded) {
-		this.mLoaded = mLoaded;
+        setLoaded(false);
+    }
 
-	}
-	
-	public void setLevelName(String levelName){
-		mLevelName.setText(levelName);
-	}
-	
-	public void setLevelChapter(String levelChapter){
-		mLevelChapter.setText(levelChapter);
-	}
+    float rectAlpha = 0;
+
+    @Override
+    protected void onManagedUpdate(float pSecondsElapsed) {
+
+        if (mLoaded) {
+            rectAlpha += 0.03f;
+            if (rectAlpha >= Math.PI) {
+                rectAlpha = 0;
+            }
+            mTextPress.setAlpha((float) (1.0f - Math.sin(rectAlpha)));
+        }
+
+        super.onManagedUpdate(pSecondsElapsed);
+    }
+
+    public boolean isLoaded() {
+        return mLoaded;
+    }
+
+    public void setLoaded(boolean mLoaded) {
+        this.mLoaded = mLoaded;
+
+    }
+
+    public void setLevelName(String levelName) {
+        mLevelName.setText(levelName);
+    }
+
+    public void setLevelChapter(String levelChapter) {
+        mLevelChapter.setText(levelChapter);
+    }
 }

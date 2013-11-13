@@ -11,24 +11,24 @@
  */
 
 package mhyhre.lightrabbit;
+
 import org.andengine.entity.scene.CameraScene;
 
 public class MhyhreScene extends CameraScene {
-	
-	public MhyhreScene() {
-		super(MainActivity.camera);
-		Hide();
-	}
-	
-	public void Show() {
-		setVisible(true);
-		setIgnoreUpdate(false);
-	}
 
-	public void Hide() {
-		setVisible(false);
-		setIgnoreUpdate(true);
-	}
+    public MhyhreScene() {
+        super(MainActivity.camera);
+        Hide();
+    }
 
-	
+    public void Show() {
+        setVisible(true);
+        setIgnoreUpdate(false);
+    }
+
+    public void Hide() {
+        setVisible(false);
+        setIgnoreUpdate(true);
+    }
+
 }

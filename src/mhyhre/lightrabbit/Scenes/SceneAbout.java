@@ -29,82 +29,82 @@ import android.util.Log;
 
 public class SceneAbout extends MhyhreScene {
 
-	private Text textTop;
-	private Text textInfo;
-	private Text textBack;
+    private Text textTop;
+    private Text textInfo;
+    private Text textBack;
 
-	public SceneAbout() {
-		
-		setBackgroundEnabled(true);
-		setBackground(new Background(0.9f, 0.9f, 1.0f));
+    public SceneAbout() {
 
-		String strText1 = MainActivity.Me.getString(R.string.textAbout);
-		textTop = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
-		textTop.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight()-40);
+        setBackgroundEnabled(true);
+        setBackground(new Background(0.9f, 0.9f, 1.0f));
 
-		Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 1, MainActivity.Me.getVertexBufferObjectManager());
-		topRect.setColor(0.5f, 0.5f, 0.6f);
-		topRect.setHeight(40 + 40 + textTop.getFont().getLineHeight());
-		topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight()-topRect.getHeight()/2);
+        String strText1 = MainActivity.Me.getString(R.string.textAbout);
+        textTop = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
+        textTop.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 40);
 
-		String strText2 = loadInfo("about.text");
-		textInfo = new Text(0, 0, MainActivity.Res.getFont("Furore"), strText2, MainActivity.Me.getVertexBufferObjectManager());
-		textInfo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+        Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 1, MainActivity.Me.getVertexBufferObjectManager());
+        topRect.setColor(0.5f, 0.5f, 0.6f);
+        topRect.setHeight(40 + 40 + textTop.getFont().getLineHeight());
+        topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - topRect.getHeight() / 2);
 
-		attachChild(topRect);
-		attachChild(textTop);
-		attachChild(textInfo);
+        String strText2 = loadInfo("about.text");
+        textInfo = new Text(0, 0, MainActivity.Res.getFont("Furore"), strText2, MainActivity.Me.getVertexBufferObjectManager());
+        textInfo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
-		String strBack = MainActivity.Me.getString(R.string.textBack);
+        attachChild(topRect);
+        attachChild(textTop);
+        attachChild(textInfo);
 
-		Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					MainActivity.vibrate(30);
-					MainActivity.getRootScene().SetState(SceneStates.MainMenu);
-				}
-				return true;
-			}
-		};
-		
-		mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
+        String strBack = MainActivity.Me.getString(R.string.textBack);
 
-		textBack = new Text(0, 0, MainActivity.Res.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
-		textBack.setPosition(mBackButtonSprite);
+        Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+            @Override
+            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+                    MainActivity.vibrate(30);
+                    MainActivity.getRootScene().SetState(SceneStates.MainMenu);
+                }
+                return true;
+            }
+        };
 
-		attachChild(mBackButtonSprite);
-		registerTouchArea(mBackButtonSprite);
-		attachChild(textBack);
-	}
+        mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
 
-	private String loadInfo(String filename) {
+        textBack = new Text(0, 0, MainActivity.Res.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
+        textBack.setPosition(mBackButtonSprite);
 
-		String text = "";
+        attachChild(mBackButtonSprite);
+        registerTouchArea(mBackButtonSprite);
+        attachChild(textBack);
+    }
 
-		InputStream input;
-		try {
-			input = MainActivity.Me.getAssetManager().open(filename);
+    private String loadInfo(String filename) {
 
-			int size = input.available();
-			byte[] buffer = new byte[size];
-			input.read(buffer);
-			input.close();
+        String text = "";
 
-			text = new String(buffer);
+        InputStream input;
+        try {
+            input = MainActivity.Me.getAssetManager().open(filename);
 
-		} catch (IOException e) {
-			Log.e(MainActivity.DEBUG_ID, "SceneAbout::loadInfo: " + e.getMessage());
-			e.printStackTrace();
-		}
+            int size = input.available();
+            byte[] buffer = new byte[size];
+            input.read(buffer);
+            input.close();
 
-		return text;
-	}
+            text = new String(buffer);
 
-	@Override
-	public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
+        } catch (IOException e) {
+            Log.e(MainActivity.DEBUG_ID, "SceneAbout::loadInfo: " + e.getMessage());
+            e.printStackTrace();
+        }
 
-		return super.onSceneTouchEvent(pSceneTouchEvent);
-	}
+        return text;
+    }
+
+    @Override
+    public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
+
+        return super.onSceneTouchEvent(pSceneTouchEvent);
+    }
 
 }

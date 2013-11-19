@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Andrew Tulay
+ * Copyright (C) 2013 Andrey Tulyakov
  * @mail: mhyhre@gmail.com
  * 
  * This work is licensed under a Creative Commons 
@@ -40,30 +40,25 @@ public class MainActivity extends SimpleBaseGameActivity {
 
     public static final String DEBUG_ID = "LRABBIT";
     public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
-
     public static final String LEVELS_FOLDER = "levels/";
-
-    // singleton handle
+    public static String MY_PREF = "MY_PREF";
+    
     public static MainActivity Me;
-
-    private static Vibrator mVibrator;
     public static Camera camera;
-    public static int unlockedLevels = 8;
-
-    // screen sizes
+    public static ResourceManager Res;
+    public static SceneRoot mSceneRoot;
+    
+    
+    private static Vibrator mVibrator;
     private static int SCREEN_WIDTH, SCREEN_HEIGHT;
     private static float HalfWidth, HalfHeight;
 
-    public static ResourceManager Res;
-    public static SceneRoot mSceneRoot;
+    private AssetManager assetManager;
 
-    AssetManager assetManager;
-
-    static private boolean vibroEnabled = true;
-    static private boolean soundEnabled = true;
-
-    public static String MY_PREF = "MY_PREF";
-
+    private static boolean vibroEnabled = true;
+    private static boolean soundEnabled = true;
+    
+    
     protected void savePreferences() {
 
         int mode = Activity.MODE_PRIVATE;
@@ -73,7 +68,6 @@ public class MainActivity extends SimpleBaseGameActivity {
         editor.putInt("appVersion", 2);
         editor.putBoolean("isVibroEnabled", isVibroEnabled());
         editor.putBoolean("isSoundEnabled", isSoundEnabled());
-        editor.putInt("unlockedLevels", getUnlockedLevels());
         editor.commit();
     }
 
@@ -216,11 +210,5 @@ public class MainActivity extends SimpleBaseGameActivity {
         }
     }
 
-    public static int getUnlockedLevels() {
-        return unlockedLevels;
-    }
 
-    public static void setUnlockedLevels(int unlockedLevels) {
-        MainActivity.unlockedLevels = unlockedLevels;
-    }
 }

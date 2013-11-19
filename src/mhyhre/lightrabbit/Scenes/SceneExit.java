@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Andrew Tulay
+ * Copyright (C) 2013 Andrey Tulyakov
  * @mail: mhyhre@gmail.com
  * 
  * This work is licensed under a Creative Commons 

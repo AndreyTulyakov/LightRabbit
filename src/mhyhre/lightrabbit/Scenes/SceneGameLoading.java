@@ -58,14 +58,14 @@ public class SceneGameLoading extends MhyhreScene {
         attachChild(backRect);
         registerTouchArea(backRect);
 
-        mTextPress = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100,
+        mTextPress = new Text(0, 0, MainActivity.resources.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100,
                 MainActivity.Me.getVertexBufferObjectManager());
         mTextPress.setPosition(MainActivity.getHalfWidth(), 30 + mTextPress.getHeight() / 2);
 
-        mLevelChapter = new Text(0, 0, MainActivity.Res.getFont("White Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+        mLevelChapter = new Text(0, 0, MainActivity.resources.getFont("White Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
         mLevelChapter.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
-        mLevelName = new Text(0, 0, MainActivity.Res.getFont("White Furore 24"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+        mLevelName = new Text(0, 0, MainActivity.resources.getFont("White Furore 24"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
         mLevelName.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight() - 80);
 
         float h = mTextPress.getHeight() + 40;

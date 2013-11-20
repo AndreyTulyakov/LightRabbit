@@ -36,29 +36,29 @@ public class GameHUD extends MhyhreScene {
             touchPoints[i] = new TouchPoint();
         }
 
-        healthIndicator = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
+        healthIndicator = new SpriteBatch(MainActivity.resources.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
 
-        spriteGold = new Sprite(0, 0, MainActivity.Res.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteGold = new Sprite(0, 0, MainActivity.resources.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
         spriteGold.setPosition(250, MainActivity.getHeight() - 28);
 
-        textGold = new Text(340, 10, MainActivity.Res.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
+        textGold = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
         updateGoldIndicator(0);
 
         attachChild(healthIndicator);
         attachChild(spriteGold);
         attachChild(textGold);
 
-        spriteMoveLeft = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteMoveLeft = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager());
         spriteMoveLeft.setPosition(60, 50);
         spriteMoveLeft.setVisible(true);
         attachChild(spriteMoveLeft);
 
-        spriteMoveRight = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteMoveRight = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
         spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, 50);
         spriteMoveRight.setVisible(true);
         attachChild(spriteMoveRight);
 
-        spriteFire = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteFire = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
         spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
         spriteFire.setVisible(true);
         attachChild(spriteFire);
@@ -73,13 +73,13 @@ public class GameHUD extends MhyhreScene {
     public void updateHealthIndicator(int currentHealth, int maxHealth) {
 
         healthIndicator.setY(MainActivity.getHeight());
-        float height = -(10 + MainActivity.Res.getTextureRegion("heart").getHeight());
+        float height = -(10 + MainActivity.resources.getTextureRegion("heart").getHeight());
 
         for (int i = 0; i < maxHealth; i++) {
             if (i < currentHealth) {
-                healthIndicator.draw(MainActivity.Res.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
+                healthIndicator.draw(MainActivity.resources.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
             } else {
-                healthIndicator.draw(MainActivity.Res.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
+                healthIndicator.draw(MainActivity.resources.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
             }
         }
         healthIndicator.submit();

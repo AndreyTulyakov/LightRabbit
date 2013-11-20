@@ -44,7 +44,7 @@ public class SceneExit extends MhyhreScene {
         String TextItem2 = MainActivity.Me.getString(R.string.textExit);
 
         // Creating sprite
-        mExitButtonSprite = new Sprite(0, 94, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+        mExitButtonSprite = new Sprite(0, 94, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -57,7 +57,7 @@ public class SceneExit extends MhyhreScene {
             }
         };
 
-        mBackButtonSprite = new Sprite(0, 154, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+        mBackButtonSprite = new Sprite(0, 154, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -70,7 +70,7 @@ public class SceneExit extends MhyhreScene {
             }
         };
 
-        mCaptionItem1 = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strQExit, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionItem1 = new Text(0, 0, MainActivity.resources.getFont("White Furore"), strQExit, MainActivity.Me.getVertexBufferObjectManager());
         mCaptionItem1.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
         Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 120, MainActivity.Me.getVertexBufferObjectManager());
@@ -93,8 +93,8 @@ public class SceneExit extends MhyhreScene {
         attachChild(mBackButtonSprite);
         registerTouchArea(mBackButtonSprite);
 
-        mCaptionItem2 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem1, MainActivity.Me.getVertexBufferObjectManager());
-        mCaptionItem3 = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextItem2, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionItem2 = new Text(0, 0, MainActivity.resources.getFont("Furore"), TextItem1, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionItem3 = new Text(0, 0, MainActivity.resources.getFont("Furore"), TextItem2, MainActivity.Me.getVertexBufferObjectManager());
 
         mCaptionItem2.setPosition(mBackButtonSprite);
         mCaptionItem3.setPosition(mExitButtonSprite);

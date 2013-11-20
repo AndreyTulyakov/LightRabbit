@@ -36,21 +36,28 @@ import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
 
+/**
+ * This scene control game process.
+ * 
+ */
 public class SceneGame extends MhyhreScene {
 
+    private static final int WATER_RESOLUTION = 16;
+    private static final int CLOUDS_MAXIMUM = 5;
+    private static final int MAX_BULLETS_ON_SCREEN = 50;
+    
     boolean mLoaded = true;
     boolean mPause = false;
 
-    private final int MAX_BULLETS_ON_SCREEN = 50;
-
-    private Background mBackground;
+    //
 
     SpriteBatch bulletBatch;
 
-    GameHUD HUD;
+    
 
     List<BulletUnit> mBullets;
 
+    GameHUD HUD;
     CloudsManager mClouds;
     SkyManager mSkyes;
     EnemiesManager mEnemies;
@@ -64,10 +71,6 @@ public class SceneGame extends MhyhreScene {
     Level level;
 
     public SceneGame(String levelFileName) {
-
-        mBackground = new Background(0.8f, 0.8f, 0.8f);
-        setBackground(mBackground);
-        setBackgroundEnabled(true);
 
         level = new Level(levelFileName);
 
@@ -99,20 +102,18 @@ public class SceneGame extends MhyhreScene {
 
     private void createGameObjects() {
 
-        mBullets = new LinkedList<BulletUnit>();
-
-        mClouds = new CloudsManager(5, MainActivity.Me.getVertexBufferObjectManager());
-
-        water = new WaterPolygon(16, MainActivity.Me.getVertexBufferObjectManager());
-
+        /* Environment */
+        
+        mClouds = new CloudsManager(CLOUDS_MAXIMUM, MainActivity.getVboManager());
+        water = new WaterPolygon(WATER_RESOLUTION, MainActivity.getVboManager());
+        
         mPlayer = new Player(100);
-
-        mEnemies = new EnemiesManager(water, MainActivity.Me.getVertexBufferObjectManager());
-
-        bulletBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.Me.getVertexBufferObjectManager());
-
-        mSkyes = new SkyManager(mBackground, water, MainActivity.Me.getVertexBufferObjectManager());
-
+        mEnemies = new EnemiesManager(water, MainActivity.getVboManager());
+        
+        mBullets = new LinkedList<BulletUnit>();
+        bulletBatch = new SpriteBatch(MainActivity.resources.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.getVboManager());
+        mSkyes = new SkyManager(MainActivity.getVboManager());
+        
         mMessageManager = new GameMessageManager();
         mMessageManager.Hide();
 
@@ -143,9 +144,6 @@ public class SceneGame extends MhyhreScene {
 
     @Override
     protected void onManagedUpdate(final float pSecondsElapsed) {
-
-        // if(!mLoaded) return;
-        // if(mPause) return;
 
         updateControlls();
 
@@ -212,8 +210,8 @@ public class SceneGame extends MhyhreScene {
 
     private void updateBullets() {
         // Bullets
-        ITextureRegion bulletRegion = MainActivity.Res.getTextureRegion("bullet");
-        ITextureRegion bulletBoomRegion = MainActivity.Res.getTextureRegion("bullet_boom");
+        ITextureRegion bulletRegion = MainActivity.resources.getTextureRegion("bullet");
+        ITextureRegion bulletBoomRegion = MainActivity.resources.getTextureRegion("bullet_boom");
         ITextureRegion bulletResultRegion;
 
         for (int i = 0; i < mBullets.size(); i++) {

@@ -46,22 +46,22 @@ public class SceneLoader extends MhyhreScene {
         setBackground(backGround);
         setBackgroundEnabled(true);
 
-        MainActivity.Res.LoadResourcesForPreloader();
+        MainActivity.resources.LoadResourcesForPreloader();
 
         // Tap text
         String TextMessage = MainActivity.Me.getString(R.string.textTap);
-        mCaptionTapScreen = new Text(0, 0, MainActivity.Res.getFont("Furore"), TextMessage, MainActivity.Me.getVertexBufferObjectManager());
+        mCaptionTapScreen = new Text(0, 0, MainActivity.resources.getFont("Furore"), TextMessage, MainActivity.getVboManager());
         mCaptionTapScreen.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 5) * 1);
         mCaptionTapScreen.setVisible(false);
         mCaptionTapScreen.setAlpha(0.0f);
 
-        textGameLogo = new Text(0, 0, MainActivity.Res.getFont("Furore48"), MainActivity.Me.getString(R.string.app_name),
-                MainActivity.Me.getVertexBufferObjectManager());
+        textGameLogo = new Text(0, 0, MainActivity.resources.getFont("Furore48"), MainActivity.Me.getString(R.string.app_name),
+                MainActivity.getVboManager());
         textGameLogo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         textGameLogo.setAlpha(0.0f);
 
         // tap-zone
-        TapRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.Me.getVertexBufferObjectManager()) {
+        TapRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.getVboManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN && !Clicked) {
@@ -90,7 +90,7 @@ public class SceneLoader extends MhyhreScene {
                 if (mCaptionTapScreen.isVisible()) {
 
                     if (AlphaTime2 > 0.3f && soundPlayed == false) {
-                        MainActivity.Res.playSound("switchOn");
+                        MainActivity.resources.playSound("switchOn");
                         soundPlayed = true;
                     }
 

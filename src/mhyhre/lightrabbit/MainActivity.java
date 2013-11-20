@@ -22,6 +22,7 @@ import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.util.FPSLogger;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import android.app.Activity;
@@ -35,34 +36,35 @@ import android.view.KeyEvent;
 /**
  * Main Activity - start point
  */
-
 public class MainActivity extends SimpleBaseGameActivity {
 
     public static final String DEBUG_ID = "LRABBIT";
+    public static String PREFERENCE_ID = "MY_PREF";
+    
     public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
     public static final String LEVELS_FOLDER = "levels/";
-    public static String MY_PREF = "MY_PREF";
     
     public static MainActivity Me;
     public static Camera camera;
-    public static ResourceManager Res;
-    public static SceneRoot mSceneRoot;
+    public static ResourceManager resources;
+    public static SceneRoot sceneRoot;
     
+    private static final int width = 960;
+    private static final int height = 540;
+    private static float halfWidth;
+    private static float halfHeight;
     
-    private static Vibrator mVibrator;
-    private static int SCREEN_WIDTH, SCREEN_HEIGHT;
-    private static float HalfWidth, HalfHeight;
-
     private AssetManager assetManager;
-
-    private static boolean vibroEnabled = true;
-    private static boolean soundEnabled = true;
+    private Vibrator vibrator;
+    
+    private boolean vibroEnabled = true;
+    private boolean soundEnabled = true;
     
     
     protected void savePreferences() {
 
         int mode = Activity.MODE_PRIVATE;
-        SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
+        SharedPreferences mySharedPreferences = getSharedPreferences(PREFERENCE_ID, mode);
 
         SharedPreferences.Editor editor = mySharedPreferences.edit();
         editor.putInt("appVersion", 2);
@@ -72,28 +74,26 @@ public class MainActivity extends SimpleBaseGameActivity {
     }
 
     public static SceneRoot getRootScene() {
-        return mSceneRoot;
+        return sceneRoot;
     }
 
     public void loadPreferences() {
 
         int mode = Activity.MODE_PRIVATE;
-        SharedPreferences mySharedPreferences = getSharedPreferences(MY_PREF, mode);
+        SharedPreferences mySharedPreferences = getSharedPreferences(PREFERENCE_ID, mode);
 
         setVibroEnabled(mySharedPreferences.getBoolean("isVibroEnabled", true));
         setSoundEnabled(mySharedPreferences.getBoolean("isSoundEnabled", true));
-        // setUnlockedLevels( mySharedPreferences.getInt("unlockedLevels", 1));
     }
 
     @Override
     public EngineOptions onCreateEngineOptions() {
 
         Log.i(DEBUG_ID, "--------------------------------------------------");
-        mVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mVibrator.vibrate(50);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        vibrator.vibrate(40);
 
         Me = this;
-
         assetManager = getAssets();
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -101,16 +101,13 @@ public class MainActivity extends SimpleBaseGameActivity {
 
         loadPreferences();
 
-        SCREEN_WIDTH = 960;
-        SCREEN_HEIGHT = 540;
+        halfWidth = width / 2.0f;
+        halfHeight = height / 2.0f;
 
-        HalfWidth = SCREEN_WIDTH / 2.0f;
-        HalfHeight = SCREEN_HEIGHT / 2.0f;
-
-        camera = new Camera(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        camera = new Camera(0, 0, width, height);
 
         if (BuildConfig.DEBUG)
-            Log.i(DEBUG_ID, "Display Metrics: " + SCREEN_WIDTH + " x " + SCREEN_HEIGHT);
+            Log.i(DEBUG_ID, "Display Metrics: " + width + " x " + height);
 
         EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels,
                 metrics.heightPixels), camera);
@@ -131,12 +128,12 @@ public class MainActivity extends SimpleBaseGameActivity {
             Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
-        Res = new ResourceManager();
+        resources = new ResourceManager();
 
-        mSceneRoot = new SceneRoot();
-        mSceneRoot.Initialize();
+        sceneRoot = new SceneRoot();
+        sceneRoot.Initialize();
 
-        return mSceneRoot;
+        return sceneRoot;
     }
 
     @Override
@@ -155,7 +152,7 @@ public class MainActivity extends SimpleBaseGameActivity {
         if (SceneRoot.GetState() == SceneStates.Splash) {
             super.onBackPressed();
         } else {
-            mSceneRoot.onSceneBackPress();
+            sceneRoot.onSceneBackPress();
         }
     }
 
@@ -173,41 +170,49 @@ public class MainActivity extends SimpleBaseGameActivity {
     }
 
     public static float getWidth() {
-        return SCREEN_WIDTH;
+        return width;
     }
 
     public static float getHeight() {
-        return SCREEN_HEIGHT;
+        return height;
     }
 
     public static float getHalfWidth() {
-        return HalfWidth;
+        return halfWidth;
     }
 
     public static float getHalfHeight() {
-        return HalfHeight;
+        return halfHeight;
     }
 
     public static boolean isVibroEnabled() {
-        return vibroEnabled;
+        return Me.vibroEnabled;
     }
 
-    public static void setVibroEnabled(boolean vibroEnabled) {
-        MainActivity.vibroEnabled = vibroEnabled;
+    public static void setVibroEnabled(boolean enabled) {
+        Me.vibroEnabled = enabled;
     }
 
     public static boolean isSoundEnabled() {
-        return soundEnabled;
+        return Me.soundEnabled;
     }
 
-    public static void setSoundEnabled(boolean soundEnabled) {
-        MainActivity.soundEnabled = soundEnabled;
+    public static void setSoundEnabled(boolean enabled) {
+            Me.soundEnabled = enabled;
     }
 
     public static void vibrate(long milliseconds) {
-        if (vibroEnabled) {
-            mVibrator.vibrate(milliseconds);
+        if (Me.vibroEnabled) {
+            Me.vibrator.vibrate(milliseconds);
         }
+    }
+    
+    /* Return vertex buffer*/
+    public static VertexBufferObjectManager getVboManager() {
+        if(Me != null) {
+            return Me.getVertexBufferObjectManager();
+        }
+        return null;
     }
 
 

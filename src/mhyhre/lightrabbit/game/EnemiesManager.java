@@ -24,7 +24,7 @@ public class EnemiesManager extends SpriteBatch {
     List<Enemy> mEnemies;
 
     public EnemiesManager(WaterPolygon pWater, VertexBufferObjectManager pVertexBufferObjectManager) {
-        super(MainActivity.Res.getTextureAtlas("texture01"), ENEMIES_MAX_COUND, pVertexBufferObjectManager);
+        super(MainActivity.resources.getTextureAtlas("texture01"), ENEMIES_MAX_COUND, pVertexBufferObjectManager);
 
         mWater = pWater;
         mEnemies = new ArrayList<Enemy>(ENEMIES_MAX_COUND);
@@ -38,9 +38,9 @@ public class EnemiesManager extends SpriteBatch {
             }
         }
 
-        ITextureRegion sharkRegion = MainActivity.Res.getTextureRegion("shark_body");
-        ITextureRegion pirateBoatRegion = MainActivity.Res.getTextureRegion("pirate_boat");
-        ITextureRegion pirateShipRegion = MainActivity.Res.getTextureRegion("pirate_ship");
+        ITextureRegion sharkRegion = MainActivity.resources.getTextureRegion("shark_body");
+        ITextureRegion pirateBoatRegion = MainActivity.resources.getTextureRegion("pirate_boat");
+        ITextureRegion pirateShipRegion = MainActivity.resources.getTextureRegion("pirate_ship");
 
         float bright, rotation;
 

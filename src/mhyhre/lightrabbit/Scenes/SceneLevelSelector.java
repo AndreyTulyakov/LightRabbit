@@ -60,12 +60,12 @@ public class SceneLevelSelector extends MhyhreScene {
 
         loadLevelsList(MainActivity.MAPS_LIST_FILENAME);
 
-        iconsBatch = new SpriteBatch(MainActivity.Res.getTextureAtlas("User_Interface"), mItems.size(), MainActivity.Me.getVertexBufferObjectManager());
+        iconsBatch = new SpriteBatch(MainActivity.resources.getTextureAtlas("User_Interface"), mItems.size(), MainActivity.Me.getVertexBufferObjectManager());
         attachChild(iconsBatch);
 
-        levelCellRegion = MainActivity.Res.getTextureRegion("LevelCell");
+        levelCellRegion = MainActivity.resources.getTextureRegion("LevelCell");
 
-        textCaption = new Text(0, 0, MainActivity.Res.getFont("White Furore"), MainActivity.Me.getString(R.string.selectLevel),
+        textCaption = new Text(0, 0, MainActivity.resources.getFont("White Furore"), MainActivity.Me.getString(R.string.selectLevel),
                 MainActivity.Me.getVertexBufferObjectManager());
         textCaption.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 50);
         attachChild(textCaption);
@@ -131,7 +131,7 @@ public class SceneLevelSelector extends MhyhreScene {
 
             LevelItem item = mItems.get(i);
 
-            Text caption = new Text(0, 0, MainActivity.Res.getFont("Furore"), mItems.get(i).label, MainActivity.Me.getVertexBufferObjectManager());
+            Text caption = new Text(0, 0, MainActivity.resources.getFont("Furore"), mItems.get(i).label, MainActivity.Me.getVertexBufferObjectManager());
             caption.setPosition(item.getX(), item.getY() - (item.getHeight() / 2 + 20));
             attachChild(caption);
         }

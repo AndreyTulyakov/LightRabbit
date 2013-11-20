@@ -18,7 +18,7 @@ public class Player extends Sprite {
     int currentHealth = 3;
 
     public Player(float xPosition) {
-        super(xPosition, 0, MainActivity.Res.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
+        super(xPosition, 0, MainActivity.resources.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
         // TODO Auto-generated constructor stub
     }
 

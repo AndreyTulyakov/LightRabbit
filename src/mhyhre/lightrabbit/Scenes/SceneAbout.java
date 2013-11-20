@@ -39,7 +39,7 @@ public class SceneAbout extends MhyhreScene {
         setBackground(new Background(0.9f, 0.9f, 1.0f));
 
         String strText1 = MainActivity.Me.getString(R.string.textAbout);
-        textTop = new Text(0, 0, MainActivity.Res.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
+        textTop = new Text(0, 0, MainActivity.resources.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
         textTop.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 40);
 
         Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 1, MainActivity.Me.getVertexBufferObjectManager());
@@ -48,7 +48,7 @@ public class SceneAbout extends MhyhreScene {
         topRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - topRect.getHeight() / 2);
 
         String strText2 = loadInfo("about.text");
-        textInfo = new Text(0, 0, MainActivity.Res.getFont("Furore"), strText2, MainActivity.Me.getVertexBufferObjectManager());
+        textInfo = new Text(0, 0, MainActivity.resources.getFont("Furore"), strText2, MainActivity.Me.getVertexBufferObjectManager());
         textInfo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
 
         attachChild(topRect);
@@ -57,7 +57,7 @@ public class SceneAbout extends MhyhreScene {
 
         String strBack = MainActivity.Me.getString(R.string.textBack);
 
-        Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+        Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -70,7 +70,7 @@ public class SceneAbout extends MhyhreScene {
 
         mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
 
-        textBack = new Text(0, 0, MainActivity.Res.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
+        textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
         textBack.setPosition(mBackButtonSprite);
 
         attachChild(mBackButtonSprite);

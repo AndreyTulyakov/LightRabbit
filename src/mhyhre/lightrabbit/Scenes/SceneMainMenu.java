@@ -49,13 +49,13 @@ public class SceneMainMenu extends MhyhreScene {
         String TextItem4 = MainActivity.Me.getString(R.string.MenuItem_Exit);
 
         // Creating text
-        final IFont usedFont = MainActivity.Res.getFont("Furore");
+        final IFont usedFont = MainActivity.resources.getFont("Furore");
         mCaptionItem1 = new Text(0, 0, usedFont, TextItem1, MainActivity.Me.getVertexBufferObjectManager());
         mCaptionItem2 = new Text(0, 0, usedFont, TextItem3, MainActivity.Me.getVertexBufferObjectManager());
         mCaptionItem3 = new Text(0, 0, usedFont, TextItem4, MainActivity.Me.getVertexBufferObjectManager());
 
         // Creating sprites
-        mSpriteItem1 = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+        mSpriteItem1 = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -69,7 +69,7 @@ public class SceneMainMenu extends MhyhreScene {
             }
         };
 
-        mSpriteItem2 = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+        mSpriteItem2 = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -82,7 +82,7 @@ public class SceneMainMenu extends MhyhreScene {
             }
         };
 
-        mSpriteItem3 = new Sprite(0, 0, MainActivity.Res.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
+        mSpriteItem3 = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -124,7 +124,7 @@ public class SceneMainMenu extends MhyhreScene {
 
         // Vibro, Sound enable/disable
 
-        Sprite mSpriteVibro = new Sprite(0, 0, MainActivity.Res.getTextureRegion("ButtonVibration"), MainActivity.Me.getVertexBufferObjectManager()) {
+        Sprite mSpriteVibro = new Sprite(0, 0, MainActivity.resources.getTextureRegion("ButtonVibration"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -145,7 +145,7 @@ public class SceneMainMenu extends MhyhreScene {
         attachChild(mSpriteVibro);
         registerTouchArea(mSpriteVibro);
 
-        Sprite mSpriteSound = new Sprite(0, 0, MainActivity.Res.getTextureRegion("ButtonSound"), MainActivity.Me.getVertexBufferObjectManager()) {
+        Sprite mSpriteSound = new Sprite(0, 0, MainActivity.resources.getTextureRegion("ButtonSound"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
@@ -156,7 +156,7 @@ public class SceneMainMenu extends MhyhreScene {
                     } else {
                         this.setAlpha(1.0f);
                         MainActivity.setSoundEnabled(true);
-                        MainActivity.Res.playSound("roboClick");
+                        MainActivity.resources.playSound("roboClick");
                     }
                     MainActivity.vibrate(40);
                 }

@@ -37,7 +37,7 @@ public class GameMessageManager extends MhyhreScene {
         clickRect.setColor(0.9f, 0.9f, 1.0f, 0.5f);
         registerTouchArea(clickRect);
 
-        textMessage = new Text(100, 100, MainActivity.Res.getFont("Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+        textMessage = new Text(100, 100, MainActivity.resources.getFont("Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
 
         attachChild(clickRect);
         attachChild(textMessage);

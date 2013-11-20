@@ -19,15 +19,15 @@ final public class CloudsManager extends SpriteBatch {
     private float mSkySeparator;
 
     public CloudsManager(int pMaxCapacity, VertexBufferObjectManager vertexBufferObjectManager) {
-        super(0, 0, MainActivity.Res.getTextureAtlas("Clouds"), pMaxCapacity + 2, vertexBufferObjectManager);
+        super(0, 0, MainActivity.resources.getTextureAtlas("Clouds"), pMaxCapacity + 2, vertexBufferObjectManager);
 
         mClouds = new ArrayList<CloudUnit>();
 
         mRegions = new TextureRegion[4];
-        mRegions[0] = MainActivity.Res.getTextureRegion("cloud1");
-        mRegions[1] = MainActivity.Res.getTextureRegion("cloud2");
-        mRegions[2] = MainActivity.Res.getTextureRegion("cloud3");
-        mRegions[3] = MainActivity.Res.getTextureRegion("cloud4");
+        mRegions[0] = MainActivity.resources.getTextureRegion("cloud1");
+        mRegions[1] = MainActivity.resources.getTextureRegion("cloud2");
+        mRegions[2] = MainActivity.resources.getTextureRegion("cloud3");
+        mRegions[3] = MainActivity.resources.getTextureRegion("cloud4");
 
         mSkySeparator = MainActivity.getHeight() / 7;
 

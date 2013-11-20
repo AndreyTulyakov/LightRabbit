@@ -43,9 +43,9 @@ public class SceneRoot extends Scene {
 
         SetState(SceneStates.Splash);
 
-        MainActivity.Res.loadAtlases();
-        MainActivity.Res.loadFonts();
-        MainActivity.Res.loadSounds();
+        MainActivity.resources.loadAtlases();
+        MainActivity.resources.loadFonts();
+        MainActivity.resources.loadSounds();
 
         // Scenes Creating ------------------------------------------------
         mSceneMainMenu = new SceneMainMenu();

@@ -1,14 +1,20 @@
 package mhyhre.lightrabbit.game;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.MhyhreScene;
 
-import org.andengine.entity.Entity;
-import org.andengine.entity.scene.background.IBackground;
+import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.adt.color.Color;
 
-public class SkyManager extends Entity {
+/**
+ * Class manage & contain:
+ *  - Background: Sky
+ *  - Sprites: Sun\Moon
+ *  - 
+ */
+public class SkyManager extends MhyhreScene {
 
     // Per second
     public final float mTimeSpeed = 0.04f;
@@ -16,6 +22,8 @@ public class SkyManager extends Entity {
     // Time in range [0, PI*2]
     float mTime;
 
+    private Background mBackground;
+    
     Sprite spriteSun;
     Sprite spriteMoon;
 
@@ -23,28 +31,27 @@ public class SkyManager extends Entity {
     Color daySkyColor, nightSkyColor;
 
     boolean mNight;
-    IBackground mBackground;
-    WaterPolygon mWater;
 
-    public SkyManager(IBackground pBackground, WaterPolygon pWater, VertexBufferObjectManager vertexBufferObjectManager) {
+    public SkyManager(VertexBufferObjectManager vertexBufferObjectManager) {
 
         this.setPosition(0, 0);
+        
+        mBackground = new Background(0.8f, 0.8f, 0.8f);
+        setBackground(mBackground);
+        setBackgroundEnabled(true);
 
         nightSkyColor = new Color(0.1f, 0.1f, 0.3f);
         daySkyColor = new Color(0.40f, 0.88f, 0.99f);
         skyColor = new Color(daySkyColor);
-
-        mBackground = pBackground;
-        mWater = pWater;
-
+        
         mTime = (float) (Math.PI * 1.7f);
         mNight = false;
 
-        spriteSun = new Sprite(10, 10, MainActivity.Res.getTextureRegion("sun"), vertexBufferObjectManager);
+        spriteSun = new Sprite(10, 10, MainActivity.resources.getTextureRegion("sun"), vertexBufferObjectManager);
         spriteSun.setScale(2);
         this.attachChild(spriteSun);
 
-        spriteMoon = new Sprite(10, 10, MainActivity.Res.getTextureRegion("moon"), vertexBufferObjectManager);
+        spriteMoon = new Sprite(10, 10, MainActivity.resources.getTextureRegion("moon"), vertexBufferObjectManager);
         spriteMoon.setScale(2);
         spriteMoon.setAlpha(0);
         this.attachChild(spriteMoon);

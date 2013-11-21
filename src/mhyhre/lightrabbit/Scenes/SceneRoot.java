@@ -145,7 +145,7 @@ public class SceneRoot extends Scene {
                 }
                 break;
 
-            case Win:
+            case EndGame:
 
                 SetState(SceneStates.LevelSelector);
                 break;

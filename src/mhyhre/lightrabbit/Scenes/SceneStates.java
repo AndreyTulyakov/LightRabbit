@@ -13,5 +13,5 @@
 package mhyhre.lightrabbit.Scenes;
 
 public enum SceneStates {
-    None, Splash, MainMenu, LevelSelector, About, Exit, Game, GameLoading, Win
+    None, Splash, MainMenu, LevelSelector, About, Exit, Game, GameLoading, EndGame
 }

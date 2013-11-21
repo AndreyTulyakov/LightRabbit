@@ -23,15 +23,15 @@ import mhyhre.lightrabbit.game.Collisions;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.GameHUD;
-import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.Levels.Event;
+import mhyhre.lightrabbit.game.Levels.EventType;
 import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.batch.SpriteBatch;
+import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
@@ -45,27 +45,25 @@ public class SceneGame extends MhyhreScene {
     private static final int CLOUDS_MAXIMUM = 5;
     private static final int MAX_BULLETS_ON_SCREEN = 50;
 
-    boolean mLoaded = true;
-    boolean mPause = false;
+    float timeCounter = 0;
 
-    //
+    boolean loaded = true;
+    boolean pause = false;
 
     SpriteBatch bulletBatch;
 
     List<BulletUnit> mBullets;
 
-    GameHUD HUD;
-    CloudsManager mClouds;
-    SkyManager mSkyes;
-    EnemiesManager mEnemies;
-    // GameMessageManager mMessageManager;
-    Player mPlayer;
-
+    private GameHUD HUD;
+    private CloudsManager mClouds;
+    private SkyManager mSkyes;
+    private EnemiesManager mEnemies;
+    private Player mPlayer;
     private WaterPolygon water;
-
-    float timeCounter = 0;
-
     Level level;
+    
+    
+    private Text textTestTimer;
 
     public SceneGame(String levelFileName) {
 
@@ -77,23 +75,23 @@ public class SceneGame extends MhyhreScene {
         configureGameObjects();
 
         attachChild(HUD);
-
+        
+        textTestTimer = new Text(100, 100, MainActivity.resources.getFont("White Furore"), "0",100, MainActivity.getVboManager());
+        attachChild(textTestTimer);
+        
         Log.i(MainActivity.DEBUG_ID, "Scene game created");
-        mLoaded = true;
+        loaded = true;
     }
 
     public void start() {
-
-        mPause = false;
+        pause = false;
     }
 
     public void pause() {
-
-        mPause = true;
+        pause = true;
     }
 
     private void configureGameObjects() {
-
         mSkyes.setCurrentTime(level.getStartTime());
     }
 
@@ -123,7 +121,7 @@ public class SceneGame extends MhyhreScene {
     @Override
     public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
-        if (!mLoaded)
+        if (!loaded)
             return true;
 
         HUD.onSceneTouchEvent(pSceneTouchEvent);
@@ -139,39 +137,44 @@ public class SceneGame extends MhyhreScene {
         mPlayer.update(water);
 
         timeCounter += pSecondsElapsed;
-        float halfRange = 0.050f;
-
+        
         Event gameEvent = level.getCurrentEvent();
 
         // if all events complete
         if (gameEvent == null) {
-
-            // if all enemies destroyed
-            if (mEnemies.isWaitState() == false) {
-
-            }
+            endGame();
+            
         } else {
 
-            if (timeCounter > (gameEvent.getIntegerArg() - halfRange)) {
+            switch(gameEvent.getType()) {
 
-                if (mEnemies.isWaitState()) {
+            case GAME_WAIT_SECONDS:
+                if (((int)timeCounter) > gameEvent.getIntegerArg()) {
                     timeCounter = 0;
-                } else {
                     level.nextEvent();
-                }
 
-                mEnemies.addNewEnemy(gameEvent);
+                }
+                break;
+                
+            default:
+                // TODO: make some actions
+                Log.i(MainActivity.DEBUG_ID, "Event ended:");
+                level.getCurrentEvent().print();
+                
+                // Go to next event.
+                timeCounter = 0;
+                level.nextEvent();
+                break;
             }
         }
+        
+        
+        textTestTimer.setText("Time: " + (int)timeCounter);
 
         updateBullets();
-
         mEnemies.update();
-
         enemiesSharks();
-
         HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
-
         super.onManagedUpdate(pSecondsElapsed);
     }
 
@@ -282,4 +285,7 @@ public class SceneGame extends MhyhreScene {
 
     }
 
+    private void endGame() {
+        MainActivity.getRootScene().SetState(SceneStates.EndGame);
+    }
 }

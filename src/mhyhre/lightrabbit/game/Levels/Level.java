@@ -127,9 +127,7 @@ public class Level {
         return null;
     }
 
-    public List<Event> getEventsList() {
-        return events;
-    }
+
 
     public String getName() {
         return mName;
@@ -146,6 +144,10 @@ public class Level {
     public void nextEvent() {
         currentEventIndex++;
     }
+    
+    public List<Event> getEventsList() {
+        return events;
+    }
 
     public Event getCurrentEvent() {
 
@@ -153,6 +155,10 @@ public class Level {
             return events.get(currentEventIndex);
         }
         return null;
+    }
+    
+    public int getCurrentEventIndex() {
+        return currentEventIndex;
     }
 
     public int getStartTime() {

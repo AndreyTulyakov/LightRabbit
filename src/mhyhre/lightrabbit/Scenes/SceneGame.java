@@ -44,7 +44,7 @@ public class SceneGame extends MhyhreScene {
     private static final int WATER_RESOLUTION = 16;
     private static final int CLOUDS_MAXIMUM = 5;
     private static final int MAX_BULLETS_ON_SCREEN = 50;
-    
+
     boolean mLoaded = true;
     boolean mPause = false;
 
@@ -52,15 +52,13 @@ public class SceneGame extends MhyhreScene {
 
     SpriteBatch bulletBatch;
 
-    
-
     List<BulletUnit> mBullets;
 
     GameHUD HUD;
     CloudsManager mClouds;
     SkyManager mSkyes;
     EnemiesManager mEnemies;
-    GameMessageManager mMessageManager;
+    // GameMessageManager mMessageManager;
     Player mPlayer;
 
     private WaterPolygon water;
@@ -102,19 +100,16 @@ public class SceneGame extends MhyhreScene {
     private void createGameObjects() {
 
         /* Environment */
-        
+
         mClouds = new CloudsManager(CLOUDS_MAXIMUM, MainActivity.getVboManager());
         water = new WaterPolygon(WATER_RESOLUTION, MainActivity.getVboManager());
-        
+
         mPlayer = new Player(100);
         mEnemies = new EnemiesManager(water, MainActivity.getVboManager());
-        
+
         mBullets = new LinkedList<BulletUnit>();
         bulletBatch = new SpriteBatch(MainActivity.resources.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.getVboManager());
         mSkyes = new SkyManager(MainActivity.getVboManager());
-        
-        mMessageManager = new GameMessageManager();
-        mMessageManager.hide();
 
         attachChild(mSkyes);
         attachChild(mClouds);
@@ -123,7 +118,6 @@ public class SceneGame extends MhyhreScene {
         attachChild(mPlayer);
         attachChild(water);
 
-        attachChild(mMessageManager);
     }
 
     @Override
@@ -134,11 +128,7 @@ public class SceneGame extends MhyhreScene {
 
         HUD.onSceneTouchEvent(pSceneTouchEvent);
 
-        mMessageManager.onSceneTouchEvent(pSceneTouchEvent);
-        if (mMessageManager.isActiveMessage() == false) {
-            return super.onSceneTouchEvent(pSceneTouchEvent);
-        }
-        return true;
+        return super.onSceneTouchEvent(pSceneTouchEvent);
     }
 
     @Override
@@ -153,27 +143,24 @@ public class SceneGame extends MhyhreScene {
 
         Event gameEvent = level.getCurrentEvent();
 
-        if (mMessageManager.isActiveMessage() == false) {
+        // if all events complete
+        if (gameEvent == null) {
 
-            // if all events complete
-            if (gameEvent == null) {
+            // if all enemies destroyed
+            if (mEnemies.isWaitState() == false) {
 
-                // if all enemies destroyed
-                if (mEnemies.isWaitState() == false) {
+            }
+        } else {
 
+            if (timeCounter > (gameEvent.getIntegerArg() - halfRange)) {
+
+                if (mEnemies.isWaitState()) {
+                    timeCounter = 0;
+                } else {
+                    level.nextEvent();
                 }
-            } else {
 
-                if (timeCounter > (gameEvent.getIntegerArg() - halfRange)) {
-
-                    if (mEnemies.isWaitState()) {
-                        timeCounter = 0;
-                    } else {
-                        level.nextEvent();
-                    }
-
-                    mEnemies.addNewEnemy(gameEvent);
-                }
+                mEnemies.addNewEnemy(gameEvent);
             }
         }
 
@@ -192,15 +179,12 @@ public class SceneGame extends MhyhreScene {
 
         for (Enemy enemy : mEnemies.getEnemiesList()) {
 
+            // If player collides with enemy.
             if (Collisions.sptireCircleByCircle(mPlayer, 20, enemy.getX(), enemy.getY(), 20)) {
 
                 if (enemy.isDied() == false) {
-
                     MainActivity.vibrate(30);
-
-                    if (mPlayer.getCurrentHealth() > 0)
-                        mPlayer.setCurrentHealth(mPlayer.getCurrentHealth() - 1);
-
+                    mPlayer.decrementHealth();
                     enemy.setDied(true);
                 }
             }

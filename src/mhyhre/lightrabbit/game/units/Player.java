@@ -74,6 +74,15 @@ public class Player extends Sprite {
     public int getCurrentHealth() {
         return currentHealth;
     }
+    
+    /*
+     * Make currentHealth --
+     */
+    public void decrementHealth() {
+        if(currentHealth > 0) {
+            currentHealth--;
+        }
+    }
 
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;

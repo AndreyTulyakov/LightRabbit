@@ -19,8 +19,8 @@ public class SkyManager extends MhyhreScene {
     // Per second
     public final float mTimeSpeed = 0.04f;
 
-    // Time in range [0, PI*2]
-    float mTime;
+    
+    float mTime; /* Time in range [0, PI*2] */
 
     private Background mBackground;
     

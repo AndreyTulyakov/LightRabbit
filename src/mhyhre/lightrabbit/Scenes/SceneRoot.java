@@ -38,7 +38,7 @@ public class SceneRoot extends Scene {
     public void Initialize() {
 
         mSceneLoader = new SceneLoader();
-        mSceneLoader.Show();
+        mSceneLoader.show();
         attachChild(mSceneLoader);
 
         SetState(SceneStates.Splash);
@@ -77,35 +77,35 @@ public class SceneRoot extends Scene {
         if (Preloaded) {
 
             // Hide all scenes.
-            mSceneLoader.Hide();
-            mSceneMainMenu.Hide();
-            mSceneAbout.Hide();
-            mSceneExit.Hide();
-            mSceneLevelSelector.Hide();
-            mSceneGameLoading.Hide();
+            mSceneLoader.hide();
+            mSceneMainMenu.hide();
+            mSceneAbout.hide();
+            mSceneExit.hide();
+            mSceneLevelSelector.hide();
+            mSceneGameLoading.hide();
 
             if (mSceneGame != null)
-                mSceneGame.Hide();
+                mSceneGame.hide();
 
             switch (state) {
             case Splash:
-                mSceneLoader.Show();
+                mSceneLoader.show();
                 break;
 
             case MainMenu:
-                mSceneMainMenu.Show();
+                mSceneMainMenu.show();
                 break;
 
             case LevelSelector:
-                mSceneLevelSelector.Show();
+                mSceneLevelSelector.show();
                 break;
 
             case About:
-                mSceneAbout.Show();
+                mSceneAbout.show();
                 break;
 
             case Exit:
-                mSceneExit.Show();
+                mSceneExit.show();
                 break;
 
             case GameLoading:
@@ -129,8 +129,8 @@ public class SceneRoot extends Scene {
                 this.attachChild(mSceneGame);
                 this.attachChild(mSceneGameLoading);
 
-                mSceneGameLoading.Show();
-                mSceneGame.Show();
+                mSceneGameLoading.show();
+                mSceneGame.show();
 
                 mSceneGameLoading.setLoaded(true);
 
@@ -140,7 +140,7 @@ public class SceneRoot extends Scene {
 
                 if (mSceneGame != null) {
 
-                    mSceneGame.Show();
+                    mSceneGame.show();
                     mSceneGame.start();
                 }
                 break;

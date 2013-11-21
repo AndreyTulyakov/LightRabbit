@@ -27,7 +27,7 @@ public class GameHUD extends MhyhreScene {
     public GameHUD() {
 
         setBackgroundEnabled(false);
-        Show();
+        show();
 
         states = new boolean[16];
 

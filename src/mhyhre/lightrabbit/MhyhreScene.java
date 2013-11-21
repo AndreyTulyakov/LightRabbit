@@ -18,15 +18,15 @@ public class MhyhreScene extends CameraScene {
 
     public MhyhreScene() {
         super(MainActivity.camera);
-        Hide();
+        hide();
     }
 
-    public void Show() {
+    public void show() {
         setVisible(true);
         setIgnoreUpdate(false);
     }
 
-    public void Hide() {
+    public void hide() {
         setVisible(false);
         setIgnoreUpdate(true);
     }

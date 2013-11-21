@@ -26,7 +26,7 @@ public class GameMessageManager extends MhyhreScene {
 
                     Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
                     MainActivity.vibrate(30);
-                    Hide();
+                    hide();
                     setIgnoreUpdate(true);
                     activeMessage = false;
                 }
@@ -49,7 +49,7 @@ public class GameMessageManager extends MhyhreScene {
 
     public boolean showEndDialog(String text) {
 
-        this.Show();
+        this.show();
         setIgnoreUpdate(false);
 
         textMessage.setText(text);

@@ -38,7 +38,6 @@ import android.util.Log;
 
 /**
  * This scene control game process.
- * 
  */
 public class SceneGame extends MhyhreScene {
 
@@ -115,7 +114,7 @@ public class SceneGame extends MhyhreScene {
         mSkyes = new SkyManager(MainActivity.getVboManager());
         
         mMessageManager = new GameMessageManager();
-        mMessageManager.Hide();
+        mMessageManager.hide();
 
         attachChild(mSkyes);
         attachChild(mClouds);

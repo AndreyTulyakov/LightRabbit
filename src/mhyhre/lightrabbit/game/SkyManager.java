@@ -56,6 +56,7 @@ public class SkyManager extends MhyhreScene {
         spriteMoon.setAlpha(0);
         this.attachChild(spriteMoon);
 
+        show();
     }
 
     @Override

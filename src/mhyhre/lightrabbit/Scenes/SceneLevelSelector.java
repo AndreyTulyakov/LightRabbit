@@ -197,8 +197,8 @@ public class SceneLevelSelector extends MhyhreScene {
     }
 
     @Override
-    public void Show() {
+    public void show() {
         touchDownToLevel = -1;
-        super.Show();
+        super.show();
     }
 }

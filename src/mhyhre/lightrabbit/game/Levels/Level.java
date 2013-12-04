@@ -71,9 +71,6 @@ public class Level {
 
         }
 
-        for (Event event : events) {
-            event.print();
-        }
         if (events != null) {
             events.get(currentEventIndex);
         }

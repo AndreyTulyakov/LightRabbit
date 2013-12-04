@@ -61,8 +61,7 @@ public class SceneGame extends MhyhreScene {
     private Player mPlayer;
     private WaterPolygon water;
     Level level;
-    
-    
+
     private Text textTestTimer;
 
     public SceneGame(String levelFileName) {
@@ -75,10 +74,10 @@ public class SceneGame extends MhyhreScene {
         configureGameObjects();
 
         attachChild(HUD);
-        
-        textTestTimer = new Text(100, 100, MainActivity.resources.getFont("White Furore"), "0",100, MainActivity.getVboManager());
+
+        textTestTimer = new Text(100, 100, MainActivity.resources.getFont("White Furore"), "0", 100, MainActivity.getVboManager());
         attachChild(textTestTimer);
-        
+
         Log.i(MainActivity.DEBUG_ID, "Scene game created");
         loaded = true;
     }
@@ -132,50 +131,59 @@ public class SceneGame extends MhyhreScene {
     @Override
     protected void onManagedUpdate(final float pSecondsElapsed) {
 
+        if(pause) {
+            return;
+        }
+        
         updateControlls();
 
         mPlayer.update(water);
 
         timeCounter += pSecondsElapsed;
-        
-        Event gameEvent = level.getCurrentEvent();
 
-        // if all events complete
-        if (gameEvent == null) {
-            endGame();
-            
-        } else {
+        updateEvents();
 
-            switch(gameEvent.getType()) {
-
-            case GAME_WAIT_SECONDS:
-                if (((int)timeCounter) > gameEvent.getIntegerArg()) {
-                    timeCounter = 0;
-                    level.nextEvent();
-
-                }
-                break;
-                
-            default:
-                // TODO: make some actions
-                Log.i(MainActivity.DEBUG_ID, "Event ended:");
-                level.getCurrentEvent().print();
-                
-                // Go to next event.
-                timeCounter = 0;
-                level.nextEvent();
-                break;
-            }
-        }
-        
-        
-        textTestTimer.setText("Time: " + (int)timeCounter);
+        textTestTimer.setText("Time: " + (int) timeCounter);
 
         updateBullets();
         mEnemies.update();
         enemiesSharks();
         HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
         super.onManagedUpdate(pSecondsElapsed);
+    }
+    
+    
+    private void updateEvents() {
+
+        Event gameEvent = level.getCurrentEvent();
+
+        // if all events complete
+        if (gameEvent == null) {
+            endGame();
+
+        } else {
+            
+            switch (gameEvent.getType()) {
+
+            case GAME_WAIT_SECONDS:
+                if (((int) timeCounter) > gameEvent.getIntegerArg()) {
+                    Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
+                    timeCounter = 0;
+                    level.nextEvent();
+                }
+                break;
+
+            default:
+                Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
+                
+                // TODO: make some actions
+
+                // Go to next event.
+                timeCounter = 0;
+                level.nextEvent();
+                break;
+            }
+        }
     }
 
     private void enemiesSharks() {
@@ -226,7 +234,7 @@ public class SceneGame extends MhyhreScene {
                 }
             }
 
-            if (bullet.getY() < water.getYPositionOnWave(bullet.getX())) {
+            if (bullet.getY() < water.getObjectYPosition(bullet.getX())) {
                 bullet.setSink(true);
             }
 

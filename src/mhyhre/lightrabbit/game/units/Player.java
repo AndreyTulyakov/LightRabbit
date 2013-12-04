@@ -30,8 +30,8 @@ public class Player extends Sprite {
             mSpeed = 0;
 
         setX(getX() + mSpeed);
-        setY(water.getYPositionOnWave(getX()) + 5);
-        setRotation(water.getAngleOnWave(getX()) / 2.0f);
+        setY(water.getObjectYPosition(getX()) + 5);
+        setRotation(water.getObjectAngle(getX()) / 2.0f);
     }
 
     public float getBoatSpeed() {

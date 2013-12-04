@@ -55,8 +55,11 @@ public class Event {
         mStringArg = arg;
     }
 
-    public void print() {
-        Log.i(MainActivity.DEBUG_ID, "Event: " + mType + " id:" + mId + " int-arg:" + mIntegerArg + " str-arg:" + mStringArg);
+    @Override
+    public String toString() {
+        return "Event [Type=" + mType + ", Id=" + mId + ", IntegerArg=" + mIntegerArg + ", StringArg=" + mStringArg + "]";
     }
+    
+    
 
 }

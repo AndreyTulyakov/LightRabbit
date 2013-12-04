@@ -53,7 +53,7 @@ public class EnemiesManager extends SpriteBatch {
             case PIRATE_BOAT:
                 PirateBoatUnit pirateBoat = (PirateBoatUnit) enemy;
 
-                pirateBoat.setWaterLevel(mWater.getYPositionOnWave(pirateBoat.getX()) + 2);
+                pirateBoat.setWaterLevel(mWater.getObjectYPosition(pirateBoat.getX()) + 2);
                 pirateBoat.update();
 
                 if (pirateBoat.getY() < 0 || pirateBoat.getX() < -50) {
@@ -61,7 +61,7 @@ public class EnemiesManager extends SpriteBatch {
                     i--;
                     continue;
                 }
-                rotation = -mWater.getAngleOnWave(pirateBoat.getX()) / 2.0f;
+                rotation = -mWater.getObjectAngle(pirateBoat.getX()) / 2.0f;
                 bright = pirateBoat.getBright();
                 draw(pirateBoatRegion, pirateBoat.getX() - pirateBoat.getWidth() / 2, pirateBoat.getY() - pirateBoat.getHeight() / 2, pirateBoat.getWidth(),
                         pirateBoat.getHeight(), rotation, bright, bright, bright, bright);
@@ -71,7 +71,7 @@ public class EnemiesManager extends SpriteBatch {
             case PIRATE_SHIP:
                 PirateShipUnit pirateShip = (PirateShipUnit) enemy;
 
-                pirateShip.setWaterLevel(mWater.getYPositionOnWave(pirateShip.getX()) + 20);
+                pirateShip.setWaterLevel(mWater.getObjectYPosition(pirateShip.getX()) + 20);
                 pirateShip.update();
 
                 if (pirateShip.getY() < 0 || pirateShip.getX() < -50) {
@@ -79,7 +79,7 @@ public class EnemiesManager extends SpriteBatch {
                     i--;
                     continue;
                 }
-                rotation = -mWater.getAngleOnWave(pirateShip.getX()) / 2.0f;
+                rotation = -mWater.getObjectAngle(pirateShip.getX()) / 2.0f;
                 bright = pirateShip.getBright();
                 draw(pirateShipRegion, pirateShip.getX() - pirateShip.getWidth() / 2, pirateShip.getY() - pirateShip.getHeight() / 2, pirateShip.getWidth(),
                         pirateShip.getHeight(), rotation, bright, bright, bright, bright);
@@ -89,7 +89,7 @@ public class EnemiesManager extends SpriteBatch {
             case SHARK:
                 SharkUnit shark = (SharkUnit) enemy;
 
-                shark.setWaterLevel(mWater.getYPositionOnWave(shark.getX()) - 40);
+                shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 40);
                 shark.update();
 
                 if (shark.getY() > MainActivity.getHeight() || shark.getX() < -50) {

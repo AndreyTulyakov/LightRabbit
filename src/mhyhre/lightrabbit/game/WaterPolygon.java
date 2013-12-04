@@ -34,15 +34,15 @@ public class WaterPolygon extends Polygon {
         // Water coordinates list
         waterCoordinates = new ArrayList<Vector2>();
 
+        // Set "Loop" vertices
         waterCoordinates.add(new Vector2(MainActivity.getHalfWidth(), 0));
-        waterCoordinates.add(new Vector2(0, 0));
+        waterCoordinates.add(new Vector2(0, 0));     
 
         for (int i = 0; i < waterResolution; i++) {
-
             waterCoordinates.add(new Vector2(i * step, MainActivity.getHalfHeight()));
         }
-
         waterCoordinates.add(new Vector2(MainActivity.getWidth(), 0));
+        
 
         // Separate coordinates
         vertexX1 = new float[waterCoordinates.size()];
@@ -66,17 +66,16 @@ public class WaterPolygon extends Polygon {
 
         float step = MainActivity.getWidth() / (waterResolution - 1);
 
-        int startWaveOffset = 2;
+        int startVerticesOffset = 2;
+        int endVerticesOffset = -1;
 
-        for (int i = startWaveOffset; i < vertexX1.length - 1; i++) {
+        for (int vertexIndex = startVerticesOffset; vertexIndex < vertexX1.length+endVerticesOffset; vertexIndex++) {
 
-            int j = i - startWaveOffset;
-            float waveAngle = getWaveAngle(j * step);
+            int relativeIndex = vertexIndex - startVerticesOffset;
+            float waveAngle = getWaveAngle(relativeIndex * step);
 
-            float vertexHeight = getHeightOnWave(waveAngle);
-
-            vertexX1[i] = j * step;
-            vertexY1[i] = vertexHeight;
+            vertexX1[vertexIndex] = relativeIndex * step;
+            vertexY1[vertexIndex] = getHeightOnWave(waveAngle);
         }
 
         updateVertices(vertexX1, vertexY1);
@@ -92,28 +91,37 @@ public class WaterPolygon extends Polygon {
         this.waveRepeating = waveRepeating;
     }
 
-    private float getWaveAngle(float i) {
-        float c = (i / (MainActivity.getWidth() / (waterResolution - 1)));
-        float waveAngle = (float) ((c * waveRepeating / (Math.PI)) + tick);
-        return waveAngle;
-    }
 
+    /**
+     * Return wave height by angle
+     */
     private float getHeightOnWave(float angle) {
         float vertexHeight = (float) (waterLevel - waveHeight * Math.sin(angle));
         return vertexHeight;
     }
 
-    public float getYPositionOnWave(float pX) {
+    /**
+     * Calculate wave angular value by X offset
+     */
+    private float getWaveAngle(float xOffset) {
+        float c = (xOffset / (MainActivity.getWidth() / (waterResolution - 1)));
+        float waveAngle = (float) ((c * waveRepeating / (Math.PI)) + tick);
+        return waveAngle;
+    }
+    
 
-        float waveAngle = getWaveAngle(pX);
+    public float getObjectYPosition(float xPosition) {
 
+        float waveAngle = getWaveAngle(xPosition);
         float vertexHeight = getHeightOnWave(waveAngle);
-
         return vertexHeight;
     }
-
-    public float getAngleOnWave(float pX) {
-        double waveAngle = getWaveAngle(pX) - Math.PI / 2;
+    
+    /**
+     * Calculate angle of object on current wave position
+     */
+    public float getObjectAngle(float xPosition) {
+        double waveAngle = getWaveAngle(xPosition) - Math.PI / 2;
         waveAngle = Math.sin(waveAngle) * -45;
         return (float) waveAngle;
     }

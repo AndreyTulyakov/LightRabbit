@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import mhyhre.lightrabbit.MainActivity;

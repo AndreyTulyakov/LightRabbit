@@ -13,6 +13,9 @@ import mhyhre.lightrabbit.game.Levels.DialogBase;
 import mhyhre.lightrabbit.game.Levels.Replic;
 
 public class GameMessageManager extends MhyhreScene {
+    
+    // TODO: add a fast message support
+    // TODO: add show actor of replica
 
     Text textMessage;
     Rectangle clickRect;
@@ -32,6 +35,7 @@ public class GameMessageManager extends MhyhreScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
+                    // if has not next replic
                     if(currentReplic.getNextId() == 0) {
                         if(activeMessage) {
                             hide();
@@ -80,8 +84,7 @@ public class GameMessageManager extends MhyhreScene {
             hide();
             return;
         }
-        
-        // Проверить что есть база диалогов и в ней есть id
+
         if(dialogBase == null) {
             return;
         }

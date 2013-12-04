@@ -23,10 +23,10 @@ import mhyhre.lightrabbit.game.Collisions;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.GameHUD;
+import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.Levels.Event;
-import mhyhre.lightrabbit.game.Levels.EventType;
 import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
@@ -60,7 +60,10 @@ public class SceneGame extends MhyhreScene {
     private EnemiesManager mEnemies;
     private Player mPlayer;
     private WaterPolygon water;
+    private GameMessageManager messageManager;
+    
     Level level;
+    
 
     private Text textTestTimer;
 
@@ -107,6 +110,8 @@ public class SceneGame extends MhyhreScene {
         mBullets = new LinkedList<BulletUnit>();
         bulletBatch = new SpriteBatch(MainActivity.resources.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.getVboManager());
         mSkyes = new SkyManager(MainActivity.getVboManager());
+        
+        messageManager = new GameMessageManager();
 
         attachChild(mSkyes);
         attachChild(mClouds);
@@ -114,6 +119,7 @@ public class SceneGame extends MhyhreScene {
         attachChild(bulletBatch);
         attachChild(mPlayer);
         attachChild(water);
+        attachChild(messageManager);
 
     }
 
@@ -122,9 +128,13 @@ public class SceneGame extends MhyhreScene {
 
         if (!loaded)
             return true;
-
-        HUD.onSceneTouchEvent(pSceneTouchEvent);
-
+        
+        if(messageManager.isActiveMessage() == true) {
+            HUD.resetStates();
+            messageManager.onSceneTouchEvent(pSceneTouchEvent);
+        } else {
+            HUD.onSceneTouchEvent(pSceneTouchEvent);
+        }
         return super.onSceneTouchEvent(pSceneTouchEvent);
     }
 
@@ -166,24 +176,50 @@ public class SceneGame extends MhyhreScene {
             switch (gameEvent.getType()) {
 
             case GAME_WAIT_SECONDS:
-                if (((int) timeCounter) > gameEvent.getIntegerArg()) {
+                if (((int) timeCounter) >= gameEvent.getIntegerArg()) {
                     Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
                     timeCounter = 0;
                     level.nextEvent();
                 }
                 break;
+                
+            case GAME_STOP_TIME:
+                mSkyes.stopTime();
+                goToNextEvent();
+                break;
+                
+            case GAME_START_TIME:
+                mSkyes.startTime();
+                goToNextEvent();
+                break;
+                
+            case MSSG_SHOW:
+                
+                if(messageManager.lastShownMessage() == -1 && messageManager.isActiveMessage() == false) {
+                    messageManager.showMessage(gameEvent.getId());
+                } else {
+                    if(messageManager.isActiveMessage() == true) {
+                        break;
+                    } else {
+                        messageManager.showMessage(-1);
+                        goToNextEvent();
+                    }
+                }
+                break;
 
             default:
-                Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
-                
-                // TODO: make some actions
 
-                // Go to next event.
-                timeCounter = 0;
-                level.nextEvent();
+                // TODO: make some actions
+                goToNextEvent();
                 break;
             }
         }
+    }
+    
+    private void goToNextEvent() {
+        Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
+        timeCounter = 0;
+        level.nextEvent();
     }
 
     private void enemiesSharks() {

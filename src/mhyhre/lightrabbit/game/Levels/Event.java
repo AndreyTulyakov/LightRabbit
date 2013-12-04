@@ -1,8 +1,5 @@
 package mhyhre.lightrabbit.game.Levels;
 
-import mhyhre.lightrabbit.MainActivity;
-import android.util.Log;
-
 public class Event {
 
     private EventType mType;

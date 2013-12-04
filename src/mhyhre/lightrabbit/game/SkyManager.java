@@ -17,8 +17,8 @@ import org.andengine.util.adt.color.Color;
 public class SkyManager extends MhyhreScene {
 
     // Per second
-    public final float mTimeSpeed = 0.04f;
-
+    private final float mTimeSpeed = 0.04f;
+    private boolean timeStopped = false;
     
     float mTime; /* Time in range [0, PI*2] */
 
@@ -57,11 +57,18 @@ public class SkyManager extends MhyhreScene {
         this.attachChild(spriteMoon);
 
         show();
+        
+        // For first configure
+        onManagedUpdate(0);
     }
 
     @Override
     protected void onManagedUpdate(float pSecondsElapsed) {
 
+        if(timeStopped) {
+            return;
+        }
+        
         mTime += mTimeSpeed * pSecondsElapsed;
         if (mTime > Math.PI * 2) {
             mTime = 0;
@@ -149,6 +156,14 @@ public class SkyManager extends MhyhreScene {
     // Use 0-23 values to set hours
     public void setCurrentTime(int time) {
         mTime = (float) ((time % 24 * Math.PI * 2) / 24.0f);
+    }
+    
+    public void stopTime() {
+        timeStopped = true;
+    }
+    
+    public void startTime() {
+        timeStopped = false;
     }
 
 }

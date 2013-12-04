@@ -14,6 +14,7 @@ public class GameMessageManager extends MhyhreScene {
     Text textMessage;
     Rectangle clickRect;
 
+    int lastMessage = -1;
     boolean activeMessage = false;
 
     public GameMessageManager() {
@@ -24,11 +25,13 @@ public class GameMessageManager extends MhyhreScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
-                    MainActivity.vibrate(30);
-                    hide();
-                    setIgnoreUpdate(true);
-                    activeMessage = false;
+                    if(activeMessage) {
+                        Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
+                        MainActivity.vibrate(30);
+                        hide();
+                        setIgnoreUpdate(true);
+                        activeMessage = false;
+                    }
                 }
                 return true;
             }
@@ -46,7 +49,7 @@ public class GameMessageManager extends MhyhreScene {
     public void loadDialogs(int dialogBaseIndex) {
 
     }
-
+/*
     public boolean showEndDialog(String text) {
 
         this.show();
@@ -59,8 +62,27 @@ public class GameMessageManager extends MhyhreScene {
 
         return false;
     }
+   */
+    
+    public int lastShownMessage(){
+        return lastMessage;
+    }
 
     public boolean isActiveMessage() {
         return activeMessage;
+    }
+    
+    public void showMessage(int messageId) {
+        lastMessage = messageId;
+        
+        if(lastMessage == -1) {
+            activeMessage = false;
+            hide();
+            return;
+        }
+        
+        show();
+        activeMessage = true;
+        
     }
 }

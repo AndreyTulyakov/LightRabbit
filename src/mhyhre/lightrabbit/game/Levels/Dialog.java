@@ -5,6 +5,8 @@ import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import mhyhre.lightrabbit.MainActivity;
 
@@ -32,6 +34,25 @@ public class Dialog {
 
         Log.e(MainActivity.DEBUG_ID, "Dialog::getReplic: invalid id");
         return null;
+    }
+    
+    // Return replic with minimal id
+    public Replic getFirstReplic() {
+        
+        if(replics.isEmpty()) {
+            return null;
+        }
+        
+        Set<Integer> keys = replics.keySet();
+        int minimalId = keys.iterator().next();
+        
+        for (Integer key: keys) {
+            if(minimalId > key) {
+                minimalId = key;
+            }
+        }
+
+        return replics.get(minimalId);
     }
 
     public String getCaption() {

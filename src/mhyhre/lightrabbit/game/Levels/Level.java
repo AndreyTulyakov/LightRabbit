@@ -51,13 +51,9 @@ public class Level {
         try {
             InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
-
             doc = docBuilder.parse(is);
-
             Element root = doc.getDocumentElement();
-
             root.normalize();
-
             LoadFromXml(root);
 
         } catch (IOException e) {
@@ -68,7 +64,6 @@ public class Level {
 
         } catch (SAXException e) {
             e.printStackTrace();
-
         }
 
         if (events != null) {
@@ -77,6 +72,10 @@ public class Level {
 
         dialogBase = new DialogBase(mDialogBaseFilename);
         characterBase = new CharacterBase(dialogBase.getCharacterBaseFilename());
+    }
+
+    public DialogBase getDialogBase() {
+        return dialogBase;
     }
 
     private void LoadFromXml(Element rootElement) {
@@ -123,8 +122,6 @@ public class Level {
 
         return null;
     }
-
-
 
     public String getName() {
         return mName;

@@ -112,6 +112,7 @@ public class SceneGame extends MhyhreScene {
         mSkyes = new SkyManager(MainActivity.getVboManager());
         
         messageManager = new GameMessageManager();
+        messageManager.setDialogBase(level.getDialogBase());
 
         attachChild(mSkyes);
         attachChild(mClouds);

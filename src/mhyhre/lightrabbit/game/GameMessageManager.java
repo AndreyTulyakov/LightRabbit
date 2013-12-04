@@ -8,13 +8,20 @@ import android.util.Log;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.game.Levels.Dialog;
+import mhyhre.lightrabbit.game.Levels.DialogBase;
+import mhyhre.lightrabbit.game.Levels.Replic;
 
 public class GameMessageManager extends MhyhreScene {
 
     Text textMessage;
     Rectangle clickRect;
+    DialogBase dialogBase;
+    
+    Dialog currentDialog;
+    Replic currentReplic;
 
-    int lastMessage = -1;
+    int lastMessageId = -1;
     boolean activeMessage = false;
 
     public GameMessageManager() {
@@ -25,13 +32,19 @@ public class GameMessageManager extends MhyhreScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    if(activeMessage) {
-                        Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
-                        MainActivity.vibrate(30);
-                        hide();
-                        setIgnoreUpdate(true);
-                        activeMessage = false;
+                    if(currentReplic.getNextId() == 0) {
+                        if(activeMessage) {
+                            hide();
+                            setIgnoreUpdate(true);
+                            activeMessage = false;
+                        }
+                    } else {
+                        currentReplic = currentDialog.getReplic(currentReplic.getNextId());
+                        updateVisualMessage();
                     }
+                    
+                    Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
+                    MainActivity.vibrate(30);
                 }
                 return true;
             }
@@ -41,31 +54,18 @@ public class GameMessageManager extends MhyhreScene {
         registerTouchArea(clickRect);
 
         textMessage = new Text(100, 100, MainActivity.resources.getFont("Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
-
+        textMessage.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+        
         attachChild(clickRect);
         attachChild(textMessage);
     }
 
-    public void loadDialogs(int dialogBaseIndex) {
-
+    private void updateVisualMessage() {
+        textMessage.setText(currentReplic.getText());
     }
-/*
-    public boolean showEndDialog(String text) {
-
-        this.show();
-        setIgnoreUpdate(false);
-
-        textMessage.setText(text);
-        textMessage.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-
-        activeMessage = true;
-
-        return false;
-    }
-   */
     
     public int lastShownMessage(){
-        return lastMessage;
+        return lastMessageId;
     }
 
     public boolean isActiveMessage() {
@@ -73,16 +73,34 @@ public class GameMessageManager extends MhyhreScene {
     }
     
     public void showMessage(int messageId) {
-        lastMessage = messageId;
+        lastMessageId = messageId;
         
-        if(lastMessage == -1) {
+        if(lastMessageId == -1) {
             activeMessage = false;
             hide();
             return;
         }
         
+        // Проверить что есть база диалогов и в ней есть id
+        if(dialogBase == null) {
+            return;
+        }
+        
+        currentDialog = dialogBase.getDialogs(lastMessageId);
+        if(currentDialog == null) {
+            showMessage(-1);
+            return;
+        }
+        
+        currentReplic = currentDialog.getFirstReplic();
+        
         show();
         activeMessage = true;
-        
+        updateVisualMessage();
     }
+    
+    public void setDialogBase(DialogBase dialogBase) {
+        this.dialogBase = dialogBase;
+    }
+
 }

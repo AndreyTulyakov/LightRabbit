@@ -109,4 +109,12 @@ public class DialogBase {
         return characterBaseFilename;
     }
 
+    public Dialog getDialogs(int id) {
+        if(dialogs.containsKey(id)) {
+            return dialogs.get(id);
+        } else {
+            return null;
+        }
+    }
+
 }

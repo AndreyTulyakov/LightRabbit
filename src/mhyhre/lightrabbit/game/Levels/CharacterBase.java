@@ -81,5 +81,9 @@ public class CharacterBase {
             characters.put(id, character);
         }
     }
+    
+    public Character getCharacter(int id) {
+        return characters.get(id);
+    }
 
 }

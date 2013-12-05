@@ -8,21 +8,26 @@ import android.util.Log;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.game.Levels.CharacterBase;
 import mhyhre.lightrabbit.game.Levels.Dialog;
 import mhyhre.lightrabbit.game.Levels.DialogBase;
 import mhyhre.lightrabbit.game.Levels.Replic;
+import mhyhre.lightrabbit.game.Levels.Character;;
 
 public class GameMessageManager extends MhyhreScene {
     
     // TODO: add a fast message support
     // TODO: add show actor of replica
 
-    Text textMessage;
-    Rectangle clickRect;
-    DialogBase dialogBase;
+    private Text textMessage;
+    private Text textCharacter;
     
-    Dialog currentDialog;
-    Replic currentReplic;
+    private Rectangle clickRect;
+    private DialogBase dialogBase;
+    private CharacterBase characterBase;
+    
+    private Dialog currentDialog;
+    private Replic currentReplic;
 
     int lastMessageId = -1;
     boolean activeMessage = false;
@@ -60,12 +65,23 @@ public class GameMessageManager extends MhyhreScene {
         textMessage = new Text(100, 100, MainActivity.resources.getFont("Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
         textMessage.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         
+        textCharacter = new Text(100, 100, MainActivity.resources.getFont("White Furore"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
+        textCharacter.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight() + 100);
+        
         attachChild(clickRect);
         attachChild(textMessage);
+        attachChild(textCharacter);
     }
 
     private void updateVisualMessage() {
         textMessage.setText(currentReplic.getText());
+        
+        Character character = characterBase.getCharacter(currentReplic.getActorId());
+        if(character != null) {
+            textCharacter.setText(character.getName());
+        }
+
+        
     }
     
     public int lastShownMessage(){
@@ -104,6 +120,10 @@ public class GameMessageManager extends MhyhreScene {
     
     public void setDialogBase(DialogBase dialogBase) {
         this.dialogBase = dialogBase;
+    }
+    
+    public void setCharacterBase(CharacterBase characterBase) {
+        this.characterBase = characterBase;
     }
 
 }

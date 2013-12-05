@@ -46,6 +46,7 @@ public class SceneGame extends MhyhreScene {
     private static final int MAX_BULLETS_ON_SCREEN = 50;
 
     float timeCounter = 0;
+    float bulletTimeCounter = 0;
 
     boolean loaded = true;
     boolean pause = false;
@@ -113,6 +114,7 @@ public class SceneGame extends MhyhreScene {
         
         messageManager = new GameMessageManager();
         messageManager.setDialogBase(level.getDialogBase());
+        messageManager.setCharacterBase(level.getCharacterBase());
 
         attachChild(mSkyes);
         attachChild(mClouds);
@@ -151,6 +153,7 @@ public class SceneGame extends MhyhreScene {
         mPlayer.update(water);
 
         timeCounter += pSecondsElapsed;
+        bulletTimeCounter += pSecondsElapsed;
 
         updateEvents();
 
@@ -320,7 +323,7 @@ public class SceneGame extends MhyhreScene {
 
             if (mBullets.size() < MAX_BULLETS_ON_SCREEN) {
 
-                BulletUnit bullet = mPlayer.fire(timeCounter);
+                BulletUnit bullet = mPlayer.fire(bulletTimeCounter);
 
                 if (bullet != null) {
                     mBullets.add(bullet);

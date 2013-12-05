@@ -52,7 +52,7 @@ public class Player extends Sprite {
 
     public BulletUnit fire(float fireTime) {
 
-        if (fireTime - lastFireTime > getGunReloadingTime()) {
+        if (Math.abs(fireTime - lastFireTime) > getGunReloadingTime()) {
 
             MainActivity.vibrate(30);
 

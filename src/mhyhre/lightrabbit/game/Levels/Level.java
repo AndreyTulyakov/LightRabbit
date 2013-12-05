@@ -77,6 +77,10 @@ public class Level {
     public DialogBase getDialogBase() {
         return dialogBase;
     }
+    
+    public CharacterBase getCharacterBase() {
+        return characterBase;
+    }
 
     private void LoadFromXml(Element rootElement) {
 

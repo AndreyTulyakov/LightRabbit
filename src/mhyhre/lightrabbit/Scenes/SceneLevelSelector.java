@@ -40,6 +40,7 @@ public class SceneLevelSelector extends MhyhreScene {
 
     List<LevelItem> mItems;
 
+    // Whats level was selected
     int touchDownToLevel = -1;
 
     SpriteBatch iconsBatch;
@@ -109,12 +110,14 @@ public class SceneLevelSelector extends MhyhreScene {
 
             for (int i = 0; i < items.getLength(); i++) {
 
-                Node levelNode = items.item(i);
-
-                LevelItem levelItem = new LevelItem();
-                levelItem.filename = levelNode.getTextContent();
-                levelItem.label = levelNode.getAttributes().getNamedItem("label").getNodeValue();
-                mItems.add(levelItem);
+                Node levelNode = items.item(i);  
+                String filename = levelNode.getTextContent();
+                String label = levelNode.getAttributes().getNamedItem("label").getNodeValue();
+                
+                LevelItem levelItem = new LevelItem(filename, label);
+                if(levelItem.isCorrect()) {
+                    mItems.add(levelItem);
+                }
             }
 
             Log.i(MainActivity.DEBUG_ID, "Good parsing!");
@@ -186,7 +189,8 @@ public class SceneLevelSelector extends MhyhreScene {
         if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
             for (LevelItem item : mItems) {
                 if (item.isCollided(pSceneTouchEvent.getX(), pSceneTouchEvent.getY()) && item.isLocked() == false) {
-
+                    Log.i(MainActivity.DEBUG_ID, "SceneLevelSelector: Selected level [" + item.label + "]");
+                    
                     selectedLevel = item;
                     MainActivity.getRootScene().SetState(SceneStates.GameLoading);
                 }

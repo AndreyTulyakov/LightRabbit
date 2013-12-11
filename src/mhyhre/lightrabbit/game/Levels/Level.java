@@ -1,5 +1,6 @@
 package mhyhre.lightrabbit.game.Levels;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.util.Log;
+
 public class Level {
 
     private static final String EVENT = "Event";
@@ -29,14 +32,14 @@ public class Level {
     private static final String LEVEL_DIALOGBASE = "DialogBase";
     private static final String LEVEL_STARTTIME = "Time";
 
-    private String mName;
-    private String mChapter;
-    private String mStory;
-    private String mDialogBaseFilename;
+    private String mName = "";
+    private String mChapter = "";
+    private String mStory = "";
+    private String mDialogBaseFilename = "";
     private int mStartTime;
 
     private List<Event> events;
-    private int currentEventIndex = 0;
+    private int currentEventIndex = -1;
 
     DialogBase dialogBase;
     CharacterBase characterBase;
@@ -57,17 +60,17 @@ public class Level {
             LoadFromXml(root);
 
         } catch (IOException e) {
-            e.printStackTrace();
-
+            Log.e(MainActivity.DEBUG_ID, "Level::Level:" + e.getMessage());
+            
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-
+            Log.e(MainActivity.DEBUG_ID, "Level::Level:" + e.getMessage());
+            
         } catch (SAXException e) {
-            e.printStackTrace();
+            Log.e(MainActivity.DEBUG_ID, "Level::Level:" + e.getMessage());
         }
 
-        if (events != null) {
-            events.get(currentEventIndex);
+        if (events.size() > 0) {
+            currentEventIndex = 0;
         }
 
         dialogBase = new DialogBase(mDialogBaseFilename);
@@ -77,7 +80,7 @@ public class Level {
     public DialogBase getDialogBase() {
         return dialogBase;
     }
-    
+
     public CharacterBase getCharacterBase() {
         return characterBase;
     }
@@ -142,7 +145,7 @@ public class Level {
     public void nextEvent() {
         currentEventIndex++;
     }
-    
+
     public List<Event> getEventsList() {
         return events;
     }
@@ -154,7 +157,7 @@ public class Level {
         }
         return null;
     }
-    
+
     public int getCurrentEventIndex() {
         return currentEventIndex;
     }

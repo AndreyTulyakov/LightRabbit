@@ -63,7 +63,7 @@ public class SceneGame extends MhyhreScene {
     private WaterPolygon water;
     private GameMessageManager messageManager;
     
-    Level level;
+    private Level level;
     
 
     private Text textTestTimer;
@@ -95,7 +95,7 @@ public class SceneGame extends MhyhreScene {
     }
 
     private void configureGameObjects() {
-        mSkyes.setCurrentTime(level.getStartTime());
+        mSkyes.setCurrentTime(getLevel().getStartTime());
     }
 
     private void createGameObjects() {
@@ -113,8 +113,8 @@ public class SceneGame extends MhyhreScene {
         mSkyes = new SkyManager(MainActivity.getVboManager());
         
         messageManager = new GameMessageManager();
-        messageManager.setDialogBase(level.getDialogBase());
-        messageManager.setCharacterBase(level.getCharacterBase());
+        messageManager.setDialogBase(getLevel().getDialogBase());
+        messageManager.setCharacterBase(getLevel().getCharacterBase());
 
         attachChild(mSkyes);
         attachChild(mClouds);
@@ -169,7 +169,7 @@ public class SceneGame extends MhyhreScene {
     
     private void updateEvents() {
 
-        Event gameEvent = level.getCurrentEvent();
+        Event gameEvent = getLevel().getCurrentEvent();
 
         // if all events complete
         if (gameEvent == null) {
@@ -181,9 +181,9 @@ public class SceneGame extends MhyhreScene {
 
             case GAME_WAIT_SECONDS:
                 if (((int) timeCounter) >= gameEvent.getIntegerArg()) {
-                    Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
+                    Log.i(MainActivity.DEBUG_ID, "Last event was: " + getLevel().getCurrentEvent());
                     timeCounter = 0;
-                    level.nextEvent();
+                    getLevel().nextEvent();
                 }
                 break;
                 
@@ -194,6 +194,17 @@ public class SceneGame extends MhyhreScene {
                 
             case GAME_START_TIME:
                 mSkyes.startTime();
+                goToNextEvent();
+                break;
+                
+            case GAME_WAIT_ENEMIES_EXIST:           
+                if(mEnemies.getEnemyCount() == 0) {
+                    goToNextEvent();
+                }
+                break;
+                
+            case UNIT_ADD:
+                mEnemies.addNewEnemy(gameEvent);
                 goToNextEvent();
                 break;
                 
@@ -221,9 +232,9 @@ public class SceneGame extends MhyhreScene {
     }
     
     private void goToNextEvent() {
-        Log.i(MainActivity.DEBUG_ID, "Last event was: " + level.getCurrentEvent());
+        Log.i(MainActivity.DEBUG_ID, "Last event was: " + getLevel().getCurrentEvent());
         timeCounter = 0;
-        level.nextEvent();
+        getLevel().nextEvent();
     }
 
     private void enemiesSharks() {
@@ -335,5 +346,9 @@ public class SceneGame extends MhyhreScene {
 
     private void endGame() {
         MainActivity.getRootScene().SetState(SceneStates.EndGame);
+    }
+
+    public Level getLevel() {
+        return level;
     }
 }

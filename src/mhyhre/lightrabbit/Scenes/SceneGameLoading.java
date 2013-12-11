@@ -108,7 +108,9 @@ public class SceneGameLoading extends MhyhreScene {
     }
 
     public void setLevelName(String levelName) {
-        mLevelName.setText(levelName);
+        if(levelName != null) {
+            mLevelName.setText(levelName);
+        }
     }
 
     public void setLevelChapter(String levelChapter) {

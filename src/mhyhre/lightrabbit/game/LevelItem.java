@@ -9,11 +9,25 @@ public class LevelItem {
     float mWidth, mHeight;
     boolean mLocked;
 
-    public String filename;
-    public String label;
-
-    public LevelItem() {
-
+    public final String filename;
+    public final String label;
+    
+    public LevelItem(String filename,String label) {
+        this.filename = filename;
+        this.label = label;
+    }
+    
+    public boolean isCorrect() {
+        
+        if(filename == null || label == null) {
+            return false;
+        }
+        
+        if(filename.isEmpty() || label.isEmpty()) {
+            return false;
+        }
+        
+        return true;
     }
 
     public float getLeftX() {

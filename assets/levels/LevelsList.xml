@@ -4,7 +4,7 @@
 	
  <Levels>
   <level label="Prolog">Prolog.lrlvl</level>
-  <level label="Глава 1">None</level>
+  <level label="Глава 1"></level>
  </Levels>
  
 </Root>

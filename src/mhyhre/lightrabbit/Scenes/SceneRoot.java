@@ -123,8 +123,8 @@ public class SceneRoot extends Scene {
                 mSceneGame.onManagedUpdate(0);
                 mSceneGame.pause();
 
-                mSceneGameLoading.setLevelName(mSceneGame.level.getName());
-                mSceneGameLoading.setLevelChapter(mSceneGame.level.getChapter());
+                mSceneGameLoading.setLevelName(mSceneGame.getLevel().getName());
+                mSceneGameLoading.setLevelChapter(mSceneGame.getLevel().getChapter());
 
                 this.attachChild(mSceneGame);
                 this.attachChild(mSceneGameLoading);

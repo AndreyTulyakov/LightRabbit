@@ -12,11 +12,11 @@
  </Setting>
  <Events>
   <Event command="GAME_STOP_TIME" id="0" arg_int="0" arg_str=""/>
-  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="5" arg_str=""/>
+  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="1" arg_int="0" arg_str=""/>
-  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="5" arg_str=""/>
+  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="2" arg_int="0" arg_str=""/>
-  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="5" arg_str=""/>
+  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="3" arg_int="0" arg_str=""/>
   <Event command="UNIT_ADD" id="1" arg_int="100" arg_str="Shark"/>
   <Event command="UNIT_ADD" id="2" arg_int="250" arg_str="Shark"/>

@@ -1,5 +1,6 @@
 package mhyhre.lightrabbit.game;
 
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.input.touch.TouchEvent;
@@ -15,12 +16,10 @@ import mhyhre.lightrabbit.game.Levels.Replic;
 import mhyhre.lightrabbit.game.Levels.Character;;
 
 public class GameMessageManager extends MhyhreScene {
-    
-    // TODO: add a fast message support
-    // TODO: add show actor of replica
 
     private Text textMessage;
     private Text textCharacter;
+    private Sprite characterIcon = null;
     
     private Rectangle clickRect;
     private DialogBase dialogBase;
@@ -77,8 +76,21 @@ public class GameMessageManager extends MhyhreScene {
         textMessage.setText(currentReplic.getText());
         
         Character character = characterBase.getCharacter(currentReplic.getActorId());
-        if(character != null) {
-            textCharacter.setText(character.getName());
+        if(character == null) {
+            return;
+        }
+        
+        textCharacter.setText(character.getName());
+        
+        if(characterIcon != null) {
+            characterIcon.detachSelf();
+            characterIcon = null;
+        }
+        
+        if(character.getIconRegion() != null) {  
+            characterIcon = new Sprite(100, MainActivity.getHalfHeight(), character.getIconRegion(), MainActivity.getVboManager());
+            characterIcon.setScale(2);
+            attachChild(characterIcon);
         }
 
         

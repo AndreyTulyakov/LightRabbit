@@ -8,19 +8,16 @@ import mhyhre.lightrabbit.game.Levels.Event;
 import mhyhre.lightrabbit.game.Levels.EventType;
 import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
+import mhyhre.lightrabbit.game.units.Player;
 import mhyhre.lightrabbit.game.units.SharkUnit;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import android.util.Log;
-
 public class EnemiesManager extends SpriteBatch {
 
     public static final int ENEMIES_MAX_COUND = 100;
-    // private boolean waitState = false;
-
     WaterPolygon mWater;
     List<Enemy> mEnemies;
 
@@ -30,8 +27,27 @@ public class EnemiesManager extends SpriteBatch {
         mWater = pWater;
         mEnemies = new ArrayList<Enemy>(ENEMIES_MAX_COUND);
     }
+    
+    private void enemiesSharks(Player player) {
 
-    public void update() {
+        for (Enemy enemy : getEnemiesList()) {
+
+            // If player collides with enemy.
+            if (Collisions.sptireCircleByCircle(player, 24, enemy.getX(), enemy.getY(), 20)) {
+
+                if (enemy.isDied() == false) {
+                    MainActivity.vibrate(30);
+                    player.decrementHealth();
+                    enemy.setDied(true);
+                }
+            }
+        }
+    }
+
+    public void update(Player player) {
+        
+        
+        enemiesSharks(player);
 
         ITextureRegion sharkRegion = MainActivity.resources.getTextureRegion("shark_body");
         ITextureRegion pirateBoatRegion = MainActivity.resources.getTextureRegion("pirate_boat");
@@ -86,8 +102,11 @@ public class EnemiesManager extends SpriteBatch {
 
                 shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 40);
                 shark.update();
+                
+                boolean needRemoveEnemy = (shark.getY() > MainActivity.getHeight() || shark.getX() < -50);
+                needRemoveEnemy |= shark.isDied() && shark.getBright() == 0; 
 
-                if (shark.getY() > MainActivity.getHeight() || shark.getX() < -50) {
+                if (needRemoveEnemy) {
                     mEnemies.remove(i);
                     i--;
                     continue;

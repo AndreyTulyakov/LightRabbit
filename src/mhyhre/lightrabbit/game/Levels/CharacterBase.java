@@ -74,9 +74,7 @@ public class CharacterBase {
 
             int id = Integer.parseInt(element.getAttribute(ID));
 
-            Character character = new Character();
-            character.setName(element.getAttribute(NAME));
-            character.setIconName(element.getAttribute(ICON));
+            Character character = new Character(element.getAttribute(NAME), element.getAttribute(ICON));
 
             characters.put(id, character);
         }

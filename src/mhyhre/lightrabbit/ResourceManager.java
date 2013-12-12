@@ -14,7 +14,6 @@ package mhyhre.lightrabbit;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.andengine.audio.sound.Sound;
@@ -33,7 +32,7 @@ import android.util.Log;
 
 public class ResourceManager {
     
-    private static final String CHARACTER_ICON_DIR = "characters_icons/";
+    
 
     Map<String, ITextureRegion> regions;
     Map<String, ITiledTextureRegion> tiledRegions;
@@ -42,26 +41,7 @@ public class ResourceManager {
     Map<String, Sound> sounds;
     
     Map<String, BitmapTextureAtlas> iconsAtlases;
-    
-    public void loadCharacterIcon(List<String> names) {
-        
-        if(atlases != null) {
 
-            BitmapTextureAtlas atlas;
-            ITextureRegion region;
-            BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-
-            
-            for(String name: names) {
-                String filename = CHARACTER_ICON_DIR + "name" + ".png";
-/// продумать загрузку списка изображений в один атлас
-                atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
-                BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "User_Interface.png", 0, 0);
-                atlas.load();
-                atlases.put(name, atlas);
-            }
-        }
-    }
 
     public ResourceManager() {
         regions = new HashMap<String, ITextureRegion>();

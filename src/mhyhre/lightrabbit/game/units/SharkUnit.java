@@ -33,6 +33,7 @@ public class SharkUnit extends Enemy {
 
     @Override
     public void update() {
+        
         if (mDied == true) {
             mX -= sSpeed;
             mY += sSinkSpeed;

@@ -19,7 +19,6 @@ import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.CloudsManager;
-import mhyhre.lightrabbit.game.Collisions;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.FogRect;
@@ -31,7 +30,6 @@ import mhyhre.lightrabbit.game.Levels.Event;
 import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -68,6 +66,7 @@ public class SceneGame extends MhyhreScene {
 
     
     private Level level;
+
     
 
     private Text textTestTimer;
@@ -129,6 +128,7 @@ public class SceneGame extends MhyhreScene {
         attachChild(water);
         attachChild(fog);
         attachChild(messageManager);
+
     }
 
     @Override
@@ -165,8 +165,7 @@ public class SceneGame extends MhyhreScene {
         textTestTimer.setText("Time: " + (int) timeCounter);
 
         updateBullets();
-        mEnemies.update();
-        enemiesSharks();
+        mEnemies.update(mPlayer);;
         HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
         super.onManagedUpdate(pSecondsElapsed);
     }
@@ -249,21 +248,7 @@ public class SceneGame extends MhyhreScene {
         getLevel().nextEvent();
     }
 
-    private void enemiesSharks() {
 
-        for (Enemy enemy : mEnemies.getEnemiesList()) {
-
-            // If player collides with enemy.
-            if (Collisions.sptireCircleByCircle(mPlayer, 20, enemy.getX(), enemy.getY(), 20)) {
-
-                if (enemy.isDied() == false) {
-                    MainActivity.vibrate(30);
-                    mPlayer.decrementHealth();
-                    enemy.setDied(true);
-                }
-            }
-        }
-    }
 
     private void updateBullets() {
         // Bullets

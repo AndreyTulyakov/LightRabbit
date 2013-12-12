@@ -33,7 +33,7 @@ public class EnemiesManager extends SpriteBatch {
         for (Enemy enemy : getEnemiesList()) {
 
             // If player collides with enemy.
-            if (Collisions.sptireCircleByCircle(player, 24, enemy.getX(), enemy.getY(), 20)) {
+            if (Collisions.spriteByCircle(player, enemy.getX(), enemy.getY(), 36)) {
 
                 if (enemy.isDied() == false) {
                     MainActivity.vibrate(30);
@@ -100,7 +100,7 @@ public class EnemiesManager extends SpriteBatch {
             case SHARK:
                 SharkUnit shark = (SharkUnit) enemy;
 
-                shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 40);
+                shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 50);
                 shark.update();
                 
                 boolean needRemoveEnemy = (shark.getY() > MainActivity.getHeight() || shark.getX() < -50);

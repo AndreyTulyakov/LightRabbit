@@ -92,8 +92,6 @@ public class GameMessageManager extends MhyhreScene {
             characterIcon.setScale(2);
             attachChild(characterIcon);
         }
-
-        
     }
     
     public int lastShownMessage(){

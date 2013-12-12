@@ -34,14 +34,11 @@ public class ResourceManager {
     
     
 
-    Map<String, ITextureRegion> regions;
-    Map<String, ITiledTextureRegion> tiledRegions;
-    Map<String, BitmapTextureAtlas> atlases;
-    Map<String, Font> fonts;
-    Map<String, Sound> sounds;
-    
-    Map<String, BitmapTextureAtlas> iconsAtlases;
-
+    private Map<String, ITextureRegion> regions;
+    private Map<String, ITiledTextureRegion> tiledRegions;
+    private Map<String, BitmapTextureAtlas> atlases;
+    private Map<String, Font> fonts;
+    private Map<String, Sound> sounds;
 
     public ResourceManager() {
         regions = new HashMap<String, ITextureRegion>();
@@ -142,7 +139,7 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 128, 180, 128, 78);
         regions.put("pirate_ship", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 64, 64);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 64, 40);
         regions.put("shark_body", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 160, 32, 32);

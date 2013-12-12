@@ -15,7 +15,7 @@ public class SharkUnit extends Enemy {
     public SharkUnit() {
         super(EnemyType.SHARK, 40);
         bright = 1;
-        setSize(64, 64);
+        setSize(64, 40);
         setRadius(25);
     }
 
@@ -48,7 +48,7 @@ public class SharkUnit extends Enemy {
             }
         } else {
             mX -= sSpeed;
-            mY = (float) (mWaterLevel - 20 * Math.sin(mX / (Math.PI * 4)));
+            mY = (float) (mWaterLevel-30 * Math.sin(mX / (Math.PI * 4)));
         }
     }
 

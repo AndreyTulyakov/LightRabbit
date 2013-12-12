@@ -62,14 +62,8 @@ public class SceneGame extends MhyhreScene {
     private Player mPlayer;
     private WaterPolygon water;
     private GameMessageManager messageManager;
-    private FogRect fog;
-
-    
+    private FogRect fog;   
     private Level level;
-
-    
-
-    private Text textTestTimer;
 
     public SceneGame(String levelFileName) {
 
@@ -82,8 +76,6 @@ public class SceneGame extends MhyhreScene {
 
         attachChild(HUD);
 
-        textTestTimer = new Text(100, 100, MainActivity.resources.getFont("White Furore"), "0", 100, MainActivity.getVboManager());
-        attachChild(textTestTimer);
 
         Log.i(MainActivity.DEBUG_ID, "Scene game created");
         loaded = true;
@@ -128,7 +120,6 @@ public class SceneGame extends MhyhreScene {
         attachChild(water);
         attachChild(fog);
         attachChild(messageManager);
-
     }
 
     @Override
@@ -162,11 +153,14 @@ public class SceneGame extends MhyhreScene {
 
         updateEvents();
 
-        textTestTimer.setText("Time: " + (int) timeCounter);
-
         updateBullets();
         mEnemies.update(mPlayer);;
         HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
+        
+        if(mPlayer.getCurrentHealth() == 0) {
+            endGame();
+        }
+        
         super.onManagedUpdate(pSecondsElapsed);
     }
     

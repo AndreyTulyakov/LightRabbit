@@ -29,8 +29,6 @@
   <Event command="UNIT_ADD" id="15" arg_int="500" arg_str="Shark"/>
   <Event command="GAME_WAIT_ENEMIES_EXIST" id="0" arg_int="0" arg_str=""/>
   <Event command="MSSG_SHOW" id="5" arg_int="0" arg_str=""/>
-  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="5" arg_str=""/>
-  <Event command="GAME_SHOW_FOG" id="0" arg_int="0" arg_str=""/>
-  <Event command="GAME_WAIT_SECONDS" id="0" arg_int="5" arg_str=""/>
+  <Event command="GAME_SHOW_FOG" id="0" arg_int="100" arg_str=""/>
  </Events>
 </Level>

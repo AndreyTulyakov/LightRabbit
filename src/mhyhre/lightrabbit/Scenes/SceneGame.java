@@ -22,6 +22,7 @@ import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.Collisions;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
+import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.GameHUD;
 import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
@@ -30,6 +31,7 @@ import mhyhre.lightrabbit.game.Levels.Event;
 import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -62,6 +64,8 @@ public class SceneGame extends MhyhreScene {
     private Player mPlayer;
     private WaterPolygon water;
     private GameMessageManager messageManager;
+    private FogRect fog;
+
     
     private Level level;
     
@@ -101,6 +105,7 @@ public class SceneGame extends MhyhreScene {
     private void createGameObjects() {
 
         /* Environment */
+        fog = new FogRect();
 
         mClouds = new CloudsManager(CLOUDS_MAXIMUM, MainActivity.getVboManager());
         water = new WaterPolygon(WATER_RESOLUTION, MainActivity.getVboManager());
@@ -122,8 +127,8 @@ public class SceneGame extends MhyhreScene {
         attachChild(bulletBatch);
         attachChild(mPlayer);
         attachChild(water);
+        attachChild(fog);
         attachChild(messageManager);
-
     }
 
     @Override
@@ -219,6 +224,13 @@ public class SceneGame extends MhyhreScene {
                         messageManager.showMessage(-1);
                         goToNextEvent();
                     }
+                }
+                break;
+                
+            case GAME_SHOW_FOG:
+                
+                if(fog.showFogEvent(gameEvent)) {
+                    goToNextEvent();
                 }
                 break;
 

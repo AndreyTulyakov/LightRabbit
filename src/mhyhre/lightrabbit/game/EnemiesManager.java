@@ -100,7 +100,7 @@ public class EnemiesManager extends SpriteBatch {
             case SHARK:
                 SharkUnit shark = (SharkUnit) enemy;
 
-                shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 50);
+                shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 40);
                 shark.update();
                 
                 boolean needRemoveEnemy = (shark.getY() > MainActivity.getHeight() || shark.getX() < -50);

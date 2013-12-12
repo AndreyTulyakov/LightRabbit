@@ -48,7 +48,7 @@ public class SharkUnit extends Enemy {
             }
         } else {
             mX -= sSpeed;
-            mY = (float) (mWaterLevel-30 * Math.sin(mX / (Math.PI * 4)));
+            mY = (float) (mWaterLevel + 30 * Math.sin(mX / (Math.PI * 4)));
         }
     }
 

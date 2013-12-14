@@ -22,6 +22,7 @@ public class SharkUnit extends Enemy {
     public float getBright() {
         return bright;
     }
+    
 
     public float getWaterLevel() {
         return mWaterLevel;
@@ -30,6 +31,7 @@ public class SharkUnit extends Enemy {
     public void setWaterLevel(float mWaterLevel) {
         this.mWaterLevel = mWaterLevel;
     }
+    
 
     @Override
     public void update() {

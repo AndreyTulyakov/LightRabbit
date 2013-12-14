@@ -31,7 +31,6 @@ import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
-import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
@@ -90,7 +89,7 @@ public class SceneGame extends MhyhreScene {
     }
 
     private void configureGameObjects() {
-        mSkyes.setCurrentTime(getLevel().getStartTime());
+
     }
 
     private void createGameObjects() {
@@ -145,7 +144,6 @@ public class SceneGame extends MhyhreScene {
         }
         
         updateControlls();
-
         mPlayer.update(water);
 
         timeCounter += pSecondsElapsed;
@@ -177,7 +175,7 @@ public class SceneGame extends MhyhreScene {
             
             switch (gameEvent.getType()) {
 
-            case GAME_WAIT_SECONDS:
+            case WAIT_SECONDS:
                 if (((int) timeCounter) >= gameEvent.getIntegerArg()) {
                     Log.i(MainActivity.DEBUG_ID, "Last event was: " + getLevel().getCurrentEvent());
                     timeCounter = 0;
@@ -185,20 +183,39 @@ public class SceneGame extends MhyhreScene {
                 }
                 break;
                 
-            case GAME_STOP_TIME:
+            case WAIT_ENEMIES_EXIST:           
+                if(mEnemies.getEnemyCount() == 0) {
+                    goToNextEvent();
+                }
+                break;
+                
+            case WAIT_ALWAYS:
+                break;
+                
+            case SET_TIME:
+                mSkyes.setCurrentTime(gameEvent.getIntegerArg());
+                goToNextEvent();
+                break;
+                
+            case SET_TIME_SPEED:
+                mSkyes.setTimeSpeed(gameEvent.getIntegerArg());
+                goToNextEvent();
+                break;
+                
+            case STOP_TIME:
                 mSkyes.stopTime();
                 goToNextEvent();
                 break;
                 
-            case GAME_START_TIME:
-                mSkyes.startTime();
+            case STOP_TIME_IN:
+                mSkyes.stopTimeIn(gameEvent.getIntegerArg());
                 goToNextEvent();
+
                 break;
                 
-            case GAME_WAIT_ENEMIES_EXIST:           
-                if(mEnemies.getEnemyCount() == 0) {
-                    goToNextEvent();
-                }
+            case START_TIME:
+                mSkyes.startTime();
+                goToNextEvent();
                 break;
                 
             case UNIT_ADD:
@@ -207,7 +224,6 @@ public class SceneGame extends MhyhreScene {
                 break;
                 
             case MSSG_SHOW:
-                
                 if(messageManager.lastShownMessage() == -1 && messageManager.isActiveMessage() == false) {
                     messageManager.showMessage(gameEvent.getId());
                 } else {
@@ -220,16 +236,19 @@ public class SceneGame extends MhyhreScene {
                 }
                 break;
                 
-            case GAME_SHOW_FOG:
-                
+            case GAME_SHOW_FOG:       
                 if(fog.showFogEvent(gameEvent)) {
                     goToNextEvent();
                 }
                 break;
+                
+            case GAME_SET_FOG_VALUE:
+                fog.setFogValueEvent(gameEvent);
+                goToNextEvent();
+                break;
 
             default:
-
-                // TODO: make some actions
+                Log.i(MainActivity.DEBUG_ID, "Unrecognized event: " + gameEvent.getType());
                 goToNextEvent();
                 break;
             }
@@ -241,9 +260,7 @@ public class SceneGame extends MhyhreScene {
         timeCounter = 0;
         getLevel().nextEvent();
     }
-
-
-
+    
     private void updateBullets() {
         // Bullets
         ITextureRegion bulletRegion = MainActivity.resources.getTextureRegion("bullet");

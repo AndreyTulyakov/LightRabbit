@@ -3,8 +3,8 @@
 <Root>
 	
  <Levels>
-  <level label="Prolog">Prolog.lrlvl</level>
-  <level label="Глава 1"></level>
+  <level label="Пролог">Prolog.lrlvl</level>
+  <level label="Кардон">Level_One.lrlvl</level>
  </Levels>
  
 </Root>

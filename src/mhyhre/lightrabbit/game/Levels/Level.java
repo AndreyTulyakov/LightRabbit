@@ -30,13 +30,11 @@ public class Level {
     private static final String LEVEL_NAME = "Name";
     private static final String LEVEL_BACKSTORY = "Backstory";
     private static final String LEVEL_DIALOGBASE = "DialogBase";
-    private static final String LEVEL_STARTTIME = "Time";
 
     private String mName = "";
     private String mChapter = "";
     private String mStory = "";
     private String mDialogBaseFilename = "";
-    private int mStartTime;
 
     private List<Event> events;
     private int currentEventIndex = -1;
@@ -97,7 +95,7 @@ public class Level {
         mName = getString(LEVEL_NAME, rootElement);
         mStory = getString(LEVEL_BACKSTORY, rootElement);
         mDialogBaseFilename = getString(LEVEL_DIALOGBASE, rootElement);
-        mStartTime = Integer.parseInt(getString(LEVEL_STARTTIME, rootElement));
+
     }
 
     private void loadEventsFromXML(Element rootElement) {
@@ -160,10 +158,6 @@ public class Level {
 
     public int getCurrentEventIndex() {
         return currentEventIndex;
-    }
-
-    public int getStartTime() {
-        return mStartTime;
     }
 
     public String getDialogBaseFilename() {

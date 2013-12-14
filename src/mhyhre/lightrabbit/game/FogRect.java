@@ -37,5 +37,9 @@ public class FogRect extends Rectangle {
         }
         return false;
     }
+    
+    public void setFogValueEvent(Event event) {
+        setAlpha(event.getIntegerArg()/100.0f);
+    }
 
 }

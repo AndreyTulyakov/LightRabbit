@@ -18,6 +18,7 @@ import java.util.List;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
+import mhyhre.lightrabbit.game.BulletsManager;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.Enemy;
@@ -42,17 +43,13 @@ public class SceneGame extends MhyhreScene {
 
     private static final int WATER_RESOLUTION = 16;
     private static final int CLOUDS_MAXIMUM = 5;
-    private static final int MAX_BULLETS_ON_SCREEN = 50;
+
 
     float timeCounter = 0;
     float bulletTimeCounter = 0;
 
     boolean loaded = true;
     boolean pause = false;
-
-    SpriteBatch bulletBatch;
-
-    List<BulletUnit> mBullets;
 
     private GameHUD HUD;
     private CloudsManager mClouds;
@@ -63,18 +60,14 @@ public class SceneGame extends MhyhreScene {
     private GameMessageManager messageManager;
     private FogRect fog;   
     private Level level;
+    private BulletsManager bullets;
 
     public SceneGame(String levelFileName) {
 
         level = new Level(levelFileName);
 
-        HUD = new GameHUD();
-
         createGameObjects();
         configureGameObjects();
-
-        attachChild(HUD);
-
 
         Log.i(MainActivity.DEBUG_ID, "Scene game created");
         loaded = true;
@@ -94,6 +87,8 @@ public class SceneGame extends MhyhreScene {
 
     private void createGameObjects() {
 
+        HUD = new GameHUD();
+
         /* Environment */
         fog = new FogRect();
 
@@ -103,21 +98,23 @@ public class SceneGame extends MhyhreScene {
         mPlayer = new Player(100);
         mEnemies = new EnemiesManager(water, MainActivity.getVboManager());
 
-        mBullets = new LinkedList<BulletUnit>();
-        bulletBatch = new SpriteBatch(MainActivity.resources.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN, MainActivity.getVboManager());
         mSkyes = new SkyManager(MainActivity.getVboManager());
         
         messageManager = new GameMessageManager();
         messageManager.setDialogBase(getLevel().getDialogBase());
         messageManager.setCharacterBase(getLevel().getCharacterBase());
+        
+        bullets = new BulletsManager(water,mEnemies,mPlayer, HUD);
 
         attachChild(mSkyes);
         attachChild(mClouds);
         attachChild(mEnemies);
-        attachChild(bulletBatch);
+        attachChild(bullets);
         attachChild(mPlayer);
         attachChild(water);
         attachChild(fog);
+        
+        attachChild(HUD);
         attachChild(messageManager);
     }
 
@@ -151,7 +148,6 @@ public class SceneGame extends MhyhreScene {
 
         updateEvents();
 
-        updateBullets();
         mEnemies.update(mPlayer);;
         HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
         
@@ -236,17 +232,17 @@ public class SceneGame extends MhyhreScene {
                 }
                 break;
                 
-            case GAME_SHOW_FOG:       
+            case SHOW_FOG:       
                 if(fog.showFogEvent(gameEvent)) {
                     goToNextEvent();
                 }
                 break;
                 
-            case GAME_SET_FOG_VALUE:
+            case SET_FOG_VALUE:
                 fog.setFogValueEvent(gameEvent);
                 goToNextEvent();
                 break;
-
+                
             default:
                 Log.i(MainActivity.DEBUG_ID, "Unrecognized event: " + gameEvent.getType());
                 goToNextEvent();
@@ -260,71 +256,7 @@ public class SceneGame extends MhyhreScene {
         timeCounter = 0;
         getLevel().nextEvent();
     }
-    
-    private void updateBullets() {
-        // Bullets
-        ITextureRegion bulletRegion = MainActivity.resources.getTextureRegion("bullet");
-        ITextureRegion bulletBoomRegion = MainActivity.resources.getTextureRegion("bullet_boom");
-        ITextureRegion bulletResultRegion;
 
-        for (int i = 0; i < mBullets.size(); i++) {
-
-            BulletUnit bullet = mBullets.get(i);
-
-            for (Enemy enemy : mEnemies.getEnemiesList()) {
-
-                if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getX(), enemy.getY(), enemy.getRadius())) {
-
-                    if (enemy.isDied() == false) {
-
-                        enemy.setHealth(enemy.getHealth() - bullet.getBoomPower());
-
-                        if (enemy.getHealth() <= 0) {
-
-                            enemy.setDied(true);
-
-                            mPlayer.setTotalGold(mPlayer.getTotalGold() + 50);
-                            HUD.updateGoldIndicator(mPlayer.getTotalGold());
-                        }
-                    }
-
-                    bullet.setSink(true);
-                    bullet.setBoom(10);
-                }
-            }
-
-            if (bullet.getY() < water.getObjectYPosition(bullet.getX())) {
-                bullet.setSink(true);
-            }
-
-            bullet.update();
-
-            if (bullet.getY() < 0) {
-                mBullets.remove(i);
-                i--;
-                continue;
-            }
-
-            if (bullet.getX() > MainActivity.getWidth() || bullet.getX() < 0) {
-                mBullets.remove(i);
-                i--;
-                continue;
-            }
-
-            if (bullet.getBoom() > 0) {
-                bulletResultRegion = bulletBoomRegion;
-            } else {
-                bulletResultRegion = bulletRegion;
-            }
-            if (bullet.getBoom() != -1) {
-                bulletBatch.draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2,
-                        bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
-
-            }
-        }
-
-        bulletBatch.submit();
-    }
 
     private void updateControlls() {
 
@@ -340,12 +272,10 @@ public class SceneGame extends MhyhreScene {
 
         if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
 
-            if (mBullets.size() < MAX_BULLETS_ON_SCREEN) {
-
+            if(bullets.isCanCreateBullet()) {
                 BulletUnit bullet = mPlayer.fire(bulletTimeCounter);
-
-                if (bullet != null) {
-                    mBullets.add(bullet);
+                if (bullet != null) { 
+                    bullets.addBullet(bullet);
                 }
             }
         }

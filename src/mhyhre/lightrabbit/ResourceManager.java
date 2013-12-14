@@ -120,9 +120,7 @@ public class ResourceManager {
 
         regions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));
         regions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 72, 80, 80, false));
-
         regions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
-
         regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
 
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);

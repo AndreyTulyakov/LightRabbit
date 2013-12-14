@@ -126,4 +126,12 @@ public class WaterPolygon extends Polygon {
         return (float) waveAngle;
     }
 
+    public float getWaterLevel() {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(float waterLevel) {
+        this.waterLevel = waterLevel;
+    }
+
 }

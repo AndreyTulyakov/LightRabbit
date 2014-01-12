@@ -23,8 +23,8 @@ import mhyhre.lightrabbit.game.GameHUD;
 import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
-import mhyhre.lightrabbit.game.Levels.Event;
-import mhyhre.lightrabbit.game.Levels.Level;
+import mhyhre.lightrabbit.game.levels.Event;
+import mhyhre.lightrabbit.game.levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
 import org.andengine.input.touch.TouchEvent;

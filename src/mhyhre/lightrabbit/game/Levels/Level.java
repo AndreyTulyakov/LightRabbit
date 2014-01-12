@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game.Levels;
+package mhyhre.lightrabbit.game.levels;
 
 import java.io.IOException;
 import java.io.InputStream;

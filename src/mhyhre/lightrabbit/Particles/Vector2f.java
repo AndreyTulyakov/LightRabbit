@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.Particles;
+package mhyhre.lightrabbit.particles;
 
 public class Vector2f {
     float x, y;

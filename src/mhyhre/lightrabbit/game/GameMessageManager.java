@@ -9,11 +9,11 @@ import android.util.Log;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
-import mhyhre.lightrabbit.game.Levels.CharacterBase;
-import mhyhre.lightrabbit.game.Levels.Dialog;
-import mhyhre.lightrabbit.game.Levels.DialogBase;
-import mhyhre.lightrabbit.game.Levels.Replic;
-import mhyhre.lightrabbit.game.Levels.Character;;
+import mhyhre.lightrabbit.game.levels.Character;
+import mhyhre.lightrabbit.game.levels.CharacterBase;
+import mhyhre.lightrabbit.game.levels.Dialog;
+import mhyhre.lightrabbit.game.levels.DialogBase;
+import mhyhre.lightrabbit.game.levels.Replic;
 
 public class GameMessageManager extends MhyhreScene {
 

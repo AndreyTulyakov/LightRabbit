@@ -1,7 +1,7 @@
 package mhyhre.lightrabbit.game;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.Levels.Event;
+import mhyhre.lightrabbit.game.levels.Event;
 
 import org.andengine.entity.primitive.Rectangle;
 

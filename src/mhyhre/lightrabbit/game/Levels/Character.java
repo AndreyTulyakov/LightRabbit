@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game.Levels;
+package mhyhre.lightrabbit.game.levels;
 
 import mhyhre.lightrabbit.MainActivity;
 

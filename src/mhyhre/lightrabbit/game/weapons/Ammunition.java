@@ -1,5 +1,7 @@
 package mhyhre.lightrabbit.game.weapons;
 
+import java.util.Random;
+
 public enum Ammunition {
 
     BULLET_50("Bullet 50", 50, 40, 30),
@@ -16,6 +18,7 @@ public enum Ammunition {
     SCREAMER_S("Screamer S", 300, 10, 100);
     ;
     
+    private static Random random = new Random();
     private String Name;
     
     private int damagePower;
@@ -44,8 +47,10 @@ public enum Ammunition {
     }
 
     public int calculateDamage(int armor) {
-        
-        return 0;
+        float currentDamageKoefficient = (random.nextInt(damageDispersionPercent*2)-damageDispersionPercent)
+                /100.0f + 1.0f;
+        int damage = (int) (damagePower * currentDamageKoefficient);
+        return damage;
     }
     
     

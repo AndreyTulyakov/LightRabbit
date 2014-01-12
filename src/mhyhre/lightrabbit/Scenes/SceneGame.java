@@ -12,16 +12,12 @@
 
 package mhyhre.lightrabbit.Scenes;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.BulletsManager;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
-import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.GameHUD;
 import mhyhre.lightrabbit.game.GameMessageManager;
@@ -31,9 +27,7 @@ import mhyhre.lightrabbit.game.Levels.Event;
 import mhyhre.lightrabbit.game.Levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 
-import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.input.touch.TouchEvent;
-import org.andengine.opengl.texture.region.ITextureRegion;
 import android.util.Log;
 
 /**

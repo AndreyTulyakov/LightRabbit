@@ -102,10 +102,10 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false);
         regions.put("Button1", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 160, 70, 60, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 9, 160, 64, 64, false);
         regions.put("ButtonVibration", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 230, 70, 60, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 9, 234, 64, 64, false);
         regions.put("ButtonSound", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 1, 447, 64, 64, false);
@@ -115,7 +115,6 @@ public class ResourceManager {
         regions.put("LevelCell", region);
 
         // game ui
-
         regions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
 
         regions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));

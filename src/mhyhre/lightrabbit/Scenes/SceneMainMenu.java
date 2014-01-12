@@ -130,7 +130,7 @@ public class SceneMainMenu extends MhyhreScene {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
                     if (MainActivity.isVibroEnabled() == true) {
-                        this.setAlpha(0.3f);
+                        this.setAlpha(0.2f);
                         MainActivity.setVibroEnabled(false);
                     } else {
                         this.setAlpha(1.0f);
@@ -151,7 +151,7 @@ public class SceneMainMenu extends MhyhreScene {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
                     if (MainActivity.isSoundEnabled() == true) {
-                        this.setAlpha(0.3f);
+                        this.setAlpha(0.2f);
                         MainActivity.setSoundEnabled(false);
                     } else {
                         this.setAlpha(1.0f);

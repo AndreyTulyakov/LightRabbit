@@ -11,6 +11,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 public class WaterPolygon extends Polygon {
 
+    private static final int WATER_RESOLUTION = 16;
+    
     private List<Vector2> waterCoordinates;
     float[] vertexX1;
     float[] vertexY1;
@@ -20,12 +22,12 @@ public class WaterPolygon extends Polygon {
     float waveHeight = 50;
     float waterLevel = 220;
 
-    public WaterPolygon(int resolution, VertexBufferObjectManager pVertexBufferObjectManager) {
+    public WaterPolygon(VertexBufferObjectManager pVertexBufferObjectManager) {
 
-        super(0, 0, new float[resolution + 3], new float[resolution + 3], pVertexBufferObjectManager);
+        super(0, 0, new float[WATER_RESOLUTION + 3], new float[WATER_RESOLUTION + 3], pVertexBufferObjectManager);
 
         setDrawMode(DrawMode.TRIANGLE_FAN);
-        waterResolution = resolution;
+        waterResolution = WATER_RESOLUTION;
 
         float step = MainActivity.getWidth() / (waterResolution - 1);
 

@@ -189,6 +189,8 @@ public class ResourceManager {
         addSound("error.ogg", "error");
         addSound("yes_1.ogg", "yes1");
         addSound("yes_2.ogg", "yes2");
+        addSound("shoot01.ogg", "shoot01");
+        
     }
 
     private void addSound(String filename, String name) {

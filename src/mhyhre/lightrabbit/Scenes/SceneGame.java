@@ -35,21 +35,15 @@ import android.util.Log;
  */
 public class SceneGame extends MhyhreScene {
 
-    private static final int WATER_RESOLUTION = 16;
-    private static final int CLOUDS_MAXIMUM = 5;
-
-
-    float timeCounter = 0;
-    float bulletTimeCounter = 0;
-
+    private float timeCounter = 0;
     boolean loaded = true;
     boolean pause = false;
 
-    private GameHUD HUD;
-    private CloudsManager mClouds;
-    private SkyManager mSkyes;
-    private EnemiesManager mEnemies;
-    private Player mPlayer;
+    private GameHUD hud;
+    private CloudsManager сlouds;
+    private SkyManager skyes;
+    private EnemiesManager enemies;
+    private Player player;
     private WaterPolygon water;
     private GameMessageManager messageManager;
     private FogRect fog;   
@@ -59,10 +53,7 @@ public class SceneGame extends MhyhreScene {
     public SceneGame(String levelFileName) {
 
         level = new Level(levelFileName);
-
         createGameObjects();
-        configureGameObjects();
-
         Log.i(MainActivity.DEBUG_ID, "Scene game created");
         loaded = true;
     }
@@ -75,40 +66,36 @@ public class SceneGame extends MhyhreScene {
         pause = true;
     }
 
-    private void configureGameObjects() {
-
-    }
-
     private void createGameObjects() {
 
-        HUD = new GameHUD();
+        hud = new GameHUD();
 
         /* Environment */
         fog = new FogRect();
 
-        mClouds = new CloudsManager(CLOUDS_MAXIMUM, MainActivity.getVboManager());
-        water = new WaterPolygon(WATER_RESOLUTION, MainActivity.getVboManager());
+        сlouds = new CloudsManager(MainActivity.getVboManager());
+        water = new WaterPolygon(MainActivity.getVboManager());
 
-        mPlayer = new Player(100);
-        mEnemies = new EnemiesManager(water, MainActivity.getVboManager());
+        player = new Player(100);
+        enemies = new EnemiesManager(water, MainActivity.getVboManager());
 
-        mSkyes = new SkyManager(MainActivity.getVboManager());
+        skyes = new SkyManager(MainActivity.getVboManager());
         
         messageManager = new GameMessageManager();
         messageManager.setDialogBase(getLevel().getDialogBase());
         messageManager.setCharacterBase(getLevel().getCharacterBase());
         
-        bullets = new BulletsManager(water,mEnemies,mPlayer, HUD);
+        bullets = new BulletsManager(water,enemies,player, hud);
 
-        attachChild(mSkyes);
-        attachChild(mClouds);
-        attachChild(mEnemies);
+        attachChild(skyes);
+        attachChild(сlouds);
+        attachChild(enemies);
         attachChild(bullets);
-        attachChild(mPlayer);
+        attachChild(player);
         attachChild(water);
         attachChild(fog);
         
-        attachChild(HUD);
+        attachChild(hud);
         attachChild(messageManager);
     }
 
@@ -119,10 +106,10 @@ public class SceneGame extends MhyhreScene {
             return true;
         
         if(messageManager.isActiveMessage() == true) {
-            HUD.resetStates();
+            hud.resetStates();
             messageManager.onSceneTouchEvent(pSceneTouchEvent);
         } else {
-            HUD.onSceneTouchEvent(pSceneTouchEvent);
+            hud.onSceneTouchEvent(pSceneTouchEvent);
         }
         return super.onSceneTouchEvent(pSceneTouchEvent);
     }
@@ -135,20 +122,17 @@ public class SceneGame extends MhyhreScene {
         }
         
         updateControlls();
-        mPlayer.update(water);
+        player.update(water, pSecondsElapsed);
 
         timeCounter += pSecondsElapsed;
-        bulletTimeCounter += pSecondsElapsed;
-
+        
         updateEvents();
-
-        mEnemies.update(mPlayer);;
-        HUD.updateHealthIndicator(mPlayer.getCurrentHealth(), mPlayer.getMaxHealth());
+        enemies.update(player);;
+        hud.updateHealthIndicator(player.getCurrentHealth());
         
-        if(mPlayer.getCurrentHealth() == 0) {
+        if(player.getCurrentHealth() == 0) {
             endGame();
-        }
-        
+        }    
         super.onManagedUpdate(pSecondsElapsed);
     }
     
@@ -174,7 +158,7 @@ public class SceneGame extends MhyhreScene {
                 break;
                 
             case WAIT_ENEMIES_EXIST:           
-                if(mEnemies.getEnemyCount() == 0) {
+                if(enemies.getEnemyCount() == 0) {
                     goToNextEvent();
                 }
                 break;
@@ -183,33 +167,33 @@ public class SceneGame extends MhyhreScene {
                 break;
                 
             case SET_TIME:
-                mSkyes.setCurrentTime(gameEvent.getIntegerArg());
+                skyes.setCurrentTime(gameEvent.getIntegerArg());
                 goToNextEvent();
                 break;
                 
             case SET_TIME_SPEED:
-                mSkyes.setTimeSpeed(gameEvent.getIntegerArg());
+                skyes.setTimeSpeed(gameEvent.getIntegerArg());
                 goToNextEvent();
                 break;
                 
             case STOP_TIME:
-                mSkyes.stopTime();
+                skyes.stopTime();
                 goToNextEvent();
                 break;
                 
             case STOP_TIME_IN:
-                mSkyes.stopTimeIn(gameEvent.getIntegerArg());
+                skyes.stopTimeIn(gameEvent.getIntegerArg());
                 goToNextEvent();
 
                 break;
                 
             case START_TIME:
-                mSkyes.startTime();
+                skyes.startTime();
                 goToNextEvent();
                 break;
                 
             case UNIT_ADD:
-                mEnemies.addNewEnemy(gameEvent);
+                enemies.addNewEnemy(gameEvent);
                 goToNextEvent();
                 break;
                 
@@ -254,26 +238,24 @@ public class SceneGame extends MhyhreScene {
 
     private void updateControlls() {
 
-        mPlayer.setBoatSpeed(0);
+        player.setBoatSpeed(0);
 
-        if (HUD.isKeyDown(GameHUD.Buttons.LEFT)) {
-            mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() - mPlayer.getBoatAcceleration());
+        if (hud.isKeyDown(GameHUD.Buttons.LEFT)) {
+            player.setBoatSpeed(player.getBoatSpeed() - player.getBoatAcceleration());
         }
 
-        if (HUD.isKeyDown(GameHUD.Buttons.RIGHT)) {
-            mPlayer.setBoatSpeed(mPlayer.getBoatSpeed() + mPlayer.getBoatAcceleration());
+        if (hud.isKeyDown(GameHUD.Buttons.RIGHT)) {
+            player.setBoatSpeed(player.getBoatSpeed() + player.getBoatAcceleration());
         }
 
-        if (HUD.isKeyDown(GameHUD.Buttons.FIRE)) {
-
+        if (hud.isKeyDown(GameHUD.Buttons.FIRE)) {
             if(bullets.isCanCreateBullet()) {
-                BulletUnit bullet = mPlayer.fire(bulletTimeCounter);
+                BulletUnit bullet = player.fire();
                 if (bullet != null) { 
                     bullets.addBullet(bullet);
                 }
             }
         }
-
     }
 
     private void endGame() {

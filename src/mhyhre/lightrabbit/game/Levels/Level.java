@@ -29,6 +29,7 @@ public class Level {
     private static final String LEVEL_NAME = "Name";
     private static final String LEVEL_BACKSTORY = "Backstory";
     private static final String LEVEL_DIALOGBASE = "DialogBase";
+    private static final String LEVEL_PLAYER = "Player";
 
     private String mName = "";
     private String mChapter = "";
@@ -40,6 +41,8 @@ public class Level {
 
     DialogBase dialogBase;
     CharacterBase characterBase;
+    
+    String playerType = "None";
 
     public Level(String filename) {
 
@@ -94,7 +97,6 @@ public class Level {
         mName = getString(LEVEL_NAME, rootElement);
         mStory = getString(LEVEL_BACKSTORY, rootElement);
         mDialogBaseFilename = getString(LEVEL_DIALOGBASE, rootElement);
-
     }
 
     private void loadEventsFromXML(Element rootElement) {
@@ -161,6 +163,10 @@ public class Level {
 
     public String getDialogBaseFilename() {
         return mDialogBaseFilename;
+    }
+
+    public String getPlayerType() {
+        return playerType;
     }
 
 }

@@ -4,7 +4,6 @@ import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
@@ -15,9 +14,10 @@ public class GameHUD extends MhyhreScene {
     }
 
     Sprite spriteGold;
-    SpriteBatch healthIndicator;
+    Sprite healthSprite;
     Sprite spriteMoveRight, spriteMoveLeft, spriteFire;
     Text textGold;
+    Text healthPoints;
 
     boolean states[];
     private static final float BUTTON_RADIUS = 50;
@@ -36,15 +36,20 @@ public class GameHUD extends MhyhreScene {
             touchPoints[i] = new TouchPoint();
         }
 
-        healthIndicator = new SpriteBatch(MainActivity.resources.getTextureAtlas("texture01"), 10, MainActivity.Me.getVertexBufferObjectManager());
-
+        healthSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("heart"), MainActivity.Me.getVertexBufferObjectManager());
+        healthSprite.setPosition(60, MainActivity.getHeight() - 28);    
+        
         spriteGold = new Sprite(0, 0, MainActivity.resources.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
         spriteGold.setPosition(250, MainActivity.getHeight() - 28);
 
         textGold = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
         updateGoldIndicator(0);
+        
+        healthPoints = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
+        updateHealthIndicator(0);
 
-        attachChild(healthIndicator);
+        attachChild(healthSprite);
+        attachChild(healthPoints);
         attachChild(spriteGold);
         attachChild(textGold);
 
@@ -70,19 +75,9 @@ public class GameHUD extends MhyhreScene {
         textGold.setPosition(spriteGold.getX() + spriteGold.getWidth() / 2 + 10 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
     }
 
-    public void updateHealthIndicator(int currentHealth, int maxHealth) {
-
-        healthIndicator.setY(MainActivity.getHeight());
-        float height = -(10 + MainActivity.resources.getTextureRegion("heart").getHeight());
-
-        for (int i = 0; i < maxHealth; i++) {
-            if (i < currentHealth) {
-                healthIndicator.draw(MainActivity.resources.getTextureRegion("heart"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
-            } else {
-                healthIndicator.draw(MainActivity.resources.getTextureRegion("heart_died"), 40 + i * 36, height, 32, 32, 0, 1, 1, 1, 1);
-            }
-        }
-        healthIndicator.submit();
+    public void updateHealthIndicator(int currentHealth) {
+        healthPoints.setText(String.valueOf(currentHealth));
+        healthPoints.setPosition(healthSprite.getX() + healthSprite.getWidth() / 2 + 10 + healthPoints.getWidth() / 2, MainActivity.getHeight() - 24);
     }
 
     private class TouchPoint {
@@ -124,9 +119,7 @@ public class GameHUD extends MhyhreScene {
             if (touchPoints[i].used == true) {
 
                 states[Buttons.LEFT.ordinal()] |= Collisions.spriteByCircle(spriteMoveLeft, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
-
                 states[Buttons.RIGHT.ordinal()] |= Collisions.spriteByCircle(spriteMoveRight, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
-
                 states[Buttons.FIRE.ordinal()] |= Collisions.spriteByCircle(spriteFire, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
             }
         }

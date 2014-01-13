@@ -12,14 +12,15 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 final public class CloudsManager extends SpriteBatch {
 
     private int TYPE_COUNTER = 0;
+    private static final int CLOUDS_MAXIMUM = 5;
 
     private List<CloudUnit> mClouds;
     private ITextureRegion[] mRegions;
     private float mCloudStep;
     private float mSkySeparator;
 
-    public CloudsManager(int pMaxCapacity, VertexBufferObjectManager vertexBufferObjectManager) {
-        super(0, 0, MainActivity.resources.getTextureAtlas("Clouds"), pMaxCapacity + 2, vertexBufferObjectManager);
+    public CloudsManager(VertexBufferObjectManager vertexBufferObjectManager) {
+        super(0, 0, MainActivity.resources.getTextureAtlas("Clouds"), CLOUDS_MAXIMUM + 2, vertexBufferObjectManager);
 
         mClouds = new ArrayList<CloudUnit>();
 

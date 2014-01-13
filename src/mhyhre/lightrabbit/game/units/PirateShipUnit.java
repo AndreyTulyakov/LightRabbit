@@ -12,7 +12,7 @@ public class PirateShipUnit extends Enemy {
     float mWaterLevel;
 
     public PirateShipUnit() {
-        super(EnemyType.PIRATE_SHIP, 300);
+        super(EnemyType.PIRATE_SHIP, 220, 50);
 
         setSize(128, 75);
         bright = 1;
@@ -34,17 +34,17 @@ public class PirateShipUnit extends Enemy {
     @Override
     public void update() {
 
-        if (mDied == true) {
-            mX -= sSpeed;
-            mY += sSinkSpeed;
+        if (isDied == true) {
+            xPosition -= sSpeed;
+            yPosition += sSinkSpeed;
             if (bright > 0) {
                 bright -= 0.01f;
                 if (bright < 0.1f)
                     bright = 0.0f;
             }
         } else {
-            mX -= sSpeed;
-            mY = (float) (mWaterLevel);
+            xPosition -= sSpeed;
+            yPosition = (float) (mWaterLevel);
         }
     }
 

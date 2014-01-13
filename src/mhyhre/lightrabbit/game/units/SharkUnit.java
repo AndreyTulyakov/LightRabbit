@@ -13,7 +13,7 @@ public class SharkUnit extends Enemy {
     private float currentRotation = 0, targetRotation = 180;
 
     public SharkUnit() {
-        super(EnemyType.SHARK, 40);
+        super(EnemyType.SHARK, 40, 20);
         bright = 1;
         setSize(64, 40);
         setRadius(25);
@@ -36,9 +36,9 @@ public class SharkUnit extends Enemy {
     @Override
     public void update() {
         
-        if (mDied == true) {
-            mX -= sSpeed;
-            mY += sSinkSpeed;
+        if (isDied == true) {
+            xPosition -= sSpeed;
+            yPosition += sSinkSpeed;
 
             if (currentRotation < targetRotation)
                 currentRotation++;
@@ -49,8 +49,8 @@ public class SharkUnit extends Enemy {
                     bright = 0.0f;
             }
         } else {
-            mX -= sSpeed;
-            mY = (float) (mWaterLevel + 30 * Math.sin(mX / (Math.PI * 4)));
+            xPosition -= sSpeed;
+            yPosition = (float) (mWaterLevel + 30 * Math.sin(xPosition / (Math.PI * 4)));
         }
     }
 

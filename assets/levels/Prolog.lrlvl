@@ -6,7 +6,6 @@
   <Backstory>Не так давно...</Backstory>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
-  <Player>BOATER</Player>
   <DialogBase>Prolog.lrdb</DialogBase>
  </Setting>
  <Events>

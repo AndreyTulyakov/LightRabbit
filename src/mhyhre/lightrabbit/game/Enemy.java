@@ -4,95 +4,97 @@ import org.andengine.entity.primitive.Vector2;
 
 public abstract class Enemy {
 
-    protected EnemyType mEnemyType;
-    protected int mHealth;
-    protected boolean mDied;
-    protected float mX, mY;
-    protected float mWidth, mHeight;
+    protected EnemyType enemyType;
+    protected int health;
+    protected int armor;
+    protected boolean isDied;
+    protected float xPosition, yPosition;
+    protected float width, height;
     protected float radius = 0;
 
-    public Enemy(EnemyType pType, int pMaxHealth) {
-        mHealth = pMaxHealth;
-        mEnemyType = pType;
+    public Enemy(EnemyType pType, int pMaxHealth, int pArmor) {
+        health = pMaxHealth;
+        enemyType = pType;
+        armor = pArmor;
 
-        mX = 0;
-        mY = 0;
-        mWidth = 0;
-        mHeight = 0;
+        xPosition = 0;
+        yPosition = 0;
+        width = 0;
+        height = 0;
     }
 
     public int getHealth() {
-        return mHealth;
+        return health;
     }
 
     public void setHealth(int pHealth) {
-        this.mHealth = pHealth;
+        this.health = pHealth;
     }
 
     public boolean isDied() {
-        return mDied;
+        return isDied;
     }
 
     public void setDied(boolean mDied) {
-        this.mDied = mDied;
+        this.isDied = mDied;
     }
 
     public abstract void update();
 
     public void setSize(float w, float h) {
-        mWidth = w;
-        mHeight = h;
+        width = w;
+        height = h;
     }
 
     public float getX() {
-        return mX;
+        return xPosition;
     }
 
     public void setX(float mX) {
-        this.mX = mX;
+        this.xPosition = mX;
     }
 
     public float getY() {
-        return mY;
+        return yPosition;
     }
 
     public void setY(float mY) {
-        this.mY = mY;
+        this.yPosition = mY;
     }
 
     public void setPosition(float pX, float pY) {
-        mX = pX;
-        mY = pY;
+        xPosition = pX;
+        yPosition = pY;
     }
 
     public void setCenteredPosition(float pX, float pY) {
-        mX = pX - mWidth / 2;
-        mY = pY - mHeight / 2;
+        xPosition = pX - width / 2;
+        yPosition = pY - height / 2;
     }
 
     public void setPosition(Vector2 pos) {
-        mX = pos.x;
-        mY = pos.y;
+        xPosition = pos.x;
+        yPosition = pos.y;
     }
 
     public float getWidth() {
-        return mWidth;
+        return width;
     }
 
     public void setWidth(float width) {
-        this.mWidth = width;
+        this.width = width;
     }
 
     public float getHeight() {
-        return mHeight;
+        return height;
     }
 
     public void setHeight(float height) {
-        this.mHeight = height;
+        this.height = height;
     }
 
     public EnemyType getEnemyType() {
-        return mEnemyType;
+        return enemyType;
     }
 
     public float getRadius() {

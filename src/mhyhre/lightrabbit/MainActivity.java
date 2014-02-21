@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Andrey Tulyakov
+ * Copyright (C) 2013-2014 Andrey Tulyakov
  * @mail: mhyhre@gmail.com
  * 
  * This work is licensed under a Creative Commons 
@@ -33,13 +33,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 
-/**
- * Main Activity - start point
- */
+
 public class MainActivity extends SimpleBaseGameActivity {
 
     public static final String DEBUG_ID = "LRABBIT";
-    public static String PREFERENCE_ID = "MY_PREF";
+    public static final String PREFERENCE_ID = "MY_PREF";
     
     public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
     public static final String LEVELS_FOLDER = "levels/";

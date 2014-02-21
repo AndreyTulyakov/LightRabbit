@@ -192,7 +192,7 @@ public class SceneLevelSelector extends MhyhreScene {
                     Log.i(MainActivity.DEBUG_ID, "SceneLevelSelector: Selected level [" + item.label + "]");
                     
                     selectedLevel = item;
-                    MainActivity.getRootScene().SetState(SceneStates.GameLoading);
+                    MainActivity.getRootScene().SetState(SceneStates.Equipment);
                 }
             }
         }

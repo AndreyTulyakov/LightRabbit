@@ -27,7 +27,9 @@ public class SceneRoot extends Scene {
     public SceneExit mSceneExit;
     public SceneGame mSceneGame;
     public SceneLevelSelector mSceneLevelSelector;
+    public SceneEquipment mSceneEquipment;
     public SceneGameLoading mSceneGameLoading;
+    
 
     public static boolean Preloaded = false;
 
@@ -52,6 +54,7 @@ public class SceneRoot extends Scene {
         mSceneAbout = new SceneAbout();
         mSceneExit = new SceneExit();
         mSceneLevelSelector = new SceneLevelSelector();
+        mSceneEquipment = new SceneEquipment();
         mSceneGameLoading = new SceneGameLoading();
 
         mSceneGame = null;
@@ -60,6 +63,7 @@ public class SceneRoot extends Scene {
         attachChild(mSceneAbout);
         attachChild(mSceneExit);
         attachChild(mSceneLevelSelector);
+        attachChild(mSceneEquipment);
         attachChild(mSceneGameLoading);
 
         // ---------------------------------------------------------------
@@ -82,6 +86,7 @@ public class SceneRoot extends Scene {
             mSceneAbout.hide();
             mSceneExit.hide();
             mSceneLevelSelector.hide();
+            mSceneEquipment.hide();
             mSceneGameLoading.hide();
 
             if (mSceneGame != null)
@@ -98,6 +103,10 @@ public class SceneRoot extends Scene {
 
             case LevelSelector:
                 mSceneLevelSelector.show();
+                break;
+                
+            case Equipment:
+                mSceneEquipment.show();
                 break;
 
             case About:
@@ -178,6 +187,10 @@ public class SceneRoot extends Scene {
             case LevelSelector:
                 mSceneLevelSelector.onSceneTouchEvent(pSceneTouchEvent);
                 break;
+                
+            case Equipment:
+                mSceneEquipment.onSceneTouchEvent(pSceneTouchEvent);
+                break;
 
             case About:
                 mSceneAbout.onSceneTouchEvent(pSceneTouchEvent);
@@ -224,6 +237,10 @@ public class SceneRoot extends Scene {
 
         case LevelSelector:
             SetState(SceneStates.MainMenu);
+            break;
+            
+        case Equipment:
+            SetState(SceneStates.LevelSelector);
             break;
 
         case About:

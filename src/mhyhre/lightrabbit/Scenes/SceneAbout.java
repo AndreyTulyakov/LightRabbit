@@ -31,7 +31,6 @@ public class SceneAbout extends MhyhreScene {
 
     private Text textTop;
     private Text textInfo;
-    private Text textBack;
 
     public SceneAbout() {
 
@@ -70,7 +69,7 @@ public class SceneAbout extends MhyhreScene {
 
         mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
 
-        textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
+        Text textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
         textBack.setPosition(mBackButtonSprite);
 
         attachChild(mBackButtonSprite);

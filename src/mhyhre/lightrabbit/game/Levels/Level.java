@@ -29,7 +29,6 @@ public class Level {
     private static final String LEVEL_NAME = "Name";
     private static final String LEVEL_BACKSTORY = "Backstory";
     private static final String LEVEL_DIALOGBASE = "DialogBase";
-    private static final String LEVEL_PLAYER = "Player";
 
     private String mName = "";
     private String mChapter = "";

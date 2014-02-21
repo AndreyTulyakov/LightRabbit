@@ -26,17 +26,18 @@ public final class R {
         public static final int MenuItem_Play=0x7f040005;
         public static final int QExit=0x7f040002;
         public static final int app_name=0x7f040000;
-        public static final int level=0x7f04000f;
-        public static final int loading=0x7f04000b;
-        public static final int passLevel=0x7f04000e;
-        public static final int selectLevel=0x7f04000a;
-        public static final int tapForContinue=0x7f04000c;
-        public static final int textAbout=0x7f040008;
-        public static final int textBack=0x7f040006;
-        public static final int textExit=0x7f040007;
-        public static final int textTap=0x7f040009;
+        public static final int level=0x7f040010;
+        public static final int loading=0x7f04000c;
+        public static final int passLevel=0x7f04000f;
+        public static final int selectLevel=0x7f04000b;
+        public static final int tapForContinue=0x7f04000d;
+        public static final int textAbout=0x7f040009;
+        public static final int textBack=0x7f040007;
+        public static final int textExit=0x7f040008;
+        public static final int textStart=0x7f040006;
+        public static final int textTap=0x7f04000a;
         public static final int title_activity_main=0x7f040001;
-        public static final int youWasDied=0x7f04000d;
+        public static final int youWasDied=0x7f04000e;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;

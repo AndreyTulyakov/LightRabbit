@@ -35,9 +35,6 @@ public class SceneRoot extends Scene {
 
     public SceneRoot() {
         setBackgroundEnabled(false);
-    }
-
-    public void Initialize() {
 
         mSceneLoader = new SceneLoader();
         mSceneLoader.show();

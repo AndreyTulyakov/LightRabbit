@@ -2,25 +2,18 @@ package mhyhre.lightrabbit.equipment;
 
 import mhyhre.lightrabbit.MainActivity;
 
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
-import org.andengine.opengl.texture.region.ITextureRegion;
 
 public class ShipConfigurator extends Scene {
 
     private static final int CELLS_CONFIGURATION_COUNT = 4;
-    private static final int CELLS_AMMUNITION = 2;
+    private static final int CELLS_AMMUNITION = 4;
     
     SpriteBatch equipmentCells;
     
-
-    
     public ShipConfigurator() {
-        
-        Rectangle rect2 = new Rectangle(MainActivity.getHalfWidth(), 3*MainActivity.getHalfHeight()/4, MainActivity.getWidth()-10, 320, MainActivity.getVboManager());
-        rect2.setColor(0.8f, 0.9f, 0.9f);
-        attachChild(rect2);
         
         int sumOfCells = CELLS_CONFIGURATION_COUNT + CELLS_AMMUNITION;
         

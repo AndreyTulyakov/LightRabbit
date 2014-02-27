@@ -17,14 +17,9 @@ public class SceneEquipment extends MhyhreScene {
     public SceneEquipment() {
         
         setBackgroundEnabled(true);
-        setBackground(new Background(0.9f, 0.9f, 1.0f));
+        setBackground(new Background(0.7f, 0.7f, 0.7f));
         
-        float borders = 10;
-        
-        Rectangle rect1 = new Rectangle(MainActivity.getHalfWidth(), 150, MainActivity.getWidth()-borders*2, 100, MainActivity.getVboManager());
-        rect1.setColor(0.8f, 0.8f, 0.9f);
-        attachChild(rect1);
-        
+
         equipmentPanel = new ShipConfigurator();
         attachChild(equipmentPanel);
         
@@ -77,7 +72,7 @@ public class SceneEquipment extends MhyhreScene {
         
         float secondHorizontalLine = 150;
         
-        
+        /*
         // Prev ship
         Sprite mPrevShipButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.getVboManager()) {
             @Override
@@ -111,7 +106,7 @@ public class SceneEquipment extends MhyhreScene {
         attachChild(mNextShipButtonSprite);
         registerTouchArea(mNextShipButtonSprite);
         
-        
+        */
     }
 
 }

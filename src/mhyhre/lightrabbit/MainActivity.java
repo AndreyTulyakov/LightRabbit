@@ -87,7 +87,6 @@ public class MainActivity extends SimpleBaseGameActivity {
     @Override
     public EngineOptions onCreateEngineOptions() {
 
-        Log.i(DEBUG_ID, "--------------------------------------------------");
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(40);
 
@@ -104,10 +103,9 @@ public class MainActivity extends SimpleBaseGameActivity {
 
         camera = new Camera(0, 0, width, height);
 
-        if (BuildConfig.DEBUG)
-            Log.i(DEBUG_ID, "Display Metrics: " + width + " x " + height);
-
-        EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels,
+        EngineOptions mEngineOptions = new EngineOptions(
+                true, ScreenOrientation.LANDSCAPE_FIXED,
+                new RatioResolutionPolicy(metrics.widthPixels,
                 metrics.heightPixels), camera);
         mEngineOptions.getAudioOptions().setNeedsSound(true);
         mEngineOptions.getTouchOptions().setNeedsMultiTouch(true);
@@ -129,8 +127,6 @@ public class MainActivity extends SimpleBaseGameActivity {
         resources = new ResourceManager();
 
         sceneRoot = new SceneRoot();
-        sceneRoot.Initialize();
-
         return sceneRoot;
     }
 
@@ -205,13 +201,11 @@ public class MainActivity extends SimpleBaseGameActivity {
         }
     }
     
-    /* Return vertex buffer*/
     public static VertexBufferObjectManager getVboManager() {
         if(Me != null) {
             return Me.getVertexBufferObjectManager();
         }
         return null;
     }
-
 
 }

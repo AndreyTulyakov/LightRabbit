@@ -1,6 +1,5 @@
 package mhyhre.lightrabbit.Scenes;
 
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
@@ -23,8 +22,16 @@ public class SceneEquipment extends MhyhreScene {
         equipmentPanel = new ShipConfigurator();
         attachChild(equipmentPanel);
         
+        addBackAndStartButtons();
+        addNextPreviousShipSlotButtons();
         
-        float firstHorizontalLine = 50;
+        
+    }
+    
+    
+    private void addBackAndStartButtons() {
+        
+        float buttionsVerticalLine = 50;
         
         // Back button
         Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button2"), MainActivity.getVboManager()) {
@@ -38,7 +45,7 @@ public class SceneEquipment extends MhyhreScene {
             }
         };
 
-        mBackButtonSprite.setPosition(mBackButtonSprite.getWidth(), firstHorizontalLine);
+        mBackButtonSprite.setPosition(mBackButtonSprite.getWidth(), buttionsVerticalLine);
         String strBack = MainActivity.Me.getString(R.string.textBack);
         Text textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), strBack, MainActivity.getVboManager());
         textBack.setPosition(mBackButtonSprite);
@@ -60,7 +67,7 @@ public class SceneEquipment extends MhyhreScene {
             }
         };
         
-        mStartButtonSprite.setPosition(MainActivity.getWidth() - mStartButtonSprite.getWidth(), firstHorizontalLine);
+        mStartButtonSprite.setPosition(MainActivity.getWidth() - mStartButtonSprite.getWidth(), buttionsVerticalLine);
         String strStart = MainActivity.Me.getString(R.string.textStart);
         Text textStart = new Text(0, 0, MainActivity.resources.getFont("Furore"), strStart, MainActivity.getVboManager());
         textStart.setPosition(mStartButtonSprite);
@@ -68,12 +75,13 @@ public class SceneEquipment extends MhyhreScene {
         attachChild(mStartButtonSprite);
         registerTouchArea(mStartButtonSprite);
         attachChild(textStart);
+    }
+
+    private void addNextPreviousShipSlotButtons() {
         
+        float buttonsVerticalLine = 150;
         
-        float secondHorizontalLine = 150;
-        
-        /*
-        // Prev ship
+        // Previous ship
         Sprite mPrevShipButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.getVboManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -85,7 +93,7 @@ public class SceneEquipment extends MhyhreScene {
             }
         };
         
-        mPrevShipButtonSprite.setPosition(mPrevShipButtonSprite.getWidth(), secondHorizontalLine);
+        mPrevShipButtonSprite.setPosition(mPrevShipButtonSprite.getWidth(), buttonsVerticalLine);
         attachChild(mPrevShipButtonSprite);
         registerTouchArea(mPrevShipButtonSprite);
         
@@ -102,11 +110,8 @@ public class SceneEquipment extends MhyhreScene {
             }
         };
         
-        mNextShipButtonSprite.setPosition(MainActivity.getWidth() - mNextShipButtonSprite.getWidth(), secondHorizontalLine);
+        mNextShipButtonSprite.setPosition(MainActivity.getWidth() - mNextShipButtonSprite.getWidth(), buttonsVerticalLine);
         attachChild(mNextShipButtonSprite);
         registerTouchArea(mNextShipButtonSprite);
-        
-        */
     }
-
 }

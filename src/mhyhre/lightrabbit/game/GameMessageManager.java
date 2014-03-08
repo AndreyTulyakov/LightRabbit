@@ -13,9 +13,9 @@ import mhyhre.lightrabbit.game.levels.CharacterBase;
 import mhyhre.lightrabbit.game.levels.Dialog;
 import mhyhre.lightrabbit.game.levels.DialogBase;
 import mhyhre.lightrabbit.game.levels.Replic;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
-public class GameMessageManager extends MhyhreScene {
+public class GameMessageManager extends EaseScene {
 
     private Text textMessage;
     private Text textCharacter;

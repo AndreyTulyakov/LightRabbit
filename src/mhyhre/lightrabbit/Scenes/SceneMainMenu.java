@@ -15,7 +15,7 @@ package mhyhre.lightrabbit.scenes;
 import mhyhre.lightrabbit.R;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -25,7 +25,7 @@ import org.andengine.opengl.font.IFont;
 
 import android.util.Log;
 
-public class SceneMainMenu extends MhyhreScene {
+public class SceneMainMenu extends EaseScene {
 
     public Background mBackGround;
 

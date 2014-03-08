@@ -1,7 +1,7 @@
 package mhyhre.lightrabbit.game;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -17,7 +17,7 @@ import android.graphics.PointF;
  *  - Sprites: Sun\Moon
  *  - 
  */
-public class SkyManager extends MhyhreScene {
+public class SkyManager extends EaseScene {
 
     private final int SUNRISE_START_TIME = 7;
     private final int SUNRISE_END_TIME = 8;

@@ -14,7 +14,7 @@ package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
@@ -24,7 +24,7 @@ import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import android.util.Log;
 
-public class SceneLoader extends MhyhreScene {
+public class SceneLoader extends EaseScene {
 
     private float AlphaTime = 0.0f;
     private float AlphaTime2 = -0.3f;

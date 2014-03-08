@@ -17,7 +17,7 @@ import java.io.InputStream;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
@@ -27,7 +27,7 @@ import org.andengine.input.touch.TouchEvent;
 
 import android.util.Log;
 
-public class SceneAbout extends MhyhreScene {
+public class SceneAbout extends EaseScene {
 
     private Text textTop;
     private Text textInfo;

@@ -25,7 +25,7 @@ import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.levels.Event;
 import mhyhre.lightrabbit.game.levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.input.touch.TouchEvent;
 import android.util.Log;
@@ -33,7 +33,7 @@ import android.util.Log;
 /**
  * This scene control game process.
  */
-public class SceneGame extends MhyhreScene {
+public class SceneGame extends EaseScene {
 
     private float timeCounter = 0;
     boolean loaded = true;

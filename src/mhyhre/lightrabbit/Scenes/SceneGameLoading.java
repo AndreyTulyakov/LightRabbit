@@ -14,7 +14,7 @@ package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.text.Text;
@@ -23,7 +23,7 @@ import org.andengine.util.adt.color.Color;
 
 import android.util.Log;
 
-public class SceneGameLoading extends MhyhreScene {
+public class SceneGameLoading extends EaseScene {
 
     private Rectangle mRotationRect;
     private Text mTextPress;

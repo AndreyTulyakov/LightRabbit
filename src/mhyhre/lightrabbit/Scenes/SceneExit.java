@@ -15,7 +15,7 @@ package mhyhre.lightrabbit.scenes;
 import mhyhre.lightrabbit.R;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
@@ -25,7 +25,7 @@ import org.andengine.input.touch.TouchEvent;
 
 import android.util.Log;
 
-public class SceneExit extends MhyhreScene {
+public class SceneExit extends EaseScene {
 
     Sprite mExitButtonSprite;
     Sprite mBackButtonSprite;

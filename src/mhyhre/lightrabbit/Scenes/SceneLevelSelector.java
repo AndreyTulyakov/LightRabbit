@@ -23,7 +23,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.game.LevelItem;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.batch.SpriteBatch;
@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
 
 import android.util.Log;
 
-public class SceneLevelSelector extends MhyhreScene {
+public class SceneLevelSelector extends EaseScene {
 
     List<LevelItem> mItems;
 

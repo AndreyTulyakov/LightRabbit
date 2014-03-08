@@ -1,13 +1,13 @@
 package mhyhre.lightrabbit.game;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-public class GameHUD extends MhyhreScene {
+public class GameHUD extends EaseScene {
 
     public enum Buttons {
         LEFT, RIGHT, JUMP, FIRE;

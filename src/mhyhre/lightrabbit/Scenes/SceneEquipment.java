@@ -18,10 +18,10 @@ import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.EaseScene;
 import mhyhre.lightrabbit.scene.utils.ShipSlotSelector;
 
-public class SceneEquipment extends MhyhreScene {
+public class SceneEquipment extends EaseScene {
   
     ShipSlotSelector shipSlotSelector;
     

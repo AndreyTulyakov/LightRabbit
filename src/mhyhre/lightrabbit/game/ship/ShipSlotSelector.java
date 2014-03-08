@@ -37,7 +37,7 @@ public class ShipSlotSelector extends EaseSceneWidget {
         currentShipSlotIndex = 0;
         
         // Loading slots from device to slots list
-        shipSlotsList = ShipSlotReader.readSlots();
+        shipSlotsList = ShipSlotReader.readSlotsFromInternalMemory();
         
         addNextAndPrevSlotButtons();
         

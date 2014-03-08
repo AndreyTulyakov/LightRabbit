@@ -11,7 +11,11 @@ public class ShipSlotReader {
     private ShipSlotReader() {
     }
     
-    public static List<ShipSlot> readSlots() {
+    /**
+     * Read file from internal device memory and parse it to ShipSlots items.
+     * @return succes readed slots
+     */
+    public static List<ShipSlot> readSlotsFromInternalMemory() {
         List<ShipSlot> slots = new ArrayList<ShipSlot>();
         
         

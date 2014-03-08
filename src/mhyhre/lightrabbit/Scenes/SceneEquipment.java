@@ -93,42 +93,4 @@ public class SceneEquipment extends EaseScene {
         registerTouchArea(mStartButtonSprite);
         attachChild(textStart);
     }
-
-    private void addNextPreviousShipSlotButtons() {
-        
-        float buttonsVerticalLine = 150;
-        
-        // Previous ship
-        Sprite mPrevShipButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.getVboManager()) {
-            @Override
-            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-                    MainActivity.vibrate(30);
-                    
-                }
-                return true;
-            }
-        };
-        
-        mPrevShipButtonSprite.setPosition(mPrevShipButtonSprite.getWidth(), buttonsVerticalLine);
-        attachChild(mPrevShipButtonSprite);
-        registerTouchArea(mPrevShipButtonSprite);
-        
-        
-        // Next ship
-        Sprite mNextShipButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Right"), MainActivity.getVboManager()) {
-            @Override
-            public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-                    MainActivity.vibrate(30);
-                    
-                }
-                return true;
-            }
-        };
-        
-        mNextShipButtonSprite.setPosition(MainActivity.getWidth() - mNextShipButtonSprite.getWidth(), buttonsVerticalLine);
-        attachChild(mNextShipButtonSprite);
-        registerTouchArea(mNextShipButtonSprite);
-    }
 }

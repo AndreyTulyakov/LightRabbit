@@ -9,12 +9,15 @@
  *      http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode
  *
  */
-package mhyhre.lightrabbit.scene.utils;
+package mhyhre.lightrabbit.game.ship;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.equipment.ShipSlot;
+import mhyhre.lightrabbit.scene.utils.EaseSceneWidget;
+
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;
 
@@ -23,7 +26,7 @@ import android.util.Log;
 public class ShipSlotSelector extends EaseSceneWidget {
     
     int currentShipSlotIndex;
-    ArrayList<ShipSlot> shipSlotsList;
+    List<ShipSlot> shipSlotsList;
 
     
     public ShipSlotSelector() {
@@ -33,10 +36,12 @@ public class ShipSlotSelector extends EaseSceneWidget {
         shipSlotsList = new ArrayList<ShipSlot>();
         currentShipSlotIndex = 0;
         
-        // TODO loading slots from device to slots list
-        
+        // Loading slots from device to slots list
+        shipSlotsList = ShipSlotReader.readSlots();
         
         addNextAndPrevSlotButtons();
+        
+        updateViews();
     }
     
     public ShipSlot getCurrentShipSlot() {
@@ -62,14 +67,14 @@ public class ShipSlotSelector extends EaseSceneWidget {
     }
     
     private void updateViews() {
-        
+        // TODO: need update child's items
     }
     
     private void addNextAndPrevSlotButtons() {
         
         float buttonsVerticalCenter = MainActivity.getHalfWidth();
         
-        // Previous ship
+        // Previous button
         Sprite buttonPrevSlot = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.getVboManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -86,7 +91,7 @@ public class ShipSlotSelector extends EaseSceneWidget {
         registerTouchArea(buttonPrevSlot);
         
         
-        // Next ship
+        // Next button
         Sprite buttonNextSlot = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Right"), MainActivity.getVboManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {

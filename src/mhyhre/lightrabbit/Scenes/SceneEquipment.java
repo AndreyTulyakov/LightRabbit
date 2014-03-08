@@ -18,27 +18,31 @@ import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.game.ship.ShipSlotSelector;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
-import mhyhre.lightrabbit.scene.utils.ShipSlotSelector;
 
 public class SceneEquipment extends EaseScene {
   
     ShipSlotSelector shipSlotSelector;
     
     
-    public SceneEquipment() {
-        
-        shipSlotSelector = new ShipSlotSelector();
-        attachChild(shipSlotSelector);
-        
-        
-        
+    public SceneEquipment() {        
         setBackgroundEnabled(true);
         setBackground(new Background(0.7f, 0.7f, 0.7f));
 
-        addBackAndStartButtons();
-        addNextPreviousShipSlotButtons();
-          
+        
+        shipSlotSelector = new ShipSlotSelector();
+        shipSlotSelector.show();
+        attachChild(shipSlotSelector);
+        
+             
+        addBackAndStartButtons(); 
+    }
+    
+    @Override
+    public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
+        shipSlotSelector.onSceneTouchEvent(pSceneTouchEvent);
+        return super.onSceneTouchEvent(pSceneTouchEvent);
     }
     
     

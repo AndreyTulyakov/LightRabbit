@@ -12,8 +12,8 @@
 
 package mhyhre.lightrabbit;
 
-import mhyhre.lightrabbit.Scenes.SceneRoot;
-import mhyhre.lightrabbit.Scenes.SceneStates;
+import mhyhre.lightrabbit.scenes.SceneRoot;
+import mhyhre.lightrabbit.scenes.SceneStates;
 
 import org.andengine.BuildConfig;
 import org.andengine.engine.camera.Camera;

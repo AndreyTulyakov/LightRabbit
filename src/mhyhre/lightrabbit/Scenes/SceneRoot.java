@@ -10,7 +10,7 @@
  *
  */
 
-package mhyhre.lightrabbit.Scenes;
+package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
 

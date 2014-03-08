@@ -1,4 +1,7 @@
-package mhyhre.lightrabbit.Scenes;
+package mhyhre.lightrabbit.scenes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -7,28 +10,40 @@ import org.andengine.input.touch.TouchEvent;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.equipment.ShipConfigurator;
+import mhyhre.lightrabbit.equipment.ShipSlot;
 
 public class SceneEquipment extends MhyhreScene {
-    
-    ShipConfigurator equipmentPanel;
+
+
+    List<ShipSlot> ships;
+    int currentShipSlot;
     
     public SceneEquipment() {
         
+        ships = new ArrayList<ShipSlot>();
+        
+        // Configure user interface
+        
         setBackgroundEnabled(true);
         setBackground(new Background(0.7f, 0.7f, 0.7f));
-        
 
-        equipmentPanel = new ShipConfigurator();
-        attachChild(equipmentPanel);
-        
         addBackAndStartButtons();
         addNextPreviousShipSlotButtons();
-        
-        
+          
     }
     
-    
+
+    @Override
+    public void show() {
+        // TODO need update ship slots
+        ships.clear();
+        
+        // By loop create new ships slots
+        
+        
+        super.show();
+    }
+
     private void addBackAndStartButtons() {
         
         float buttionsVerticalLine = 50;

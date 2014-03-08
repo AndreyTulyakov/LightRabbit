@@ -10,7 +10,7 @@
  *
  */
 
-package mhyhre.lightrabbit.Scenes;
+package mhyhre.lightrabbit.scenes;
 
 import java.io.IOException;
 import java.io.InputStream;

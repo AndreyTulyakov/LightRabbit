@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Andrey Tulyakov
+ * Copyright (C) 2013-2014 Andrey Tulyakov
  * @mail: mhyhre@gmail.com
  * 
  * This work is licensed under a Creative Commons 
@@ -10,8 +10,15 @@
  *
  */
 
-package mhyhre.lightrabbit.scenes;
+package mhyhre.lightrabbit.game.ship;
 
-public enum SceneStates {
-    None, Splash, MainMenu, LevelSelector, Equipment,About, Exit, Game, GameLoading, EndGame
+
+public abstract class SimpleShip {
+    
+    ShipConfiguration configuration;
+    
+    public SimpleShip(ShipConfiguration config) {
+        configuration = config;
+    }
+    
 }

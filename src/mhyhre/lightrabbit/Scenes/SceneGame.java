@@ -13,7 +13,6 @@
 package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.BulletsManager;
 import mhyhre.lightrabbit.game.CloudsManager;
@@ -26,6 +25,7 @@ import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.levels.Event;
 import mhyhre.lightrabbit.game.levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
 
 import org.andengine.input.touch.TouchEvent;
 import android.util.Log;

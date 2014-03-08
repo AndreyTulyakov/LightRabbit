@@ -21,9 +21,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.game.LevelItem;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;

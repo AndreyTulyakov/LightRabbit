@@ -1,28 +1,37 @@
-package mhyhre.lightrabbit.scenes;
+/*
+ * Copyright (C) 2013 Andrey Tulyakov
+ * @mail: mhyhre@gmail.com
+ * 
+ * This work is licensed under a Creative Commons 
+ * Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+ * You may obtain a copy of the License at
+ *
+ *      http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode
+ *
+ */
 
-import java.util.ArrayList;
-import java.util.List;
+package mhyhre.lightrabbit.scenes;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.equipment.ShipSlot;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.ShipSlotSelector;
 
 public class SceneEquipment extends MhyhreScene {
-
-
-    List<ShipSlot> ships;
-    int currentShipSlot;
+  
+    ShipSlotSelector shipSlotSelector;
+    
     
     public SceneEquipment() {
         
-        ships = new ArrayList<ShipSlot>();
+        shipSlotSelector = new ShipSlotSelector();
+        attachChild(shipSlotSelector);
         
-        // Configure user interface
+        
         
         setBackgroundEnabled(true);
         setBackground(new Background(0.7f, 0.7f, 0.7f));
@@ -32,18 +41,7 @@ public class SceneEquipment extends MhyhreScene {
           
     }
     
-
-    @Override
-    public void show() {
-        // TODO need update ship slots
-        ships.clear();
-        
-        // By loop create new ships slots
-        
-        
-        super.show();
-    }
-
+    
     private void addBackAndStartButtons() {
         
         float buttionsVerticalLine = 50;

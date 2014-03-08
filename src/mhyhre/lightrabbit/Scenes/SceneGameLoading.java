@@ -13,8 +13,9 @@
 package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;

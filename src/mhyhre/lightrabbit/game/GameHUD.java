@@ -1,7 +1,7 @@
 package mhyhre.lightrabbit.game;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
 
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;

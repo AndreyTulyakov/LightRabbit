@@ -15,7 +15,7 @@ package mhyhre.lightrabbit.scenes;
 import mhyhre.lightrabbit.R;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
 
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;

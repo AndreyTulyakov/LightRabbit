@@ -13,8 +13,9 @@
 package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
+
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.primitive.Rectangle;

@@ -8,12 +8,12 @@ import org.andengine.input.touch.TouchEvent;
 import android.util.Log;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.MhyhreScene;
 import mhyhre.lightrabbit.game.levels.Character;
 import mhyhre.lightrabbit.game.levels.CharacterBase;
 import mhyhre.lightrabbit.game.levels.Dialog;
 import mhyhre.lightrabbit.game.levels.DialogBase;
 import mhyhre.lightrabbit.game.levels.Replic;
+import mhyhre.lightrabbit.scene.utils.MhyhreScene;
 
 public class GameMessageManager extends MhyhreScene {
 

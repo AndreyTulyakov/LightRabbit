@@ -1,6 +1,7 @@
 package mhyhre.lightrabbit.game;
 
-import org.andengine.entity.primitive.Vector2;
+import mhyhre.lightrabbit.utils.Vector2;
+
 
 public abstract class Enemy {
 

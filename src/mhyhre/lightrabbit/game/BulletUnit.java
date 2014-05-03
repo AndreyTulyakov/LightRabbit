@@ -1,7 +1,7 @@
 package mhyhre.lightrabbit.game;
 
+import mhyhre.lightrabbit.utils.Vector2;
 import org.andengine.entity.Entity;
-import org.andengine.entity.primitive.Vector2;
 
 public class BulletUnit extends Entity {
 
@@ -28,7 +28,7 @@ public class BulletUnit extends Entity {
     }
 
     public Vector2 getAcceleration() {
-        return new Vector2(mAcceleration);
+        return mAcceleration.clone();
     }
 
     public void setAcceleration(float pX, float pY) {

@@ -2,45 +2,48 @@ package mhyhre.lightrabbit.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.utils.Polygon;
+import mhyhre.lightrabbit.utils.Vector2;
 
 import org.andengine.entity.primitive.DrawMode;
-import org.andengine.entity.primitive.Polygon;
-import org.andengine.entity.primitive.Vector2;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 public class WaterPolygon extends Polygon {
 
     private static final int WATER_RESOLUTION = 16;
+    private static final int OVERHEAD_VERTICES = 3;
+    
+    private static float tick = 0;
     
     private List<Vector2> waterCoordinates;
     float[] vertexX1;
     float[] vertexY1;
 
-    private final int waterResolution;
     float waveRepeating = 1.5f;
     float waveHeight = 50;
     float waterLevel = 220;
 
     public WaterPolygon(VertexBufferObjectManager pVertexBufferObjectManager) {
-
-        super(0, 0, new float[WATER_RESOLUTION + 3], new float[WATER_RESOLUTION + 3], pVertexBufferObjectManager);
-
+        
+        super(0, 0, new float[WATER_RESOLUTION + OVERHEAD_VERTICES], new float[WATER_RESOLUTION + OVERHEAD_VERTICES], pVertexBufferObjectManager);
+        
         setDrawMode(DrawMode.TRIANGLE_FAN);
-        waterResolution = WATER_RESOLUTION;
+        // setDrawMode(DrawMode.LINE_LOOP);
 
-        float step = MainActivity.getWidth() / (waterResolution - 1);
 
-        setColor(0.0f, 0.1f, 0.6f, 0.5f);
+        setColor(0.0f, 0.1f, 0.6f, 0.7f);
 
         // Water coordinates list
         waterCoordinates = new ArrayList<Vector2>();
 
-        // Set "Loop" vertices
+        // Add "Loop" vertices
         waterCoordinates.add(new Vector2(MainActivity.getHalfWidth(), 0));
-        waterCoordinates.add(new Vector2(0, 0));     
+        waterCoordinates.add(new Vector2(0, 0));
 
-        for (int i = 0; i < waterResolution; i++) {
+        float step = MainActivity.getWidth() / (WATER_RESOLUTION - 1);
+        for (int i = 0; i < WATER_RESOLUTION; i++) {
             waterCoordinates.add(new Vector2(i * step, MainActivity.getHalfHeight()));
         }
         waterCoordinates.add(new Vector2(MainActivity.getWidth(), 0));
@@ -56,7 +59,7 @@ public class WaterPolygon extends Polygon {
         }
     }
 
-    private static float tick = 0;
+
 
     @Override
     protected void onManagedUpdate(float pSecondsElapsed) {
@@ -66,7 +69,7 @@ public class WaterPolygon extends Polygon {
         if (tick > Math.PI * 2.0f)
             tick = 0.0f;
 
-        float step = MainActivity.getWidth() / (waterResolution - 1);
+        float step = MainActivity.getWidth() / (WATER_RESOLUTION - 1);
 
         int startVerticesOffset = 2;
         int endVerticesOffset = -1;
@@ -84,6 +87,8 @@ public class WaterPolygon extends Polygon {
 
         super.onManagedUpdate(pSecondsElapsed);
     }
+    
+    
 
     public float getWaveRepeating() {
         return waveRepeating;
@@ -106,7 +111,7 @@ public class WaterPolygon extends Polygon {
      * Calculate wave angular value by X offset
      */
     private float getWaveAngle(float xOffset) {
-        float c = (xOffset / (MainActivity.getWidth() / (waterResolution - 1)));
+        float c = (xOffset / (MainActivity.getWidth() / (WATER_RESOLUTION - 1)));
         float waveAngle = (float) ((c * waveRepeating / (Math.PI)) + tick);
         return waveAngle;
     }

@@ -6,7 +6,6 @@
 	<classpathentry exported="true" kind="src" path="/AndEngine"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="D:/WorkspaceLightRabbit/AndEngine/bin/andengine.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

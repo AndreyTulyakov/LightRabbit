@@ -143,7 +143,7 @@ public class MainActivity extends SimpleBaseGameActivity {
     @Override
     public void onBackPressed() {
 
-        if (SceneRoot.GetState() == SceneStates.Splash) {
+        if (SceneRoot.getState() == SceneStates.Splash) {
             super.onBackPressed();
         } else {
             sceneRoot.onSceneBackPress();

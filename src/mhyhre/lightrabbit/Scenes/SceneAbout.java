@@ -99,11 +99,4 @@ public class SceneAbout extends EaseScene {
 
         return text;
     }
-
-    @Override
-    public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
-
-        return super.onSceneTouchEvent(pSceneTouchEvent);
-    }
-
 }

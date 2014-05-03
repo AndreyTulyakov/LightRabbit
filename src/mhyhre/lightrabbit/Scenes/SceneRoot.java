@@ -164,7 +164,7 @@ public class SceneRoot extends Scene {
 
     }
 
-    public static SceneStates GetState() {
+    public static SceneStates getState() {
         return state;
     }
 

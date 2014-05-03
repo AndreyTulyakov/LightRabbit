@@ -1,16 +1,9 @@
 package mhyhre.lightrabbit.game.ship;
 
-import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.equipment.ShipSlot;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.util.Log;
 
 public class ShipSlotReader {
 
@@ -29,7 +22,7 @@ public class ShipSlotReader {
 
         return slots;
     }
-
+/*
     private static void readFile() {
         
         try {
@@ -49,5 +42,6 @@ public class ShipSlotReader {
             Log.w(MainActivity.DEBUG_ID, "ShipSlotReader:" + e.getMessage());
         }
     }
+    */
 
 }

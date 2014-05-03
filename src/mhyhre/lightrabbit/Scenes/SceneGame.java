@@ -26,10 +26,9 @@ import mhyhre.lightrabbit.game.levels.Event;
 import mhyhre.lightrabbit.game.levels.Level;
 import mhyhre.lightrabbit.game.units.Player;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
-import mhyhre.lightrabbit.utils.Polygon;
 
 import org.andengine.input.touch.TouchEvent;
-import org.andengine.util.adt.color.Color;
+
 
 import android.util.Log;
 
@@ -58,14 +57,7 @@ public class SceneGame extends EaseScene {
 
         level = new Level(levelFileName);
         createGameObjects();
-        /*
-        private Polygon polygon;
-        float[] xPoses = new float[] {0.0f, 0.0f, 100.0f, 150.0f, 200.0f};
-        float[] yPoses = new float[] {0.0f, 100.0f, 120.0f, 200.0f, 0.0f};
-        polygon = new Polygon(100, 100, xPoses, yPoses, MainActivity.getVboManager());
-        polygon.setColor(Color.GREEN);
-        attachChild(polygon);
-        */
+        
         Log.i(MainActivity.DEBUG_ID, "Scene game created");
         loaded = true;
     }

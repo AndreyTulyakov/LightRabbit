@@ -10,7 +10,7 @@
  *
  */
 
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.sky;
 
 /**
  * Cloud, simple model

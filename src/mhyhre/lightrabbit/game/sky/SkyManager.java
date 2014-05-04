@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.sky;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.scene.utils.EaseScene;

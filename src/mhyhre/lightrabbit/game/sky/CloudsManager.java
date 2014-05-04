@@ -1,7 +1,8 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.sky;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mhyhre.lightrabbit.MainActivity;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;

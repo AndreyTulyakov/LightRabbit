@@ -15,19 +15,21 @@ package mhyhre.lightrabbit.scenes;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.BulletsManager;
-import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.GameUserInterface;
 import mhyhre.lightrabbit.game.GameMessageManager;
-import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.levels.Event;
 import mhyhre.lightrabbit.game.levels.Level;
+import mhyhre.lightrabbit.game.sky.CloudsManager;
+import mhyhre.lightrabbit.game.sky.SkyManager;
 import mhyhre.lightrabbit.game.units.Player;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.input.touch.TouchEvent;
+
+
 
 
 import android.util.Log;

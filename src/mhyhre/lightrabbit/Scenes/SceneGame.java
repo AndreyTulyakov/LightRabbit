@@ -18,7 +18,7 @@ import mhyhre.lightrabbit.game.BulletsManager;
 import mhyhre.lightrabbit.game.CloudsManager;
 import mhyhre.lightrabbit.game.EnemiesManager;
 import mhyhre.lightrabbit.game.FogRect;
-import mhyhre.lightrabbit.game.GameHUD;
+import mhyhre.lightrabbit.game.GameUserInterface;
 import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.SkyManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
@@ -41,7 +41,7 @@ public class SceneGame extends EaseScene {
     boolean loaded = true;
     boolean pause = false;
 
-    private GameHUD hud;
+    private GameUserInterface hud;
     private CloudsManager сlouds;
     private SkyManager skyes;
     private EnemiesManager enemies;
@@ -72,7 +72,7 @@ public class SceneGame extends EaseScene {
 
     private void createGameObjects() {
 
-        hud = new GameHUD();
+        hud = new GameUserInterface();
 
         /* Environment */
         fog = new FogRect();
@@ -203,12 +203,15 @@ public class SceneGame extends EaseScene {
                 
             case MSSG_SHOW:
                 if(messageManager.lastShownMessage() == -1 && messageManager.isActiveMessage() == false) {
+                    hud.hide();
+                    hud.resetTouches();
                     messageManager.showMessage(gameEvent.getId());
                 } else {
                     if(messageManager.isActiveMessage() == true) {
                         break;
                     } else {
                         messageManager.showMessage(-1);
+                        hud.show();
                         goToNextEvent();
                     }
                 }
@@ -241,18 +244,22 @@ public class SceneGame extends EaseScene {
 
 
     private void updateControlls() {
-
+        
         player.setBoatSpeed(0);
 
-        if (hud.isKeyDown(GameHUD.Buttons.LEFT)) {
+        if(hud.isActivated() == false) {
+            return;
+        }
+        
+        if (hud.isKeyDown(GameUserInterface.Buttons.LEFT)) {
             player.setBoatSpeed(player.getBoatSpeed() - player.getBoatAcceleration());
         }
 
-        if (hud.isKeyDown(GameHUD.Buttons.RIGHT)) {
+        if (hud.isKeyDown(GameUserInterface.Buttons.RIGHT)) {
             player.setBoatSpeed(player.getBoatSpeed() + player.getBoatAcceleration());
         }
 
-        if (hud.isKeyDown(GameHUD.Buttons.FIRE)) {
+        if (hud.isKeyDown(GameUserInterface.Buttons.FIRE)) {
             if(bullets.isCanCreateBullet()) {
                 BulletUnit bullet = player.fire();
                 if (bullet != null) { 

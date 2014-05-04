@@ -7,7 +7,7 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-public class GameHUD extends EaseScene {
+public class GameUserInterface extends EaseScene {
 
     public enum Buttons {
         LEFT, RIGHT, JUMP, FIRE;
@@ -21,10 +21,12 @@ public class GameHUD extends EaseScene {
 
     boolean states[];
     private static final float BUTTON_RADIUS = 50;
+    
+    private boolean activated;
 
     TouchPoint[] touchPoints;
 
-    public GameHUD() {
+    public GameUserInterface() {
 
         setBackgroundEnabled(false);
         show();
@@ -88,30 +90,33 @@ public class GameHUD extends EaseScene {
     @Override
     public boolean onSceneTouchEvent(TouchEvent pSceneTouchEvent) {
 
-        int pId = pSceneTouchEvent.getPointerID();
-
-        if (pId < 0 && pId >= touchPoints.length)
-            return false;
-
-        if (pSceneTouchEvent.isActionCancel() || pSceneTouchEvent.isActionOutside() || pSceneTouchEvent.isActionUp()) {
-            touchPoints[pId].used = false;
-            updateCollisionStates();
-        }
-
-        if (pSceneTouchEvent.isActionMove() || pSceneTouchEvent.isActionDown()) {
-
-            touchPoints[pId].used = true;
-            touchPoints[pId].x = pSceneTouchEvent.getX();
-            touchPoints[pId].y = pSceneTouchEvent.getY();
-
-            updateCollisionStates();
+        if(activated) {
+        
+            int pId = pSceneTouchEvent.getPointerID();
+    
+            if (pId < 0 && pId >= touchPoints.length)
+                return false;
+    
+            if (pSceneTouchEvent.isActionCancel() || pSceneTouchEvent.isActionOutside() || pSceneTouchEvent.isActionUp()) {
+                touchPoints[pId].used = false;
+                updateCollisionStates();
+            }
+    
+            if (pSceneTouchEvent.isActionMove() || pSceneTouchEvent.isActionDown()) {
+    
+                touchPoints[pId].used = true;
+                touchPoints[pId].x = pSceneTouchEvent.getX();
+                touchPoints[pId].y = pSceneTouchEvent.getY();
+    
+                updateCollisionStates();
+            }
         }
 
         return super.onSceneTouchEvent(pSceneTouchEvent);
     }
 
     private void updateCollisionStates() {
-
+        
         resetStates();
 
         for (int i = 0; i < touchPoints.length; i++) {
@@ -124,15 +129,48 @@ public class GameHUD extends EaseScene {
             }
         }
     }
+    
+    public void resetTouches() {
+        for (int touchId = 0; touchId < touchPoints.length; touchId++) {
+            touchPoints[touchId].used = false;
+        }
+    }
 
     public void resetStates() {
-        for (int i = 0; i < states.length; i++) {
-            states[i] = false;
+        for (int keyId = 0; keyId < states.length; keyId++) {
+            states[keyId] = false;
         }
     }
 
     public boolean isKeyDown(Buttons code) {
+        
+        if(activated == false) {
+            return false;
+        }
+
         return states[code.ordinal()];
     }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    @Override
+    public void show() {
+        setActivated(true);
+        super.show();
+    }
+
+    @Override
+    public void hide() {
+        setActivated(false);
+        super.hide();
+    }
+    
+    
 
 }

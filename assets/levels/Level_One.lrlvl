@@ -9,10 +9,12 @@
   <Player>BOATER</Player>
   <DialogBase>Prolog.lrdb</DialogBase>
  </Setting>
+
  <Events>
   <Event command="SET_TIME" id="0" arg_int="6" arg_str=""/>
   <Event command="STOP_TIME_IN" id="0" arg_int="15" arg_str=""/>
   <Event command="SHOW_IMAGE" id="0" arg_int="50" arg_str="seaport"/>
   <Event command="WAIT_ALWAYS" id="0" arg_int="0" arg_str=""/>
  </Events>
+
 </Level>

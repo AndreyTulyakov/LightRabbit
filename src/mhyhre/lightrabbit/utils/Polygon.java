@@ -94,9 +94,7 @@ public class Polygon extends Mesh {
             Log.e(MainActivity.DEBUG_ID, "Error: Polygon - Polygon can't be triangulated. Will not update vertices");
             return false;
         }
-        
-        Log.i(MainActivity.DEBUG_ID, "verticesVectors:" + verticesVectors.size() + " __BufferSize:" + getBufferData().length);
-        
+
         updateVertices(verticesVectors, getBufferData());
         onUpdateVertices();
         

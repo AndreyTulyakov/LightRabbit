@@ -90,7 +90,7 @@ public class SceneGame extends EaseScene {
         messageManager = new GameMessageManager();
         messageManager.setDialogBase(getLevel().getDialogBase());
         messageManager.setCharacterBase(getLevel().getCharacterBase());
-        
+        messageManager.setPictureRegions(getLevel().getPicturesRegions());
         bullets = new BulletsManager(water,enemies,player, hud);
 
         attachChild(skyes);
@@ -214,6 +214,22 @@ public class SceneGame extends EaseScene {
                     } else {
                         messageManager.showMessage(-1);
                         hud.show();
+                        goToNextEvent();
+                    }
+                }
+                break;
+                
+            case MSSG_PICTURE_SHOW:
+                if(messageManager.lastShownMessage() == -1 && messageManager.isActiveMessage() == false) {
+                    hud.setActivated(false);
+                    hud.resetTouches();
+                    messageManager.showPictureMessage(gameEvent.getStringArg());
+                } else {
+                    if(messageManager.isActiveMessage() == true) {
+                        break;
+                    } else {
+                        messageManager.showMessage(-1);
+                        hud.setActivated(true);
                         goToNextEvent();
                     }
                 }

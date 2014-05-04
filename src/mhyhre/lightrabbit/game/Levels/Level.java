@@ -3,13 +3,22 @@ package mhyhre.lightrabbit.game.levels;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.ResourceManager;
 
+import org.andengine.opengl.texture.TextureOptions;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.andengine.opengl.texture.region.TextureRegion;
+import org.andengine.opengl.texture.region.TextureRegionFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -19,6 +28,10 @@ import android.util.Log;
 
 public class Level {
 
+    private static final String PICTURE = "Picture";
+    private static final String FILENAME = "filename";    
+    private static final String REGION_NAME = "region_name";
+    
     private static final String EVENT = "Event";
     private static final String COMMAND = "command";
     private static final String ID = "id";
@@ -40,20 +53,24 @@ public class Level {
 
     DialogBase dialogBase;
     CharacterBase characterBase;
+    Map<String, TextureRegion> picturesRegions;
     
+    public Map<String, TextureRegion> getPicturesRegions() {
+        return picturesRegions;
+    }
+
     String playerType = "None";
 
     public Level(String filename) {
 
         events = new ArrayList<Event>();
 
-        Document doc = null;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         try {
             InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
-            doc = docBuilder.parse(is);
+            Document doc = docBuilder.parse(is);
             Element root = doc.getDocumentElement();
             root.normalize();
             LoadFromXml(root);
@@ -88,6 +105,7 @@ public class Level {
 
         loadHeaderFromXML(rootElement);
         loadEventsFromXML(rootElement);
+        loadPicturesFromXML(rootElement);
     }
 
     private void loadHeaderFromXML(Element rootElement) {
@@ -113,6 +131,20 @@ public class Level {
 
             events.add(event);
         }
+    }
+    
+    private void loadPicturesFromXML(Element rootElement) {
+        NodeList items = rootElement.getElementsByTagName(PICTURE);
+        Log.i(MainActivity.DEBUG_ID, "Level::loadPicturesFromXML: finded pictures:" + items.getLength());
+                
+        Map<String, String> filenamesAndRegionNames = new HashMap<String, String>();
+
+        for (int i = 0; i < items.getLength(); i++) {
+            Element element = (Element) items.item(i);
+            filenamesAndRegionNames.put(element.getAttribute(FILENAME), element.getAttribute(REGION_NAME));
+        }
+        
+        picturesRegions = ResourceManager.loadRegionsToMap(filenamesAndRegionNames);
     }
 
     public static String getString(String tagName, Element element) {

@@ -8,7 +8,15 @@ import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.weapons.ProtoGun;
 
+import org.andengine.entity.particle.SpriteParticleSystem;
+import org.andengine.entity.particle.emitter.PointParticleEmitter;
+import org.andengine.entity.particle.initializer.AccelerationParticleInitializer;
+import org.andengine.entity.particle.initializer.ExpireParticleInitializer;
+import org.andengine.entity.particle.initializer.VelocityParticleInitializer;
+import org.andengine.entity.particle.modifier.AlphaParticleModifier;
+import org.andengine.entity.particle.modifier.ScaleParticleModifier;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.opengl.texture.region.ITextureRegion;
 
 public class Player extends Sprite {
 
@@ -22,36 +30,69 @@ public class Player extends Sprite {
     final int maxHealth = 100;
     int currentHealth = 100;
     
+    VelocityParticleInitializer<Sprite> smokeVelocityInitializer;
+
     List<ProtoGun> guns;
     int currentGunIndex = 0;
 
     public Player(float xPosition) {
         super(xPosition, 0, MainActivity.resources.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
         guns = new ArrayList<ProtoGun>();
+
+        addSmokeParticle();
     }
-    
+
+    private void addSmokeParticle() {
+
+        smokeVelocityInitializer = new VelocityParticleInitializer<Sprite>(-5, 5, 5, 20);
+
+        ITextureRegion particleSmokeTextureRegion = MainActivity.resources.getTextureRegion("boat_smoke");
+        final PointParticleEmitter particleEmitter = new PointParticleEmitter(20, 60);
+        final SpriteParticleSystem particleSystem = new SpriteParticleSystem(particleEmitter, 1, 5, 20, particleSmokeTextureRegion,
+                this.getVertexBufferObjectManager());
+        // particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
+        particleSystem.addParticleInitializer(smokeVelocityInitializer);
+        particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 2, 0.2f, 1.0f));
+        particleSystem.addParticleInitializer(new AccelerationParticleInitializer<Sprite>(2, 5));
+        particleSystem.addParticleInitializer(new ExpireParticleInitializer<Sprite>(2.0f));
+        particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.0f, 0.5f, 0.0f, 0.7f));
+        particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.5f, 2.0f, 0.7f, 0.0f));
+        // particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0.0f, 11.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f));
+
+        attachChild(particleSystem);
+
+    }
+
     public void addGun(ProtoGun gun) {
         guns.add(gun);
     }
-    
+
     public void setCurrentGun(int index) {
-        if(index < guns.size() && index >= 0){
+        if (index < guns.size() && index >= 0) {
             currentGunIndex = index;
         }
-        
+
     }
-    
+
     public ProtoGun getGun(int index) {
-        if(index < guns.size() && index >= 0){
+        if (index < guns.size() && index >= 0) {
             return guns.get(index);
         }
         return null;
     }
 
     public void update(WaterPolygon water, final float pSecondsElapsed) {
+
+        if(mSpeed == 0) {
+            smokeVelocityInitializer.setVelocity(-10, 1, 5, 10);
+        } else if(mSpeed < 0) {
+           smokeVelocityInitializer.setVelocity(-1, 10, 8, 30);
+        } else {
+            smokeVelocityInitializer.setVelocity(-15, 1, 8, 30);
+        }
         
         bulletTimeCounter += pSecondsElapsed;
-        
+
         if (getX() > (MainActivity.getWidth() - 32 - getWidth()) && mSpeed > 0) {
             mSpeed = 0;
         }
@@ -86,8 +127,7 @@ public class Player extends Sprite {
         if ((Math.abs(bulletTimeCounter) - Math.abs(lastFireTime)) > getGunReloadingTime()) {
 
             MainActivity.resources.playSound("shoot01");
-            
-            
+
             MainActivity.vibrate(30);
 
             BulletUnit bullet = new BulletUnit(getX(), getY() + 15);
@@ -108,12 +148,12 @@ public class Player extends Sprite {
     public int getCurrentHealth() {
         return currentHealth;
     }
-    
+
     /*
      * Make currentHealth --
      */
     public void decrementHealth() {
-        if(currentHealth > 0) {
+        if (currentHealth > 0) {
             currentHealth--;
         }
     }

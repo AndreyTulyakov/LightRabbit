@@ -26,7 +26,9 @@ import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
+import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
+
 import android.graphics.Color;
 import android.util.Log;
 
@@ -128,6 +130,7 @@ public class ResourceManager {
         regions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
         regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
 
+        
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
         atlas.load();
@@ -165,6 +168,9 @@ public class ResourceManager {
 
         region = TextureRegionFactory.extractFromTexture(atlas, 200, 0, 50, 50);
         regions.put("moon", region);
+        
+        regions.put("boat_smoke",TextureRegionFactory.extractFromTexture(atlas, 48, 200, 32, 32));
+        
 
         // Clouds texture
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.BILINEAR);
@@ -185,6 +191,24 @@ public class ResourceManager {
         regions.put("cloud4", region);
 
         Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadAtlases: OK");
+    }
+    
+    public static Map<String, TextureRegion> loadRegionsToMap(Map<String, String> filenameAndRegionName) {
+        
+        Map<String, TextureRegion> result = new HashMap<String, TextureRegion>();
+        
+        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+        
+        for(String filename: filenameAndRegionName.keySet()) {
+            
+            BitmapTextureAtlas atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 960, 540, TextureOptions.BILINEAR);
+            BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, filename, 0, 0);
+            atlas.load();
+            
+            result.put(filenameAndRegionName.get(filename), TextureRegionFactory.extractFromTexture(atlas));
+        }
+        
+        return result;
     }
 
     public void loadSounds() {

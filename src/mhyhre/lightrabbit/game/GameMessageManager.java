@@ -1,12 +1,15 @@
 package mhyhre.lightrabbit.game;
 
+import java.util.Map;
+
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.TextureRegion;
 
 import android.util.Log;
-
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.levels.Character;
 import mhyhre.lightrabbit.game.levels.CharacterBase;
@@ -24,9 +27,11 @@ public class GameMessageManager extends EaseScene {
     private Rectangle clickRect;
     private DialogBase dialogBase;
     private CharacterBase characterBase;
+    private Sprite spritePictureMessage;
     
     private Dialog currentDialog;
     private Replic currentReplic;
+    private Map<String, TextureRegion> pictureRegions;
 
     int lastMessageId = -1;
     boolean activeMessage = false;
@@ -39,16 +44,26 @@ public class GameMessageManager extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    // if has not next replic
-                    if(currentReplic.getNextId() == 0) {
-                        if(activeMessage) {
-                            hide();
-                            setIgnoreUpdate(true);
-                            activeMessage = false;
+                    // if is text message
+                    if(spritePictureMessage == null) {
+                        // if has not next replic
+                        if(currentReplic.getNextId() == 0) {
+                            if(activeMessage) {
+                                hide();
+                                setIgnoreUpdate(true);
+                                activeMessage = false;
+                            }
+                        } else {
+                            currentReplic = currentDialog.getReplic(currentReplic.getNextId());
+                            updateVisualMessage();
                         }
-                    } else {
-                        currentReplic = currentDialog.getReplic(currentReplic.getNextId());
-                        updateVisualMessage();
+                    } else { // if picture message
+                        detachChild(spritePictureMessage);
+                        spritePictureMessage = null;
+                        
+                        hide();
+                        setIgnoreUpdate(true);
+                        activeMessage = false;
                     }
                     
                     Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
@@ -134,6 +149,34 @@ public class GameMessageManager extends EaseScene {
     
     public void setCharacterBase(CharacterBase characterBase) {
         this.characterBase = characterBase;
+    }
+    
+    public void setPictureRegions(Map<String, TextureRegion> regions) {
+        this.pictureRegions = regions;
+    }
+    
+    private TextureRegion getRegion(String name) {
+        if(pictureRegions != null) {
+            if(pictureRegions.containsKey(name)) {
+                return pictureRegions.get(name);
+            }
+        }
+        Log.e(MainActivity.DEBUG_ID, "GameMessageManager: can't find picture region:" + name);
+        return null;
+    }
+    
+
+    public void showPictureMessage(String stringArg) {
+        
+        lastMessageId = 0;
+        
+        ITextureRegion pictureRegion = getRegion(stringArg);
+        
+        spritePictureMessage = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(), pictureRegion, MainActivity.getVboManager());
+        attachChild(spritePictureMessage);
+        
+        show();
+        activeMessage = true;
     }
 
 }

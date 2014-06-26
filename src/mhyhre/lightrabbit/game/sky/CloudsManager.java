@@ -5,7 +5,6 @@ import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
 
-import org.andengine.entity.scene.background.ParallaxBackground;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;

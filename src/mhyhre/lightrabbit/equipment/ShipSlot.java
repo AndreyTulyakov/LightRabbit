@@ -7,9 +7,6 @@ import org.andengine.entity.primitive.Rectangle;
 
 public class ShipSlot extends Entity {
 
-    private static final int CELLS_CONFIGURATION_COUNT = 4;
-    private static final int CELLS_AMMUNITION = 4;
-
     public ShipSlot() {
         Rectangle rect = new Rectangle( MainActivity.getHalfWidth(),  MainActivity.getHalfHeight(),
                 MainActivity.getWidth()-20, MainActivity.getHeight()-20,

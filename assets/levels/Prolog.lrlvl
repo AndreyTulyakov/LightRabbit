@@ -11,18 +11,12 @@
   <DialogBase>Prolog.lrdb</DialogBase>
  </Setting>
 
- <Pictures>
-  <Picture filename="pictures/UIHelp.png" region_name="UIHelp"/>
- </Pictures>
-
  <Events>
   <Event command="SET_TIME" id="0" arg_int="21" arg_str=""/>
   <Event command="STOP_TIME_IN" id="0" arg_int="2" arg_str=""/> 
   <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="1" arg_int="0" arg_str=""/>
-  <Event command="WAIT_SECONDS" id="0" arg_int="1" arg_str=""/>
-  <Event command="MSSG_PICTURE_SHOW" id="0" arg_int="0" arg_str="UIHelp"/>
-  <Event command="WAIT_SECONDS" id="0" arg_int="5" arg_str=""/>
+  <Event command="WAIT_SECONDS" id="0" arg_int="4" arg_str=""/>
   <Event command="MSSG_SHOW" id="2" arg_int="0" arg_str=""/>
   <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="3" arg_int="0" arg_str=""/>

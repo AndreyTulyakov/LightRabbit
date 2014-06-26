@@ -3,7 +3,6 @@ package mhyhre.lightrabbit.game.levels;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.ResourceManager;
+import mhyhre.lightrabbit.game.levels.events.Event;
 
 import org.andengine.opengl.texture.region.TextureRegion;
 import org.w3c.dom.Document;
@@ -23,10 +22,6 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 public class Level {
-
-    private static final String PICTURE = "Picture";
-    private static final String FILENAME = "filename";    
-    private static final String REGION_NAME = "region_name";
     
     private static final String EVENT = "Event";
     private static final String COMMAND = "command";
@@ -101,7 +96,6 @@ public class Level {
 
         loadHeaderFromXML(rootElement);
         loadEventsFromXML(rootElement);
-        loadPicturesFromXML(rootElement);
     }
 
     private void loadHeaderFromXML(Element rootElement) {
@@ -129,19 +123,6 @@ public class Level {
         }
     }
     
-    private void loadPicturesFromXML(Element rootElement) {
-        NodeList items = rootElement.getElementsByTagName(PICTURE);
-        Log.i(MainActivity.DEBUG_ID, "Level::loadPicturesFromXML: finded pictures:" + items.getLength());
-                
-        Map<String, String> filenamesAndRegionNames = new HashMap<String, String>();
-
-        for (int i = 0; i < items.getLength(); i++) {
-            Element element = (Element) items.item(i);
-            filenamesAndRegionNames.put(element.getAttribute(FILENAME), element.getAttribute(REGION_NAME));
-        }
-        
-        picturesRegions = ResourceManager.loadRegionsToMap(filenamesAndRegionNames);
-    }
 
     public static String getString(String tagName, Element element) {
         NodeList list = element.getElementsByTagName(tagName);

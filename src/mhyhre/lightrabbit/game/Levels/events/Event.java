@@ -1,4 +1,5 @@
-package mhyhre.lightrabbit.game.levels;
+package mhyhre.lightrabbit.game.levels.events;
+
 
 public class Event {
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.levels.Event;
-import mhyhre.lightrabbit.game.levels.EventType;
+import mhyhre.lightrabbit.game.levels.events.Event;
+import mhyhre.lightrabbit.game.levels.events.EventType;
 import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
 import mhyhre.lightrabbit.game.units.Player;

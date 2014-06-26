@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game.levels;
+package mhyhre.lightrabbit.game.levels.events;
 
 public enum EventType {
 
@@ -6,7 +6,7 @@ public enum EventType {
 
     UNIT_ADD, UNIT_KILL, UNIT_REMOVE, UNIT_HEALTH, UNIT_SPEED,
 
-    MSSG_SHOW, MSSG_PICTURE_SHOW,
+    MSSG_SHOW,
     
     STOP_TIME, STOP_TIME_IN, START_TIME, SET_TIME, SET_TIME_SPEED,
 

@@ -20,14 +20,15 @@ import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.GameUserInterface;
 import mhyhre.lightrabbit.game.GameMessageManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
-import mhyhre.lightrabbit.game.levels.Event;
 import mhyhre.lightrabbit.game.levels.Level;
+import mhyhre.lightrabbit.game.levels.events.Event;
 import mhyhre.lightrabbit.game.sky.CloudsManager;
 import mhyhre.lightrabbit.game.sky.SkyManager;
 import mhyhre.lightrabbit.game.units.Player;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.input.touch.TouchEvent;
+
 
 
 
@@ -190,7 +191,6 @@ public class SceneGame extends EaseScene {
             case STOP_TIME_IN:
                 skyes.stopTimeIn(gameEvent.getIntegerArg());
                 goToNextEvent();
-
                 break;
                 
             case START_TIME:
@@ -214,22 +214,6 @@ public class SceneGame extends EaseScene {
                     } else {
                         messageManager.showMessage(-1);
                         hud.show();
-                        goToNextEvent();
-                    }
-                }
-                break;
-                
-            case MSSG_PICTURE_SHOW:
-                if(messageManager.lastShownMessage() == -1 && messageManager.isActiveMessage() == false) {
-                    hud.setActivated(false);
-                    hud.resetTouches();
-                    messageManager.showPictureMessage(gameEvent.getStringArg());
-                } else {
-                    if(messageManager.isActiveMessage() == true) {
-                        break;
-                    } else {
-                        messageManager.showMessage(-1);
-                        hud.setActivated(true);
                         goToNextEvent();
                     }
                 }

@@ -18,5 +18,5 @@ public enum EventType {
     
     WAIT_SECONDS, 
     WAIT_ENEMIES_EXIST,
-    WAIT_ALWAYS,
+    WAIT_FOREVER,
 }

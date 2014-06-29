@@ -6,6 +6,7 @@ import java.util.List;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.levels.events.Event;
 import mhyhre.lightrabbit.game.levels.events.EventType;
+import mhyhre.lightrabbit.game.units.DirigibleUnit;
 import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
 import mhyhre.lightrabbit.game.units.Player;
@@ -28,7 +29,7 @@ public class EnemiesManager extends SpriteBatch {
         mEnemies = new ArrayList<Enemy>(ENEMIES_MAX_COUND);
     }
     
-    private void enemiesSharks(Player player) {
+    private void calculateCollisionsWithEnemies(Player player) {
 
         for (Enemy enemy : getEnemiesList()) {
 
@@ -47,11 +48,12 @@ public class EnemiesManager extends SpriteBatch {
     public void update(Player player) {
         
         
-        enemiesSharks(player);
+        calculateCollisionsWithEnemies(player);
 
         ITextureRegion sharkRegion = MainActivity.resources.getTextureRegion("shark_body");
         ITextureRegion pirateBoatRegion = MainActivity.resources.getTextureRegion("pirate_boat");
         ITextureRegion pirateShipRegion = MainActivity.resources.getTextureRegion("pirate_ship");
+        ITextureRegion dirigibleRegion =  MainActivity.resources.getTextureRegion("dirigible");
 
         float bright, rotation;
 
@@ -73,10 +75,7 @@ public class EnemiesManager extends SpriteBatch {
                     continue;
                 }
                 rotation = -mWater.getObjectAngle(pirateBoat.getX()) / 2.0f;
-                bright = pirateBoat.getBright();
-                draw(pirateBoatRegion, pirateBoat.getX() - pirateBoat.getWidth() / 2, pirateBoat.getY() - pirateBoat.getHeight() / 2, pirateBoat.getWidth(),
-                        pirateBoat.getHeight(), rotation, bright, bright, bright, bright);
-
+                drawEnemy(pirateBoatRegion, pirateBoat, pirateBoat.getBright(), rotation);
                 break;
 
             case PIRATE_SHIP:
@@ -91,10 +90,7 @@ public class EnemiesManager extends SpriteBatch {
                     continue;
                 }
                 rotation = -mWater.getObjectAngle(pirateShip.getX()) / 2.0f;
-                bright = pirateShip.getBright();
-                draw(pirateShipRegion, pirateShip.getX() - pirateShip.getWidth() / 2, pirateShip.getY() - pirateShip.getHeight() / 2, pirateShip.getWidth(),
-                        pirateShip.getHeight(), rotation, bright, bright, bright, bright);
-
+                drawEnemy(pirateShipRegion, pirateShip, pirateShip.getBright(), rotation);
                 break;
 
             case SHARK:
@@ -113,10 +109,23 @@ public class EnemiesManager extends SpriteBatch {
                 }
 
                 bright = shark.getBright();
-                draw(sharkRegion, shark.getX() - shark.getWidth() / 2, shark.getY() - shark.getHeight() / 2, shark.getWidth(), shark.getHeight(),
-                        shark.getCurrentRotation(), bright, bright, bright, bright);
-
+                drawEnemy(sharkRegion, shark, bright, 0, 4);
                 break;
+                
+            case DIRIGIBLE:
+                DirigibleUnit dirigible = (DirigibleUnit) enemy;
+                dirigible.update();
+                
+                boolean needRemoveDirigible = dirigible.getX() < -200;
+                needRemoveDirigible |= dirigible.isDied(); 
+
+                if (needRemoveDirigible) {
+                    mEnemies.remove(i);
+                    i--;
+                    continue;
+                }
+
+                drawEnemy(dirigibleRegion, dirigible, 1, 0, 4);
 
             case UNDEFINED:
                 break;
@@ -125,6 +134,17 @@ public class EnemiesManager extends SpriteBatch {
 
         submit();
 
+    }
+    
+    
+    private void drawEnemy(ITextureRegion region, Enemy enemy, float bright, float currentRotation) {
+        draw(region, enemy.getX() - region.getWidth() / 2, enemy.getY() - region.getHeight() / 2, region.getWidth(), region.getHeight(),
+                currentRotation, bright, bright, bright, bright);
+    }
+    
+    private void drawEnemy(ITextureRegion region, Enemy enemy, float bright, float currentRotation, float scale) {
+        draw(region, enemy.getX() - region.getWidth() / 2, enemy.getY() - region.getHeight() / 2, region.getWidth(), region.getHeight(),
+                currentRotation, scale, scale, bright, bright, bright, bright);
     }
 
     public void addNewEnemy(Event event) {
@@ -142,9 +162,19 @@ public class EnemiesManager extends SpriteBatch {
                     shark.setPosition(xpos, 0);
                     mEnemies.add(shark);
                     break;
-                /*
-                 * case NEW_PIRATE_SHIP: PirateShipUnit pirateShip = new PirateShipUnit(); pirateShip.setPosition(xpos, 0); mEnemies.add(pirateShip); break;
-                 */
+                    
+                case DIRIGIBLE:
+                    DirigibleUnit dirigible = new DirigibleUnit();
+                    dirigible.setPosition(xpos, 0);
+                    mEnemies.add(dirigible);
+                    break;
+                
+                case PIRATE_SHIP: 
+                    PirateShipUnit pirateShip = new PirateShipUnit();
+                    pirateShip.setPosition(xpos, 0);
+                    mEnemies.add(pirateShip);
+                    break;
+                
                 default:
                     break;
                 }

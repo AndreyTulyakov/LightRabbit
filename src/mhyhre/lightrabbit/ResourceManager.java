@@ -131,7 +131,7 @@ public class ResourceManager {
         regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
 
         
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
         atlas.load();
         atlases.put("texture01", atlas);
@@ -139,15 +139,21 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 80, 64, 64);
         regions.put("boat_body", region);
 
+        // Enemies
         region = TextureRegionFactory.extractFromTexture(atlas, 70, 80, 64, 24);
         regions.put("pirate_boat", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 128, 180, 128, 78);
         regions.put("pirate_ship", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 64, 40);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 16, 10);
         regions.put("shark_body", region);
+        
+        region = TextureRegionFactory.extractFromTexture(atlas, 20, 0, 52, 27);
+        regions.put("dirigible", region);
+        
 
+        // Misc
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 160, 32, 32);
         regions.put("heart", region);
 

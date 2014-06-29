@@ -170,7 +170,7 @@ public class SceneGame extends EaseScene {
                 }
                 break;
                 
-            case WAIT_ALWAYS:
+            case WAIT_FOREVER:
                 break;
                 
             case SET_TIME:

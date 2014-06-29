@@ -1,7 +1,9 @@
 package mhyhre.lightrabbit.game;
 
 public enum EnemyType {
-    UNDEFINED(""), SHARK("Shark"), PIRATE_BOAT("PirateBoat"), PIRATE_SHIP("PirateShip");
+    UNDEFINED(""), SHARK("Shark"),
+    PIRATE_BOAT("PirateBoat"), PIRATE_SHIP("PirateShip"),
+    DIRIGIBLE("Dirigible"), WAR_PLANE("WarPlane"), ZOMBIE_PLANE("ZombiePlane");
     
     private final String name;
     

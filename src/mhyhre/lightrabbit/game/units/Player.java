@@ -37,6 +37,7 @@ public class Player extends Sprite {
 
     public Player(float xPosition) {
         super(xPosition, 0, MainActivity.resources.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
+        this.setScale(MainActivity.PIXEL_MULTIPLIER);
         guns = new ArrayList<ProtoGun>();
 
         addSmokeParticle();
@@ -44,23 +45,22 @@ public class Player extends Sprite {
 
     private void addSmokeParticle() {
 
-        smokeVelocityInitializer = new VelocityParticleInitializer<Sprite>(-5, 5, 5, 20);
+        smokeVelocityInitializer = new VelocityParticleInitializer<Sprite>(-5, 5, 5, 15);
 
         ITextureRegion particleSmokeTextureRegion = MainActivity.resources.getTextureRegion("boat_smoke");
-        final PointParticleEmitter particleEmitter = new PointParticleEmitter(20, 60);
+        final PointParticleEmitter particleEmitter = new PointParticleEmitter(5, 10);
         final SpriteParticleSystem particleSystem = new SpriteParticleSystem(particleEmitter, 1, 5, 20, particleSmokeTextureRegion,
                 this.getVertexBufferObjectManager());
         // particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
         particleSystem.addParticleInitializer(smokeVelocityInitializer);
         particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 2, 0.2f, 1.0f));
-        particleSystem.addParticleInitializer(new AccelerationParticleInitializer<Sprite>(2, 5));
+        particleSystem.addParticleInitializer(new AccelerationParticleInitializer<Sprite>(1, 2));
         particleSystem.addParticleInitializer(new ExpireParticleInitializer<Sprite>(2.0f));
         particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.0f, 0.5f, 0.0f, 0.7f));
         particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.5f, 2.0f, 0.7f, 0.0f));
         // particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0.0f, 11.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f));
 
         attachChild(particleSystem);
-
     }
 
     public void addGun(ProtoGun gun) {
@@ -84,11 +84,11 @@ public class Player extends Sprite {
     public void update(WaterPolygon water, final float pSecondsElapsed) {
 
         if(mSpeed == 0) {
-            smokeVelocityInitializer.setVelocity(-10, 1, 5, 10);
+            smokeVelocityInitializer.setVelocity(-3, 1, 2, 3);
         } else if(mSpeed < 0) {
-           smokeVelocityInitializer.setVelocity(-1, 10, 8, 30);
+           smokeVelocityInitializer.setVelocity(-1, 2, 3, 10);
         } else {
-            smokeVelocityInitializer.setVelocity(-15, 1, 8, 30);
+            smokeVelocityInitializer.setVelocity(-5, 1, 3, 10);
         }
         
         bulletTimeCounter += pSecondsElapsed;
@@ -102,7 +102,7 @@ public class Player extends Sprite {
         }
 
         setX(getX() + mSpeed);
-        setY(water.getObjectYPosition(getX()) + 5);
+        setY(water.getObjectYPosition(getX()) + 10);
         setRotation(water.getObjectAngle(getX()) / 2.0f);
     }
 

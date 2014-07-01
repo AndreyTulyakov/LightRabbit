@@ -39,6 +39,8 @@ public class MainActivity extends SimpleBaseGameActivity {
     public static final String DEBUG_ID = "LRABBIT";
     public static final String PREFERENCE_ID = "MY_PREF";
     
+    public static final int PIXEL_MULTIPLIER = 4;
+    
     public static final String MAPS_LIST_FILENAME = "levels/LevelsList.xml";
     public static final String LEVELS_FOLDER = "levels/";
     

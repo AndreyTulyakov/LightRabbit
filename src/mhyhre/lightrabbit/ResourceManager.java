@@ -136,14 +136,14 @@ public class ResourceManager {
         atlas.load();
         atlases.put("texture01", atlas);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 80, 64, 64);
+        region = TextureRegionFactory.extractFromTexture(atlas, 34, 33, 16, 10);
         regions.put("boat_body", region);
 
         // Enemies
-        region = TextureRegionFactory.extractFromTexture(atlas, 70, 80, 64, 24);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 16, 16, 6);
         regions.put("pirate_boat", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 128, 180, 128, 78);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 25, 32, 18);
         regions.put("pirate_ship", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 16, 10);
@@ -175,13 +175,14 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 200, 0, 50, 50);
         regions.put("moon", region);
         
-        regions.put("boat_smoke",TextureRegionFactory.extractFromTexture(atlas, 48, 200, 32, 32));
+        regions.put("boat_smoke",TextureRegionFactory.extractFromTexture(atlas, 0, 46, 8, 8));
         
 
         // Clouds texture
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.BILINEAR);
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "Clouds.png", 0, 0);
         atlas.load();
+        
         atlases.put("Clouds", atlas);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 90, 45);

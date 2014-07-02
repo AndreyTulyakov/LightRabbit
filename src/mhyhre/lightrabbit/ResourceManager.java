@@ -169,10 +169,10 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 16, 200, 32, 32);
         regions.put("bullet_boom", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 150, 0, 50, 50);
+        region = TextureRegionFactory.extractFromTexture(atlas, 16, 46, 8, 8);
         regions.put("sun", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 200, 0, 50, 50);
+        region = TextureRegionFactory.extractFromTexture(atlas, 8, 46, 8, 8);
         regions.put("moon", region);
         
         regions.put("boat_smoke",TextureRegionFactory.extractFromTexture(atlas, 0, 46, 8, 8));
@@ -197,7 +197,7 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 150, 90, 45);
         regions.put("cloud4", region);
 
-        Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadAtlases: OK");
+        Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadAtlases: Success");
     }
     
     public static Map<String, TextureRegion> loadRegionsToMap(Map<String, String> filenameAndRegionName) {

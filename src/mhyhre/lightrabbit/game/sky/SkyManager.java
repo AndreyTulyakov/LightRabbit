@@ -59,7 +59,7 @@ public class SkyManager extends EaseScene {
         sunriseDuration = SUNRISE_END_TIME - SUNRISE_START_TIME;
         sunsetDuration = SUNSET_END_TIME - SUNSET_START_TIME;
 
-        nightSkyColor = new Color(0.10f, 0.10f, 0.30f);
+        nightSkyColor = new Color(0.05f, 0.05f, 0.20f);
         daySkyColor = new Color(0.40f, 0.88f, 0.99f);
         
         sunriseColor = new Color(1f, 1f, 0.5f);
@@ -67,11 +67,11 @@ public class SkyManager extends EaseScene {
         skyColor = new Color(0,0,0);
 
         spriteSun = new Sprite(10, 10, MainActivity.resources.getTextureRegion("sun"), vertexBufferObjectManager);
-        spriteSun.setScale(2);
+        spriteSun.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         this.attachChild(spriteSun);
 
         spriteMoon = new Sprite(10, 10, MainActivity.resources.getTextureRegion("moon"), vertexBufferObjectManager);
-        spriteMoon.setScale(2);
+        spriteMoon.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         this.attachChild(spriteMoon);
         
         radius = new PointF(300, 250);

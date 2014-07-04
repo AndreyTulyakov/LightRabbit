@@ -43,7 +43,7 @@ public class GameUserInterface extends EaseScene {
         healthSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
         
         spriteGold = new Sprite(0, 0, MainActivity.resources.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteGold.setPosition(250, MainActivity.getHeight() - 28);
+        spriteGold.setPosition(MainActivity.getWidth() - 60, MainActivity.getHeight() - 28);
         spriteGold.setScale(MainActivity.PIXEL_MULTIPLIER);
         
         textGold = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
@@ -79,7 +79,7 @@ public class GameUserInterface extends EaseScene {
 
     public void updateGoldIndicator(int value) {
         textGold.setText(String.valueOf(value));
-        textGold.setPosition(spriteGold.getX() + 30 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
+        textGold.setPosition(spriteGold.getX() - 30 - textGold.getWidth() / 2, MainActivity.getHeight() - 24);
     }
 
     public void updateHealthIndicator(int currentHealth) {

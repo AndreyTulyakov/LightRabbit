@@ -102,7 +102,8 @@ public class BulletsManager extends SpriteBatch {
             }
             if (bullet.getBoom() != -1) {
                 draw(bulletResultRegion, bullet.getX() - bulletResultRegion.getWidth() / 2, bullet.getY() - bulletResultRegion.getHeight() / 2,
-                        bulletResultRegion.getWidth(), bulletResultRegion.getHeight(), 1, 1, 1, 1, 1);
+                        bulletResultRegion.getWidth()*MainActivity.PIXEL_MULTIPLIER, bulletResultRegion.getHeight()*MainActivity.PIXEL_MULTIPLIER,
+                        1,  1, 1, 1, 1);
 
             }
         }

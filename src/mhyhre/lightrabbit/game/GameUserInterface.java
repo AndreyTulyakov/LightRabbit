@@ -40,10 +40,12 @@ public class GameUserInterface extends EaseScene {
 
         healthSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("heart"), MainActivity.Me.getVertexBufferObjectManager());
         healthSprite.setPosition(60, MainActivity.getHeight() - 28);    
+        healthSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
         
         spriteGold = new Sprite(0, 0, MainActivity.resources.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
         spriteGold.setPosition(250, MainActivity.getHeight() - 28);
-
+        spriteGold.setScale(MainActivity.PIXEL_MULTIPLIER);
+        
         textGold = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
         updateGoldIndicator(0);
         
@@ -56,30 +58,33 @@ public class GameUserInterface extends EaseScene {
         attachChild(textGold);
 
         spriteMoveLeft = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveLeft.setPosition(60, 50);
+        spriteMoveLeft.setPosition(64, 50);
         spriteMoveLeft.setVisible(true);
+        spriteMoveLeft.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveLeft);
 
         spriteMoveRight = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveRight.setPosition(spriteMoveLeft.getX() + spriteMoveLeft.getWidth() + 20, 50);
+        spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 20, 50);
         spriteMoveRight.setVisible(true);
+        spriteMoveRight.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveRight);
 
         spriteFire = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteFire.setPosition(MainActivity.getWidth() - (spriteFire.getWidth() + 40), 50);
+        spriteFire.setPosition(MainActivity.getWidth() - 64, 50);
         spriteFire.setVisible(true);
+        spriteFire.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteFire);
 
     }
 
     public void updateGoldIndicator(int value) {
         textGold.setText(String.valueOf(value));
-        textGold.setPosition(spriteGold.getX() + spriteGold.getWidth() / 2 + 10 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
+        textGold.setPosition(spriteGold.getX() + 30 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
     }
 
     public void updateHealthIndicator(int currentHealth) {
         healthPoints.setText(String.valueOf(currentHealth));
-        healthPoints.setPosition(healthSprite.getX() + healthSprite.getWidth() / 2 + 10 + healthPoints.getWidth() / 2, MainActivity.getHeight() - 24);
+        healthPoints.setPosition(healthSprite.getX() + 30 + healthPoints.getWidth() / 2, MainActivity.getHeight() - 24);
     }
 
     private class TouchPoint {

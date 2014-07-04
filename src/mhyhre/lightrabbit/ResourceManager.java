@@ -96,7 +96,7 @@ public class ResourceManager {
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
         // Load ui graphics
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.BILINEAR);
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "User_Interface.png", 0, 0);
         atlas.load();
         atlases.put("User_Interface", atlas);
@@ -121,20 +121,18 @@ public class ResourceManager {
         
         region = TextureRegionFactory.extractFromTexture(atlas, 380, 386, 124, 124, false);
         regions.put("EquipmentCell", region);
-
-        // game ui
         regions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
 
-        regions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 72, 80, 80, false));
-        regions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 80, 72, 80, 80, false));
-        regions.put("Menu", TextureRegionFactory.extractFromTexture(atlas, 160, 70, 74, 74, false));
-        regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 86, 160, 64, 64, false));
 
-        
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
         atlas.load();
         atlases.put("texture01", atlas);
+        
+        // Changeble by level game ui
+        regions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 60, 8, 8, false));
+        regions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 8, 60, 8, 8, false));
+        regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 16, 60, 8, 8, false));
 
         region = TextureRegionFactory.extractFromTexture(atlas, 34, 33, 16, 10);
         regions.put("boat_body", region);
@@ -154,19 +152,19 @@ public class ResourceManager {
         
 
         // Misc
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 160, 32, 32);
+        region = TextureRegionFactory.extractFromTexture(atlas, 32, 46, 8, 8);
         regions.put("heart", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 32, 160, 32, 32);
+        region = TextureRegionFactory.extractFromTexture(atlas, 40, 46, 8, 8);
         regions.put("heart_died", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 64, 160, 32, 32);
+        region = TextureRegionFactory.extractFromTexture(atlas, 48, 46, 8, 8);
         regions.put("gold", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 200, 16, 16);
+        region = TextureRegionFactory.extractFromTexture(atlas, 32, 60, 4, 4);
         regions.put("bullet", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 16, 200, 32, 32);
+        region = TextureRegionFactory.extractFromTexture(atlas, 36, 60, 8, 8);
         regions.put("bullet_boom", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 16, 46, 8, 8);

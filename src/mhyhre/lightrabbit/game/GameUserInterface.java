@@ -15,7 +15,7 @@ public class GameUserInterface extends EaseScene {
 
     Sprite spriteGold;
     Sprite healthSprite;
-    Sprite spriteMoveRight, spriteMoveLeft, spriteFire;
+    Sprite spriteMoveRight, spriteMoveLeft, spriteFire, spriteJump;
     Text textGold;
     Text healthPoints;
 
@@ -74,6 +74,12 @@ public class GameUserInterface extends EaseScene {
         spriteFire.setVisible(true);
         spriteFire.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteFire);
+        
+        spriteJump = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Jump"), MainActivity.Me.getVertexBufferObjectManager());
+        spriteJump.setPosition(spriteFire.getX() - 64, 50);
+        spriteJump.setVisible(true);
+        spriteJump.setScale(MainActivity.PIXEL_MULTIPLIER*2);
+        attachChild(spriteJump);
 
     }
 
@@ -131,6 +137,7 @@ public class GameUserInterface extends EaseScene {
                 states[Buttons.LEFT.ordinal()] |= Collisions.spriteByCircle(spriteMoveLeft, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
                 states[Buttons.RIGHT.ordinal()] |= Collisions.spriteByCircle(spriteMoveRight, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
                 states[Buttons.FIRE.ordinal()] |= Collisions.spriteByCircle(spriteFire, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
+                states[Buttons.JUMP.ordinal()] |= Collisions.spriteByCircle(spriteJump, touchPoints[i].x, touchPoints[i].y, BUTTON_RADIUS);
             }
         }
     }

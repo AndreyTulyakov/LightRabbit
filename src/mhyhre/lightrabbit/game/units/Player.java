@@ -27,8 +27,11 @@ public class Player extends Sprite {
     float bulletTimeCounter = 0;
 
     private int totalGold = 100;
-    final int maxHealth = 100;
-    int currentHealth = 100;
+    private final int maxHealth = 100;
+    private int currentHealth = 100;
+    private boolean canJump;
+    private float jumpTiming;
+    private final float JUMP_TIME_LIMIT = 4.0f;
     
     VelocityParticleInitializer<Sprite> smokeVelocityInitializer;
 
@@ -40,6 +43,7 @@ public class Player extends Sprite {
         this.setScale(MainActivity.PIXEL_MULTIPLIER);
         guns = new ArrayList<ProtoGun>();
 
+        canJump = true;
         addSmokeParticle();
     }
 
@@ -83,6 +87,10 @@ public class Player extends Sprite {
 
     public void update(WaterPolygon water, final float pSecondsElapsed) {
 
+        if(canJump && jumpTiming < JUMP_TIME_LIMIT) {
+            jumpTiming += 0.1f;
+        }
+        
         if(mSpeed == 0) {
             smokeVelocityInitializer.setVelocity(-3, 1, 2, 3);
         } else if(mSpeed < 0) {
@@ -101,9 +109,17 @@ public class Player extends Sprite {
             mSpeed = 0;
         }
 
+        float waveYPositionUnderPlayer = water.getObjectYPosition(getX() + 10.0f);
+        
         setX(getX() + mSpeed);
-        setY(water.getObjectYPosition(getX()) + 10);
+
         setRotation(water.getObjectAngle(getX()) / 2.0f);
+        
+        if(Math.abs(waveYPositionUnderPlayer - getY()) < 20) {
+            setY(waveYPositionUnderPlayer);
+        } else {
+            setY(getY() + (-1.0f*jumpTiming*jumpTiming*jumpTiming));
+        }
     }
 
     public float getBoatSpeed() {
@@ -168,5 +184,14 @@ public class Player extends Sprite {
 
     public void setTotalGold(int totalGold) {
         this.totalGold = totalGold;
+    }
+
+    public boolean isCanJump() {
+        return canJump;
+    }
+
+    public void jump() {
+        this.canJump = false;
+        jumpTiming = -5.0f;
     }
 }

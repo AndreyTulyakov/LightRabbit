@@ -124,7 +124,7 @@ public class ResourceManager {
         regions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
 
 
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
         atlas.load();
         atlases.put("texture01", atlas);
@@ -133,7 +133,8 @@ public class ResourceManager {
         regions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 60, 8, 8, false));
         regions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 8, 60, 8, 8, false));
         regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 16, 60, 8, 8, false));
-
+        regions.put("Jump", TextureRegionFactory.extractFromTexture(atlas, 24, 60, 8, 8, false));
+        
         region = TextureRegionFactory.extractFromTexture(atlas, 34, 33, 16, 10);
         regions.put("boat_body", region);
 

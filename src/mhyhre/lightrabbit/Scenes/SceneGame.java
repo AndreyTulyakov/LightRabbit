@@ -269,6 +269,10 @@ public class SceneGame extends EaseScene {
                 }
             }
         }
+        
+        if (hud.isKeyDown(GameUserInterface.Buttons.JUMP)) {
+            
+        }
     }
 
     private void endGame() {

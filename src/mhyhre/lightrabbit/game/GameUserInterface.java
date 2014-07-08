@@ -20,7 +20,7 @@ public class GameUserInterface extends EaseScene {
     Text healthPoints;
 
     boolean states[];
-    private static final float BUTTON_RADIUS = 50;
+    private static final float BUTTON_RADIUS = 60;
     
     private boolean activated;
 
@@ -64,7 +64,7 @@ public class GameUserInterface extends EaseScene {
         attachChild(spriteMoveLeft);
 
         spriteMoveRight = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 20, 50);
+        spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 30, 50);
         spriteMoveRight.setVisible(true);
         spriteMoveRight.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveRight);
@@ -76,7 +76,7 @@ public class GameUserInterface extends EaseScene {
         attachChild(spriteFire);
         
         spriteJump = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Jump"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteJump.setPosition(spriteFire.getX() - 64, 50);
+        spriteJump.setPosition((spriteFire.getX() - 64) - 30, 50);
         spriteJump.setVisible(true);
         spriteJump.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteJump);

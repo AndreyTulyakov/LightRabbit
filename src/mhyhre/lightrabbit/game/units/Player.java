@@ -30,8 +30,9 @@ public class Player extends Sprite {
     private final int maxHealth = 100;
     private int currentHealth = 100;
     private boolean canJump;
-    private float jumpTiming;
-    private final float JUMP_TIME_LIMIT = 4.0f;
+    private float jumpAcceleration;
+    private static final float JUMP_ACCELERATION_LIMIT = 16;
+
     
     VelocityParticleInitializer<Sprite> smokeVelocityInitializer;
 
@@ -43,6 +44,8 @@ public class Player extends Sprite {
         this.setScale(MainActivity.PIXEL_MULTIPLIER);
         guns = new ArrayList<ProtoGun>();
 
+        
+        
         canJump = true;
         addSmokeParticle();
     }
@@ -87,10 +90,12 @@ public class Player extends Sprite {
 
     public void update(WaterPolygon water, final float pSecondsElapsed) {
 
-        if(canJump && jumpTiming < JUMP_TIME_LIMIT) {
-            jumpTiming += 0.1f;
+        // Update jumping
+        if(canJump == false && jumpAcceleration > -JUMP_ACCELERATION_LIMIT) {
+            jumpAcceleration -= 0.8f;
         }
         
+        // Smoke tracers
         if(mSpeed == 0) {
             smokeVelocityInitializer.setVelocity(-3, 1, 2, 3);
         } else if(mSpeed < 0) {
@@ -108,17 +113,27 @@ public class Player extends Sprite {
         if (getX() < 32 && mSpeed < 0) {
             mSpeed = 0;
         }
-
-        float waveYPositionUnderPlayer = water.getObjectYPosition(getX() + 10.0f);
         
         setX(getX() + mSpeed);
 
+        float waveYPositionUnderPlayer = 10 + water.getObjectYPosition(getX());
+        
+        
+
         setRotation(water.getObjectAngle(getX()) / 2.0f);
         
-        if(Math.abs(waveYPositionUnderPlayer - getY()) < 20) {
+        
+        
+        if(getY() < waveYPositionUnderPlayer - 10 && canJump == false) {
             setY(waveYPositionUnderPlayer);
+            canJump = true;
         } else {
-            setY(getY() + (-1.0f*jumpTiming*jumpTiming*jumpTiming));
+            if(canJump == false) {
+                setY(getY() + jumpAcceleration);
+            } else {
+                setY(waveYPositionUnderPlayer);
+            }
+            
         }
     }
 
@@ -191,7 +206,10 @@ public class Player extends Sprite {
     }
 
     public void jump() {
-        this.canJump = false;
-        jumpTiming = -5.0f;
+        if(canJump == true) {
+            canJump = false;
+            jumpAcceleration = JUMP_ACCELERATION_LIMIT;
+        }
     }
+    
 }

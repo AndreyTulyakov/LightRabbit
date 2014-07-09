@@ -7,7 +7,8 @@ public class PirateShipUnit extends Enemy {
 
     public static final float sSinkSpeed = -1.0f;
     public static final float sSpeed = 0.3f;
-
+    private float targetRotation = -30;
+    
     float bright;
     float mWaterLevel;
 
@@ -37,6 +38,10 @@ public class PirateShipUnit extends Enemy {
         if (isDied == true) {
             xPosition -= sSpeed;
             yPosition += sSinkSpeed;
+            
+            if (rotation > targetRotation)
+                rotation-=0.5f;
+            
             if (bright > 0) {
                 bright -= 0.01f;
                 if (bright < 0.1f)

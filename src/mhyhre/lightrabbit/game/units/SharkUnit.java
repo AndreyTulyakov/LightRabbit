@@ -10,7 +10,7 @@ public class SharkUnit extends Enemy {
 
     float bright;
     float mWaterLevel;
-    private float currentRotation = 0, targetRotation = 180;
+    private float targetRotation = 180;
 
     public SharkUnit() {
         super(EnemyType.SHARK, 40, 20);
@@ -22,7 +22,6 @@ public class SharkUnit extends Enemy {
     public float getBright() {
         return bright;
     }
-    
 
     public float getWaterLevel() {
         return mWaterLevel;
@@ -40,8 +39,8 @@ public class SharkUnit extends Enemy {
             xPosition -= sSpeed;
             yPosition += sSinkSpeed;
 
-            if (currentRotation < targetRotation)
-                currentRotation++;
+            if (rotation < targetRotation)
+                rotation++;
 
             if (bright > 0) {
                 bright -= 0.01f;
@@ -54,8 +53,5 @@ public class SharkUnit extends Enemy {
         }
     }
 
-    public float getCurrentRotation() {
-        return currentRotation;
-    }
 
 }

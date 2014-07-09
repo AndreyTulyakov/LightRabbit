@@ -60,37 +60,58 @@ public class EnemiesManager extends SpriteBatch {
 
             Enemy enemy = mEnemies.get(i);
 
+            
+
+            
+            
+
             switch (enemy.getEnemyType()) {
 
+            
             case PIRATE_BOAT:
                 PirateBoatUnit pirateBoat = (PirateBoatUnit) enemy;
 
                 pirateBoat.setWaterLevel(2 + mWater.getObjectYPosition(pirateBoat.getX()) + 2);
                 pirateBoat.update();
 
-                if (pirateBoat.getY() < 0 || pirateBoat.getX() < -50) {
+                if (enemy.getY() < 0 || enemy.getX() < -50) {
                     mEnemies.remove(i);
                     i--;
                     continue;
                 }
-                rotation = -mWater.getObjectAngle(pirateBoat.getX()) / 2.0f;
-                drawEnemy(pirateBoatRegion, pirateBoat, pirateBoat.getBright(), rotation);
+          
+                if(enemy.isDied()) {
+                    rotation = enemy.getRotation();
+                } else {
+                    enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
+                }
+                
+                drawEnemy(pirateBoatRegion, pirateBoat, pirateBoat.getBright(), enemy.getRotation());
                 break;
 
+                
             case PIRATE_SHIP:
                 PirateShipUnit pirateShip = (PirateShipUnit) enemy;
 
                 pirateShip.setWaterLevel(5 + mWater.getObjectYPosition(pirateShip.getX()) + 20);
                 pirateShip.update();
 
-                if (pirateShip.getY() < 0 || pirateShip.getX() < -50) {
+                if (enemy.getY() < 0 || enemy.getX() < -50) {
                     mEnemies.remove(i);
                     i--;
                     continue;
                 }
-                rotation = -mWater.getObjectAngle(pirateShip.getX()) / 2.0f;
-                drawEnemy(pirateShipRegion, pirateShip, pirateShip.getBright(), rotation);
+              
+                
+                if(enemy.isDied()) {
+                    rotation = enemy.getRotation();
+                } else {
+                    enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
+                }
+                           
+                drawEnemy(pirateShipRegion, pirateShip, pirateShip.getBright(), enemy.getRotation());
                 break;
+                
 
             case SHARK:
                 SharkUnit shark = (SharkUnit) enemy;
@@ -106,28 +127,37 @@ public class EnemiesManager extends SpriteBatch {
                     i--;
                     continue;
                 }
-
+                
+                if(enemy.isDied()) {
+                    rotation = enemy.getRotation();
+                } else {
+                    enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
+                }
+                   
                 bright = shark.getBright();
-                drawEnemy(sharkRegion, shark, bright, 0);
+                drawEnemy(sharkRegion, shark, bright, enemy.getRotation());
                 break;
 
+                
             case DIRIGIBLE:
                 DirigibleUnit dirigible = (DirigibleUnit) enemy;
                 dirigible.update();
 
                 boolean needRemoveDirigible = dirigible.getX() < -200;
-                needRemoveDirigible |= dirigible.isDied();
+                needRemoveDirigible |= dirigible.isDied() && dirigible.getBright() == 0;
 
                 if (needRemoveDirigible) {
                     mEnemies.remove(i);
                     i--;
                     continue;
                 }
+                
+                drawEnemy(dirigibleRegion, dirigible, dirigible.getBright(),  enemy.getRotation());
 
-                drawEnemy(dirigibleRegion, dirigible, 1, 0);
-
+                
             case UNDEFINED:
                 break;
+                
             default:
                 break;
             }

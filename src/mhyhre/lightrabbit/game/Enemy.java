@@ -10,6 +10,7 @@ public abstract class Enemy {
     protected int armor;
     protected boolean isDied;
     protected float xPosition, yPosition;
+    protected float rotation;
     protected float width, height;
     protected float radius = 0;
 
@@ -104,5 +105,13 @@ public abstract class Enemy {
 
     public void setRadius(float radius) {
         this.radius = radius;
+    }
+
+    public float getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
     }
 }

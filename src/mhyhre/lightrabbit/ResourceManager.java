@@ -182,16 +182,16 @@ public class ResourceManager {
         
         atlases.put("Clouds", atlas);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 90, 45);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 45, 22);
         regions.put("cloud1", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 50, 90, 45);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 25, 45, 22);
         regions.put("cloud2", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 100, 70, 45);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 50, 35, 22);
         regions.put("cloud3", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 150, 90, 45);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 75, 45, 22);
         regions.put("cloud4", region);
 
         Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadAtlases: Success");

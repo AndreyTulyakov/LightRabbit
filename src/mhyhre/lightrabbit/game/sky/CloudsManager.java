@@ -10,6 +10,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+
 final public class CloudsManager extends SpriteBatch {
 
     private int TYPE_COUNTER = 0;
@@ -75,7 +76,8 @@ final public class CloudsManager extends SpriteBatch {
 
         for (CloudUnit cloud : mClouds) {
 
-            this.draw(mRegions[cloud.type], cloud.PosX, cloud.PosY, mRegions[cloud.type].getWidth(), mRegions[cloud.type].getHeight(), 0, 2, 2, 1, 1, 1, 1);
+            this.draw(mRegions[cloud.type], cloud.PosX, cloud.PosY, mRegions[cloud.type].getWidth(), mRegions[cloud.type].getHeight(), 0, 
+                    MainActivity.PIXEL_MULTIPLIER, MainActivity.PIXEL_MULTIPLIER, 1, 1, 1, 1);
         }
 
         submit();

@@ -54,15 +54,11 @@ public class EnemiesManager extends SpriteBatch {
         ITextureRegion pirateShipRegion = MainActivity.resources.getTextureRegion("pirate_ship");
         ITextureRegion dirigibleRegion = MainActivity.resources.getTextureRegion("dirigible");
 
-        float bright, rotation;
+        float bright;
 
         for (int i = 0; i < mEnemies.size(); i++) {
 
             Enemy enemy = mEnemies.get(i);
-
-            
-
-            
             
 
             switch (enemy.getEnemyType()) {
@@ -81,7 +77,6 @@ public class EnemiesManager extends SpriteBatch {
                 }
           
                 if(enemy.isDied()) {
-                    rotation = enemy.getRotation();
                 } else {
                     enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
                 }
@@ -104,7 +99,6 @@ public class EnemiesManager extends SpriteBatch {
               
                 
                 if(enemy.isDied()) {
-                    rotation = enemy.getRotation();
                 } else {
                     enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
                 }
@@ -129,7 +123,6 @@ public class EnemiesManager extends SpriteBatch {
                 }
                 
                 if(enemy.isDied()) {
-                    rotation = enemy.getRotation();
                 } else {
                     enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
                 }

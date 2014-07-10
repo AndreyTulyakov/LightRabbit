@@ -34,8 +34,6 @@ import android.util.Log;
 
 public class ResourceManager {
     
-    
-
     private Map<String, ITextureRegion> regions;
     private Map<String, ITiledTextureRegion> tiledRegions;
     private Map<String, BitmapTextureAtlas> atlases;
@@ -168,10 +166,10 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 36, 60, 8, 8);
         regions.put("bullet_boom", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 16, 46, 8, 8);
+        region = TextureRegionFactory.extractFromTexture(atlas, 16, 70, 16, 16);
         regions.put("sun", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 8, 46, 8, 8);
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 70, 16, 16);
         regions.put("moon", region);
         
         regions.put("boat_smoke",TextureRegionFactory.extractFromTexture(atlas, 0, 46, 8, 8));
@@ -222,11 +220,9 @@ public class ResourceManager {
 
         addSound("untitled.ogg", "roboClick");
         addSound("SwitchOn.ogg", "switchOn");
-        addSound("error.ogg", "error");
-        addSound("yes_1.ogg", "yes1");
-        addSound("yes_2.ogg", "yes2");
         addSound("shoot01.ogg", "shoot01");
-        
+        addSound("boom01.ogg", "boom01");
+        addSound("shipDie.ogg", "shipDie");
     }
 
     private void addSound(String filename, String name) {

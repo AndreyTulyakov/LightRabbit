@@ -11,8 +11,7 @@
  </Setting>
 
  <Events>
-  <Event command="SET_TIME" id="0" arg_int="6" arg_str=""/>
-  <Event command="STOP_TIME_IN" id="0" arg_int="9" arg_str=""/>
+  <Event command="SET_TIME" id="0" arg_int="6" arg_str=""/> 
   <Event command="UNIT_ADD" id="1" arg_int="50" arg_str="Dirigible"/>
   <Event command="UNIT_ADD" id="2" arg_int="100" arg_str="PirateShip"/>
   <Event command="WAIT_SECONDS" id="0" arg_int="4" arg_str=""/>
@@ -20,6 +19,8 @@
   <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="UNIT_ADD" id="1" arg_int="100" arg_str="Shark"/>
   <Event command="WAIT_FOREVER" id="0" arg_int="0" arg_str=""/>
+
+  <Event command="STOP_TIME_IN" id="0" arg_int="9" arg_str=""/>
  </Events>
 
 </Level>

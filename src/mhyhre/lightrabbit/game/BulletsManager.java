@@ -62,7 +62,8 @@ public class BulletsManager extends SpriteBatch {
                     if (enemy.isDied() == false) {
 
                         enemy.setHealth(enemy.getHealth() - bullet.getBoomPower());
-
+                        
+                        
                         if (enemy.getHealth() <= 0) {
 
                             enemy.setDied(true);
@@ -74,6 +75,7 @@ public class BulletsManager extends SpriteBatch {
 
                     bullet.setSink(true);
                     bullet.setBoom(10);
+                    MainActivity.resources.playSound("boom01");
                 }
             }
 

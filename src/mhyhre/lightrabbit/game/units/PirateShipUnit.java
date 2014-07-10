@@ -1,5 +1,6 @@
 package mhyhre.lightrabbit.game.units;
 
+import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.Enemy;
 import mhyhre.lightrabbit.game.EnemyType;
 
@@ -19,6 +20,14 @@ public class PirateShipUnit extends Enemy {
         bright = 1;
         setRadius(45);
     }
+    
+    @Override
+    public void setDied(boolean mDied) {
+        super.setDied(mDied);
+        if(mDied == true) {
+            MainActivity.resources.playSound("shipDie");
+        }
+    };
 
     public float getBright() {
         return bright;

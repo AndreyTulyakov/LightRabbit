@@ -1,7 +1,6 @@
 <!DOCTYPE LRLevel>
 
 <Level>
-
  <Setting>
   <Chapter>Глава первая</Chapter>
   <Name>Пролог</Name>
@@ -9,11 +8,13 @@
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>Prolog.lrdb</DialogBase>
+  <Fog colorR="15" colorG="30" colorB="60" colorA="255"/>
  </Setting>
 
  <Events>
   <Event command="SET_TIME" id="0" arg_int="21" arg_str=""/>
-  <Event command="STOP_TIME_IN" id="0" arg_int="2" arg_str=""/> 
+  <Event command="STOP_TIME_IN" id="0" arg_int="2" arg_str=""/>  
+  <Event command="SET_FOG_VISIBLE" id="0" arg_int="0" arg_str=""/>
   <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="1" arg_int="0" arg_str=""/>
   <Event command="WAIT_SECONDS" id="0" arg_int="4" arg_str=""/>
@@ -31,8 +32,8 @@
   <Event command="UNIT_ADD" id="15" arg_int="500" arg_str="Shark"/>
   <Event command="WAIT_ENEMIES_EXIST" id="0" arg_int="0" arg_str=""/>
   <Event command="MSSG_SHOW" id="5" arg_int="0" arg_str=""/>
-  <Event command="GAME_SHOW_FOG" id="0" arg_int="100" arg_str=""/>
-  <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
+  <Event command="WAIT_SECONDS" id="0" arg_int="2" arg_str=""/>
+  <Event command="SET_FOG_VISIBLE" id="0" arg_int="100" arg_str=""/>
  </Events>
  
 </Level>

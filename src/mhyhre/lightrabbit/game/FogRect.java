@@ -7,11 +7,12 @@ import org.andengine.entity.primitive.Rectangle;
 
 public class FogRect extends Rectangle {
     
-    public FogRect() {
+    public FogRect(int r, int g, int b, int a) {
         super(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),MainActivity.getWidth(),MainActivity.getHeight(),MainActivity.getVboManager());
-        setColor(0.5f, 0.6f, 0.9f);
-        setAlpha(0);
+        setColor(r/255.0f, g/255.0f, b/255.0f);
+        setAlpha(a/255.0f);
     }
+    
     
     public boolean showFogEvent(Event event) {
         
@@ -37,9 +38,4 @@ public class FogRect extends Rectangle {
         }
         return false;
     }
-    
-    public void setFogValueEvent(Event event) {
-        setAlpha(event.getIntegerArg()/100.0f);
-    }
-
 }

@@ -50,6 +50,8 @@ public class SceneGame extends EaseScene {
     private EnemiesManager enemies;
     private Player player;
     private WaterPolygon water;
+    
+    
 
     private GameMessageManager messageManager;
     private FogRect fog;   
@@ -78,7 +80,6 @@ public class SceneGame extends EaseScene {
         hud = new GameUserInterface();
 
         /* Environment */
-        fog = new FogRect();
 
         сlouds = new CloudsManager(MainActivity.getVboManager());
         water = new WaterPolygon(MainActivity.getVboManager());
@@ -88,10 +89,13 @@ public class SceneGame extends EaseScene {
 
         skyes = new SkyManager(MainActivity.getVboManager());
         
+        fog = getLevel().getConfiguredFog();
+        
         messageManager = new GameMessageManager();
         messageManager.setDialogBase(getLevel().getDialogBase());
         messageManager.setCharacterBase(getLevel().getCharacterBase());
         messageManager.setPictureRegions(getLevel().getPicturesRegions());
+        
         bullets = new BulletsManager(water,enemies,player, hud);
 
         attachChild(skyes);
@@ -100,9 +104,9 @@ public class SceneGame extends EaseScene {
         attachChild(bullets);
         attachChild(player);
         attachChild(water);
+        attachChild(hud);
         attachChild(fog);
         
-        attachChild(hud);
         attachChild(messageManager);
     }
 
@@ -219,15 +223,10 @@ public class SceneGame extends EaseScene {
                 }
                 break;
                 
-            case SHOW_FOG:       
+            case SET_FOG_VISIBLE:       
                 if(fog.showFogEvent(gameEvent)) {
                     goToNextEvent();
                 }
-                break;
-                
-            case SET_FOG_VALUE:
-                fog.setFogValueEvent(gameEvent);
-                goToNextEvent();
                 break;
                 
             default:

@@ -1,6 +1,6 @@
 <!DOCTYPE LRCharactersFile>
 <Characters>
- <character name="..." icon="" id="0"/>
+ <character name="Немного предыстории..." icon="" id="0"/>
  <character name="Матрос Гоги" icon="gogi" id="1"/>
  <character name="Капитан Рэббит" icon="captainRabbit" id="2"/>
  <character name="Рэббит" icon="player_1" id="3"/>

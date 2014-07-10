@@ -3,7 +3,7 @@
  <CharacterBase>ActorBase1.lrcb</CharacterBase>
  <Dialogs>
   <dialog fast="true" id="1" caption="За много лет до..">
-   <replic actor_id="0" next_id="0" id="1">120-й год от рождения Василия Пупкина</replic>
+   <replic actor_id="4" next_id="0" id="1">120-й год от рождения Василия Пупкина</replic>
   </dialog>
   <dialog fast="false" id="2" caption="Диалог 1">
    <replic actor_id="1" next_id="2" id="1">Капитан, мы приближаемся к городу...</replic>

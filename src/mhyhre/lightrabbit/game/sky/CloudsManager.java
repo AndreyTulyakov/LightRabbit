@@ -79,7 +79,6 @@ final public class CloudsManager extends SpriteBatch {
             this.draw(mRegions[cloud.type], cloud.PosX, cloud.PosY, mRegions[cloud.type].getWidth(), mRegions[cloud.type].getHeight(), 0, 
                     MainActivity.PIXEL_MULTIPLIER, MainActivity.PIXEL_MULTIPLIER, 1, 1, 1, 1);
         }
-
         submit();
     }
 

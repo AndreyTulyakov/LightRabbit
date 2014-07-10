@@ -14,7 +14,7 @@ public enum EventType {
     SET_WAVE_HEIGHT, 
     SET_WEATHER, 
     
-    SHOW_FOG, SET_FOG_VALUE,
+    SET_FOG_VISIBLE,
     
     WAIT_SECONDS, 
     WAIT_ENEMIES_EXIST,

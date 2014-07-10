@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.levels.events.Event;
 
 import org.andengine.opengl.texture.region.TextureRegion;
@@ -33,6 +34,7 @@ public class Level {
     private static final String LEVEL_NAME = "Name";
     private static final String LEVEL_BACKSTORY = "Backstory";
     private static final String LEVEL_DIALOGBASE = "DialogBase";
+    private static final String LEVEL_FOG = "Fog";
 
     private String mName = "";
     private String mChapter = "";
@@ -45,6 +47,7 @@ public class Level {
     DialogBase dialogBase;
     CharacterBase characterBase;
     Map<String, TextureRegion> picturesRegions;
+    FogRect fogRect;
     
     public Map<String, TextureRegion> getPicturesRegions() {
         return picturesRegions;
@@ -95,7 +98,25 @@ public class Level {
     private void LoadFromXml(Element rootElement) {
 
         loadHeaderFromXML(rootElement);
+        loadFogConfigFromXML(rootElement);
         loadEventsFromXML(rootElement);
+    }
+
+    private void loadFogConfigFromXML(Element rootElement) {
+        
+        NodeList items = rootElement.getElementsByTagName(LEVEL_FOG);
+        if(items.getLength() > 0) {
+            Element element = (Element) items.item(0);
+            
+            fogRect = new FogRect(
+                    Integer.parseInt(element.getAttribute("colorR")),
+                    Integer.parseInt(element.getAttribute("colorG")),
+                    Integer.parseInt(element.getAttribute("colorB")),
+                    Integer.parseInt(element.getAttribute("colorA")));
+        } else {
+            fogRect = new FogRect(0, 0, 0, 0);
+        }
+        
     }
 
     private void loadHeaderFromXML(Element rootElement) {
@@ -104,6 +125,7 @@ public class Level {
         mName = getString(LEVEL_NAME, rootElement);
         mStory = getString(LEVEL_BACKSTORY, rootElement);
         mDialogBaseFilename = getString(LEVEL_DIALOGBASE, rootElement);
+
     }
 
     private void loadEventsFromXML(Element rootElement) {
@@ -175,6 +197,10 @@ public class Level {
 
     public String getPlayerType() {
         return playerType;
+    }
+
+    public FogRect getConfiguredFog() {
+        return fogRect;
     }
 
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE LRLevel>
+
 <Level>
  <Setting>
   <Chapter>Глава вторая</Chapter>
@@ -8,10 +9,12 @@
   <Weather>FAIR</Weather>
   <Player>BOATER</Player>
   <DialogBase>Prolog.lrdb</DialogBase>
+  <Fog colorR="15" colorG="30" colorB="15" colorA="255"/>
  </Setting>
 
  <Events>
-  <Event command="SET_TIME" id="0" arg_int="6" arg_str=""/> 
+  <Event command="SET_TIME" id="0" arg_int="6" arg_str=""/>
+  <Event command="SET_FOG_VISIBLE" id="0" arg_int="0" arg_str=""/>
   <Event command="UNIT_ADD" id="1" arg_int="50" arg_str="Dirigible"/>
   <Event command="UNIT_ADD" id="2" arg_int="100" arg_str="PirateShip"/>
   <Event command="WAIT_SECONDS" id="0" arg_int="4" arg_str=""/>

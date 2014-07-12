@@ -1,10 +1,8 @@
 package mhyhre.lightrabbit.game.units;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.Enemy;
-import mhyhre.lightrabbit.game.EnemyType;
 
-public class DirigibleUnit extends Enemy {
+public class DirigibleUnit extends Unit {
 
     public static final float sSpeed = 0.3f;
     public static final float sSinkSpeed = -1.0f;
@@ -13,7 +11,7 @@ public class DirigibleUnit extends Enemy {
     private float targetRotation = -180;
     
     public DirigibleUnit() {
-        super(EnemyType.DIRIGIBLE, 300, 10);
+        super(UnitType.DIRIGIBLE, 300, 10);
         bright = 1;
 
         setSize(120, 60);

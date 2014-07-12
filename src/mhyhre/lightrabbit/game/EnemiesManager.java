@@ -7,6 +7,8 @@ import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.levels.events.Event;
 import mhyhre.lightrabbit.game.levels.events.EventType;
 import mhyhre.lightrabbit.game.units.DirigibleUnit;
+import mhyhre.lightrabbit.game.units.Unit;
+import mhyhre.lightrabbit.game.units.UnitType;
 import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
 import mhyhre.lightrabbit.game.units.Player;
@@ -20,18 +22,18 @@ public class EnemiesManager extends SpriteBatch {
 
     public static final int ENEMIES_MAX_COUND = 100;
     WaterPolygon mWater;
-    List<Enemy> mEnemies;
+    List<Unit> mEnemies;
 
     public EnemiesManager(WaterPolygon pWater, VertexBufferObjectManager pVertexBufferObjectManager) {
         super(MainActivity.resources.getTextureAtlas("texture01"), ENEMIES_MAX_COUND, pVertexBufferObjectManager);
 
         mWater = pWater;
-        mEnemies = new ArrayList<Enemy>(ENEMIES_MAX_COUND);
+        mEnemies = new ArrayList<Unit>(ENEMIES_MAX_COUND);
     }
 
     private void calculateCollisionsWithEnemies(Player player) {
 
-        for (Enemy enemy : getEnemiesList()) {
+        for (Unit enemy : getEnemiesList()) {
 
             // If player collides with enemy.
             if (Collisions.spriteByCircle(player, enemy.getX(), enemy.getY(), 36)) {
@@ -58,7 +60,7 @@ public class EnemiesManager extends SpriteBatch {
 
         for (int i = 0; i < mEnemies.size(); i++) {
 
-            Enemy enemy = mEnemies.get(i);
+            Unit enemy = mEnemies.get(i);
             
 
             switch (enemy.getEnemyType()) {
@@ -160,7 +162,7 @@ public class EnemiesManager extends SpriteBatch {
 
     }
 
-    private void drawEnemy(ITextureRegion region, Enemy enemy, float bright, float currentRotation) {
+    private void drawEnemy(ITextureRegion region, Unit enemy, float bright, float currentRotation) {
         draw(region, enemy.getX() - region.getWidth() / 2, enemy.getY() - region.getHeight() / 2, region.getWidth(), region.getHeight(), currentRotation,
                 MainActivity.PIXEL_MULTIPLIER, MainActivity.PIXEL_MULTIPLIER, bright, bright, bright, bright);
     }
@@ -171,7 +173,7 @@ public class EnemiesManager extends SpriteBatch {
             if (mEnemies.size() < ENEMIES_MAX_COUND) {
 
                 float xpos = event.getIntegerArg() + MainActivity.getWidth();
-                EnemyType type = EnemyType.getByName(event.getStringArg());
+                UnitType type = UnitType.getByName(event.getStringArg());
 
                 switch (type) {
 
@@ -211,7 +213,7 @@ public class EnemiesManager extends SpriteBatch {
         return mEnemies.size();
     }
 
-    public List<Enemy> getEnemiesList() {
+    public List<Unit> getEnemiesList() {
         return mEnemies;
     }
     /*

@@ -1,9 +1,7 @@
 package mhyhre.lightrabbit.game.units;
 
-import mhyhre.lightrabbit.game.Enemy;
-import mhyhre.lightrabbit.game.EnemyType;
 
-public class SharkUnit extends Enemy {
+public class SharkUnit extends Unit {
 
     public static final float sSinkSpeed = -1.0f;
     public static final float sSpeed = 1;
@@ -13,7 +11,7 @@ public class SharkUnit extends Enemy {
     private float targetRotation = 180;
 
     public SharkUnit() {
-        super(EnemyType.SHARK, 40, 20);
+        super(UnitType.SHARK, 40, 20);
         bright = 1;
         setSize(64, 40);
         setRadius(25);

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.units.Unit;
 import mhyhre.lightrabbit.game.units.Player;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
@@ -55,7 +56,7 @@ public class BulletsManager extends SpriteBatch {
 
             BulletUnit bullet = mBullets.get(i);
 
-            for (Enemy enemy : enemies.getEnemiesList()) {
+            for (Unit enemy : enemies.getEnemiesList()) {
 
                 if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getX(), enemy.getY(), enemy.getRadius())) {
 

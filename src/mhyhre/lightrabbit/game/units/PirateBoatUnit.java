@@ -1,9 +1,7 @@
 package mhyhre.lightrabbit.game.units;
 
-import mhyhre.lightrabbit.game.Enemy;
-import mhyhre.lightrabbit.game.EnemyType;
 
-public class PirateBoatUnit extends Enemy {
+public class PirateBoatUnit extends Unit {
 
     public static final float sSinkSpeed = -1.0f;
     public static final float sSpeed = 0.5f;
@@ -13,7 +11,7 @@ public class PirateBoatUnit extends Enemy {
     float mWaterLevel;
 
     public PirateBoatUnit() {
-        super(EnemyType.PIRATE_BOAT, 60, 30);
+        super(UnitType.PIRATE_BOAT, 60, 30);
 
         setSize(64, 22);
         bright = 1;

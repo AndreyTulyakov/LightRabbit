@@ -1,22 +1,25 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.units;
 
 import mhyhre.lightrabbit.utils.Vector2;
 
 
-public abstract class Enemy {
+public abstract class Unit {
 
-    protected EnemyType enemyType;
+    protected UnitType type;
+    
     protected int health;
     protected int armor;
+    
     protected boolean isDied;
+    
     protected float xPosition, yPosition;
     protected float rotation;
     protected float width, height;
     protected float radius = 0;
 
-    public Enemy(EnemyType pType, int pMaxHealth, int pArmor) {
+    public Unit(UnitType pType, int pMaxHealth, int pArmor) {
         health = pMaxHealth;
-        enemyType = pType;
+        type = pType;
         armor = pArmor;
 
         xPosition = 0;
@@ -95,8 +98,8 @@ public abstract class Enemy {
         this.height = height;
     }
 
-    public EnemyType getEnemyType() {
-        return enemyType;
+    public UnitType getEnemyType() {
+        return type;
     }
 
     public float getRadius() {

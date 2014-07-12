@@ -1,13 +1,13 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.units;
 
-public enum EnemyType {
+public enum UnitType {
     UNDEFINED(""), SHARK("Shark"),
     PIRATE_BOAT("PirateBoat"), PIRATE_SHIP("PirateShip"),
     DIRIGIBLE("Dirigible"), WAR_PLANE("WarPlane"), ZOMBIE_PLANE("ZombiePlane");
     
     private final String name;
     
-    private EnemyType(String name) {
+    private UnitType(String name) {
         this.name = name;
     }
 
@@ -15,9 +15,9 @@ public enum EnemyType {
         return name;
     }
     
-    public static EnemyType getByName(String name) {
+    public static UnitType getByName(String name) {
         
-        for(EnemyType type: values()) {
+        for(UnitType type: values()) {
             if(type.getName().equals(name)) {
                 return type;
             }

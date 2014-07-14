@@ -16,11 +16,11 @@ public class BulletsManager extends SpriteBatch {
     private List<BulletUnit> mBullets;
     
     private WaterPolygon water;
-    private EnemiesManager enemies;
+    private UnitsManager enemies;
     private Player player;
     private GameUserInterface hud;
 
-    public BulletsManager(WaterPolygon water, EnemiesManager enemies, Player player, GameUserInterface hud) {
+    public BulletsManager(WaterPolygon water, UnitsManager enemies, Player player, GameUserInterface hud) {
         super(0, 0, MainActivity.resources.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN+1, MainActivity.getVboManager());
 
         this.water = water;

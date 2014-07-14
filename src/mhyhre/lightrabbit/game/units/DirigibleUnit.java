@@ -2,16 +2,25 @@ package mhyhre.lightrabbit.game.units;
 
 import mhyhre.lightrabbit.MainActivity;
 
+/*
+ * Type: Dirigible
+ * Speed: 0.3f
+ * Health: 300
+ * Armor: 10
+ */
+
 public class DirigibleUnit extends Unit {
 
-    public static final float sSpeed = 0.3f;
     public static final float sSinkSpeed = -1.0f;
+    private static final float targetRotation = -180;
     float bright;
     
-    private float targetRotation = -180;
+
     
-    public DirigibleUnit() {
-        super(UnitType.DIRIGIBLE, 300, 10);
+    public DirigibleUnit(int id, UnitMoveDirection dir) {
+        super(id, UnitType.DIRIGIBLE, 300, 10, 0.3f, dir);
+        setIdeology(UnitIdeology.IMPERIAL);
+        
         bright = 1;
 
         setSize(120, 60);
@@ -23,7 +32,7 @@ public class DirigibleUnit extends Unit {
     public void update() {
         
         if (isDied == true) {
-            xPosition -= sSpeed;
+            moveHorizontalByDirection();
             yPosition += sSinkSpeed;
             
             if (rotation > targetRotation)
@@ -35,7 +44,7 @@ public class DirigibleUnit extends Unit {
                     bright = 0.0f;
             }
         } else {
-            xPosition -= sSpeed;
+            moveHorizontalByDirection();
             yPosition = MainActivity.getHeight() * 0.66f;
         }
     }

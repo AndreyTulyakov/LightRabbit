@@ -193,7 +193,7 @@ public class SceneLevelSelector extends EaseScene {
                     Log.i(MainActivity.DEBUG_ID, "SceneLevelSelector: Selected level [" + item.label + "]");
                     
                     selectedLevel = item;
-                    MainActivity.getRootScene().SetState(SceneStates.Equipment);
+                    MainActivity.getRootScene().SetState(SceneStates.GameLoading);
                 }
             }
         }

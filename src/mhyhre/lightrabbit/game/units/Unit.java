@@ -5,10 +5,18 @@ import mhyhre.lightrabbit.utils.Vector2;
 
 public abstract class Unit {
 
+    protected int id;
+    public int getId() {
+        return id;
+    }
+
     protected UnitType type;
+    protected UnitIdeology ideology;
     
     protected int health;
     protected int armor;
+    protected float speed;
+    protected UnitMoveDirection moveDirection;
     
     protected boolean isDied;
     
@@ -16,16 +24,36 @@ public abstract class Unit {
     protected float rotation;
     protected float width, height;
     protected float radius = 0;
+    
 
-    public Unit(UnitType pType, int pMaxHealth, int pArmor) {
+    public Unit(int id, UnitType pType, int pMaxHealth, int pArmor, float speed, UnitMoveDirection direction) {
+        this.id = id;
         health = pMaxHealth;
         type = pType;
         armor = pArmor;
+        this.speed = speed;
+        moveDirection = direction;
+        ideology = UnitIdeology.NEUTRAL;
 
         xPosition = 0;
         yPosition = 0;
         width = 0;
         height = 0;
+    }
+    
+    public void moveHorizontalByDirection() {
+        switch(moveDirection) {
+        case LEFT:
+            xPosition -= speed;
+            break;
+        case RIGHT:
+            xPosition += speed;
+            break;
+        default:
+            break;
+        
+        }
+
     }
 
     public int getHealth() {
@@ -94,6 +122,14 @@ public abstract class Unit {
         return height;
     }
 
+    public UnitIdeology getIdeology() {
+        return ideology;
+    }
+
+    public void setIdeology(UnitIdeology ideology) {
+        this.ideology = ideology;
+    }
+
     public void setHeight(float height) {
         this.height = height;
     }
@@ -110,8 +146,24 @@ public abstract class Unit {
         this.radius = radius;
     }
 
+    public UnitMoveDirection getMoveDirection() {
+        return moveDirection;
+    }
+
+    public void setMoveDirection(UnitMoveDirection moveDirection) {
+        this.moveDirection = moveDirection;
+    }
+
     public float getRotation() {
         return rotation;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     public void setRotation(float rotation) {

@@ -2,18 +2,25 @@ package mhyhre.lightrabbit.game.units;
 
 import mhyhre.lightrabbit.MainActivity;
 
+/*
+ * Type: Pirate Ship
+ * Speed: 0.3f
+ * Health: 220
+ * Armor: 50
+ */
+
 public class PirateShipUnit extends Unit {
 
     public static final float sSinkSpeed = -1.0f;
-    public static final float sSpeed = 0.3f;
     private float targetRotation = -30;
     
     float bright;
     float mWaterLevel;
 
-    public PirateShipUnit() {
-        super(UnitType.PIRATE_SHIP, 220, 50);
-
+    public PirateShipUnit(int id, UnitMoveDirection dir) {
+        super(id, UnitType.PIRATE_SHIP, 220, 50, 0.3f, dir);
+        setIdeology(UnitIdeology.PIRATE);
+        
         setSize(128, 75);
         bright = 1;
         setRadius(45);
@@ -42,8 +49,9 @@ public class PirateShipUnit extends Unit {
     @Override
     public void update() {
 
+        moveHorizontalByDirection();
+        
         if (isDied == true) {
-            xPosition -= sSpeed;
             yPosition += sSinkSpeed;
             
             if (rotation > targetRotation)
@@ -55,7 +63,6 @@ public class PirateShipUnit extends Unit {
                     bright = 0.0f;
             }
         } else {
-            xPosition -= sSpeed;
             yPosition = (float) (mWaterLevel);
         }
     }

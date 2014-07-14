@@ -29,6 +29,7 @@ public class Level {
     private static final String ID = "id";
     private static final String INT_ARG = "arg_int";
     private static final String STRING_ARG = "arg_str";
+    private static final String STRING_SECOND_ARG = "arg_str2";
 
     private static final String LEVEL_CHAPTER = "Chapter";
     private static final String LEVEL_NAME = "Name";
@@ -140,7 +141,8 @@ public class Level {
             event.setId(Integer.parseInt(element.getAttribute(ID)));
             event.setIntArg(Integer.parseInt(element.getAttribute(INT_ARG)));
             event.setStrArg(element.getAttribute(STRING_ARG));
-
+            event.setSecondStringArg(element.getAttribute(STRING_SECOND_ARG));            
+            
             events.add(event);
         }
     }

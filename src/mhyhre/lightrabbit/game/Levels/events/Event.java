@@ -3,59 +3,69 @@ package mhyhre.lightrabbit.game.levels.events;
 
 public class Event {
 
-    private EventType mType;
-    private int mId;
-    private int mIntegerArg;
-    String mStringArg;
+    private EventType type;
+    private int id;
+    private int integerArg;
+    String stringArg;
+    String secondStringArg;
 
     public Event() {
-        mType = EventType.NONE;
-        mId = -1;
-        mIntegerArg = 0;
-        mStringArg = "";
+        type = EventType.NONE;
+        id = -1;
+        integerArg = 0;
+        stringArg = "";
+        secondStringArg = "";
     }
 
     public void setType(String typeName) {
 
         try {
-            mType = EventType.valueOf(typeName);
+            type = EventType.valueOf(typeName);
 
         } catch (IllegalArgumentException e) {
-            mType = EventType.NONE;
+            type = EventType.NONE;
         }
     }
 
     public EventType getType() {
-        return mType;
+        return type;
     }
 
     public int getId() {
-        return mId;
+        return id;
     }
 
     public String getStringArg() {
-        return mStringArg;
+        return stringArg;
     }
 
     public int getIntegerArg() {
-        return mIntegerArg;
+        return integerArg;
     }
 
     public void setIntArg(int arg) {
-        mIntegerArg = arg;
+        integerArg = arg;
     }
 
     public void setId(int arg) {
-        mId = arg;
+        id = arg;
     }
 
     public void setStrArg(String arg) {
-        mStringArg = arg;
+        stringArg = arg;
+    }
+
+    public String getSecondStringArg() {
+        return secondStringArg;
+    }
+
+    public void setSecondStringArg(String secondStringArg) {
+        this.secondStringArg = secondStringArg;
     }
 
     @Override
     public String toString() {
-        return "Event [Type=" + mType + ", Id=" + mId + ", IntegerArg=" + mIntegerArg + ", StringArg=" + mStringArg + "]";
+        return "Event [Type=" + type + ", Id=" + id + ", IntegerArg=" + integerArg + ", StringArg=" + stringArg + "]";
     }
     
     

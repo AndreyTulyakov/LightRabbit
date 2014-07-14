@@ -15,7 +15,7 @@ package mhyhre.lightrabbit.scenes;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.BulletsManager;
-import mhyhre.lightrabbit.game.EnemiesManager;
+import mhyhre.lightrabbit.game.UnitsManager;
 import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.GameUserInterface;
 import mhyhre.lightrabbit.game.GameMessageManager;
@@ -47,7 +47,7 @@ public class SceneGame extends EaseScene {
     private GameUserInterface hud;
     private CloudsManager сlouds;
     private SkyManager skyes;
-    private EnemiesManager enemies;
+    private UnitsManager enemies;
     private Player player;
     private WaterPolygon water;
     
@@ -85,7 +85,7 @@ public class SceneGame extends EaseScene {
         water = new WaterPolygon(MainActivity.getVboManager());
 
         player = new Player(100);
-        enemies = new EnemiesManager(water, MainActivity.getVboManager());
+        enemies = new UnitsManager(water, MainActivity.getVboManager());
 
         skyes = new SkyManager(MainActivity.getVboManager());
         
@@ -205,6 +205,10 @@ public class SceneGame extends EaseScene {
             case UNIT_ADD:
                 enemies.addNewEnemy(gameEvent);
                 goToNextEvent();
+                break;
+                
+            case UNIT_SET_IDEOLOGY:
+                enemies.unitSetIdeology(gameEvent);
                 break;
                 
             case MSSG_SHOW:

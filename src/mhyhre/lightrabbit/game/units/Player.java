@@ -20,6 +20,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 
 public class Player extends Sprite {
 
+    UnitIdeology ideology;
+    
     private float mAcceleration = 3;
     private float mSpeed = 0;
     private final float GUN_RELOADING_TIME = 0.5f;

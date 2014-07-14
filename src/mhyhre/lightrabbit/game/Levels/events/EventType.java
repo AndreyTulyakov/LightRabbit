@@ -5,6 +5,7 @@ public enum EventType {
     NONE,
 
     UNIT_ADD, UNIT_KILL, UNIT_REMOVE, UNIT_HEALTH, UNIT_SPEED,
+    UNIT_SET_IDEOLOGY,
 
     MSSG_SHOW,
     

@@ -8,6 +8,8 @@ import mhyhre.lightrabbit.game.levels.events.Event;
 import mhyhre.lightrabbit.game.levels.events.EventType;
 import mhyhre.lightrabbit.game.units.DirigibleUnit;
 import mhyhre.lightrabbit.game.units.Unit;
+import mhyhre.lightrabbit.game.units.UnitIdeology;
+import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
@@ -18,17 +20,19 @@ import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-public class EnemiesManager extends SpriteBatch {
+import android.util.Log;
 
-    public static final int ENEMIES_MAX_COUND = 100;
-    WaterPolygon mWater;
-    List<Unit> mEnemies;
+public class UnitsManager extends SpriteBatch {
 
-    public EnemiesManager(WaterPolygon pWater, VertexBufferObjectManager pVertexBufferObjectManager) {
-        super(MainActivity.resources.getTextureAtlas("texture01"), ENEMIES_MAX_COUND, pVertexBufferObjectManager);
+    public static final int UNITS_MAX_COUNT = 100;
+    WaterPolygon water;
+    List<Unit> units;
 
-        mWater = pWater;
-        mEnemies = new ArrayList<Unit>(ENEMIES_MAX_COUND);
+    public UnitsManager(WaterPolygon pWater, VertexBufferObjectManager pVertexBufferObjectManager) {
+        super(MainActivity.resources.getTextureAtlas("texture01"), UNITS_MAX_COUNT, pVertexBufferObjectManager);
+
+        water = pWater;
+        units = new ArrayList<Unit>(UNITS_MAX_COUNT);
     }
 
     private void calculateCollisionsWithEnemies(Player player) {
@@ -58,9 +62,9 @@ public class EnemiesManager extends SpriteBatch {
 
         float bright;
 
-        for (int i = 0; i < mEnemies.size(); i++) {
+        for (int i = 0; i < units.size(); i++) {
 
-            Unit enemy = mEnemies.get(i);
+            Unit enemy = units.get(i);
             
 
             switch (enemy.getEnemyType()) {
@@ -69,18 +73,18 @@ public class EnemiesManager extends SpriteBatch {
             case PIRATE_BOAT:
                 PirateBoatUnit pirateBoat = (PirateBoatUnit) enemy;
 
-                pirateBoat.setWaterLevel(2 + mWater.getObjectYPosition(pirateBoat.getX()) + 2);
+                pirateBoat.setWaterLevel(2 + water.getObjectYPosition(pirateBoat.getX()) + 2);
                 pirateBoat.update();
 
                 if (enemy.getY() < 0 || enemy.getX() < -50) {
-                    mEnemies.remove(i);
+                    units.remove(i);
                     i--;
                     continue;
                 }
           
                 if(enemy.isDied()) {
                 } else {
-                    enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
+                    enemy.setRotation(-water.getObjectAngle(enemy.getX()) / 2.0f);
                 }
                 
                 drawEnemy(pirateBoatRegion, pirateBoat, pirateBoat.getBright(), enemy.getRotation());
@@ -90,11 +94,11 @@ public class EnemiesManager extends SpriteBatch {
             case PIRATE_SHIP:
                 PirateShipUnit pirateShip = (PirateShipUnit) enemy;
 
-                pirateShip.setWaterLevel(5 + mWater.getObjectYPosition(pirateShip.getX()) + 20);
+                pirateShip.setWaterLevel(5 + water.getObjectYPosition(pirateShip.getX()) + 20);
                 pirateShip.update();
 
                 if (enemy.getY() < 0 || enemy.getX() < -50) {
-                    mEnemies.remove(i);
+                    units.remove(i);
                     i--;
                     continue;
                 }
@@ -102,7 +106,7 @@ public class EnemiesManager extends SpriteBatch {
                 
                 if(enemy.isDied()) {
                 } else {
-                    enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
+                    enemy.setRotation(-water.getObjectAngle(enemy.getX()) / 2.0f);
                 }
                            
                 drawEnemy(pirateShipRegion, pirateShip, pirateShip.getBright(), enemy.getRotation());
@@ -112,21 +116,21 @@ public class EnemiesManager extends SpriteBatch {
             case SHARK:
                 SharkUnit shark = (SharkUnit) enemy;
 
-                shark.setWaterLevel(mWater.getObjectYPosition(shark.getX()) - 40);
+                shark.setWaterLevel(water.getObjectYPosition(shark.getX()) - 40);
                 shark.update();
 
                 boolean needRemoveEnemy = (shark.getY() > MainActivity.getHeight() || shark.getX() < -50);
                 needRemoveEnemy |= shark.isDied() && shark.getBright() == 0;
 
                 if (needRemoveEnemy) {
-                    mEnemies.remove(i);
+                    units.remove(i);
                     i--;
                     continue;
                 }
                 
                 if(enemy.isDied()) {
                 } else {
-                    enemy.setRotation(-mWater.getObjectAngle(enemy.getX()) / 2.0f);
+                    enemy.setRotation(-water.getObjectAngle(enemy.getX()) / 2.0f);
                 }
                    
                 bright = shark.getBright();
@@ -142,7 +146,7 @@ public class EnemiesManager extends SpriteBatch {
                 needRemoveDirigible |= dirigible.isDied() && dirigible.getBright() == 0;
 
                 if (needRemoveDirigible) {
-                    mEnemies.remove(i);
+                    units.remove(i);
                     i--;
                     continue;
                 }
@@ -163,42 +167,66 @@ public class EnemiesManager extends SpriteBatch {
     }
 
     private void drawEnemy(ITextureRegion region, Unit enemy, float bright, float currentRotation) {
+        float directionScale;
+        switch(enemy.getMoveDirection()) {
+        case LEFT:
+            directionScale = MainActivity.PIXEL_MULTIPLIER;
+            break;
+        case RIGHT:
+            directionScale = -MainActivity.PIXEL_MULTIPLIER;
+            break;
+        default:
+            directionScale = MainActivity.PIXEL_MULTIPLIER;
+            break;
+           
+        }
         draw(region, enemy.getX() - region.getWidth() / 2, enemy.getY() - region.getHeight() / 2, region.getWidth(), region.getHeight(), currentRotation,
-                MainActivity.PIXEL_MULTIPLIER, MainActivity.PIXEL_MULTIPLIER, bright, bright, bright, bright);
+                directionScale, MainActivity.PIXEL_MULTIPLIER, bright, bright, bright, bright);
     }
 
     public void addNewEnemy(Event event) {
 
         if (event.getType() == EventType.UNIT_ADD) {
-            if (mEnemies.size() < ENEMIES_MAX_COUND) {
+            if (units.size() < UNITS_MAX_COUNT) {
 
                 float xpos = event.getIntegerArg() + MainActivity.getWidth();
                 UnitType type = UnitType.getByName(event.getStringArg());
+                
+                UnitMoveDirection moveDirection = UnitMoveDirection.LEFT;
+ 
+                    try {
+                        moveDirection = UnitMoveDirection.valueOf(event.getSecondStringArg());
+
+                    } catch (IllegalArgumentException e) {
+                        moveDirection = UnitMoveDirection.LEFT;
+                    }
+                    
+                    int id = event.getId();
 
                 switch (type) {
 
                 case SHARK:
-                    SharkUnit shark = new SharkUnit();
+                    SharkUnit shark = new SharkUnit(id, moveDirection);
                     shark.setPosition(xpos, 0);
-                    mEnemies.add(shark);
+                    units.add(shark);
                     break;
 
                 case DIRIGIBLE:
-                    DirigibleUnit dirigible = new DirigibleUnit();
+                    DirigibleUnit dirigible = new DirigibleUnit(id, moveDirection);
                     dirigible.setPosition(xpos, 0);
-                    mEnemies.add(dirigible);
+                    units.add(dirigible);
                     break;
 
                 case PIRATE_SHIP:
-                    PirateShipUnit pirateShip = new PirateShipUnit();
+                    PirateShipUnit pirateShip = new PirateShipUnit(id, moveDirection);
                     pirateShip.setPosition(xpos, 0);
-                    mEnemies.add(pirateShip);
+                    units.add(pirateShip);
                     break;
 
                 case PIRATE_BOAT:
-                    PirateBoatUnit pirateBoat = new PirateBoatUnit();
+                    PirateBoatUnit pirateBoat = new PirateBoatUnit(id, moveDirection);
                     pirateBoat.setPosition(xpos, 0);
-                    mEnemies.add(pirateBoat);
+                    units.add(pirateBoat);
                     break;
 
                 default:
@@ -208,13 +236,31 @@ public class EnemiesManager extends SpriteBatch {
             }
         }
     }
+    
+    public void unitSetIdeology(Event event) {
+        if(event.getType() == EventType.UNIT_SET_IDEOLOGY) {
+            
+            for(Unit unit: units) {
+                if(unit.getId() == event.getId()) {
+                    
+                    try {
+                        unit.setIdeology(UnitIdeology.valueOf(event.getStringArg()));
+
+                    } catch (IllegalArgumentException e) {
+                        Log.w(MainActivity.DEBUG_ID, "UnitManager: can't set unit ideology");
+                    }
+                    
+                }
+            }   
+        }
+    }
 
     public int getEnemyCount() {
-        return mEnemies.size();
+        return units.size();
     }
 
     public List<Unit> getEnemiesList() {
-        return mEnemies;
+        return units;
     }
     /*
      * public boolean isWaitState() { return waitState; }

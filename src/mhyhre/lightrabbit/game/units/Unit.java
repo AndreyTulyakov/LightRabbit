@@ -1,5 +1,11 @@
 package mhyhre.lightrabbit.game.units;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import android.util.Log;
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.units.agents.UnitAgent;
 import mhyhre.lightrabbit.utils.Vector2;
 
 
@@ -13,12 +19,16 @@ public abstract class Unit {
     protected UnitType type;
     protected UnitIdeology ideology;
     
+    // Demons, works in background
+    protected List<UnitAgent> agents;
+    
     protected int health;
     protected int armor;
     protected float speed;
     protected UnitMoveDirection moveDirection;
     
     protected boolean isDied;
+    protected boolean isStopped;
     
     protected float xPosition, yPosition;
     protected float rotation;
@@ -34,6 +44,8 @@ public abstract class Unit {
         this.speed = speed;
         moveDirection = direction;
         ideology = UnitIdeology.NEUTRAL;
+        
+        agents = new LinkedList<UnitAgent>();
 
         xPosition = 0;
         yPosition = 0;
@@ -42,6 +54,11 @@ public abstract class Unit {
     }
     
     public void moveHorizontalByDirection() {
+        
+        if(isStopped) {
+            return;
+        }
+        
         switch(moveDirection) {
         case LEFT:
             xPosition -= speed;
@@ -73,6 +90,15 @@ public abstract class Unit {
     }
 
     public abstract void update();
+    
+    public void updateAgents() {
+        for(UnitAgent agent: agents) {
+            agent.update();
+            if(agent.isActive() == false) {
+                agents.remove(agent);
+            }
+        }
+    }
 
     public void setSize(float w, float h) {
         width = w;
@@ -142,6 +168,14 @@ public abstract class Unit {
         return radius;
     }
 
+    public boolean isStopped() {
+        return isStopped;
+    }
+
+    public void setStopped(boolean isStopped) {
+        this.isStopped = isStopped;
+    }
+
     public void setRadius(float radius) {
         this.radius = radius;
     }
@@ -168,5 +202,9 @@ public abstract class Unit {
 
     public void setRotation(float rotation) {
         this.rotation = rotation;
+    }
+
+    public void addAgent(UnitAgent agent) {
+        agents.add(agent);
     }
 }

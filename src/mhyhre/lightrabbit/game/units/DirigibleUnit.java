@@ -46,7 +46,9 @@ public class DirigibleUnit extends Unit {
         } else {
             moveHorizontalByDirection();
             yPosition = MainActivity.getHeight() * 0.66f;
+            updateAgents();
         }
+
     }
 
 

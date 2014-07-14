@@ -135,11 +135,24 @@ public class Level {
         for (int i = 0; i < items.getLength(); i++) {
 
             Element element = (Element) items.item(i);
+            
+            
 
             Event event = new Event();
             event.setType(element.getAttribute(COMMAND));
-            event.setId(Integer.parseInt(element.getAttribute(ID)));
-            event.setIntArg(Integer.parseInt(element.getAttribute(INT_ARG)));
+            
+            try {
+                event.setId(Integer.parseInt(element.getAttribute(ID)));
+            } catch (NumberFormatException e) {
+                event.setId(-1);
+            }
+            
+            try {
+                event.setIntArg(Integer.parseInt(element.getAttribute(INT_ARG)));
+            } catch (NumberFormatException e) {
+                event.setIntArg(0);
+            }
+            
             event.setStrArg(element.getAttribute(STRING_ARG));
             event.setSecondStringArg(element.getAttribute(STRING_SECOND_ARG));            
             

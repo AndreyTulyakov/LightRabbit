@@ -209,6 +209,13 @@ public class SceneGame extends EaseScene {
                 
             case UNIT_SET_IDEOLOGY:
                 enemies.unitSetIdeology(gameEvent);
+                goToNextEvent();
+                break;
+                
+                
+            case UNIT_SET_STOP_POSITION:
+                enemies.unitSetStopPosition(gameEvent);
+                goToNextEvent();
                 break;
                 
             case MSSG_SHOW:
@@ -232,6 +239,7 @@ public class SceneGame extends EaseScene {
                     goToNextEvent();
                 }
                 break;
+
                 
             default:
                 Log.i(MainActivity.DEBUG_ID, "Unrecognized event: " + gameEvent.getType());

@@ -1,0 +1,29 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава Третья</Chapter>
+  <Name>Веселье</Name>
+  <Backstory>Не так давно...</Backstory>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <Player>BOATER</Player>
+  <DialogBase>Prolog.lrdb</DialogBase>
+  <Fog colorR="15" colorG="30" colorB="15" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="SET_TIME" id="0" arg_int="6" arg_str=""/>
+  <Event command="SET_FOG_VISIBLE" id="0" arg_int="0" arg_str=""/>
+  <Event command="UNIT_ADD" id="1" arg_int="50" arg_str="Dirigible"/>
+  <Event command="UNIT_ADD" id="2" arg_int="100" arg_str="PirateShip"/>
+  <Event command="WAIT_SECONDS" id="0" arg_int="4" arg_str=""/>
+  <Event command="UNIT_ADD" id="3" arg_int="10" arg_str="PirateBoat"/>
+  <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
+  <Event command="UNIT_ADD" id="1" arg_int="100" arg_str="Shark"/>
+  <Event command="WAIT_FOREVER" id="0" arg_int="0" arg_str=""/>
+
+  <Event command="STOP_TIME_IN" id="0" arg_int="9" arg_str=""/>
+ </Events>
+
+</Level>

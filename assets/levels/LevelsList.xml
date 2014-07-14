@@ -4,7 +4,8 @@
 	
  <Levels>
   <level label="Пролог">Prolog.lrlvl</level>
-  <level label="Кардон">Level_One.lrlvl</level>
+  <level label="Погоня">Level_One.lrlvl</level>
+  <level label="Кардон">Level_Two.lrlvl</level>
  </Levels>
  
 </Root>

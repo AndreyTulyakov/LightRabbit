@@ -54,6 +54,7 @@ public class SharkUnit extends Unit {
         } else {
             moveHorizontalByDirection();
             yPosition = (float) (mWaterLevel + 30 * Math.sin(xPosition / (Math.PI * 4)));
+            updateAgents();
         }
     }
 

@@ -64,6 +64,7 @@ public class PirateShipUnit extends Unit {
             }
         } else {
             yPosition = (float) (mWaterLevel);
+            updateAgents();
         }
     }
 

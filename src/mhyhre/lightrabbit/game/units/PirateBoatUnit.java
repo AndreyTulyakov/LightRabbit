@@ -54,6 +54,7 @@ public class PirateBoatUnit extends Unit {
         } else {
             moveHorizontalByDirection();
             yPosition = (float) (mWaterLevel);
+            updateAgents();
         }
     }
 

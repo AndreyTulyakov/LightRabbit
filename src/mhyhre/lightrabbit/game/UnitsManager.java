@@ -15,6 +15,7 @@ import mhyhre.lightrabbit.game.units.PirateBoatUnit;
 import mhyhre.lightrabbit.game.units.PirateShipUnit;
 import mhyhre.lightrabbit.game.units.Player;
 import mhyhre.lightrabbit.game.units.SharkUnit;
+import mhyhre.lightrabbit.game.units.agents.UnitStopAgent;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.opengl.texture.region.ITextureRegion;
@@ -25,6 +26,7 @@ import android.util.Log;
 public class UnitsManager extends SpriteBatch {
 
     public static final int UNITS_MAX_COUNT = 100;
+    public static final int MINIMAX_UNIT_X = -5000;
     WaterPolygon water;
     List<Unit> units;
 
@@ -76,7 +78,7 @@ public class UnitsManager extends SpriteBatch {
                 pirateBoat.setWaterLevel(2 + water.getObjectYPosition(pirateBoat.getX()) + 2);
                 pirateBoat.update();
 
-                if (enemy.getY() < 0 || enemy.getX() < -50) {
+                if (enemy.getY() < 0 || enemy.getX() < MINIMAX_UNIT_X) {
                     units.remove(i);
                     i--;
                     continue;
@@ -97,7 +99,7 @@ public class UnitsManager extends SpriteBatch {
                 pirateShip.setWaterLevel(5 + water.getObjectYPosition(pirateShip.getX()) + 20);
                 pirateShip.update();
 
-                if (enemy.getY() < 0 || enemy.getX() < -50) {
+                if (enemy.getY() < 0 || enemy.getX() < MINIMAX_UNIT_X) {
                     units.remove(i);
                     i--;
                     continue;
@@ -119,7 +121,7 @@ public class UnitsManager extends SpriteBatch {
                 shark.setWaterLevel(water.getObjectYPosition(shark.getX()) - 40);
                 shark.update();
 
-                boolean needRemoveEnemy = (shark.getY() > MainActivity.getHeight() || shark.getX() < -50);
+                boolean needRemoveEnemy = (shark.getY() > MainActivity.getHeight() || shark.getX() < MINIMAX_UNIT_X);
                 needRemoveEnemy |= shark.isDied() && shark.getBright() == 0;
 
                 if (needRemoveEnemy) {
@@ -142,7 +144,7 @@ public class UnitsManager extends SpriteBatch {
                 DirigibleUnit dirigible = (DirigibleUnit) enemy;
                 dirigible.update();
 
-                boolean needRemoveDirigible = dirigible.getX() < -200;
+                boolean needRemoveDirigible = dirigible.getX() < MINIMAX_UNIT_X;
                 needRemoveDirigible |= dirigible.isDied() && dirigible.getBright() == 0;
 
                 if (needRemoveDirigible) {
@@ -254,6 +256,19 @@ public class UnitsManager extends SpriteBatch {
             }   
         }
     }
+    
+    public void unitSetStopPosition(Event event) {
+        
+            if(event.getType() == EventType.UNIT_SET_STOP_POSITION) {
+
+                for(Unit unit: units) {
+                    if(unit.getId() == event.getId()) {
+                        UnitStopAgent stopAgent = new UnitStopAgent(unit, event.getIntegerArg(), 5);
+                        unit.addAgent(stopAgent);
+                    }
+                }   
+            }
+    }
 
     public int getEnemyCount() {
         return units.size();
@@ -262,10 +277,5 @@ public class UnitsManager extends SpriteBatch {
     public List<Unit> getEnemiesList() {
         return units;
     }
-    /*
-     * public boolean isWaitState() { return waitState; }
-     * 
-     * public void setWaitState(boolean waitState) { this.waitState = waitState; }
-     */
 
 }

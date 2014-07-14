@@ -1,7 +1,5 @@
 package mhyhre.lightrabbit.game.units.agents;
 
-import android.util.Log;
-import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.Unit;
 
 public class UnitStopAgent extends UnitAgent {

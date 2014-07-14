@@ -3,8 +3,6 @@ package mhyhre.lightrabbit.game.units;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.util.Log;
-import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.agents.UnitAgent;
 import mhyhre.lightrabbit.utils.Vector2;
 

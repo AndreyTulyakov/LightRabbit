@@ -80,7 +80,9 @@ public class BulletsManager extends SpriteBatch {
                 }
             }
 
-            if (bullet.getY() < water.getObjectYPosition(bullet.getX())) {
+            float yPosOnWater =  water.getObjectYPosition(bullet.getX());
+            
+            if (bullet.getY() <= yPosOnWater) {
                 bullet.setSink(true);
             }
 

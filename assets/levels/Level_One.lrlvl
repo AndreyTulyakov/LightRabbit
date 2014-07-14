@@ -22,11 +22,14 @@
   <Event command="UNIT_ADD" id="1" arg_int="-1500" arg_str="PirateBoat" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="2" arg_int="-1400" arg_str="PirateBoat" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="3" arg_int="-1300" arg_str="PirateBoat" arg_str2="RIGHT"/>
+  <Event command="UNIT_ADD" id="4" arg_int="-1200" arg_str="PirateBoat" arg_str2="RIGHT"/>
 
-  <Event command="UNIT_SET_STOP_POSITION" id="1" arg_int="80"/>
-  <Event command="UNIT_SET_STOP_POSITION" id="2" arg_int="150"/>
-  <Event command="UNIT_SET_STOP_POSITION" id="3" arg_int="200"/>
-  <Event command="UNIT_SET_STOP_POSITION" id="5" arg_int="100"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="1" arg_int="330"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="2" arg_int="250"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="3" arg_int="130"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="4" arg_int="50"/>
+
+  <Event command="UNIT_SET_STOP_POSITION" id="5" arg_int="190"/>
 
   <Event command="WAIT_FOREVER"/>
  </Events>

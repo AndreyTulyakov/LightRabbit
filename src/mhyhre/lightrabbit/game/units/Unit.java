@@ -10,9 +10,6 @@ import mhyhre.lightrabbit.utils.Vector2;
 public abstract class Unit {
 
     protected int id;
-    public int getId() {
-        return id;
-    }
 
     protected UnitType type;
     protected UnitIdeology ideology;
@@ -204,5 +201,9 @@ public abstract class Unit {
 
     public void addAgent(UnitAgent agent) {
         agents.add(agent);
+    }
+    
+    public int getId() {
+        return id;
     }
 }

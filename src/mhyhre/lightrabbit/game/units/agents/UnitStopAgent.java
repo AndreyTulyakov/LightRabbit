@@ -21,5 +21,4 @@ public class UnitStopAgent extends UnitAgent {
         }
 
     }
-
 }

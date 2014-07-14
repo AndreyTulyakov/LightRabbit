@@ -87,6 +87,10 @@ public class BulletUnit extends Entity {
         return false;
     }
 
+    public boolean isBoomed() {
+        return mBoom <= 0;
+    }
+    
     public int getBoom() {
         return mBoom;
     }

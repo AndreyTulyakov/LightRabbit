@@ -8,7 +8,7 @@
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <Player>BOATER</Player>
-  <DialogBase>Prolog.lrdb</DialogBase>
+  <DialogBase>DialogBases/Prolog.lrdb</DialogBase>
   <Fog colorR="15" colorG="30" colorB="60" colorA="255"/>
  </Setting>
 

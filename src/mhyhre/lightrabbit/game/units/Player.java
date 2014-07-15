@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.BulletUnit;
 import mhyhre.lightrabbit.game.WaterPolygon;
-import mhyhre.lightrabbit.game.weapons.ProtoGun;
+import mhyhre.lightrabbit.game.weapons.guns.Gun;
+import mhyhre.lightrabbit.game.weapons.guns.Gun90;
+import mhyhre.lightrabbit.game.weapons.projectiles.BulletUnit;
 
 import org.andengine.entity.particle.SpriteParticleSystem;
 import org.andengine.entity.particle.emitter.PointParticleEmitter;
@@ -21,6 +22,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 public class Player extends Sprite {
 
     UnitIdeology ideology;
+    Gun gun;
     
     private float mAcceleration = 3;
     private float mSpeed = 0;
@@ -38,15 +40,15 @@ public class Player extends Sprite {
     
     VelocityParticleInitializer<Sprite> smokeVelocityInitializer;
 
-    List<ProtoGun> guns;
+    List<Gun> guns;
     int currentGunIndex = 0;
 
     public Player(float xPosition) {
         super(xPosition, 0, MainActivity.resources.getTextureRegion("boat_body"), MainActivity.Me.getVertexBufferObjectManager());
         this.setScale(MainActivity.PIXEL_MULTIPLIER);
-        guns = new ArrayList<ProtoGun>();
+        guns = new ArrayList<Gun>();
 
-        
+        gun = new Gun90(50);
         
         canJump = true;
         addSmokeParticle();
@@ -60,19 +62,17 @@ public class Player extends Sprite {
         final PointParticleEmitter particleEmitter = new PointParticleEmitter(5, 10);
         final SpriteParticleSystem particleSystem = new SpriteParticleSystem(particleEmitter, 1, 5, 20, particleSmokeTextureRegion,
                 this.getVertexBufferObjectManager());
-        // particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
         particleSystem.addParticleInitializer(smokeVelocityInitializer);
         particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 2, 0.2f, 1.0f));
         particleSystem.addParticleInitializer(new AccelerationParticleInitializer<Sprite>(1, 2));
         particleSystem.addParticleInitializer(new ExpireParticleInitializer<Sprite>(2.0f));
         particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.0f, 0.5f, 0.0f, 0.7f));
         particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.5f, 2.0f, 0.7f, 0.0f));
-        // particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0.0f, 11.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f));
-
+        
         attachChild(particleSystem);
     }
 
-    public void addGun(ProtoGun gun) {
+    public void addGun(Gun gun) {
         guns.add(gun);
     }
 
@@ -83,7 +83,7 @@ public class Player extends Sprite {
 
     }
 
-    public ProtoGun getGun(int index) {
+    public Gun getGun(int index) {
         if (index < guns.size() && index >= 0) {
             return guns.get(index);
         }
@@ -124,8 +124,6 @@ public class Player extends Sprite {
 
         setRotation(water.getObjectAngle(getX()) / 2.0f);
         
-        
-        
         if(getY() < waveYPositionUnderPlayer - 10 && canJump == false) {
             setY(waveYPositionUnderPlayer);
             canJump = true;
@@ -135,7 +133,6 @@ public class Player extends Sprite {
             } else {
                 setY(waveYPositionUnderPlayer);
             }
-            
         }
     }
 
@@ -213,5 +210,4 @@ public class Player extends Sprite {
             jumpAcceleration = JUMP_ACCELERATION_LIMIT;
         }
     }
-    
 }

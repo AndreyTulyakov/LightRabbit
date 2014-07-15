@@ -1,6 +1,6 @@
 <!DOCTYPE LRDialogBase>
 <Root>
- <CharacterBase>ActorBase1.lrcb</CharacterBase>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
  <Dialogs>
   <dialog fast="true" id="1" caption="За много лет до..">
    <replic actor_id="4" next_id="0" id="1">120-й год от рождения Василия Пупкина</replic>

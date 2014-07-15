@@ -63,6 +63,7 @@ public class DialogBase {
         }
     }
 
+    
     private void parseXml(Element rootElement) {
 
         characterBaseFilename = Level.getString(CHARACTER_BASE_FILENAME, rootElement);
@@ -83,9 +84,9 @@ public class DialogBase {
 
             dialogs.put(id, dialog);
         }
-
     }
 
+    
     private void parseReplics(Dialog dialog, Element rootElement) {
 
         NodeList items = rootElement.getElementsByTagName(REPLIC);

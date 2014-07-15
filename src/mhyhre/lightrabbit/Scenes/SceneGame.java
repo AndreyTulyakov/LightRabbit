@@ -13,8 +13,6 @@
 package mhyhre.lightrabbit.scenes;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.BulletUnit;
-import mhyhre.lightrabbit.game.BulletsManager;
 import mhyhre.lightrabbit.game.UnitsManager;
 import mhyhre.lightrabbit.game.FogRect;
 import mhyhre.lightrabbit.game.GameUserInterface;
@@ -25,9 +23,13 @@ import mhyhre.lightrabbit.game.levels.events.Event;
 import mhyhre.lightrabbit.game.sky.CloudsManager;
 import mhyhre.lightrabbit.game.sky.SkyManager;
 import mhyhre.lightrabbit.game.units.Player;
+import mhyhre.lightrabbit.game.weapons.BulletsManager;
+import mhyhre.lightrabbit.game.weapons.projectiles.BulletUnit;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.input.touch.TouchEvent;
+
+
 
 
 

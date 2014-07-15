@@ -1,4 +1,4 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.weapons.projectiles;
 
 import mhyhre.lightrabbit.utils.Vector2;
 import org.andengine.entity.Entity;

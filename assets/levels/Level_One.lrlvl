@@ -8,7 +8,7 @@
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <Player>BOATER</Player>
-  <DialogBase>Prolog.lrdb</DialogBase>
+  <DialogBase>DialogBases/Prolog.lrdb</DialogBase>
   <Fog colorR="120" colorG="50" colorB="50" colorA="255"/>
  </Setting>
 
@@ -30,6 +30,8 @@
   <Event command="UNIT_SET_STOP_POSITION" id="4" arg_int="50"/>
 
   <Event command="UNIT_SET_STOP_POSITION" id="5" arg_int="190"/>
+
+  <Event command="WAIT_SECONDS" id="0" arg_int="2" arg_str=""/>
 
   <Event command="WAIT_FOREVER"/>
  </Events>

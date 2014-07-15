@@ -1,11 +1,15 @@
-package mhyhre.lightrabbit.game;
+package mhyhre.lightrabbit.game.weapons;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.GameUserInterface;
+import mhyhre.lightrabbit.game.UnitsManager;
+import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.Unit;
 import mhyhre.lightrabbit.game.units.Player;
+import mhyhre.lightrabbit.game.weapons.projectiles.BulletUnit;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.opengl.texture.region.ITextureRegion;

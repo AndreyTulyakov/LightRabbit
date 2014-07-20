@@ -1,4 +1,8 @@
-package mhyhre.lightrabbit.game.units;
+package mhyhre.lightrabbit.game.units.models;
+
+import mhyhre.lightrabbit.game.units.UnitIdeology;
+import mhyhre.lightrabbit.game.units.UnitMoveDirection;
+import mhyhre.lightrabbit.game.units.UnitType;
 
 /*
  * Type: Shark
@@ -7,7 +11,7 @@ package mhyhre.lightrabbit.game.units;
  * Armor: 20
  */
 
-public class SharkUnit extends Unit {
+public class SharkUnit extends UnitModel {
 
     public static final float sSinkSpeed = -1.0f;
 
@@ -16,7 +20,7 @@ public class SharkUnit extends Unit {
     private float targetRotation = 180;
 
     public SharkUnit(int id, UnitMoveDirection dir) {
-        super(id, UnitType.SHARK, 40, 20, 1.0f, dir);
+        super(id, UnitType.SHARK, 40, 20, 1.0f, 0.5f, dir);
         setIdeology(UnitIdeology.ENEMY_FOR_ALL);
         bright = 1;
         setSize(64, 40);

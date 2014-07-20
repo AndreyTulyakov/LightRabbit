@@ -1,6 +1,8 @@
 package mhyhre.lightrabbit.game.weapons.projectiles;
 
+import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.utils.Vector2;
+
 import org.andengine.entity.Entity;
 
 public class BulletUnit extends Entity {
@@ -8,14 +10,16 @@ public class BulletUnit extends Entity {
     public static final float sSinkSpeed = -1.0f;
     public static final float sGravity = -0.15f;
 
+    private UnitModel parent;
     private Vector2 mAcceleration;
     boolean mSink;
     int mBoom;
     int mBoomPower;
 
-    public BulletUnit(float pX, float pY) {
+    public BulletUnit(float pX, float pY, UnitModel parent) {
         super(pX, pY);
 
+        this.parent = parent;
         mBoomPower = 50;
 
         mAcceleration = new Vector2(0, 0);
@@ -101,5 +105,13 @@ public class BulletUnit extends Entity {
 
     public int getBoomPower() {
         return mBoomPower;
+    }
+
+    public UnitModel getParent() {
+        return parent;
+    }
+
+    public void setParent(UnitModel parent) {
+        this.parent = parent;
     }
 }

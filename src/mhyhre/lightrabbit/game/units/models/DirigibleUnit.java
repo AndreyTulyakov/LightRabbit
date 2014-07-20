@@ -1,6 +1,9 @@
-package mhyhre.lightrabbit.game.units;
+package mhyhre.lightrabbit.game.units.models;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.units.UnitIdeology;
+import mhyhre.lightrabbit.game.units.UnitMoveDirection;
+import mhyhre.lightrabbit.game.units.UnitType;
 
 /*
  * Type: Dirigible
@@ -9,7 +12,7 @@ import mhyhre.lightrabbit.MainActivity;
  * Armor: 10
  */
 
-public class DirigibleUnit extends Unit {
+public class DirigibleUnit extends UnitModel {
 
     public static final float sSinkSpeed = -1.0f;
     private static final float targetRotation = -180;
@@ -18,7 +21,7 @@ public class DirigibleUnit extends Unit {
 
     
     public DirigibleUnit(int id, UnitMoveDirection dir) {
-        super(id, UnitType.DIRIGIBLE, 300, 10, 0.3f, dir);
+        super(id, UnitType.DIRIGIBLE, 300, 10, 0.3f, 0.1f, dir);
         setIdeology(UnitIdeology.IMPERIAL);
         
         bright = 1;

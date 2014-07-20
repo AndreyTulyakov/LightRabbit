@@ -22,20 +22,20 @@ import mhyhre.lightrabbit.game.levels.Level;
 import mhyhre.lightrabbit.game.levels.events.Event;
 import mhyhre.lightrabbit.game.sky.CloudsManager;
 import mhyhre.lightrabbit.game.sky.SkyManager;
-import mhyhre.lightrabbit.game.units.Player;
+import mhyhre.lightrabbit.game.units.Unit;
+import mhyhre.lightrabbit.game.units.UnitGenerator;
+import mhyhre.lightrabbit.game.units.UnitMoveDirection;
+import mhyhre.lightrabbit.game.units.controller.UnitController;
+import mhyhre.lightrabbit.game.units.models.Player;
+import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.BulletsManager;
-import mhyhre.lightrabbit.game.weapons.projectiles.BulletUnit;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
 
 import org.andengine.input.touch.TouchEvent;
 
-
-
-
-
-
-
 import android.util.Log;
+
+
 
 /**
  * This scene control game process.
@@ -49,8 +49,10 @@ public class SceneGame extends EaseScene {
     private GameUserInterface hud;
     private CloudsManager сlouds;
     private SkyManager skyes;
-    private UnitsManager enemies;
-    private Player player;
+    
+    private UnitsManager units;
+    private Unit player;
+    
     private WaterPolygon water;
     
     
@@ -86,8 +88,10 @@ public class SceneGame extends EaseScene {
         сlouds = new CloudsManager(MainActivity.getVboManager());
         water = new WaterPolygon(MainActivity.getVboManager());
 
-        player = new Player(100);
-        enemies = new UnitsManager(water, MainActivity.getVboManager());
+        player = UnitGenerator.generate(true, level.getPlayerType());
+        
+        units = new UnitsManager(water, MainActivity.getVboManager());
+        
 
         skyes = new SkyManager(MainActivity.getVboManager());
         
@@ -98,13 +102,12 @@ public class SceneGame extends EaseScene {
         messageManager.setCharacterBase(getLevel().getCharacterBase());
         messageManager.setPictureRegions(getLevel().getPicturesRegions());
         
-        bullets = new BulletsManager(water,enemies,player, hud);
+        bullets = new BulletsManager(water,units);
 
         attachChild(skyes);
         attachChild(сlouds);
-        attachChild(enemies);
+        attachChild(units);
         attachChild(bullets);
-        attachChild(player);
         attachChild(water);
         attachChild(hud);
         attachChild(fog);
@@ -135,17 +138,17 @@ public class SceneGame extends EaseScene {
         }
         
         updateControlls();
-        player.update(water, pSecondsElapsed);
+       // player.update(water, pSecondsElapsed);
 
         timeCounter += pSecondsElapsed;
         
         updateEvents();
-        enemies.update(player);;
-        hud.updateHealthIndicator(player.getCurrentHealth());
+        units.update();
         
-        if(player.getCurrentHealth() == 0) {
-            endGame();
-        }    
+        UnitModel playerModel = player.getModel();
+        hud.updateHealthIndicator(playerModel.getHealth());
+        hud.updateGoldIndicator(playerModel.getGold());
+   
         super.onManagedUpdate(pSecondsElapsed);
     }
     
@@ -171,7 +174,7 @@ public class SceneGame extends EaseScene {
                 break;
                 
             case WAIT_ENEMIES_EXIST:           
-                if(enemies.getEnemyCount() == 0) {
+                if(units.getEnemyCount() == 0) {
                     goToNextEvent();
                 }
                 break;
@@ -205,18 +208,18 @@ public class SceneGame extends EaseScene {
                 break;
                 
             case UNIT_ADD:
-                enemies.addNewEnemy(gameEvent);
+                units.addUnit(gameEvent);
                 goToNextEvent();
                 break;
                 
             case UNIT_SET_IDEOLOGY:
-                enemies.unitSetIdeology(gameEvent);
+                units.unitSetIdeology(gameEvent);
                 goToNextEvent();
                 break;
                 
                 
             case UNIT_SET_STOP_POSITION:
-                enemies.unitSetStopPosition(gameEvent);
+                units.unitSetStopPosition(gameEvent);
                 goToNextEvent();
                 break;
                 
@@ -260,31 +263,27 @@ public class SceneGame extends EaseScene {
 
     private void updateControlls() {
         
-        player.setBoatSpeed(0);
-
         if(hud.isActivated() == false) {
             return;
         }
+
+        UnitController controller = player.getController();
         
         if (hud.isKeyDown(GameUserInterface.Buttons.LEFT)) {
-            player.setBoatSpeed(player.getBoatSpeed() - player.getBoatAcceleration());
+            controller.accelerate(UnitMoveDirection.LEFT);
         }
 
         if (hud.isKeyDown(GameUserInterface.Buttons.RIGHT)) {
-            player.setBoatSpeed(player.getBoatSpeed() + player.getBoatAcceleration());
+            controller.accelerate(UnitMoveDirection.RIGHT);
         }
 
         if (hud.isKeyDown(GameUserInterface.Buttons.FIRE)) {
-            if(bullets.isCanCreateBullet()) {
-                BulletUnit bullet = player.fire();
-                if (bullet != null) { 
-                    bullets.addBullet(bullet);
-                }
-            }
+            // FIXME: gun index by fire button index;
+            controller.fireByGun(0);
         }
         
         if (hud.isKeyDown(GameUserInterface.Buttons.JUMP)) {
-            player.jump();
+            controller.jump();
         }
     }
 

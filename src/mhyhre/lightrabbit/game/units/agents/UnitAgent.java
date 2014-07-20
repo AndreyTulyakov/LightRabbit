@@ -1,13 +1,13 @@
 package mhyhre.lightrabbit.game.units.agents;
 
-import mhyhre.lightrabbit.game.units.Unit;
+import mhyhre.lightrabbit.game.units.models.UnitModel;
 
 public abstract class UnitAgent {
     
-    protected Unit unit;
+    protected UnitModel unit;
     protected boolean active;
 
-    protected UnitAgent(Unit unit) {
+    protected UnitAgent(UnitModel unit) {
         this.unit = unit;
         active = true;
     }

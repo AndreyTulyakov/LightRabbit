@@ -3,7 +3,8 @@ package mhyhre.lightrabbit.game.units;
 public enum UnitType {
     UNDEFINED(""), SHARK("Shark"),
     PIRATE_BOAT("PirateBoat"), PIRATE_SHIP("PirateShip"),
-    DIRIGIBLE("Dirigible"), WAR_PLANE("WarPlane"), ZOMBIE_PLANE("ZombiePlane");
+    DIRIGIBLE("Dirigible"), WAR_PLANE("WarPlane"), ZOMBIE_PLANE("ZombiePlane"),
+    STEAM_SHIP("SteamShip");
     
     private final String name;
     

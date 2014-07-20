@@ -8,7 +8,8 @@ import mhyhre.lightrabbit.game.GameUserInterface;
 import mhyhre.lightrabbit.game.UnitsManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.Unit;
-import mhyhre.lightrabbit.game.units.Player;
+import mhyhre.lightrabbit.game.units.models.Player;
+import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.projectiles.BulletUnit;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
@@ -20,17 +21,13 @@ public class BulletsManager extends SpriteBatch {
     private List<BulletUnit> mBullets;
     
     private WaterPolygon water;
-    private UnitsManager enemies;
-    private Player player;
-    private GameUserInterface hud;
+    private UnitsManager units;
 
-    public BulletsManager(WaterPolygon water, UnitsManager enemies, Player player, GameUserInterface hud) {
+    public BulletsManager(WaterPolygon water, UnitsManager enemies) {
         super(0, 0, MainActivity.resources.getTextureAtlas("texture01"), MAX_BULLETS_ON_SCREEN+1, MainActivity.getVboManager());
 
         this.water = water;
-        this.enemies = enemies;
-        this.player = player;
-        this.hud = hud;
+        this.units = enemies;
         
         mBullets = new LinkedList<BulletUnit>();
     }
@@ -51,7 +48,8 @@ public class BulletsManager extends SpriteBatch {
 
     @Override
     protected void onManagedUpdate(float pSecondsElapsed) {
-     // Bullets
+        
+        // Bullets
         ITextureRegion bulletRegion = MainActivity.resources.getTextureRegion("bullet");
         ITextureRegion bulletBoomRegion = MainActivity.resources.getTextureRegion("bullet_boom");
         ITextureRegion bulletResultRegion;
@@ -60,21 +58,23 @@ public class BulletsManager extends SpriteBatch {
 
             BulletUnit bullet = mBullets.get(i);
 
-            for (Unit enemy : enemies.getEnemiesList()) {
+            for (Unit unit : units.getUnitsList()) {
+                
+                UnitModel model = unit.getModel();
 
-                if (bullet.getBoom() == 0 && bullet.collideWithCircle(enemy.getX(), enemy.getY(), enemy.getRadius())) {
+                if (bullet.getBoom() == 0 && bullet.collideWithCircle(model.getX(), model.getY(), model.getRadius())) {
 
-                    if (enemy.isDied() == false) {
+                    if (model.isDied() == false) {
 
-                        enemy.setHealth(enemy.getHealth() - bullet.getBoomPower());
+                        model.setHealth(model.getHealth() - bullet.getBoomPower());
                         
                         
-                        if (enemy.getHealth() <= 0) {
+                        if (model.getHealth() <= 0) {
 
-                            enemy.setDied(true);
+                            model.setDied(true);
 
-                            player.setTotalGold(player.getTotalGold() + 50);
-                            hud.updateGoldIndicator(player.getTotalGold());
+                            UnitModel bulletParent = bullet.getParent();
+                            bulletParent.setGold(bulletParent.getGold() + model.getGold());
                         }
                     }
 

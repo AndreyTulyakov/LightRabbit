@@ -7,7 +7,7 @@
   <Backstory>Не так давно...</Backstory>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
-  <Player>BOATER</Player>
+  <Player>Shark</Player>
   <DialogBase>Prolog.lrdb</DialogBase>
   <Fog colorR="15" colorG="30" colorB="15" colorA="255"/>
  </Setting>

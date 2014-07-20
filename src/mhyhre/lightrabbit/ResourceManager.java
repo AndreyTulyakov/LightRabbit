@@ -134,20 +134,20 @@ public class ResourceManager {
         regions.put("Jump", TextureRegionFactory.extractFromTexture(atlas, 24, 60, 8, 8, false));
         
         region = TextureRegionFactory.extractFromTexture(atlas, 34, 33, 16, 10);
-        regions.put("boat_body", region);
+        regions.put("SteamShip", region);
 
         // Enemies
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 16, 16, 6);
-        regions.put("pirate_boat", region);
+        regions.put("PirateBoat", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 25, 32, 18);
-        regions.put("pirate_ship", region);
+        regions.put("PirateShip", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 16, 10);
-        regions.put("shark_body", region);
+        regions.put("Shark", region);
         
         region = TextureRegionFactory.extractFromTexture(atlas, 20, 0, 52, 27);
-        regions.put("dirigible", region);
+        regions.put("Dirigible", region);
         
 
         // Misc

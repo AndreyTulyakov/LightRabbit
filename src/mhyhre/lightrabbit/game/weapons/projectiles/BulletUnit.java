@@ -10,7 +10,7 @@ public class BulletUnit extends Entity {
     public static final float sSinkSpeed = -1.0f;
     public static final float sGravity = -0.15f;
 
-    private UnitModel parent;
+    private UnitModel parentUnit;
     private Vector2 mAcceleration;
     boolean mSink;
     int mBoom;
@@ -19,7 +19,7 @@ public class BulletUnit extends Entity {
     public BulletUnit(float pX, float pY, UnitModel parent) {
         super(pX, pY);
 
-        this.parent = parent;
+        parentUnit = parent;
         mBoomPower = 50;
 
         mAcceleration = new Vector2(0, 0);
@@ -107,11 +107,11 @@ public class BulletUnit extends Entity {
         return mBoomPower;
     }
 
-    public UnitModel getParent() {
-        return parent;
+    public UnitModel getParentUnit() {
+        return parentUnit;
     }
 
     public void setParent(UnitModel parent) {
-        this.parent = parent;
+        this.parentUnit = parent;
     }
 }

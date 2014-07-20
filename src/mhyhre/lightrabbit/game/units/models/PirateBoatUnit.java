@@ -1,7 +1,7 @@
 package mhyhre.lightrabbit.game.units.models;
 
+import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
-import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 
 /*
@@ -19,8 +19,8 @@ public class PirateBoatUnit extends UnitModel {
     float bright;
     float mWaterLevel;
 
-    public PirateBoatUnit(int id, UnitMoveDirection dir) {
-        super(id, UnitType.PIRATE_BOAT, 60, 30, 0.5f, 0.1f, dir);
+    public PirateBoatUnit(int id) {
+        super(id, UnitType.PIRATE_BOAT, 60, 30, 0.5f, 0.1f);
         setIdeology(UnitIdeology.PIRATE);
 
         setSize(64, 22);
@@ -41,7 +41,7 @@ public class PirateBoatUnit extends UnitModel {
     }
 
     @Override
-    public void update() {
+    public void update(WaterPolygon water) {
 
         if (isDied == true) {
             moveHorizontalByDirection();
@@ -50,16 +50,38 @@ public class PirateBoatUnit extends UnitModel {
             if (rotation < targetRotation)
                 rotation++;
             
+            
+            
             if (bright > 0) {
                 bright -= 0.01f;
                 if (bright < 0.1f)
                     bright = 0.0f;
             }
         } else {
+            setRotation(-water.getObjectAngle(getX()) / 2.0f);
+            setWaterLevel(2 + water.getObjectYPosition(getX()) + 2);
+            
             moveHorizontalByDirection();
             yPosition = (float) (mWaterLevel);
             updateAgents();
         }
+    }
+
+    @Override
+    public void accelerate(float acceleration) {
+        this.setX(getX() + acceleration);
+    }
+
+    @Override
+    public void jump() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void fireByGun(int gunIndex) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

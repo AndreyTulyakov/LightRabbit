@@ -7,12 +7,13 @@
   <Backstory>Не так давно...</Backstory>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
-  <Player>BOATER</Player>
+  <Player>SteamShip</Player>
   <DialogBase>DialogBases/Prolog.lrdb</DialogBase>
   <Fog colorR="15" colorG="30" colorB="60" colorA="255"/>
  </Setting>
 
  <Events>
+  <Event command="PLAYER_SET_POSITION" arg_int="100"/>
   <Event command="SET_TIME" id="0" arg_int="21" arg_str=""/>
   <Event command="STOP_TIME_IN" id="0" arg_int="2" arg_str=""/>  
   <Event command="SET_FOG_VISIBLE" id="0" arg_int="0" arg_str=""/>

@@ -6,22 +6,16 @@ import mhyhre.lightrabbit.game.units.views.UnitView;
 
 public class Unit {
 
-    private UnitModel model;
-    private UnitController controller;
-    private UnitView view;
+    private final UnitModel model;
+    private final UnitController controller;
+    private final UnitView view;
     
     public Unit(UnitModel model, UnitController controller, UnitView view) {
         this.model = model;
         this.controller = controller;
         this.view = view;
     }
-    
-    public void update() {
-        controller.update();
-        model.update();
-        view.update();
-    }
-    
+
     public UnitModel getModel() {
         return model;
     }

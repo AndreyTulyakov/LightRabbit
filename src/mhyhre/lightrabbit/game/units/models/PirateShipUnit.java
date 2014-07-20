@@ -1,8 +1,8 @@
 package mhyhre.lightrabbit.game.units.models;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
-import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 
 /*
@@ -16,16 +16,13 @@ public class PirateShipUnit extends UnitModel {
 
     public static final float sSinkSpeed = -1.0f;
     private float targetRotation = -30;
-    
-    float bright;
+
     float mWaterLevel;
 
-    public PirateShipUnit(int id, UnitMoveDirection dir) {
-        super(id, UnitType.PIRATE_SHIP, 220, 50, 0.3f, 0.2f, dir);
-        setIdeology(UnitIdeology.PIRATE);
-        
+    public PirateShipUnit(int id) {
+        super(id, UnitType.PIRATE_SHIP, 220, 50, 0.3f, 1.0f);
+        setIdeology(UnitIdeology.PIRATE);    
         setSize(128, 75);
-        bright = 1;
         setRadius(45);
     }
     
@@ -37,10 +34,6 @@ public class PirateShipUnit extends UnitModel {
         }
     };
 
-    public float getBright() {
-        return bright;
-    }
-
     public float getWaterLevel() {
         return mWaterLevel;
     }
@@ -50,9 +43,7 @@ public class PirateShipUnit extends UnitModel {
     }
 
     @Override
-    public void update() {
-
-        moveHorizontalByDirection();
+    public void update(WaterPolygon water) {
         
         if (isDied == true) {
             yPosition += sSinkSpeed;
@@ -66,9 +57,47 @@ public class PirateShipUnit extends UnitModel {
                     bright = 0.0f;
             }
         } else {
+            
+            // Update jumping
+            if(canJump == false && jumpAcceleration > - JUMP_ACCELERATION_LIMIT) {
+                jumpAcceleration -= 0.8f;
+            }
+            
+            setRotation(-water.getObjectAngle(getX()) / 2.0f);
+            setWaterLevel(5 + water.getObjectYPosition(getX()) + 20);
+            
+            float waveYPositionUnderPlayer = 10 + water.getObjectYPosition(getX());
+
+            if(getY() < waveYPositionUnderPlayer - 10 && canJump == false) {
+                setY(waveYPositionUnderPlayer);
+                canJump = true;
+            } else {
+                if(canJump == false) {
+                    setY(getY() + jumpAcceleration);
+                } else {
+                    setY(waveYPositionUnderPlayer);
+                }
+            }
+
             yPosition = (float) (mWaterLevel);
             updateAgents();
         }
+    }
+
+    @Override
+    public void accelerate(float acceleration) {
+    }
+
+    @Override
+    public void jump() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void fireByGun(int gunIndex) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

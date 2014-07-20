@@ -26,7 +26,6 @@ import mhyhre.lightrabbit.game.units.Unit;
 import mhyhre.lightrabbit.game.units.UnitGenerator;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.controller.UnitController;
-import mhyhre.lightrabbit.game.units.models.Player;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.BulletsManager;
 import mhyhre.lightrabbit.scene.utils.EaseScene;
@@ -88,10 +87,9 @@ public class SceneGame extends EaseScene {
         сlouds = new CloudsManager(MainActivity.getVboManager());
         water = new WaterPolygon(MainActivity.getVboManager());
 
-        player = UnitGenerator.generate(true, level.getPlayerType());
-        
         units = new UnitsManager(water, MainActivity.getVboManager());
-        
+        player = UnitGenerator.generate(true, level.getPlayerType());
+        units.addUnit(player);
 
         skyes = new SkyManager(MainActivity.getVboManager());
         
@@ -138,7 +136,6 @@ public class SceneGame extends EaseScene {
         }
         
         updateControlls();
-       // player.update(water, pSecondsElapsed);
 
         timeCounter += pSecondsElapsed;
         
@@ -173,8 +170,8 @@ public class SceneGame extends EaseScene {
                 }
                 break;
                 
-            case WAIT_ENEMIES_EXIST:           
-                if(units.getEnemyCount() == 0) {
+            case WAIT_ENEMIES_EXIST:   
+                if(units.existEnemiesFor(player) == false) {
                     goToNextEvent();
                 }
                 break;
@@ -209,6 +206,11 @@ public class SceneGame extends EaseScene {
                 
             case UNIT_ADD:
                 units.addUnit(gameEvent);
+                goToNextEvent();
+                break;
+                
+            case PLAYER_SET_POSITION:
+                player.getModel().setX(gameEvent.getIntegerArg());
                 goToNextEvent();
                 break;
                 
@@ -275,6 +277,10 @@ public class SceneGame extends EaseScene {
 
         if (hud.isKeyDown(GameUserInterface.Buttons.RIGHT)) {
             controller.accelerate(UnitMoveDirection.RIGHT);
+        }
+        
+        if (hud.isKeyDown(GameUserInterface.Buttons.LEFT) && hud.isKeyDown(GameUserInterface.Buttons.RIGHT)) {
+            controller.accelerate(UnitMoveDirection.NONE);
         }
 
         if (hud.isKeyDown(GameUserInterface.Buttons.FIRE)) {

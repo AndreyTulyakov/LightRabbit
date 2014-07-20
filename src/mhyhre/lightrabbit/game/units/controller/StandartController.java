@@ -1,5 +1,7 @@
 package mhyhre.lightrabbit.game.units.controller;
 
+import android.util.Log;
+import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
 
@@ -12,12 +14,27 @@ public class StandartController extends UnitController {
 
     @Override
     public void accelerate(UnitMoveDirection moveDirection) {
-        model.setSpeed(model.getSpeed() + moveDirection.getDirect() * model.getMoveAcceleration());   
+    
+
+        
+        // Right-Left borders
+        if (model.getX() > (MainActivity.getWidth() - 20) && model.getSpeed() > 0) {
+            model.setSpeed(0);
+        }
+
+        if (model.getX() < 20 && model.getSpeed() < 0) {
+            model.setSpeed(0);
+        }
+
+        model.setX(model.getX() + model.getMoveAcceleration() * moveDirection.getDirect());
     }
 
     @Override
-    public void jump() {
-        model.jump();
+    public void jump() {   
+        if(model.isCanJump()) {
+            model.setCanJump(false);
+            model.setJumpAcceletation(UnitModel.JUMP_ACCELERATION_LIMIT);
+        } 
     }
 
     @Override

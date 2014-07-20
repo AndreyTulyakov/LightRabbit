@@ -1,7 +1,7 @@
 package mhyhre.lightrabbit.game.units.models;
 
+import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
-import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 
 /*
@@ -19,8 +19,8 @@ public class SharkUnit extends UnitModel {
     float mWaterLevel;
     private float targetRotation = 180;
 
-    public SharkUnit(int id, UnitMoveDirection dir) {
-        super(id, UnitType.SHARK, 40, 20, 1.0f, 0.5f, dir);
+    public SharkUnit(int id) {
+        super(id, UnitType.SHARK, 40, 20, 1.0f, 0.5f);
         setIdeology(UnitIdeology.ENEMY_FOR_ALL);
         bright = 1;
         setSize(64, 40);
@@ -41,7 +41,7 @@ public class SharkUnit extends UnitModel {
     
 
     @Override
-    public void update() {
+    public void update(WaterPolygon water) {
         
         if (isDied == true) {
             moveHorizontalByDirection();
@@ -56,10 +56,39 @@ public class SharkUnit extends UnitModel {
                     bright = 0.0f;
             }
         } else {
-            moveHorizontalByDirection();
+            
+            // Update jumping
+            if(canJump == false && jumpAcceleration > - JUMP_ACCELERATION_LIMIT) {
+                jumpAcceleration -= 0.8f;
+            }
+            
+
+            
+            setRotation(-water.getObjectAngle(getX()) / 2.0f);
+            setWaterLevel(water.getObjectYPosition(getX()) - 40);
+            
             yPosition = (float) (mWaterLevel + 30 * Math.sin(xPosition / (Math.PI * 4)));
             updateAgents();
         }
+    }
+
+    @Override
+    public void accelerate(float acceleration) {
+
+    }
+
+    @Override
+    public void jump() {
+        if(canJump == true) {
+            canJump = false;
+            jumpAcceleration = JUMP_ACCELERATION_LIMIT;
+        }
+    }
+
+    @Override
+    public void fireByGun(int gunIndex) {
+        // TODO Auto-generated method stub
+        
     }
 
 

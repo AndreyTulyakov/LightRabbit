@@ -4,11 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.GameUserInterface;
 import mhyhre.lightrabbit.game.UnitsManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.Unit;
-import mhyhre.lightrabbit.game.units.models.Player;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.projectiles.BulletUnit;
 
@@ -73,7 +71,7 @@ public class BulletsManager extends SpriteBatch {
 
                             model.setDied(true);
 
-                            UnitModel bulletParent = bullet.getParent();
+                            UnitModel bulletParent = bullet.getParentUnit();
                             bulletParent.setGold(bulletParent.getGold() + model.getGold());
                         }
                     }

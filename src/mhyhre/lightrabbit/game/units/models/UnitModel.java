@@ -3,6 +3,7 @@ package mhyhre.lightrabbit.game.units.models;
 import java.util.LinkedList;
 import java.util.List;
 
+import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
@@ -13,7 +14,7 @@ import mhyhre.lightrabbit.utils.Vector2;
 
 public abstract class UnitModel {
     
-    private static final float JUMP_ACCELERATION_LIMIT = 16;
+    public static final float JUMP_ACCELERATION_LIMIT = 16;
 
     protected int id;
 
@@ -34,6 +35,8 @@ public abstract class UnitModel {
 
 
     protected boolean canJump;
+
+
     protected float jumpAcceleration;
     
     protected boolean isDied;
@@ -43,9 +46,14 @@ public abstract class UnitModel {
     protected float rotation;
     protected float width, height;
     protected float radius = 0;
+
+    protected float bright;
     
 
-    public UnitModel(int id, UnitType pType, int pMaxHealth, int pArmor, float speed, float acceleration, UnitMoveDirection direction) {
+    public UnitModel(int id, UnitType pType, int pMaxHealth, int pArmor, float speed, float acceleration) {
+        
+        
+        
         this.id = id;
         health = pMaxHealth;
         type = pType;
@@ -53,7 +61,10 @@ public abstract class UnitModel {
         this.speed = speed;
         this.moveAcceleration = acceleration;
         
-        moveDirection = direction;
+        isDied = false;
+        bright = 1;
+        
+        moveDirection = UnitMoveDirection.LEFT;
         ideology = UnitIdeology.NEUTRAL;
         
         agents = new LinkedList<UnitAgent>();
@@ -83,6 +94,10 @@ public abstract class UnitModel {
         }
 
     }
+    
+    public void setCanJump(boolean canJump) {
+        this.canJump = canJump;
+    }
 
     public int getHealth() {
         return health;
@@ -100,7 +115,7 @@ public abstract class UnitModel {
         this.isDied = mDied;
     }
 
-    public abstract void update();
+    public abstract void update(WaterPolygon water);
     
     public void updateAgents() {
         for(UnitAgent agent: agents) {
@@ -171,7 +186,7 @@ public abstract class UnitModel {
         this.height = height;
     }
 
-    public UnitType getEnemyType() {
+    public UnitType getType() {
         return type;
     }
 
@@ -244,21 +259,20 @@ public abstract class UnitModel {
         this.gold = gold;
     }
 
-    
-    public void jump() {
-        if(canJump == true) {
-            canJump = false;
-            jumpAcceleration = JUMP_ACCELERATION_LIMIT;
-        }
-    }
-
-    public void fireByGun(int gunIndex) {
-        // TODO Auto-generated method stub
-        
-    }
+    public abstract void accelerate(float acceleration);
+    public abstract void jump();
+    public abstract void fireByGun(int gunIndex);
     
     public int getDamagePower() {
         return armor * health;
+    }
+
+    public float getBright() {
+        return bright;
+    }
+
+    public void setJumpAcceletation(float jumpAcceleration) {
+        this.jumpAcceleration = jumpAcceleration;
     }
     
 }

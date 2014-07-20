@@ -7,7 +7,7 @@
   <Backstory>После поражения.</Backstory>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
-  <Player>BOATER</Player>
+  <Player>PirateShip</Player>
   <DialogBase>DialogBases/Prolog.lrdb</DialogBase>
   <Fog colorR="120" colorG="50" colorB="50" colorA="255"/>
  </Setting>

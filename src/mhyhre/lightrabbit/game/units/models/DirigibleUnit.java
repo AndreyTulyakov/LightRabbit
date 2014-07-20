@@ -1,8 +1,8 @@
 package mhyhre.lightrabbit.game.units.models;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
-import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 
 /*
@@ -16,15 +16,12 @@ public class DirigibleUnit extends UnitModel {
 
     public static final float sSinkSpeed = -1.0f;
     private static final float targetRotation = -180;
-    float bright;
-    
+
 
     
-    public DirigibleUnit(int id, UnitMoveDirection dir) {
-        super(id, UnitType.DIRIGIBLE, 300, 10, 0.3f, 0.1f, dir);
+    public DirigibleUnit(int id) {
+        super(id, UnitType.DIRIGIBLE, 300, 10, 0.3f, 0.1f);
         setIdeology(UnitIdeology.IMPERIAL);
-        
-        bright = 1;
 
         setSize(120, 60);
         setRadius(45);
@@ -32,7 +29,7 @@ public class DirigibleUnit extends UnitModel {
 
     
     @Override
-    public void update() {
+    public void update(WaterPolygon water) {
         
         if (isDied == true) {
             moveHorizontalByDirection();
@@ -55,9 +52,24 @@ public class DirigibleUnit extends UnitModel {
     }
 
 
-    public float getBright() {
-        return bright;
+
+    @Override
+    public void accelerate(float acceleration) {
+        this.setX(getX() + acceleration);
     }
+
+
+    @Override
+    public void jump() {
+        // None
+    }
+
+
+    @Override
+    public void fireByGun(int gunIndex) {
+        // Not now
+    }
+
 
 
 }

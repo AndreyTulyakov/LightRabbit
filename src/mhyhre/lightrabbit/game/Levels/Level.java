@@ -42,7 +42,7 @@ public class Level {
     private String mChapter = "";
     private String mStory = "";
     private String mDialogBaseFilename = "";
-    private String mPlayer = "";
+    private String playerType = "None";
 
     private List<Event> events;
     private int currentEventIndex = -1;
@@ -56,7 +56,7 @@ public class Level {
         return picturesRegions;
     }
 
-    String playerType = "None";
+
 
     public Level(String filename) {
 
@@ -128,7 +128,7 @@ public class Level {
         mName = getString(LEVEL_NAME, rootElement);
         mStory = getString(LEVEL_BACKSTORY, rootElement);
         mDialogBaseFilename = getString(LEVEL_DIALOGBASE, rootElement);
-        mPlayer = getString(LEVEL_PLAYER, rootElement);
+        playerType = getString(LEVEL_PLAYER, rootElement);
     }
 
     private void loadEventsFromXML(Element rootElement) {
@@ -186,14 +186,6 @@ public class Level {
 
     public String getBackstory() {
         return mStory;
-    }
-
-    public String getmPlayer() {
-        return mPlayer;
-    }
-
-    public void setmPlayer(String mPlayer) {
-        this.mPlayer = mPlayer;
     }
 
     public void nextEvent() {

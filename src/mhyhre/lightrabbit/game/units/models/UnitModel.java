@@ -259,10 +259,6 @@ public abstract class UnitModel {
         this.gold = gold;
     }
 
-    public abstract void accelerate(float acceleration);
-    public abstract void jump();
-    public abstract void fireByGun(int gunIndex);
-    
     public int getDamagePower() {
         return armor * health;
     }

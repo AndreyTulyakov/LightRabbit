@@ -77,22 +77,5 @@ public class SteamShip extends UnitModel{
             updateAgents();
         }
     }
-    
-    public void jump() {
-        if(canJump == true) {
-            canJump = false;
-            jumpAcceleration = JUMP_ACCELERATION_LIMIT;
-        }
-    }
 
-    @Override
-    public void accelerate(float acceleration) {
-        // none
-    }
-
-    @Override
-    public void fireByGun(int gunIndex) {
-        // Not now
-    }
-    
 }

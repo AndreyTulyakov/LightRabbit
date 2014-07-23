@@ -56,14 +56,7 @@ public class SharkUnit extends UnitModel {
                     bright = 0.0f;
             }
         } else {
-            
-            // Update jumping
-            if(canJump == false && jumpAcceleration > - JUMP_ACCELERATION_LIMIT) {
-                jumpAcceleration -= 0.8f;
-            }
-            
 
-            
             setRotation(-water.getObjectAngle(getX()) / 2.0f);
             setWaterLevel(water.getObjectYPosition(getX()) - 40);
             
@@ -71,25 +64,4 @@ public class SharkUnit extends UnitModel {
             updateAgents();
         }
     }
-
-    @Override
-    public void accelerate(float acceleration) {
-
-    }
-
-    @Override
-    public void jump() {
-        if(canJump == true) {
-            canJump = false;
-            jumpAcceleration = JUMP_ACCELERATION_LIMIT;
-        }
-    }
-
-    @Override
-    public void fireByGun(int gunIndex) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
 }

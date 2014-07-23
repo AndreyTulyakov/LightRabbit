@@ -46,6 +46,7 @@ public class PirateShipUnit extends UnitModel {
     public void update(WaterPolygon water) {
         
         if (isDied == true) {
+            
             yPosition += sSinkSpeed;
             
             if (rotation > targetRotation)
@@ -56,6 +57,7 @@ public class PirateShipUnit extends UnitModel {
                 if (bright < 0.1f)
                     bright = 0.0f;
             }
+            
         } else {
             
             // Update jumping
@@ -83,21 +85,4 @@ public class PirateShipUnit extends UnitModel {
             updateAgents();
         }
     }
-
-    @Override
-    public void accelerate(float acceleration) {
-    }
-
-    @Override
-    public void jump() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void fireByGun(int gunIndex) {
-        // TODO Auto-generated method stub
-        
-    }
-
 }

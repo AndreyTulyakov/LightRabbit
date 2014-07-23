@@ -13,6 +13,7 @@
  </Setting>
 
  <Events>
+  <Event command="PLAYER_SET_POSITION" arg_int="300"/>
   <Event command="SET_TIME" arg_int="10"/>
   <Event command="STOP_TIME_IN" arg_int="14"/>  
 

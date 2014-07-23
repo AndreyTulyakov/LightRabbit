@@ -66,22 +66,11 @@ public class PirateBoatUnit extends UnitModel {
             updateAgents();
         }
     }
-
+/*
     @Override
     public void accelerate(float acceleration) {
         this.setX(getX() + acceleration);
     }
-
-    @Override
-    public void jump() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void fireByGun(int gunIndex) {
-        // TODO Auto-generated method stub
-        
-    }
+*/
 
 }

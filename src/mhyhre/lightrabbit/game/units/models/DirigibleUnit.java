@@ -51,25 +51,4 @@ public class DirigibleUnit extends UnitModel {
 
     }
 
-
-
-    @Override
-    public void accelerate(float acceleration) {
-        this.setX(getX() + acceleration);
-    }
-
-
-    @Override
-    public void jump() {
-        // None
-    }
-
-
-    @Override
-    public void fireByGun(int gunIndex) {
-        // Not now
-    }
-
-
-
 }

@@ -89,6 +89,7 @@ public class UnitsManager extends SpriteBatch {
             Unit unit = units.get(i);
             UnitModel model = unit.getModel();
             model.update(water);
+            unit.getController().update();
             drawUnit(unit);
 
             // if out of scene

@@ -245,4 +245,17 @@ public class UnitsManager extends SpriteBatch {
         
     }
 
+    public boolean hasActiveAgents(int id) {
+        
+        for (Unit unit : units) {
+            
+            if(unit.getModel().getId() == id) {
+                if(unit.getModel().hasActiveAgents()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

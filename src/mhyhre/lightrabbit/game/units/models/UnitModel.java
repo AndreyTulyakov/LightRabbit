@@ -232,6 +232,15 @@ public abstract class UnitModel {
         agents.add(agent);
     }
     
+    public boolean hasActiveAgents() {
+        for (UnitAgent agent: agents) {
+            if(agent.isActive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean isCanJump() {
         return canJump;
     }

@@ -14,28 +14,32 @@ public class StandartController extends UnitController {
 
     @Override
     public void accelerate(UnitMoveDirection moveDirection) {
+
+        if(model.isDied() == false) {
+            
+            // Right-Left borders
+            if (model.getX() > (MainActivity.getWidth() - 20) && model.getSpeed() > 0) {
+                model.setSpeed(0);
+            }
     
-
-        
-        // Right-Left borders
-        if (model.getX() > (MainActivity.getWidth() - 20) && model.getSpeed() > 0) {
-            model.setSpeed(0);
+            if (model.getX() < 20 && model.getSpeed() < 0) {
+                model.setSpeed(0);
+            }
+    
+            model.setX(model.getX() + model.getMoveAcceleration() * moveDirection.getDirect());
         }
-
-        if (model.getX() < 20 && model.getSpeed() < 0) {
-            model.setSpeed(0);
-        }
-
-        model.setX(model.getX() + model.getMoveAcceleration() * moveDirection.getDirect());
     }
 
     @Override
     public void jump() {
         
         if(model.isDied() == false) {
-            if(model.isCanJump()) {
-                model.setCanJump(false);
-                model.setJumpAcceletation(UnitModel.JUMP_ACCELERATION_LIMIT);
+            
+            if(model.isDied() == false) {
+                if(model.isCanJump()) {
+                    model.setCanJump(false);
+                    model.setJumpAcceletation(UnitModel.JUMP_ACCELERATION_LIMIT);
+                }
             }
         }
     }

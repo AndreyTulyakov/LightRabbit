@@ -83,6 +83,9 @@ public class NPCController extends UnitController {
     @Override
     public void update() 
     {
+        if(model.isDied()) {
+            return;
+        }
         
         switch(state) {
             

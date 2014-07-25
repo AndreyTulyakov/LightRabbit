@@ -25,7 +25,10 @@ public class UnitsManager extends SpriteBatch {
 
     private static final float COLLISIONS_DAMAGE_FACTOR = 0.1f;
     public static final int UNITS_MAX_COUNT = 100;
-    public static final int MINIMAX_UNIT_X = -5000;
+    private static final int MINIMAX_UNIT_X = -5000;
+    private int diePositionXForEveryone;
+
+
     WaterPolygon water;
     List<Unit> units;
 
@@ -34,6 +37,7 @@ public class UnitsManager extends SpriteBatch {
 
         water = pWater;
         units = new ArrayList<Unit>(UNITS_MAX_COUNT);
+        diePositionXForEveryone = MINIMAX_UNIT_X;
     }
 
     private void calculateCollisionsBetweenUnits() {
@@ -70,11 +74,13 @@ public class UnitsManager extends SpriteBatch {
         second.setHealth(second.getHealth() - firstDamagePower);
         
         if(first.getHealth() <= 0) {
+            first.setHealth(0);
             Log.i(MainActivity.DEBUG_ID, "Unit:" + first.getType().getName() + "died by collision.");
             first.setDied(true);
         }
         
         if(second.getHealth() <= 0) {
+            second.setHealth(0);
             Log.i(MainActivity.DEBUG_ID, "Unit:" + second.getType().getName() + "died by collision.");
             second.setDied(true);
         }
@@ -93,6 +99,12 @@ public class UnitsManager extends SpriteBatch {
             unit.getController().update();
             drawUnit(unit);
 
+            // Die 'line' in position for all units. 
+            if(Math.abs(model.getX() - diePositionXForEveryone) < 10) {
+                model.setDied(true);
+            }
+            
+            
             // if out of scene
             if (model.getY() < 0 || model.getX() < MINIMAX_UNIT_X) {
                 units.remove(i);
@@ -106,7 +118,6 @@ public class UnitsManager extends SpriteBatch {
                 i--;
                 continue;
             }
-            
         }
 
         submit();
@@ -256,6 +267,10 @@ public class UnitsManager extends SpriteBatch {
             }
         }
         return false;
+    }
+    
+    public void setDiePositionXForEveryone(int diePositionXForEveryone) {
+        this.diePositionXForEveryone = diePositionXForEveryone;
     }
 
 }

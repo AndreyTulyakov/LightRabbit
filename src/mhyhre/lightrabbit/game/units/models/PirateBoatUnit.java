@@ -29,14 +29,22 @@ public class PirateBoatUnit extends UnitModel {
     public void update(WaterPolygon water) {
 
         if (isDied == true) {
-            yPosition += sSinkSpeed;
+            
+            mWaterLevel = 2 + water.getObjectYPosition(getX()) + 2;
+            
+            if(getY() < mWaterLevel - 10 && canJump == false) {
+                setY(mWaterLevel);
+            } else {
+                setY(getY() + sSinkSpeed);
+            }
+            
             
             if (rotation < targetRotation)
                 rotation++;
               
             if (bright > 0) {
                 bright -= 0.01f;
-                if (bright < 0.1f)
+                if (bright < 0.05f)
                     bright = 0.0f;
             }
         } else {

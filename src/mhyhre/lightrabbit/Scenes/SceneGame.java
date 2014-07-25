@@ -188,7 +188,8 @@ public class SceneGame extends EaseScene {
                 break;
                 
             case SET_DIE_POSITION:
-                // TODO: Make it!
+                units.setDiePositionXForEveryone(gameEvent.getIntegerArg());
+                goToNextEvent();
                 break;
                 
             case WAIT_FOREVER:

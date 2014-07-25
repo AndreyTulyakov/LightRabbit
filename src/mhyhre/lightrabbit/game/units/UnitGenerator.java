@@ -61,7 +61,7 @@ public class UnitGenerator {
             controller = new StandartController(model);
             model.setMoveDirection(UnitMoveDirection.RIGHT);
         } else {
-            controller = new NPCController(model);
+            controller = new NPCController();
         }
         
         Unit unit = new Unit(model, controller, null);

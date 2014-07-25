@@ -44,7 +44,6 @@ public class SharkUnit extends UnitModel {
     public void update(WaterPolygon water) {
         
         if (isDied == true) {
-            moveHorizontalByDirection();
             yPosition += sSinkSpeed;
 
             if (rotation < targetRotation)

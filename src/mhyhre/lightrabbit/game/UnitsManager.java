@@ -12,6 +12,7 @@ import mhyhre.lightrabbit.game.units.UnitIdeology;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 import mhyhre.lightrabbit.game.units.agents.UnitStopAgent;
+import mhyhre.lightrabbit.game.units.controller.NPCController;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
 
 import org.andengine.entity.sprite.batch.SpriteBatch;
@@ -198,7 +199,7 @@ public class UnitsManager extends SpriteBatch {
 
             for (Unit unit : units) {
                 if (unit.getModel().getId() == event.getId()) {
-                    UnitStopAgent stopAgent = new UnitStopAgent(unit.getModel(), event.getIntegerArg(), 5);
+                    UnitStopAgent stopAgent = new UnitStopAgent(unit, event.getIntegerArg(), 5);
                     unit.getModel().addAgent(stopAgent);
                 }
             }
@@ -226,6 +227,22 @@ public class UnitsManager extends SpriteBatch {
         }
         
         return false;
+    }
+
+    public void changeNPCState(Event gameEvent) {
+        
+        for (Unit unit : units) {
+            
+            if(unit.getModel().getId() == gameEvent.getId()) {
+                if(unit.getController().isPlayerController() == false) {
+
+                    // Need fix it.
+                    NPCController controller = (NPCController) unit.getController();
+                    controller.setStateByEvent(gameEvent);
+                }
+            }
+        }
+        
     }
 
 }

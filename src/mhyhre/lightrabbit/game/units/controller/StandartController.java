@@ -45,4 +45,8 @@ public class StandartController extends UnitController {
         //model.fireByGun(gunIndex);
     }
 
+    @Override
+    public boolean isPlayerController() {
+        return true;
+    }
 }

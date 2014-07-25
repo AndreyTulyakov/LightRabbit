@@ -26,17 +26,6 @@ public class SteamShip extends UnitModel{
         }
     };
 
-    public float getBright() {
-        return bright;
-    }
-
-    public float getWaterLevel() {
-        return mWaterLevel;
-    }
-
-    public void setWaterLevel(float mWaterLevel) {
-        this.mWaterLevel = mWaterLevel;
-    }
 
     @Override
     public void update(WaterPolygon water) {
@@ -59,7 +48,6 @@ public class SteamShip extends UnitModel{
                 jumpAcceleration -= 0.8f;
             }
                  
-
             float waveYPositionUnderPlayer = 10 + water.getObjectYPosition(getX());
 
             setRotation(-water.getObjectAngle(getX()) / 2.0f);

@@ -176,6 +176,11 @@ public class SceneGame extends EaseScene {
                 }
                 break;
                 
+            case NPC_CHANGE_STATE:
+                units.changeNPCState(gameEvent);
+                goToNextEvent();
+                break;
+                
             case WAIT_FOREVER:
                 break;
                 

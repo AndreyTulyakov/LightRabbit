@@ -52,8 +52,6 @@ public abstract class UnitModel {
 
     public UnitModel(int id, UnitType pType, int pMaxHealth, int pArmor, float speed, float acceleration) {
         
-        
-        
         this.id = id;
         health = pMaxHealth;
         type = pType;

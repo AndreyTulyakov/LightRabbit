@@ -7,30 +7,37 @@
   <Backstory>После поражения.</Backstory>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
-  <Player>PirateShip</Player>
+  <Player>PirateBoat</Player>
   <DialogBase>DialogBases/Prolog.lrdb</DialogBase>
   <Fog colorR="120" colorG="50" colorB="50" colorA="255"/>
  </Setting>
 
  <Events>
-  <Event command="PLAYER_SET_POSITION" arg_int="300"/>
+  <Event command="PLAYER_SET_POSITION" arg_int="400"/>
   <Event command="SET_TIME" arg_int="10"/>
   <Event command="STOP_TIME_IN" arg_int="14"/>  
 
   <Event command="SET_FOG_VISIBLE" arg_int="20"/>
 
-  <Event command="UNIT_ADD" id="5" arg_int="-1500" arg_str="PirateShip" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="1" arg_int="-1500" arg_str="PirateBoat" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="2" arg_int="-1400" arg_str="PirateBoat" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="3" arg_int="-1300" arg_str="PirateBoat" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="4" arg_int="-1200" arg_str="PirateBoat" arg_str2="RIGHT"/>
+  <Event command="UNIT_ADD" id="5" arg_int="-1500" arg_str="PirateShip" arg_str2="RIGHT"/>
+
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="3" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="NPC_CHANGE_STATE" id="2" arg_int="3" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="3" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="NPC_CHANGE_STATE" id="4" arg_int="3" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="NPC_CHANGE_STATE" id="5" arg_int="2" arg_str="MOVE" arg_str2="RIGHT"/>
+
 
   <Event command="UNIT_SET_STOP_POSITION" id="1" arg_int="330"/>
   <Event command="UNIT_SET_STOP_POSITION" id="2" arg_int="250"/>
   <Event command="UNIT_SET_STOP_POSITION" id="3" arg_int="130"/>
   <Event command="UNIT_SET_STOP_POSITION" id="4" arg_int="50"/>
-
   <Event command="UNIT_SET_STOP_POSITION" id="5" arg_int="190"/>
+
 
   <Event command="WAIT_SECONDS" id="0" arg_int="2" arg_str=""/>
 

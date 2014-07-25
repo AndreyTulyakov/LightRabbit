@@ -14,6 +14,8 @@ public class Unit {
         this.model = model;
         this.controller = controller;
         this.view = view;
+        
+        controller.setModel(getModel());
     }
 
     public UnitModel getModel() {

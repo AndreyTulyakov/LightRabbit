@@ -38,9 +38,9 @@ public class PirateBoatUnit extends UnitModel {
                 setY(getY() + sSinkSpeed);
             }
             
-            
-            if (rotation < targetRotation)
+            if (rotation < targetRotation) {
                 rotation++;
+            }
               
             if (bright > 0) {
                 bright -= 0.01f;
@@ -71,5 +71,4 @@ public class PirateBoatUnit extends UnitModel {
             updateAgents();
         }
     }
-
 }

@@ -19,7 +19,7 @@
 
   <Event command="SET_FOG_VISIBLE" arg_int="20"/>
 
-  <Event command="SET_DIE_POSITION" arg_int="180"/>
+
 
   <Event command="UNIT_ADD" id="1" arg_int="-1500" arg_str="PirateBoat" arg_str2="RIGHT"/>
   <Event command="UNIT_ADD" id="2" arg_int="-1400" arg_str="PirateBoat" arg_str2="RIGHT"/>

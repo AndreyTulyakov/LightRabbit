@@ -18,6 +18,8 @@
   <Event command="STOP_TIME_IN" id="0" arg_int="2" arg_str=""/>  
   <Event command="SET_FOG_VISIBLE" id="0" arg_int="0" arg_str=""/>
 
+  <Event command="SET_DIE_POSITION" arg_int="-100"/>
+
   <Event command="WAIT_SECONDS" id="0" arg_int="3" arg_str=""/>
   <Event command="MSSG_SHOW" id="1" arg_int="0" arg_str=""/>
 

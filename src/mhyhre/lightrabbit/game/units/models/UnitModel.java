@@ -116,10 +116,15 @@ public abstract class UnitModel {
     public abstract void update(WaterPolygon water);
     
     public void updateAgents() {
-        for(UnitAgent agent: agents) {
+        
+        for (int agentIndex = 0; agentIndex < agents.size(); agentIndex++) {
+            
+            UnitAgent agent = agents.get(agentIndex);
             agent.update();
+            
             if(agent.isActive() == false) {
                 agents.remove(agent);
+                agentIndex--;
             }
         }
     }

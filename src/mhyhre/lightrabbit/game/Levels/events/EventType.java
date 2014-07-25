@@ -26,4 +26,5 @@ public enum EventType {
     WAIT_FOREVER,
     
     WAIT_WHILE_UNIT_AGENTS_ACTIVE,
+    
 }

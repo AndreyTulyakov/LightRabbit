@@ -181,6 +181,16 @@ public class SceneGame extends EaseScene {
                 goToNextEvent();
                 break;
                 
+            case WAIT_WHILE_UNIT_AGENTS_ACTIVE:
+                if(units.hasActiveAgents(gameEvent.getId()) == false) {
+                    goToNextEvent();
+                }
+                break;
+                
+            case SET_DIE_POSITION:
+                // TODO: Make it!
+                break;
+                
             case WAIT_FOREVER:
                 break;
                 

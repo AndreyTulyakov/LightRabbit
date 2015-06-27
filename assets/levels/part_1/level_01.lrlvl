@@ -1,0 +1,86 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава вторая</Chapter>
+  <Name>Повседневность</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_01.lrdb</DialogBase>
+  <Fog colorR="20" colorG="20" colorB="20" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="SET_WATER_WAVE_HEIGHT" arg_int="30"/>
+  <Event command="SET_WATER_WAVE_REPEATING" arg_int="20"/>
+  <Event command="SET_TIME" arg_int="6"/>
+  <Event command="STOP_TIME_IN" arg_int="21"/> 
+
+  <Event command="UNIT_ADD" id="0" arg_int="-600" arg_str="SteamShip" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="0" arg_int="32"/>
+  <Event command="SET_DIE_POSITION" arg_int="-100"/>
+  
+  <Event command="UNIT_SET_POSITION" id="0"  arg_int="200"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="0"/>
+
+
+  <Event command="WAIT_SECONDS" arg_int="2"/>
+  <Event command="SHOW_DIALOG" id="1"/>
+  <Event command="WAIT_SECONDS" arg_int="2"/>
+  <Event command="SHOW_DIALOG" id="2"/>
+
+
+  <Event command="UNIT_ADD" id="1" arg_int="50" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="2" arg_int="150" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="3" arg_int="250" arg_str="Shark" arg_str2="LEFT"/>
+
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="2" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="WAIT_ENEMIES_EXIST"/>
+
+  <Event command="GUI_HIDE_ELEMENT" arg_str="FIRE"/>
+
+  <Event command="UNIT_ADD" id="10" arg_int="100" arg_str="MerchantShip" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="10" arg_int="2" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="WAIT_SECONDS" arg_int="5"/>
+  <Event command="NPC_CHANGE_STATE" id="10" arg_int="2" arg_str="NONE"/>
+
+  <Event command="UNIT_ADD" id="11" arg_int="150" arg_str="MerchantShip" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="12" arg_int="400" arg_str="MerchantShip" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="13" arg_int="650" arg_str="MerchantShip" arg_str2="LEFT"/>
+
+  <Event command="SHOW_DIALOG" id="4"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+
+  <Event command="NPC_CHANGE_STATE" id="11" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="12" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="13" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="10" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="WAIT_WHILE_UNIT_ALIVE" id="10"/>
+
+  <Event command="GUI_SHOW_ELEMENT" arg_str="FIRE"/>
+
+  <Event command="UNIT_ADD" id="1" arg_int="50" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="2" arg_int="150" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="3" arg_int="250" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="4" arg_int="350" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="5" arg_int="450" arg_str="Shark" arg_str2="LEFT"/>
+
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="2" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="4" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="5" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+
+
+  <Event command="WAIT_ENEMIES_EXIST"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="100"/>
+  <Event command="UNLOCK_LEVEL" arg_int="2"/>
+ </Events>
+
+</Level>

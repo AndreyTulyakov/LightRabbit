@@ -1,0 +1,39 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+
+  <dialog id="1">
+   <replic id="1" actor_id="27" next_id="2" >Пшш... ПРиказываю всем!
+Перейти в наступление!</replic>
+   <replic id="2" actor_id="25" next_id="3" >Так точно!</replic>
+   <replic id="3" actor_id="26" next_id="0" >Вас понял!</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" actor_id="26" next_id="2" >Мы несем потери!</replic>
+   <replic id="2" actor_id="27" next_id="3" >Пшш.. Продолжайте наступление!</replic>
+   <replic id="3" actor_id="25" next_id="4" >У меня развалилось орудие!
+Собираю!</replic>
+   <replic id="4" actor_id="27" next_id="0" >Пшш.. Некогда болтать!</replic>
+  </dialog>
+
+  <dialog id="3">
+   <replic id="1" actor_id="25" next_id="2" >Святой помидор!
+Я остался один.</replic>
+   <replic id="2" actor_id="25" next_id="0" >Зато починил орудие...</replic>
+  </dialog>
+
+  <dialog id="4">
+   <replic id="1" actor_id="27" next_id="2" >Вы большой молодец.
+Осталось дело за малым.</replic>
+   <replic id="2" actor_id="25" next_id="3" >Что там?</replic>
+   <replic id="3" actor_id="27" next_id="4" >Недалеко от вас пираты
+окружают гражданское судно.</replic>
+   <replic id="4" actor_id="25" next_id="5" >Мне нужно немного времени
+залатать дыры.</replic>
+   <replic id="5" actor_id="27" next_id="0" >Поспешите, лейтенант.</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

@@ -1,0 +1,24 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+ 
+  <dialog id="1">
+   <replic id="1" actor_id="0" next_id="2" >Ситуация оказалась непростая.
+   Покопавшись в записях выяснилось следующее:</replic>
+   <replic id="2" actor_id="0" next_id="3" >Императора звали Питон и был
+он помешанный.</replic>
+   <replic id="3" actor_id="0" next_id="4" >Среди бреда упоминается какой-то рыбак.</replic>
+   <replic id="4" actor_id="0" next_id="5" >Да и с пиратами империя имела тайные связи.</replic>
+   <replic id="5" actor_id="0" next_id="6" >И поставка каких-то древних артефактов.
+А они утонули.</replic>
+   <replic id="6" actor_id="0" next_id="7" >Прямо с рыбаком. Ничего не смогли найти.</replic>
+   <replic id="7" actor_id="0" next_id="8" >Император испугался и решил на всякий
+случай от пиратов избавиться.</replic>
+   <replic id="8" actor_id="0" next_id="9" >Вот так и началась войнушка.</replic>
+   <replic id="9" actor_id="0" next_id="10" >А потом дух рыбака стал мстить пиратам.</replic>
+   <replic id="10" actor_id="31" next_id="0" >И император внезапно умер. Хм...</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

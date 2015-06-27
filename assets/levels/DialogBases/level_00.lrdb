@@ -1,0 +1,46 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+
+  <dialog id="1">
+   <replic id="1" next_id="2"  actor_id="0">Я родился в семье рыбака.
+Мы не были так уж бедны.</replic>
+   <replic id="2" next_id="3"  actor_id="0">Когда я был маленьким, мой папа
+брал меня в море с собой.</replic>
+   <replic id="3" next_id="0"  actor_id="0">Там он учил меня управлять судном,
+а было это так...</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" next_id="0"  actor_id="6">Если ты хочешь, сдвинуть судно,
+нажми вот здесь.</replic>
+  </dialog>
+  
+  <dialog id="3">
+   <replic id="1" next_id="0"  actor_id="6">Знаешь, не каждый корабль так может,
+но попробуй вот это.</replic>
+  </dialog>
+
+  <dialog id="4">
+   <replic id="1" next_id="3"  actor_id="6">Славно, буду надеяться
+что ты всё понял.</replic>
+   <replic id="3" next_id="4"  actor_id="6">У нас есть небольшая пушка на корабле.</replic>
+   <replic id="4" next_id="0"  actor_id="6">Я зарядил тебе пару снарядов.
+Можешь попробовать, смотри, акула!.</replic>
+  </dialog>
+
+  <dialog id="5">
+   <replic id="1" next_id="2"  actor_id="6">Я вижу морскую бомбу.</replic>
+   <replic id="2" next_id="0"  actor_id="6">Их лучше всего перепрыгивать
+или расстреливать.</replic>
+  </dialog>
+
+  <dialog id="6">
+   <replic id="1" next_id="2"  actor_id="0">Спустя много лет папе надоело это дело
+и он открыл ресторан.</replic>
+   <replic id="2" next_id="0"  actor_id="0">А корабль он отдал мне…</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

@@ -1,0 +1,20 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава Третья</Chapter>
+  <Name>Питон</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_02.lrdb</DialogBase>
+  <Fog colorR="30" colorG="25" colorB="5" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SHOW_DIALOG" id="1"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="UNLOCK_LEVEL" arg_int="3"/>
+ </Events>
+
+</Level>

@@ -1,0 +1,29 @@
+<!DOCTYPE LR_LEVELS_LIST>
+
+<Root>
+	
+ <Levels>
+
+	<Page id="1" caption="Часть первая">
+		<level id="0" label="Глава I">part_1/level_00.lrlvl</level>
+	    <level id="1" label="Глава II">part_1/level_01.lrlvl</level>
+	    <level id="2" label="Глава III">part_1/level_02.lrlvl</level>
+	    <level id="3" label="Глава IV">part_1/level_03.lrlvl</level>
+    </Page>
+
+    <Page id="2" caption="Часть вторая">
+ 		<level id="4" label="Глава V">part_2/level_04.lrlvl</level>
+ 		<level id="5" label="Глава VI">part_2/level_05.lrlvl</level>
+ 		<level id="6" label="Глава VII">part_2/level_06.lrlvl</level>
+ 		<level id="7" label="Глава VIII">part_2/level_07.lrlvl</level>
+    </Page>
+
+    <Page id="3" caption="Часть третья">
+ 		<level id="8" label="Глава IX">part_3/level_08.lrlvl</level>
+ 		<level id="9" label="Глава X">part_3/level_09.lrlvl</level>
+ 		<level id="10" label="Глава XI">part_3/level_10.lrlvl</level>
+    </Page>
+
+ </Levels>
+ 
+</Root>

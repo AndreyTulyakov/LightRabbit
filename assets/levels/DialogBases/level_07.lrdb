@@ -1,0 +1,30 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+ 
+  <dialog id="1">
+   <replic id="1" actor_id="0" next_id="2" >По окончании славной битвы
+пригласил меня император.</replic>
+   <replic id="2" actor_id="0" next_id="3" >Темновато у него.
+Тень сидит в кресле и смотрит...</replic>
+   <replic id="3" actor_id="0" next_id="4" >Прежде лица императора никто не видел.</replic>
+   <replic id="4" actor_id="29" next_id="5" >Купер явился!</replic>
+   <replic id="5" actor_id="28" next_id="6" >Присаживайся.</replic>
+
+   <replic id="6" actor_id="0" next_id="7" >Сзади из темноты выехало кресло.</replic>
+
+   <replic id="7" actor_id="28" next_id="8" >Разумеется,
+ты получишь всё что тебе полагается.</replic>
+   <replic id="8" actor_id="28" next_id="9" >Деньги...</replic>
+   <replic id="9" actor_id="28" next_id="10" >Должность... Власть... Но...</replic>
+   <replic id="10" actor_id="28" next_id="11" >Я хотел поговорить о том призраке...</replic>
+   <replic id="11" actor_id="0" next_id="12" >И тут он стал задвигать мне теории
+о потусторонних мирах.</replic>
+   <replic id="12" actor_id="0" next_id="13" >Он так волновался, что умер.</replic>
+   <replic id="13" actor_id="0" next_id="0" >Вообщем, я стал императором.
+Так бывает.</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

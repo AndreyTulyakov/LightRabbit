@@ -19,6 +19,7 @@ public enum EventType {
     NPC_CHANGE_STATE,
 
     SHOW_DIALOG,
+    SHOW_REPLIC,
     SHOW_TITLES,
     
     HIDE_TOP_PANEL, SHOW_TOP_PANEL,
@@ -52,5 +53,7 @@ public enum EventType {
     MAKE_LIGHTNING,
     UNLOCK_LEVEL,
     SET_GAME_OVER_CONTIDION,
-    END_GAME, 
+    END_GAME,
+
+    GO_TO_MAIN_MENU;
 }

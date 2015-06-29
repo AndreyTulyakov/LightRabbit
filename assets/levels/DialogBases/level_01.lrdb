@@ -7,13 +7,12 @@
 
 
   <dialog id="1">
-   <replic id="1" actor_id="0" next_id="2" >Прошло много лет</replic>
-   <replic id="2" actor_id="0" next_id="0" >Капитан Руби с уловом возвращается домой...</replic>
+   <replic id="1" actor_id="0" next_id="0" >Спустя некоторое время...</replic>
   </dialog>
 
 
   <dialog id="2">
-   <replic id="1" actor_id="2" next_id="2" >Оу, акулы, давно их не было видно.</replic>
+   <replic id="1" actor_id="2" next_id="2" >О, акулы! Давно их не было видно.</replic>
    <replic id="2" actor_id="2" next_id="0">Они немного опасны,
 надо их обойти или уничтожить.</replic>
   </dialog>
@@ -24,8 +23,7 @@
    <replic id="2" actor_id="2" next_id="3" >Я не могу, мы же в двумерном мире!</replic>
    <replic id="3" actor_id="7" next_id="4" >Ваши проблемы. Предпологаю, при
 столкновении вы пойдете на дно.</replic>
-   <replic id="4" actor_id="8" next_id="5" >Он правильно предполагает,
-его корабли массивнее.</replic>
+   <replic id="4" actor_id="8" next_id="5" >Его корабли массивнее. Не столкнись!</replic>
    <replic id="5" actor_id="8" next_id="0" >Постарайся перепрыгнуть их!</replic>
   </dialog>
 

@@ -20,12 +20,12 @@
   <Event command="SET_TIME" arg_int="4"/>
   <Event command="STOP_TIME_IN" arg_int="5"/> 
 
+
   <Event command="UNIT_ADD" id="1" arg_int="-500" arg_str="Barge" arg_str2="RIGHT"/>
   <Event command="UNIT_SET_PROJECTILES_COUNT" id="1" arg_int="6"/>
 
   <Event command="SET_DIE_POSITION" arg_int="-50"/>
   <Event command="UNIT_SET_POSITION" id="0" arg_int="200"/>
-
 
   <Event command="SHOW_DIALOG" id="1"/>
   <Event command="NPC_CHANGE_STATE" id="1" arg_str="ATTACK" arg_str2="RIGHT"/>
@@ -62,14 +62,16 @@
   <Event command="WAIT_SECONDS" arg_int="1"/> 
   <Event command="NPC_CHANGE_STATE" id="3" arg_int="5" arg_str="ATTACK_AND_MOVE" arg_str2="RIGHT"/>
 
-  <Event command="WAIT_SECONDS" arg_int="4"/>
+  <Event command="SHOW_REPLIC" id="4"  arg_int="1"/>
+
+  <Event command="WAIT_SECONDS" arg_int="2"/>
   <Event command="SET_FOG_VISIBLE" arg_int="75"/>
 
-  <Event command="SHOW_TITLES" id="4"/>
+  <Event command="SHOW_TITLES" id="5"/>
 
   <Event command="SET_FOG_VISIBLE" arg_int="100"/>
 
-
+  <Event command="GO_TO_MAIN_MENU"/>
  </Events>
 
 </Level>

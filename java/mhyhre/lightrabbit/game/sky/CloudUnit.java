@@ -12,55 +12,60 @@ package mhyhre.lightrabbit.game.sky;
 public class CloudUnit {
 
     public int type = 0;
-    public float SizeX = 0, SizeY = 0;
-    public float PosX = 0, PosY = 0;
-    public float SpeedX = 0, SpeedY = 0;
-    public float Scale = 1;
-    public float Rotation = 0;
+    public float sizeX = 0, sizeY = 0;
+    public float posX = 0, posY = 0;
+    public float speedX = 0, speedY = 0;
+    public float scale = 1;
+    public float rotation = 0;
 
     // Color modulation
     public float Red = 1, Green = 1, Blue = 1;
 
-    public void SetSize(float px, float py) {
-        SizeX = px;
-        SizeY = py;
+    public void setSize(float px, float py) {
+        sizeX = px;
+        sizeY = py;
     }
 
-    public void SetColor(float r, float g, float b) {
+    public void setColor(float r, float g, float b) {
         Red = r;
         Green = g;
         Blue = b;
     }
 
-    public void SetScale(float ps) {
-        Scale = ps;
+    public void setScale(float ps) {
+        scale = ps;
     }
 
-    public void SetRotation(float pr) {
-        Rotation = pr;
+    public float getScale() {
+        return scale;
     }
 
-    public void SetMoveSpeed(float px, float py) {
-        SpeedX = px;
-        SpeedY = py;
+
+    public void setRotation(float pr) {
+        rotation = pr;
     }
 
-    public void SetPosition(float px, float py) {
-        PosX = px;
-        PosY = py;
+    public void setMoveSpeed(float px, float py) {
+        speedX = px;
+        speedY = py;
     }
 
-    public void Update(float px1, float px2, float py1, float py2) {
+    public void setPosition(float px, float py) {
+        posX = px;
+        posY = py;
+    }
 
-        if ((PosX + SizeX > px2) || (PosX < px1)) {
-            SpeedX *= -1.0f;
+    public void update(float px1, float px2, float py1, float py2) {
+
+        if ((posX + sizeX > px2) || (posX < px1)) {
+            speedX *= -1.0f;
         }
-        if ((PosY + SizeY > py2) || (PosY < py1)) {
-            SpeedY *= -1.0f;
+        if ((posY + sizeY > py2) || (posY < py1)) {
+            speedY *= -1.0f;
         }
 
-        PosX += SpeedX;
-        PosY += SpeedY;
+        posX += speedX;
+        posY += speedY;
     }
 
 }

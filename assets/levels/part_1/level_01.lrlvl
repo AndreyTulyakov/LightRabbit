@@ -26,7 +26,7 @@
 
 
   <Event command="WAIT_SECONDS" arg_int="2"/>
-  <Event command="SHOW_DIALOG" id="1"/>
+  <Event command="SHOW_REPLIC" id="1"  arg_int="2"/>
   <Event command="WAIT_SECONDS" arg_int="2"/>
   <Event command="SHOW_DIALOG" id="2"/>
 
@@ -48,9 +48,9 @@
   <Event command="WAIT_SECONDS" arg_int="5"/>
   <Event command="NPC_CHANGE_STATE" id="10" arg_int="2" arg_str="NONE"/>
 
-  <Event command="UNIT_ADD" id="11" arg_int="150" arg_str="MerchantShip" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="12" arg_int="400" arg_str="MerchantShip" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="13" arg_int="650" arg_str="MerchantShip" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="11" arg_int="180" arg_str="MerchantShip" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="12" arg_int="500" arg_str="MerchantShip" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="13" arg_int="670" arg_str="MerchantShip" arg_str2="LEFT"/>
 
   <Event command="SHOW_DIALOG" id="4"/>
   <Event command="WAIT_SECONDS" arg_int="1"/>

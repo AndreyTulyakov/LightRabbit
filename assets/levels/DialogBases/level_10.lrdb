@@ -20,16 +20,18 @@
   <dialog id="3">
    <replic id="1" actor_id="22" next_id="2" >Что случилось, что с водой?</replic>
    <replic id="2" actor_id="20" next_id="3" >Сбрасывает что-то в воду.</replic>
-   <replic id="3" actor_id="22" next_id="4" >А, понятно, расстрелять!</replic>
-   <replic id="4" actor_id="21" next_id="0" >Пора сматываться.</replic>
+   <replic id="3" actor_id="22" next_id="0" >А, понятно, расстрелять!</replic>
   </dialog>
 
   <dialog id="4">
-   <replic id="1" actor_id="0" next_id="2" >Проект Light Rabbit.</replic>
-   <replic id="2" actor_id="0" next_id="3" >2014-2015.</replic>
+     <replic id="1" actor_id="21" next_id="0" >Пора сматываться!</replic>
+  </dialog>
+
+  <dialog id="5">
+   <replic id="1" actor_id="0" next_id="2" >Проект Light Rabbit</replic>
+   <replic id="2" actor_id="0" next_id="3" >2014-2015</replic>
    <replic id="3" actor_id="0" next_id="4" >Разработано в России.</replic>
-   <replic id="4" actor_id="0" next_id="5" >Автор ~ Туляков А.В.</replic>
-   <replic id="5" actor_id="0" next_id="0" >Fin!</replic>
+   <replic id="4" actor_id="0" next_id="0" >Конец!</replic>
   </dialog>
 
  </Dialogs>

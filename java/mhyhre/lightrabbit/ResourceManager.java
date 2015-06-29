@@ -5,9 +5,8 @@
 
 package mhyhre.lightrabbit;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import android.graphics.Color;
+import android.util.Log;
 
 import org.andengine.audio.sound.Sound;
 import org.andengine.audio.sound.SoundFactory;
@@ -22,8 +21,9 @@ import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
 
-import android.graphics.Color;
-import android.util.Log;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResourceManager {
     
@@ -178,7 +178,6 @@ public class ResourceManager {
         
         region = TextureRegionFactory.extractFromTexture(atlas, 76, 39, 20, 9);
         regions.put("PirateAir", region);
-        
         
         // Misc
         region = TextureRegionFactory.extractFromTexture(atlas, 32, 46, 8, 8);

@@ -21,5 +21,6 @@ public enum SceneStates {
     Exit,
     Game,
     GameLoading,
-    EndGame;
+    EndGame,
+    PauseMenu;
 }

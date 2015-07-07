@@ -5,8 +5,9 @@
 
 package mhyhre.lightrabbit.game;
 
-import mhyhre.lightrabbit.MainActivity;
 import android.util.Log;
+
+import mhyhre.lightrabbit.MainActivity;
 
 public class LevelItem {
 
@@ -90,11 +91,14 @@ public class LevelItem {
 
     public boolean isCollided(float x, float y) {
 
-        float dx = mX - mWidth / 2;
-        float dy = mY - mHeight / 2;
+        float mw = mWidth * MainActivity.PIXEL_MULTIPLIER;
+        float mh = mHeight * MainActivity.PIXEL_MULTIPLIER;
 
-        if (x >= dx && x <= dx + mWidth) {
-            if (y >= dy && y <= dy + mHeight) {
+        float dx = mX - mw / 2;
+        float dy = mY - mh / 2;
+
+        if (x >= dx && x <= dx + mw) {
+            if (y >= dy && y <= dy + mh) {
                 return true;
             }
         }

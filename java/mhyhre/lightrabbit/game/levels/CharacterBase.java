@@ -5,6 +5,14 @@
 
 package mhyhre.lightrabbit.game.levels;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -15,14 +23,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import mhyhre.lightrabbit.MainActivity;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import android.annotation.SuppressLint;
-import android.util.Log;
 
 public class CharacterBase {
 
@@ -40,29 +40,25 @@ public class CharacterBase {
 
         try {
             InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
-
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
-
             Document doc = docBuilder.parse(is);
 
             Element root = doc.getDocumentElement();
             root.normalize();
 
             parseXml(root);
-            Log.i(MainActivity.DEBUG_ID, "Character base " + filename + " loaded and contain " + characters.size());
-            
+
         } catch (IOException e) {
             Log.w(MainActivity.DEBUG_ID, "CharacterBase IO:" + e);
 
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            Log.w(MainActivity.DEBUG_ID, "CharacterBase ParserConfigurationException:" + e.getMessage());
 
         } catch (SAXException e) {
-            e.printStackTrace();
-
+            Log.w(MainActivity.DEBUG_ID, "CharacterBase ParserConfigurationException:" + e.getMessage());
         }
-
+        Log.i(MainActivity.DEBUG_ID, "Character base " + filename + " loaded and contain " + characters.size());
     }
 
     private void parseXml(Element rootElement) {

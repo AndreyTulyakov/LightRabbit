@@ -5,7 +5,8 @@
 
   <dialog id="1">
    <replic id="1" actor_id="31" next_id="2" >Что же еще случилось?</replic>
-   <replic id="2" actor_id="31" next_id="0" >Я ввел жестокие меры за нарушение экологии...</replic>
+   <replic id="2" actor_id="31" next_id="0" >Я ввел жестокие меры
+за нарушение экологии...</replic>
   </dialog>
 
   <dialog id="2">

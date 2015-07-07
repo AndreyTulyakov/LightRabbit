@@ -4,20 +4,20 @@
  <Dialogs>
 
   <dialog id="1">
-   <replic id="1" actor_id="8" next_id="2" >Настало утро следующего дня.
-Туманно было.</replic>
-   <replic id="2" actor_id="8" next_id="3" >Я взял помощника - Гоги.
-Местного парнишку.</replic>
-   <replic id="3" actor_id="8" next_id="0" >Мы взяли груз на борт
-и снарядились как могли…</replic>
+   <replic id="1" actor_id="0" next_id="0" >Настало утро следующего дня</replic>
   </dialog>
 
   <dialog id="2">
+   <replic id="1" actor_id="0" next_id="0" >Я взял помощника - Гоги.
+Старого друга.</replic>
+  </dialog>
+
+  <dialog id="3">
    <replic id="1" actor_id="1" next_id="2" >Вот так скорость!</replic>
    <replic id="2" actor_id="2" next_id="0" >Не нравится это мне…</replic>
   </dialog>
 
-  <dialog id="3">
+  <dialog id="4">
    <replic id="1" actor_id="5" next_id="2" >Здравствуйте, мы хотели бы
 забрать всё что у вас есть.</replic>
    <replic id="2" actor_id="2" next_id="3" >Мы останемся живы?</replic>
@@ -26,14 +26,23 @@
    <replic id="5" actor_id="5" next_id="0" >Окей.</replic>
   </dialog>
 
-  <dialog id="4">
+  <dialog id="5">
    <replic id="1" actor_id="5" next_id="0" >Что же, пришло время покончить с этим!</replic>
   </dialog>
 
-  <dialog id="5">
+  <dialog id="6">
+   <replic id="1" actor_id="1" next_id="0" >Я еще слишком молод!</replic>
+  </dialog>
+
+  <dialog id="7">
    <replic id="1" actor_id="8" next_id="2" >Исчезая под водой я понимал.</replic>
    <replic id="2" actor_id="8" next_id="3" >Это была славная битва.</replic>
    <replic id="3" actor_id="8" next_id="0" >Но так просто это всё не могло закончится...</replic>
+  </dialog>
+
+
+  <dialog id="8">
+   <replic id="1" actor_id="0" next_id="0" >Пиратские лодки!</replic>
   </dialog>
 
  </Dialogs>

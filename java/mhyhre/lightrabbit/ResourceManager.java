@@ -86,32 +86,41 @@ public class ResourceManager {
 
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
+
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 1024, 1024, TextureOptions.NEAREST);
+        BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "BackgroundLS.png", 0, 0);
+        atlas.load();
+        atlases.put("Background", atlas);
+        regions.put("backgroundLevelSelector", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 960, 540, false));
+
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 128, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "User_Interface.png", 0, 0);
         atlas.load();
         atlases.put("User_Interface", atlas);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false);
-        regions.put("Button1", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 110, 450, 92, 60, false);
+        regions.put("Button1", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 76, 16, false));
+
+        region = TextureRegionFactory.extractFromTexture(atlas, 28, 113, 22, 14, false);
         regions.put("Button2", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 9, 160, 64, 64, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 3, 41, 14, 14, false);
         regions.put("ButtonVibration", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 9, 234, 64, 64, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 3, 59, 16, 14, false);
         regions.put("ButtonSound", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 1, 447, 64, 64, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 102, 102, 16, 16, false);
         regions.put("ParticlePoint", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 360, 104, 144, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 51, 46, 26, 36, false);
         regions.put("LevelCell", region);
         
-        region = TextureRegionFactory.extractFromTexture(atlas, 380, 386, 124, 124, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 96, 97, 30, 30, false);
         regions.put("EquipmentCell", region);
-        regions.put("Button", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 310, 70, false));
+
+        regions.put("RowRight", TextureRegionFactory.extractFromTexture(atlas, 32, 95, 14, 12, false));
+        regions.put("RowLeft", TextureRegionFactory.extractFromTexture(atlas, 48, 95, 14, 12, false));
+
 
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
@@ -326,13 +335,13 @@ public class ResourceManager {
         fonts.put("White Furore", mFont);
 
         final ITexture TextureFontPixelWhite24 = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
-
         mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite24, MainActivity.Me.getAssets(), "Furore.otf", 24, true,
                 Color.WHITE);
         mFont.load();
         fonts.put("White Furore 24", mFont);
 
-        mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite24, MainActivity.Me.getAssets(), "Furore.otf", 16, true,
+        final ITexture TextureFontPixelWhite16 = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+        mFont = FontFactory.createFromAsset(MainActivity.Me.getFontManager(), TextureFontPixelWhite16, MainActivity.Me.getAssets(), "Furore.otf", 16, true,
                 Color.WHITE);
         mFont.load();
         fonts.put("White Furore 16", mFont);

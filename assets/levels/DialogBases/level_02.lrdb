@@ -5,36 +5,32 @@
 
   <dialog id="1">
 
-   <replic id="1" actor_id="8" next_id="2" >Раннее утро, сидим значит в кафе.
+   <replic id="1" actor_id="8" next_id="2" >Раннее утро, дождь, сидим значит в кафе.
    Я и моё тело.</replic>
 
-   <replic id="2" actor_id="8" next_id="3" >К нам идет какой-то тип.</replic>
+   <replic id="2" actor_id="8" next_id="3" >Подходит какой-то тип в капюшоне.</replic>
+   <replic id="3" actor_id="10" next_id="5" >Не хочешь взяться за одну работу?</replic>
 
-   <replic id="3" actor_id="10" next_id="4" >Здравствуй Руби.</replic>
-   <replic id="4" actor_id="10" next_id="5" >Я раньше плавал с твоим отцом.</replic>
-   <replic id="4" actor_id="10" next_id="5" >Меня зовут Питон.</replic>
+   <replic id="5" actor_id="3" next_id="6" >А вы кем будете?</replic>
+   <replic id="6" actor_id="10" next_id="7" >Меня зовут Питон, я занимаюсь перевозками.</replic>
 
-   <replic id="5" actor_id="13" next_id="6" >Здрасти дядь Питон</replic>
-   <replic id="6" actor_id="8" next_id="7" >Странный тип. Не припомню его.</replic>
-   <replic id="7" actor_id="11" next_id="8" >Я слышал ты ещё ловишь рыбку. Что же.
-Не очень много денег приносит наверное?</replic>
-   <replic id="8" actor_id="8" next_id="9" >Киваю.</replic>
-   <replic id="9" actor_id="11" next_id="10" >Я думаю ты не откажешься
-от одного прибыльного дельца.</replic>
-   <replic id="10" actor_id="13" next_id="11" >И что же за дело?</replic>
+   <replic id="7" actor_id="3" next_id="8" >И что же за дело?</replic>
 
-   <replic id="11" actor_id="11" next_id="12" >Тебе нужно будет переправить груз,
+   <replic id="8" actor_id="10" next_id="9" >Тебе нужно будет переправить груз,
 антиквариат.</replic>
-   <replic id="12" actor_id="11" next_id="13" >Дорога дальняя, неделя уйдет.</replic>
-   <replic id="13" actor_id="11" next_id="14" >Но, я щедро заплачу тебе.
-   5000 урановых монет.
-   С задатком в половину.</replic>
-   <replic id="14" actor_id="8" next_id="15" >Нифигасе. Я богат!</replic>
-   <replic id="15" actor_id="13" next_id="16" >Я подумаю.</replic>
-   <replic id="16" actor_id="11" next_id="17" >Смотри, я спешу, и могу отдать
+
+   <replic id="9" actor_id="10" next_id="10" >Мой корабль получил пробоину.
+Дорога дальняя, неделя уйдет.</replic>
+
+   <replic id="10" actor_id="10" next_id="11" >Но, я щедро заплачу тебе.
+5000 у.е. Согласишься?</replic>
+
+   <replic id="11" actor_id="8" next_id="12" >Нифигасе. Я богат!</replic>
+   <replic id="12" actor_id="10" next_id="13" >Смотри, я спешу, и могу отдать
 эту работу любому другому.</replic>
-   <replic id="17" actor_id="13" next_id="18" >В таком случае я согласен.</replic>
-   <replic id="18" actor_id="12" next_id="0" >Вот и хорошо. Детали обсудим чуть позже.</replic>
+
+   <replic id="13" actor_id="3" next_id="14" >В таком случае я согласен.</replic>
+   <replic id="14" actor_id="10" next_id="0" >Вот и хорошо. Детали обсудим позже.</replic>
   </dialog>
 
  </Dialogs>

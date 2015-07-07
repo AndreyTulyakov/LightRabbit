@@ -12,10 +12,10 @@
 
 package mhyhre.lightrabbit.scenes;
 
-import mhyhre.lightrabbit.MainActivity;
-
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
+
+import mhyhre.lightrabbit.MainActivity;
 
 public class SceneRoot extends Scene {
 
@@ -26,9 +26,10 @@ public class SceneRoot extends Scene {
     public SceneAbout mSceneAbout;
     public SceneExit mSceneExit;
     public SceneGame mSceneGame;
+    public ScenePauseGame mScenePauseGame;
     public SceneLevelSelector mSceneLevelSelector;
     public SceneGameLoading mSceneGameLoading;
-    
+
 
     public static boolean Preloaded = false;
 
@@ -51,6 +52,7 @@ public class SceneRoot extends Scene {
         mSceneExit = new SceneExit();
         mSceneLevelSelector = new SceneLevelSelector();
         mSceneGameLoading = new SceneGameLoading();
+        mScenePauseGame = new ScenePauseGame();
 
         mSceneGame = null;
 
@@ -81,77 +83,88 @@ public class SceneRoot extends Scene {
             mSceneExit.hide();
             mSceneLevelSelector.hide();
             mSceneGameLoading.hide();
+            mScenePauseGame.hide();
 
             if (mSceneGame != null)
                 mSceneGame.hide();
 
             switch (state) {
-            case Splash:
-                mSceneLoader.show();
-                break;
+                case Splash:
+                    mSceneLoader.show();
+                    break;
 
-            case MainMenu:
-                mSceneMainMenu.show();
-                break;
+                case MainMenu:
+                    mSceneMainMenu.show();
+                    break;
 
-            case LevelSelector:
-                mSceneLevelSelector.show();
-                break;
-            
+                case LevelSelector:
+                    mSceneLevelSelector.show();
+                    break;
 
-            case About:
-                mSceneAbout.show();
-                break;
 
-            case Exit:
-                mSceneExit.show();
-                break;
+                case About:
+                    mSceneAbout.show();
+                    break;
 
-            case GameLoading:
+                case Exit:
+                    mSceneExit.show();
+                    break;
 
-                mSceneGameLoading.setLoaded(false);
+                case GameLoading:
 
-                detachChild(mSceneGameLoading);
+                    mSceneGameLoading.setLoaded(false);
 
-                if (mSceneGame != null) {
-                    this.detachChild(mSceneGame);
-                    mSceneGame = null;
-                }
+                    detachChild(mSceneGameLoading);
 
-                mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().getFilename());
-                mSceneGame.onManagedUpdate(0);
-                mSceneGame.pause();
+                    if (mSceneGame != null) {
+                        this.detachChild(mSceneGame);
+                        this.detachChild(mScenePauseGame);
+                        mSceneGame = null;
+                    }
 
-                mSceneGameLoading.setLevelName(mSceneGame.getLevel().getName());
-                mSceneGameLoading.setLevelChapter(mSceneGame.getLevel().getChapter());
+                    mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().getFilename());
+                    mSceneGame.onManagedUpdate(0);
+                    mSceneGame.pause();
 
-                this.attachChild(mSceneGame);
-                this.attachChild(mSceneGameLoading);
+                    mSceneGameLoading.setLevelName(mSceneGame.getLevel().getName());
+                    mSceneGameLoading.setLevelChapter(mSceneGame.getLevel().getChapter());
 
-                mSceneGameLoading.show();
-                mSceneGame.show();
+                    this.attachChild(mSceneGame);
+                    this.attachChild(mSceneGameLoading);
+                    this.attachChild(mScenePauseGame);
 
-                mSceneGameLoading.setLoaded(true);
-
-                break;
-
-            case Game:
-
-                if (mSceneGame != null) {
-
+                    mSceneGameLoading.show();
                     mSceneGame.show();
-                    mSceneGame.start();
-                }
-                break;
 
-            case EndGame:
+                    mSceneGameLoading.setLoaded(true);
 
-                SetState(SceneStates.LevelSelector);
-                break;
+                    break;
 
-            default:
+                case Game:
 
-                break;
+                    if (mSceneGame != null) {
+
+                        mSceneGame.show();
+                        mSceneGame.start();
+                    }
+                    break;
+
+                case PauseMenu:
+                    if (mSceneGame != null) {
+                        mSceneGame.show();
+                        mSceneGame.pause();
+                        mScenePauseGame.show();
+                    }
+                    break;
+
+                case EndGame:
+
+                    SetState(SceneStates.LevelSelector);
+                    break;
+
+                default:
+
+                    break;
             }
         }
 
@@ -165,38 +178,42 @@ public class SceneRoot extends Scene {
     public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
 
         if (Preloaded) {
-            
+
             switch (state) {
-            case Splash:
-                mSceneLoader.onSceneTouchEvent(pSceneTouchEvent);
-                break;
+                case Splash:
+                    mSceneLoader.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
 
-            case MainMenu:
-                mSceneMainMenu.onSceneTouchEvent(pSceneTouchEvent);
-                break;
+                case MainMenu:
+                    mSceneMainMenu.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
 
-            case LevelSelector:
-                mSceneLevelSelector.onSceneTouchEvent(pSceneTouchEvent);
-                break;
-                
-            case About:
-                mSceneAbout.onSceneTouchEvent(pSceneTouchEvent);
-                break;
+                case LevelSelector:
+                    mSceneLevelSelector.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
 
-            case Exit:
-                mSceneExit.onSceneTouchEvent(pSceneTouchEvent);
-                break;
+                case About:
+                    mSceneAbout.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
 
-            case GameLoading:
-                mSceneGameLoading.onSceneTouchEvent(pSceneTouchEvent);
-                break;
+                case Exit:
+                    mSceneExit.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
 
-            case Game:
-                mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
-                break;
+                case GameLoading:
+                    mSceneGameLoading.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
 
-            default:
-                break;
+                case Game:
+                    mSceneGame.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
+
+                case PauseMenu:
+                    mScenePauseGame.onSceneTouchEvent(pSceneTouchEvent);
+                    break;
+
+                default:
+                    break;
 
             }
         }
@@ -206,36 +223,40 @@ public class SceneRoot extends Scene {
     public void onSceneBackPress() {
 
         switch (state) {
-        case Splash:
+            case Splash:
 
-            break;
+                break;
 
-        case MainMenu:
-            SetState(SceneStates.Exit);
-            break;
+            case MainMenu:
+                SetState(SceneStates.Exit);
+                break;
 
-        case GameLoading:
+            case GameLoading:
 
-            break;
+                break;
 
-        case Game:
-            SetState(SceneStates.LevelSelector);
-            break;
+            case Game:
+                SetState(SceneStates.PauseMenu);
+                break;
 
-        case LevelSelector:
-            SetState(SceneStates.MainMenu);
-            break;
+            case PauseMenu:
+                SetState(SceneStates.Game);
+                break;
 
-        case About:
-            SetState(SceneStates.MainMenu);
-            break;
+            case LevelSelector:
+                SetState(SceneStates.MainMenu);
+                break;
 
-        case Exit:
-            SetState(SceneStates.MainMenu);
-            break;
+            case About:
+                SetState(SceneStates.MainMenu);
+                break;
 
-        default:
-            break;
+            case Exit:
+                SetState(SceneStates.MainMenu);
+                break;
+
+            default:
+                break;
         }
     }
 

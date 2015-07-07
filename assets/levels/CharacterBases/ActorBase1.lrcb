@@ -10,10 +10,8 @@
  <character id="8" name="Внутренний голос" icon="intuition"/>
  <character id="9" name="Правила Водного Движения" icon=""/>
 
- <character id="10" name="Невнятный Тип" icon=""/>
- <character id="11" name="Дядя Питон" icon=""/>
+ <character id="10" name="Тип в капюшоне" icon="pythonMan"/>
  <character id="12" name="Питон" icon=""/>
- <character id="13" name="Рэббит наземный" icon=""/>
  
  <character id="20" name="Индустриальный" icon="indMan"/>
  <character id="21" name="Николя" icon="nikola"/>
@@ -26,5 +24,9 @@
  <character id="29" name="Майор Купер" icon="cooper"/>
  <character id="30" name="Призрак" icon=""/>
  <character id="31" name="Купер" icon="cooper"/> 
+
+ <character id="32" name="Кларсен" icon=""/> 
+ <character id="33" name="Стив" icon=""/>  
+ <character id="34" name="Рация *Пиратская волна*" icon=""/>  
 
 </Characters>

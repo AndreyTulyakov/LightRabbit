@@ -13,28 +13,32 @@
 package mhyhre.lightrabbit.scenes;
 
 
-import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.scenes.utils.EaseScene;
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.font.IFont;
+
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneMainMenu extends EaseScene {
 
     public Text mCaptionItem1; // New Game
     public Text mCaptionItem2; // About
     public Text mCaptionItem3; // Exit
+    private Sprite background;
 
     
     public SceneMainMenu() {
         
-        setBackgroundEnabled(true);
-        setBackground(new Background(0.6f, 0.7f, 0.9f));
-        
-        
+        setBackgroundEnabled(false);
+        background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
+                MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
+                MainActivity.Me.getVertexBufferObjectManager());
+        attachChild(background);
+
+
         // Text captions
         String TextItem1 = MainActivity.Me.getString(R.string.MenuItem_Play);
         String TextItem3 = MainActivity.Me.getString(R.string.MenuItem_About);
@@ -64,6 +68,7 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
+        buttonSpriteGame.setScale(MainActivity.PIXEL_MULTIPLIER);
 
         Sprite buttonSpriteAbout = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
@@ -76,7 +81,8 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
-        
+        buttonSpriteAbout.setScale(MainActivity.PIXEL_MULTIPLIER);
+
         Sprite buttonSpriteExit = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -88,6 +94,8 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
+        buttonSpriteExit.setScale(MainActivity.PIXEL_MULTIPLIER);
+
           
         // Calculating positions
         float OffsetX = MainActivity.getHalfWidth();
@@ -134,10 +142,11 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
-        mSpriteVibro.setPosition(MainActivity.getWidth()/6, MainActivity.getHalfHeight());
+        mSpriteVibro.setScale(MainActivity.PIXEL_MULTIPLIER);
+        mSpriteVibro.setPosition(MainActivity.getWidth() / 6, MainActivity.getHalfHeight());
         registerTouchArea(mSpriteVibro);
         attachChild(mSpriteVibro);
-        mSpriteVibro.setColor(0.1f,0.6f,1.0f);
+        mSpriteVibro.setColor(0.4f, 0.8f, 1.0f);
 
         Sprite mSpriteSound = new Sprite(0, 0, MainActivity.resources.getTextureRegion("ButtonSound"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
@@ -157,11 +166,11 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
-        
+        mSpriteSound.setScale(MainActivity.PIXEL_MULTIPLIER);
         mSpriteSound.setPosition((MainActivity.getWidth()/6)*5, MainActivity.getHalfHeight());
         attachChild(mSpriteSound);
         registerTouchArea(mSpriteSound);
-        mSpriteSound.setColor(0.1f,0.6f,1.0f);
+        mSpriteSound.setColor(0.4f,0.8f,1.0f);
         
         if (MainActivity.isVibroEnabled() == false) {
             mSpriteVibro.setAlpha(0.4f);

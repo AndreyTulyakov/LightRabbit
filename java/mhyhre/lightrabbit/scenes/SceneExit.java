@@ -12,28 +12,30 @@
 
 package mhyhre.lightrabbit.scenes;
 
-import mhyhre.lightrabbit.R;
+import android.util.Log;
 
-import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.scenes.utils.EaseScene;
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
-import android.util.Log;
+
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneExit extends EaseScene {
 
     private Text textQuestion;
     private Text buttonTextBack;
     private Text buttonTextExit;
-    
+    private Sprite background;
 
     public SceneExit() {
 
-        setBackgroundEnabled(true);
-        setBackground(new Background(0.2f, 0.2f, 0.2f));
-
+        setBackgroundEnabled(false);
+        background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
+                MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
+                MainActivity.Me.getVertexBufferObjectManager());
+        attachChild(background);
 
         String textExit = MainActivity.Me.getString(R.string.QExit);
         String textBack = MainActivity.Me.getString(R.string.textBack);
@@ -52,6 +54,7 @@ public class SceneExit extends EaseScene {
                 return true;
             }
         };
+        buttonExitRect.setScale(MainActivity.PIXEL_MULTIPLIER);
 
         Sprite buttonBackRect  = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
@@ -65,6 +68,7 @@ public class SceneExit extends EaseScene {
                 return true;
             }
         };
+        buttonBackRect.setScale(MainActivity.PIXEL_MULTIPLIER);
 
         textQuestion = new Text(0, 0, MainActivity.resources.getFont("White Furore"), textExit, MainActivity.Me.getVertexBufferObjectManager());
         textQuestion.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
@@ -73,7 +77,7 @@ public class SceneExit extends EaseScene {
         buttonBackRect.setColor(0.8f, 0.8f, 1.0f);
 
         float OffsetX = MainActivity.getWidth() / 4.0f;
-        float OffsetY = buttonExitRect.getHeight() * 1.5f;
+        float OffsetY = buttonExitRect.getHeight() * MainActivity.PIXEL_MULTIPLIER * 1.5f;
 
         buttonBackRect.setPosition(OffsetX * 1, OffsetY);
         buttonExitRect.setPosition(OffsetX * 3, OffsetY);
@@ -96,7 +100,6 @@ public class SceneExit extends EaseScene {
 
     @Override
     public boolean onSceneTouchEvent(final TouchEvent pSceneTouchEvent) {
-
         return super.onSceneTouchEvent(pSceneTouchEvent);
     }
 }

@@ -70,13 +70,12 @@ public class GameMessageManager extends EaseScene {
         textTitle.setHorizontalAlign(HorizontalAlign.CENTER);
         textTitle.setLeading(20);
 
-        clickRect = new Rectangle(0, 0, MainActivity.getWidth() - 200, MainActivity.getHeight() * 0.66f, MainActivity.Me.getVertexBufferObjectManager()) {
+        clickRect = new Rectangle(0, 0, MainActivity.getWidth() - 100, MainActivity.getHeight() * 0.66f, MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
                     if (currentShowMode == ShowMode.SHOW_DIALOGS) {
-                        // if has not next replic
                         if (currentReplic.getNextId() == 0) {
                             if (activeMessage) {
                                 hide();
@@ -90,8 +89,6 @@ public class GameMessageManager extends EaseScene {
                         Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
                         MainActivity.vibrate(30);
                     }
-
-
                 }
                 return true;
             }
@@ -100,7 +97,6 @@ public class GameMessageManager extends EaseScene {
         clickRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         clickRect.setColor(0.0f, 0.0f, 0.0f, 0.60f);
         registerTouchArea(clickRect);
-
 
         actorRect = new Rectangle(0, 0, MainActivity.getWidth() - 60, 100, MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
@@ -151,6 +147,7 @@ public class GameMessageManager extends EaseScene {
     private void updateVisualMessage() {
 
         Character character;
+        Log.w(MainActivity.DEBUG_ID, "updateVisualMessage" + currentShowMode.name());
 
         switch (currentShowMode) {
 
@@ -167,11 +164,13 @@ public class GameMessageManager extends EaseScene {
 
                 character = characterBase.getCharacter(currentReplic.getActorId());
                 if (character == null) {
+                    Log.w(MainActivity.DEBUG_ID, "character == null");
+
                     return;
                 }
                 textCharacter.setVisible(true);
-                textCharacter.setAlpha(1);
                 textCharacter.setText(character.getName());
+                Log.w(MainActivity.DEBUG_ID, "Char name:" + character.getName());
 
 
                 if (characterIcon != null) {
@@ -200,7 +199,6 @@ public class GameMessageManager extends EaseScene {
                 }
                 textTitle.setText(currentReplic.getText());
                 textTitle.setAlpha(0);
-                textCharacter.setAlpha(0);
                 break;
 
             case SHOW_REPLIC:
@@ -297,7 +295,7 @@ public class GameMessageManager extends EaseScene {
             switch (currentShowMode) {
 
                 case SHOW_DIALOGS:
-
+                    textCharacter.setVisible(true);
                     if (textMessage.getAlpha() < 1.0f) {
                         textMessage.setAlpha(textMessage.getAlpha() + 0.05f);
                         if (textMessage.getAlpha() > 1.0f) {

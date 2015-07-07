@@ -12,6 +12,14 @@
 
 package mhyhre.lightrabbit.scenes;
 
+import android.util.Log;
+
+import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.sprite.batch.SpriteBatch;
+import org.andengine.entity.text.Text;
+import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.texture.region.ITextureRegion;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +30,10 @@ import mhyhre.lightrabbit.game.levels.LevelsPage;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 import mhyhre.lightrabbit.utils.LevelListLoader;
 
-import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.sprite.Sprite;
-import org.andengine.entity.sprite.batch.SpriteBatch;
-import org.andengine.entity.text.Text;
-import org.andengine.input.touch.TouchEvent;
-import org.andengine.opengl.texture.region.ITextureRegion;
-import android.util.Log;
-
 public class SceneLevelSelector extends EaseScene {
 
     private static final float HORIZONTAL_DISTANCE = 80;
-    private static final int MAX_LEVELS_ON_SCREEN = 20;
+    private static final int MAX_LEVELS_ON_SCREEN = 10;
     private static final float NOT_ACTIVE_ALPHA = 0.25f;
 
     private LevelUnlocker unlocker;
@@ -41,6 +41,7 @@ public class SceneLevelSelector extends EaseScene {
     private List<LevelsPage> pages;
     private List<Text> levelsTexts;
     private int currentPage = 0;
+    private float moveCounter = 0;
 
     private SpriteBatch iconsBatch;
     private Text textCaption;
@@ -49,11 +50,11 @@ public class SceneLevelSelector extends EaseScene {
 
     private Sprite nextPage;
     private Sprite prevPage;
+    private Sprite background;
 
     public SceneLevelSelector() {
 
-        setBackgroundEnabled(true);
-        setBackground(new Background(0.5f, 0.6f, 0.9f));
+        setBackgroundEnabled(false);
 
         unlocker = MainActivity.Me.getLevelUnlocker();
 
@@ -61,7 +62,12 @@ public class SceneLevelSelector extends EaseScene {
 
         levelsTexts = new ArrayList<Text>(MAX_LEVELS_ON_SCREEN);
 
-        nextPage = new Sprite(MainActivity.getWidth() - 100, MainActivity.getHeight() * 0.75f, MainActivity.resources.getTextureRegion("Right"),
+        background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
+                MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
+                MainActivity.Me.getVertexBufferObjectManager());
+        attachChild(background);
+
+        nextPage = new Sprite(MainActivity.getWidth() - 100, MainActivity.getHeight() * 0.75f, MainActivity.resources.getTextureRegion("RowRight"),
                 MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -78,15 +84,15 @@ public class SceneLevelSelector extends EaseScene {
             @Override
             protected void onManagedUpdate(float pSecondsElapsed) {
                 if (currentPage == pages.size() - 1) {
-                    setAlpha(NOT_ACTIVE_ALPHA);
+                    setVisible(false);
                 } else {
-                    setAlpha(1.0f);
+                    setVisible(true);
                 }
                 super.onManagedUpdate(pSecondsElapsed);
             }
         };
 
-        prevPage = new Sprite(100, MainActivity.getHeight() * 0.25f, MainActivity.resources.getTextureRegion("Left"),
+        prevPage = new Sprite(100, MainActivity.getHeight() * 0.25f, MainActivity.resources.getTextureRegion("RowLeft"),
                 MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -103,9 +109,9 @@ public class SceneLevelSelector extends EaseScene {
             @Override
             protected void onManagedUpdate(float pSecondsElapsed) {
                 if (currentPage == 0) {
-                    setAlpha(NOT_ACTIVE_ALPHA);
+                    setVisible(false);
                 } else {
-                    setAlpha(1.0f);
+                    setVisible(true);
                 }
                 super.onManagedUpdate(pSecondsElapsed);
             }
@@ -131,7 +137,7 @@ public class SceneLevelSelector extends EaseScene {
         attachChild(textCaption);
 
         for (int i = 0; i < MAX_LEVELS_ON_SCREEN; i++) {
-            Text caption = new Text(0, 0, MainActivity.resources.getFont("Furore"), "", 32, MainActivity.Me.getVertexBufferObjectManager());
+            Text caption = new Text(0, 0, MainActivity.resources.getFont("White Furore 24"), "", 48, MainActivity.Me.getVertexBufferObjectManager());
             levelsTexts.add(caption);
             attachChild(caption);
         }
@@ -159,7 +165,7 @@ public class SceneLevelSelector extends EaseScene {
             LevelItem item = levels.get(i);
             Text caption = levelsTexts.get(i);
             caption.setText(item.getLabel());
-            caption.setPosition(item.getX(), item.getY() - (item.getHeight() / 2 + 20));
+            caption.setPosition(item.getX(), item.getY() - ((item.getHeight()*MainActivity.PIXEL_MULTIPLIER) / 2 + 20));
             caption.setVisible(true);
         }
     }
@@ -170,7 +176,7 @@ public class SceneLevelSelector extends EaseScene {
 
         // Positioning
         float hStep = 40;
-        float xStep = (levelCellRegion.getWidth() + HORIZONTAL_DISTANCE);
+        float xStep = (levelCellRegion.getWidth() * MainActivity.PIXEL_MULTIPLIER + HORIZONTAL_DISTANCE);
         float xStart = MainActivity.getHalfWidth() - (xStep * ((levels.size() - 1) / 2.0f));
         float yStart = MainActivity.getHalfHeight() + hStep * levels.size() / 2;
 
@@ -182,12 +188,24 @@ public class SceneLevelSelector extends EaseScene {
             item.setHeight(levelCellRegion.getHeight());
 
             item.setX(xStart + i * xStep);
-            item.setY(yStart - hStep * i);
+            if(unlocker.isLevelUnlocked(item.getId())) {
+                item.setY(yStart - hStep * i + (float)(30.0f * Math.sin(moveCounter + i)));
+            } else {
+                item.setY(yStart - hStep * i);
+            }
         }
     }
 
     @Override
     protected void onManagedUpdate(float pSecondsElapsed) {
+
+        moveCounter += pSecondsElapsed;
+        if(moveCounter > 6.286f) {
+            moveCounter = moveCounter % 6.286f;
+        }
+
+        configureLevelsItem();
+        configureLevelsCaption();
 
         for (LevelItem item : pages.get(currentPage).getLevelList()) {
 
@@ -199,7 +217,8 @@ public class SceneLevelSelector extends EaseScene {
             } else {
                 colorsPower = 0.55f;
             }
-            iconsBatch.draw(levelCellRegion, item.getLeftX(), item.getDownY(), item.getWidth(), item.getHeight(), 0, colorsPower, colorsPower, colorsPower, 1);
+            iconsBatch.draw(levelCellRegion, item.getLeftX(), item.getDownY(), item.getWidth(), item.getHeight(),
+                    MainActivity.PIXEL_MULTIPLIER, MainActivity.PIXEL_MULTIPLIER, colorsPower, colorsPower, colorsPower, 1);
         }
 
         iconsBatch.submit();

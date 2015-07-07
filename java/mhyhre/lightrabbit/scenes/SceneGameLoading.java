@@ -12,16 +12,16 @@
 
 package mhyhre.lightrabbit.scenes;
 
-import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.scenes.utils.EaseScene;
+import android.util.Log;
 
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
 
-import android.util.Log;
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneGameLoading extends EaseScene {
 
@@ -69,9 +69,7 @@ public class SceneGameLoading extends EaseScene {
         mLevelName = new Text(0, 0, MainActivity.resources.getFont("White Furore 24"), "", 100, MainActivity.Me.getVertexBufferObjectManager());
         mLevelName.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight() - 80);
 
-        float h = mTextPress.getHeight() + 40;
-
-        mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mTextPress.getY(), MainActivity.getWidth(), h,
+        mRotationRect = new Rectangle(MainActivity.getHalfWidth(), mTextPress.getY(), MainActivity.getWidth(), mTextPress.getHeight() + 40,
                 MainActivity.Me.getVertexBufferObjectManager());
         mRotationRect.setColor(Color.BLACK);
 

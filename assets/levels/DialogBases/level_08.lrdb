@@ -4,20 +4,49 @@
  <Dialogs>
  
   <dialog id="1">
-   <replic id="1" actor_id="0" next_id="2" >Ситуация оказалась непростая.
-   Покопавшись в записях выяснилось следующее:</replic>
-   <replic id="2" actor_id="0" next_id="3" >Императора звали Питон и был
-он помешанный.</replic>
-   <replic id="3" actor_id="0" next_id="4" >Среди бреда упоминается какой-то рыбак.</replic>
-   <replic id="4" actor_id="0" next_id="5" >Да и с пиратами империя имела тайные связи.</replic>
-   <replic id="5" actor_id="0" next_id="6" >И поставка каких-то древних артефактов.
-А они утонули.</replic>
-   <replic id="6" actor_id="0" next_id="7" >Прямо с рыбаком. Ничего не смогли найти.</replic>
-   <replic id="7" actor_id="0" next_id="8" >Император испугался и решил на всякий
-случай от пиратов избавиться.</replic>
-   <replic id="8" actor_id="0" next_id="9" >Вот так и началась войнушка.</replic>
-   <replic id="9" actor_id="0" next_id="10" >А потом дух рыбака стал мстить пиратам.</replic>
-   <replic id="10" actor_id="31" next_id="0" >И император внезапно умер. Хм...</replic>
+   <replic id="1" actor_id="0" next_id="2" >Небольшая пиратская банда расположилась
+на побережье пустынных островов.</replic>
+   <replic id="2" actor_id="0" next_id="3" >Один пиратский корабль был без якоря.</replic>
+   <replic id="3" actor_id="0" next_id="0" >И пока все дрейфовали, его время от
+времени сносило течением.</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" actor_id="33" next_id="2" >Эй Кларсен, мы отдалились, пора бы
+подплыть поближе к остальным.</replic>
+   <replic id="2" actor_id="32" next_id="3" >Стив, я хочу спать,
+может ты сам всё сделаешь?</replic>
+   <replic id="3" actor_id="33" next_id="0" >Хорошо, но только в этот раз.</replic>
+  </dialog>
+
+
+  <dialog id="3">
+   <replic id="1" actor_id="0" next_id="0" >..Зашуршала рация..</replic>
+  </dialog>
+
+
+  <dialog id="4">
+   <replic id="1" actor_id="34" next_id="2" >Пшшш, парни, держитесь ближе.
+Вас едва видно.</replic>
+   <replic id="2" actor_id="33" next_id="0" >Говорит Стив, сейчас приблизимся.</replic>
+  </dialog>
+
+  <dialog id="5">
+   <replic id="1" actor_id="34" next_id="2" >Пшшш, вы плывете не в ту сторону,
+вас уже не видно.</replic>
+   <replic id="2" actor_id="33" next_id="0" >Мы плывем на белые огни.</replic>
+  </dialog>
+
+  <dialog id="7">
+   <replic id="1" actor_id="34" next_id="0" >Но у пшшс крсн..е пшшш..гни.
+(Нет сигнала)</replic>
+  </dialog>
+
+
+  <dialog id="6">
+   <replic id="1" actor_id="0" next_id="2" >Через некоторое время сквозь
+туман к берегу приплыл корабль.</replic>
+   <replic id="2" actor_id="0" next_id="0" >Ни одной живой души на нём не нашли.</replic>
   </dialog>
 
  </Dialogs>

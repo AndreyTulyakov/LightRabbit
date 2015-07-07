@@ -17,5 +17,7 @@
     <string name="youWasDied">Вы умерли</string>
     <string name="passLevel">Вы прошли уровень!</string>
     <string name="level">Уровень</string>
-
+    <string name="resume">Продолжить</string>
+    <string name="pauseExit">Выйти</string>
+    <string name="pause">Пауза</string>
 </resources>

@@ -12,20 +12,19 @@
 
 package mhyhre.lightrabbit.scenes;
 
-import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
-import mhyhre.lightrabbit.game.WaterPolygon;
-import mhyhre.lightrabbit.scenes.utils.EaseScene;
+import android.util.Log;
+
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
 
-import android.util.Log;
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 
 public class SceneLoader extends EaseScene {
@@ -42,8 +41,6 @@ public class SceneLoader extends EaseScene {
     public Text textGameLogo;
 
     private boolean Clicked = false;
-    private WaterPolygon water;
-    private Sprite preloaderBoat;
     
     public SceneLoader() {
         
@@ -52,32 +49,23 @@ public class SceneLoader extends EaseScene {
         
         MainActivity.resources.LoadResourcesForPreloader();
         
-        Color tra = new Color(0.0f, 0.8f, 1.0f, 1.0f);
+        Color captionsColor = new Color(0.0f, 0.8f, 1.0f, 1.0f);
         
-        water = new WaterPolygon(MainActivity.getVboManager());
-        water.setWaveHeight(30);
-        water.setColor(tra);//(0.0f, 0.8f, 1.0f, 1.0f);
-        attachChild(water);
-        
-        preloaderBoat = new Sprite(0, 0, MainActivity.resources.getTextureRegion("PreloaderBoat"), MainActivity.Me.getVertexBufferObjectManager());
-        attachChild(preloaderBoat);
-        preloaderBoat.setX(MainActivity.getHalfWidth());
-        preloaderBoat.setColor(tra);//(0.0f, 0.8f, 1.0f, 1.0f);
-        
+
         // Tap text
         String TextMessage = MainActivity.Me.getString(R.string.textTap);
         mCaptionTapScreen = new Text(0, 0, MainActivity.resources.getFont("White Furore"), TextMessage, MainActivity.getVboManager());
         mCaptionTapScreen.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 4) * 1);
         mCaptionTapScreen.setVisible(false);
         mCaptionTapScreen.setAlpha(0.0f);
-        mCaptionTapScreen.setColor(0.1f, 0.25f, 0.3f);
+        mCaptionTapScreen.setColor(captionsColor);
         
         textGameLogo = new Text(0, 0, MainActivity.resources.getFont("Furore48"), " " + MainActivity.Me.getString(R.string.app_name),
                 MainActivity.getVboManager());
         textGameLogo.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 4) * 3);
         //textGameLogo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         textGameLogo.setAlpha(0.0f);
-        textGameLogo.setColor(0.0f, 0.8f, 1.0f);
+        textGameLogo.setColor(captionsColor);
 
         // tap-zone
         TapRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.getVboManager()) {
@@ -92,6 +80,8 @@ public class SceneLoader extends EaseScene {
                 return true;
             }
         };
+
+
         TapRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         TapRect.setVisible(false);
         TapRect.setAlpha(AlphaTime3);
@@ -147,15 +137,4 @@ public class SceneLoader extends EaseScene {
             }
         }));
     }
-    
-    @Override
-    protected void onManagedUpdate(float pSecondsElapsed) {
-
-        float waveYPositionUnderPlayer = 26 + water.getObjectYPosition(preloaderBoat.getX());
-        preloaderBoat.setRotation(water.getObjectAngle(getX()-64) / 2.0f);
-        preloaderBoat.setY(waveYPositionUnderPlayer);
-        
-        super.onManagedUpdate(pSecondsElapsed);
-    }
-
 }

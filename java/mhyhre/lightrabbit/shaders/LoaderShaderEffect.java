@@ -5,12 +5,7 @@
 
 package mhyhre.lightrabbit.shaders;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import mhyhre.lightrabbit.MainActivity;
+import android.opengl.GLES20;
 
 import org.andengine.opengl.shader.PositionTextureCoordinatesShaderProgram;
 import org.andengine.opengl.shader.ShaderProgram;
@@ -19,7 +14,13 @@ import org.andengine.opengl.shader.exception.ShaderProgramLinkException;
 import org.andengine.opengl.util.GLState;
 import org.andengine.opengl.vbo.attribute.VertexBufferObjectAttributes;
 
-import android.opengl.GLES20;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+
+import mhyhre.lightrabbit.MainActivity;
 
 
 
@@ -33,7 +34,7 @@ public class LoaderShaderEffect extends ShaderProgram {
     private float timeValue = 0;
 
     public LoaderShaderEffect() {
-        super(loadFromFile("shaders/base_vertex_shader.vs"), loadFromFile("shaders/loader_shader.fs"));
+        super(loadFromFile("shaders/base_vertex_shader.vs"), loadFromFile("shaders/loader_shader_copy.fs"));
     }
 
     

@@ -22,6 +22,7 @@ import mhyhre.lightrabbit.game.units.models.MerchantShip;
 import mhyhre.lightrabbit.game.units.models.NovaSteamShip;
 import mhyhre.lightrabbit.game.units.models.PirateAirUnit;
 import mhyhre.lightrabbit.game.units.models.PirateBoatUnit;
+import mhyhre.lightrabbit.game.units.models.PirateGhostShipUnit;
 import mhyhre.lightrabbit.game.units.models.PirateShipUnit;
 import mhyhre.lightrabbit.game.units.models.ImperialPoliceShipUnit;
 import mhyhre.lightrabbit.game.units.models.SharkUnit;
@@ -44,7 +45,7 @@ public class UnitGenerator {
         UnitController controller = null;
         
         switch (type) {
-        
+
         case STEAM_SHIP:
             model = new SteamShip(id);
             break;
@@ -82,7 +83,11 @@ public class UnitGenerator {
             break;
 
         case PIRATE_SHIP:
-            model = new PirateShipUnit(id);                
+                model = new PirateShipUnit(id);
+                break;
+
+        case PIRATE_GHOST_SHIP:
+            model = new PirateGhostShipUnit(id);
             break;
 
         case PIRATE_BOAT:

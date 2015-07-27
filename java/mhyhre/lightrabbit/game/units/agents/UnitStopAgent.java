@@ -21,8 +21,6 @@ public class UnitStopAgent extends UnitAgent {
         this.position = position;
         this.epselon = epselon;
 
-        Log.i(MainActivity.DEBUG_ID,"UnitStopAgent!");
-
         if(unit.getController().isPlayerController()) {
             Log.w(MainActivity.DEBUG_ID, "UnitStopAgent: NPC unit needed.");
         }
@@ -38,13 +36,10 @@ public class UnitStopAgent extends UnitAgent {
                 NPCController controller =  (NPCController)unit.getController();
                 NonPlayerUnitState state = controller.getState();
 
-                Log.i(MainActivity.DEBUG_ID,"Prizrak stop 1!");
-
                 if(state == NonPlayerUnitState.ATTACK_AND_MOVE) {
                     controller.setState(NonPlayerUnitState.ATTACK);
                 } else if(state == NonPlayerUnitState.MOVE) {
                     controller.setState(NonPlayerUnitState.NONE);
-                    Log.i(MainActivity.DEBUG_ID, "Prizrak stop 2!");
                 }
             } else {
                 Log.w(MainActivity.DEBUG_ID, "UnitStopAgent: deactivated, but not executed");

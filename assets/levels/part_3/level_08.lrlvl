@@ -57,7 +57,16 @@
 
 
   <Event command="WAIT_SECONDS" arg_int="5"/>
+  <Event command="UNIT_KILL" id="1"/>
+  <Event command="UNIT_KILL" id="2"/>
+
+  <Event command="UNIT_ADD" id="3" arg_int="50" arg_str="PirateGhostShip" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="6" arg_str="MOVE" arg_str2="LEFT"/>
+  
+
   <Event command="SHOW_DIALOG" id="6"/>
+
+
 
   <Event command="WAIT_SECONDS" arg_int="1"/>
   <Event command="SET_FOG_VISIBLE" arg_int="100"/>

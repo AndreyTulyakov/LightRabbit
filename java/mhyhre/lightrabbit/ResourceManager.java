@@ -152,6 +152,9 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 25, 32, 18);
         regions.put("PirateShip", region);
 
+        region = TextureRegionFactory.extractFromTexture(atlas, 0, 105, 32, 18);
+        regions.put("PirateGhostShip", region);
+
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 16, 10);
         regions.put("Shark", region);
         

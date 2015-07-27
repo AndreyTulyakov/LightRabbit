@@ -19,6 +19,7 @@ public enum UnitType {
     
     PIRATE_BOAT("PirateBoat"),
     PIRATE_SHIP("PirateShip"),
+    PIRATE_GHOST_SHIP("PirateGhostShip"),
     PIRATE_AIR("PirateAir"),
     
     IMPERIAL_BOAT_UNIT("ImperialBoat"),

@@ -36,7 +36,6 @@ public class UnitDieAgent extends UnitAgent {
                 UnitModel model = unit.getModel();
                 model.setHealth(0);
                 model.setDied(true);
-                Log.i(MainActivity.DEBUG_ID, "UnitDieAgent: deactivated");
             } else {
                 Log.w(MainActivity.DEBUG_ID, "UnitDieAgent: deactivated, but not executed");
             }

@@ -5,10 +5,11 @@
 
 package mhyhre.lightrabbit.game.units.agents;
 
+import android.util.Log;
+
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.Unit;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
-import android.util.Log;
 
 public class UnitDieAgent extends UnitAgent {
     
@@ -35,6 +36,7 @@ public class UnitDieAgent extends UnitAgent {
                 UnitModel model = unit.getModel();
                 model.setHealth(0);
                 model.setDied(true);
+                Log.i(MainActivity.DEBUG_ID, "UnitDieAgent: deactivated");
             } else {
                 Log.w(MainActivity.DEBUG_ID, "UnitDieAgent: deactivated, but not executed");
             }

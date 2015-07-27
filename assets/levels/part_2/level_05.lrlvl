@@ -73,7 +73,7 @@
   <Event command="UNIT_ADD" id="45" arg_int="-1400" arg_str="ImperialAirTypeA" arg_str2="LEFT"/>
 
   <Event command="NPC_CHANGE_STATE" id="45" arg_int="6" arg_str="MOVE" arg_str2="RIGHT"/>
-  <Event command="UNIT_SET_FIRE_POSITION" id="45" arg_int="565"/>
+  <Event command="UNIT_SET_FIRE_POSITION" id="45" arg_int="555"/>
   <Event command="UNIT_SET_DIE_POSITION" id="45" arg_int="1200"/>
 
   <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="45"/>

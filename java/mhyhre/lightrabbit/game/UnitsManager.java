@@ -5,6 +5,12 @@
 
 package mhyhre.lightrabbit.game;
 
+import android.util.Log;
+
+import org.andengine.entity.sprite.batch.SpriteBatch;
+import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +37,6 @@ import mhyhre.lightrabbit.game.weapons.guns.Gun150;
 import mhyhre.lightrabbit.game.weapons.guns.Gun90;
 import mhyhre.lightrabbit.scenes.SceneGame;
 import mhyhre.lightrabbit.scenes.utils.PlayerDeadEventListener;
-
-import org.andengine.entity.sprite.batch.SpriteBatch;
-import org.andengine.opengl.texture.region.ITextureRegion;
-import org.andengine.opengl.vbo.VertexBufferObjectManager;
-
-import android.util.Log;
 
 public class UnitsManager extends SpriteBatch {
 
@@ -266,7 +266,7 @@ public class UnitsManager extends SpriteBatch {
 
             for (Unit unit : units) {
                 if (unit.getModel().getId() == event.getId()) {
-                    UnitDieAgent dieAgent = new UnitDieAgent(unit, event.getIntegerArg(), 11);
+                    UnitDieAgent dieAgent = new UnitDieAgent(unit, event.getIntegerArg(), 25);
                     unit.getModel().addAgent(dieAgent);
                 }
             }

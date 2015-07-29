@@ -228,7 +228,6 @@ public class MainActivity extends LayoutGameActivity {
         this.runOnUiThread(new Runnable() {
             public void run() {
                 mAdvertisement = new ScreenAdvertisement(MainActivity.Me, R.id.adViewId);
-                //hideAd();
             }
         });
 
@@ -245,9 +244,6 @@ public class MainActivity extends LayoutGameActivity {
         return R.id.SurfaceViewId;
     }
 
-    // ===========================================================
-    // Methods
-    // ===========================================================
     public void showAd() {
         mAdvertisement.showAdvertisement();
     }

@@ -20,12 +20,13 @@ import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.ui.activity.SimpleBaseGameActivity;
+import org.andengine.ui.activity.LayoutGameActivity;
 
+import mhyhre.lightrabbit.ads.ScreenAdvertisement;
 import mhyhre.lightrabbit.scenes.SceneRoot;
 import mhyhre.lightrabbit.scenes.SceneStates;
 
-public class MainActivity extends SimpleBaseGameActivity {
+public class MainActivity extends LayoutGameActivity {
 
     public static final String DEBUG_ID = "LRABBIT";
     public static final String PREFERENCE_ID = "LIGHT_RABBIT_PREF";
@@ -49,7 +50,10 @@ public class MainActivity extends SimpleBaseGameActivity {
 
     private boolean vibroEnabled = true;
     private boolean soundEnabled = true;
-    
+
+    private ScreenAdvertisement mAdvertisement;
+
+
     @Override
     public EngineOptions onCreateEngineOptions() {
 
@@ -79,21 +83,27 @@ public class MainActivity extends SimpleBaseGameActivity {
     }
 
     @Override
-    public void onCreateResources() {
-        if (BuildConfig.DEBUG)
+    public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) {
+        if (BuildConfig.DEBUG) {
             Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateResources");
+        }
+
+        pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
 
+
+
     @Override
-    public Scene onCreateScene() {
+    public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) {
         if (BuildConfig.DEBUG)
             Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
         resources = new ResourceManager();
-
         sceneRoot = new SceneRoot();
-        return sceneRoot;
+
+        this.mEngine.registerUpdateHandler(sceneRoot);
+        pOnCreateSceneCallback.onCreateSceneFinished(sceneRoot);
     }
 
     @Override
@@ -105,6 +115,8 @@ public class MainActivity extends SimpleBaseGameActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -204,4 +216,43 @@ public class MainActivity extends SimpleBaseGameActivity {
         return levelUnlocker;
     }
 
+    @Override
+    public void onPopulateScene(Scene pScene,
+                                OnPopulateSceneCallback pOnPopulateSceneCallback) {
+        pOnPopulateSceneCallback.onPopulateSceneFinished();
+    }
+
+    @Override
+    public synchronized void onGameCreated() {
+
+        this.runOnUiThread(new Runnable() {
+            public void run() {
+                mAdvertisement = new ScreenAdvertisement(MainActivity.Me, R.id.adViewId);
+                //hideAd();
+            }
+        });
+
+        super.onGameCreated();
+    }
+
+    @Override
+    protected int getLayoutID() {
+        return R.layout.game_layout;
+    }
+
+    @Override
+    protected int getRenderSurfaceViewID() {
+        return R.id.SurfaceViewId;
+    }
+
+    // ===========================================================
+    // Methods
+    // ===========================================================
+    public void showAd() {
+        mAdvertisement.showAdvertisement();
+    }
+
+    public void hideAd() {
+        mAdvertisement.hideAdvertisement();
+    }
 }

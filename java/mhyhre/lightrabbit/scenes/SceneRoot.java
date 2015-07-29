@@ -77,6 +77,7 @@ public class SceneRoot extends Scene {
         if (Preloaded) {
 
             // Hide all scenes.
+            MainActivity.Me.hideAd();
             mSceneLoader.hide();
             mSceneMainMenu.hide();
             mSceneAbout.hide();
@@ -95,6 +96,7 @@ public class SceneRoot extends Scene {
 
                 case MainMenu:
                     mSceneMainMenu.show();
+                    MainActivity.Me.showAd();
                     break;
 
                 case LevelSelector:

@@ -48,8 +48,7 @@ public class SceneLoader extends EaseScene {
         setBackground(new Background(0.1f, 0.25f, 0.3f));
         
         MainActivity.resources.LoadResourcesForPreloader();
-        
-        Color captionsColor = new Color(0.0f, 0.8f, 1.0f, 1.0f);
+        Color captionsColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         
 
         // Tap text
@@ -100,7 +99,6 @@ public class SceneLoader extends EaseScene {
                         soundPlayed = true;
                     }
 
-                    // Splash on - logo
                     if (AlphaTime2 < 0.99f) {
                         AlphaTime2 += 0.01f;
                         if (AlphaTime2 < 0.0f) {
@@ -110,7 +108,6 @@ public class SceneLoader extends EaseScene {
                         }
                     }
 
-                    // Splash on - tap text
                     if (AlphaTime2 > 0.5f) {
                         AlphaTime += 0.05f;
                         if (AlphaTime > Math.PI)
@@ -120,7 +117,6 @@ public class SceneLoader extends EaseScene {
                 }
 
                 if (Clicked) {
-
                     // Splash off scene by rect
                     if (AlphaTime3 >= 1.0f) {
                         unregisterUpdateHandler(pTimerHandler);

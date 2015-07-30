@@ -50,7 +50,6 @@ public class SceneLoader extends EaseScene {
         MainActivity.resources.LoadResourcesForPreloader();
         Color captionsColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         
-
         // Tap text
         String TextMessage = MainActivity.Me.getString(R.string.textTap);
         mCaptionTapScreen = new Text(0, 0, MainActivity.resources.getFont("White Furore"), TextMessage, MainActivity.getVboManager());

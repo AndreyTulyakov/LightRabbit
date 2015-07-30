@@ -361,8 +361,6 @@ public class ResourceManager {
     public void LoadResourcesForPreloader() {
 
         BitmapTextureAtlas atlas;
-        ITextureRegion region;
-
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
@@ -370,7 +368,6 @@ public class ResourceManager {
         atlas.load();
         atlases.put("SplashAtlas", atlas);
         regions.put("splash", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
-
         
         Font mFont;
         FontFactory.setAssetBasePath("font/");

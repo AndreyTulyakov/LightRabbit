@@ -86,12 +86,18 @@ public class ResourceManager {
 
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 1024, 1024, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "BackgroundLS.png", 0, 0);
         atlas.load();
         atlases.put("Background", atlas);
         regions.put("backgroundLevelSelector", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 960, 540, false));
+
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
+        BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "splash.png", 0, 0);
+        atlas.load();
+        atlases.put("SplashAtlas", atlas);
+        regions.put("splash",TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
+
 
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 128, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "User_Interface.png", 0, 0);
@@ -359,14 +365,12 @@ public class ResourceManager {
 
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 64, TextureOptions.NEAREST);
-        BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "loader_graphics.png", 0, 0);
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
+        BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "splash.png", 0, 0);
         atlas.load();
-        atlases.put("preloader", atlas);
+        atlases.put("SplashAtlas", atlas);
+        regions.put("splash", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 100, 64, false);
-        regions.put("PreloaderBoat", region);
-        
         
         Font mFont;
         FontFactory.setAssetBasePath("font/");

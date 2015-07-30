@@ -66,7 +66,7 @@ public class SceneRoot extends Scene {
 
         Preloaded = true;
         mSceneLoader.mCaptionTapScreen.setVisible(true);
-        mSceneLoader.registerTouchArea(mSceneLoader.TapRect);
+        mSceneLoader.registerTouchArea(mSceneLoader.splashSprite);
 
     }
 

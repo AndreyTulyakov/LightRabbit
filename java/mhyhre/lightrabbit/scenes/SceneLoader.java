@@ -16,8 +16,8 @@ import android.util.Log;
 
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
-import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
@@ -37,7 +37,7 @@ public class SceneLoader extends EaseScene {
 
     public Text mCaptionTapScreen;
 
-    public Rectangle TapRect;
+    public Sprite splashSprite;
     public Text textGameLogo;
 
     private boolean Clicked = false;
@@ -63,16 +63,15 @@ public class SceneLoader extends EaseScene {
         textGameLogo = new Text(0, 0, MainActivity.resources.getFont("Furore48"), " " + MainActivity.Me.getString(R.string.app_name),
                 MainActivity.getVboManager());
         textGameLogo.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 4) * 3);
-        //textGameLogo.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         textGameLogo.setAlpha(0.0f);
         textGameLogo.setColor(captionsColor);
 
         // tap-zone
-        TapRect = new Rectangle(0, 0, MainActivity.getWidth(), MainActivity.getHeight(), MainActivity.getVboManager()) {
+        splashSprite = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(), MainActivity.resources.getTextureRegion("splash") , MainActivity.getVboManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN && !Clicked) {
-                    unregisterTouchArea(TapRect);
+                    unregisterTouchArea(splashSprite);
                     Clicked = true;
                     Log.i(MainActivity.DEBUG_ID, "Splash Screen [ Tap ] button");
                     MainActivity.vibrate(30);
@@ -81,15 +80,13 @@ public class SceneLoader extends EaseScene {
             }
         };
 
+        splashSprite.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
+        splashSprite.setScale(2);
 
-        TapRect.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
-        TapRect.setVisible(false);
-        TapRect.setAlpha(AlphaTime3);
-        TapRect.setColor(0f, 0.2f, 0.0f);
-
+        attachChild(splashSprite);
         attachChild(textGameLogo);
         attachChild(mCaptionTapScreen);
-        attachChild(TapRect);
+
 
         // Alpha Timer
         registerUpdateHandler(new TimerHandler(0.02f, true, new ITimerCallback() {
@@ -131,8 +128,8 @@ public class SceneLoader extends EaseScene {
                     } else {
                         AlphaTime3 += 0.1f;
                     }
-                    TapRect.setVisible(true);
-                    TapRect.setAlpha(AlphaTime3);
+                    splashSprite.setVisible(true);
+                    splashSprite.setAlpha(AlphaTime3);
                 }
             }
         }));

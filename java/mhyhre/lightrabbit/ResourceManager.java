@@ -86,11 +86,11 @@ public class ResourceManager {
 
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 1024, 1024, TextureOptions.NEAREST);
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "BackgroundLS.png", 0, 0);
         atlas.load();
         atlases.put("Background", atlas);
-        regions.put("backgroundLevelSelector", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 960, 540, false));
+        regions.put("backgroundLevelSelector", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
 
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 512, 512, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "splash.png", 0, 0);

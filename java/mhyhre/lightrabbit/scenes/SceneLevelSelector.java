@@ -65,6 +65,7 @@ public class SceneLevelSelector extends EaseScene {
         background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
                 MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
                 MainActivity.Me.getVertexBufferObjectManager());
+        background.setScale(2);
         attachChild(background);
 
         nextPage = new Sprite(MainActivity.getWidth() - 100, MainActivity.getHeight() * 0.75f, MainActivity.resources.getTextureRegion("RowRight"),

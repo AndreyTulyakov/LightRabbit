@@ -32,6 +32,7 @@ public class SceneAbout extends EaseScene {
         background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
                 MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
                 MainActivity.Me.getVertexBufferObjectManager());
+        background.setScale(2);
         attachChild(background);
 
         String strText1 = MainActivity.Me.getString(R.string.textAbout);

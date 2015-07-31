@@ -36,8 +36,8 @@ public class SceneMainMenu extends EaseScene {
         background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
                 MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
                 MainActivity.Me.getVertexBufferObjectManager());
+        background.setScale(2);
         attachChild(background);
-
 
         // Text captions
         String TextItem1 = MainActivity.Me.getString(R.string.MenuItem_Play);
@@ -55,7 +55,6 @@ public class SceneMainMenu extends EaseScene {
         mCaptionItem2.setColor(0.1f,0.6f,1.0f);
         mCaptionItem3.setColor(0.1f,0.6f,1.0f);
 
-        
         // Creating sprites
         Sprite buttonSpriteGame = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override

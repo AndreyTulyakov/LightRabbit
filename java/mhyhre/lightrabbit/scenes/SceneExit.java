@@ -35,6 +35,7 @@ public class SceneExit extends EaseScene {
         background = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
                 MainActivity.resources.getTextureRegion("backgroundLevelSelector"),
                 MainActivity.Me.getVertexBufferObjectManager());
+        background.setScale(2);
         attachChild(background);
 
         String textExit = MainActivity.Me.getString(R.string.QExit);

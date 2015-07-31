@@ -102,7 +102,6 @@ public class MainActivity extends LayoutGameActivity {
         resources = new ResourceManager();
         sceneRoot = new SceneRoot();
 
-        this.mEngine.registerUpdateHandler(sceneRoot);
         pOnCreateSceneCallback.onCreateSceneFinished(sceneRoot);
     }
 

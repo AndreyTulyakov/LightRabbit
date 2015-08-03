@@ -20,7 +20,6 @@ import mhyhre.lightrabbit.MainActivity;
 public class SceneRoot extends Scene {
 
     private static SceneStates state = SceneStates.None;
-    private float updateTimeCounter = 0;
 
     public SceneLoader mSceneLoader;
     public SceneMainMenu mSceneMainMenu;

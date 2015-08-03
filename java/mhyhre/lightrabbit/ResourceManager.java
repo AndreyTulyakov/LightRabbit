@@ -118,7 +118,7 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 102, 102, 16, 16, false);
         regions.put("ParticlePoint", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 51, 46, 26, 36, false);
+        region = TextureRegionFactory.extractFromTexture(atlas, 49, 44, 30, 40, false);
         regions.put("LevelCell", region);
         
         region = TextureRegionFactory.extractFromTexture(atlas, 96, 97, 30, 30, false);

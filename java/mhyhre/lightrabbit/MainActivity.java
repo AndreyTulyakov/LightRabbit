@@ -116,7 +116,6 @@ public class MainActivity extends LayoutGameActivity {
     }
 
 
-
     @Override
     public void onBackPressed() {
 
@@ -126,7 +125,8 @@ public class MainActivity extends LayoutGameActivity {
             sceneRoot.onSceneBackPress();
         }
     }
-    
+
+
     protected void savePreferences() {
 
         int mode = Activity.MODE_PRIVATE;
@@ -151,7 +151,6 @@ public class MainActivity extends LayoutGameActivity {
         setVibroEnabled(mySharedPreferences.getBoolean("isVibroEnabled", true));
         setSoundEnabled(mySharedPreferences.getBoolean("isSoundEnabled", true));
     }
-
 
     public AssetManager getAssetManager() {
         return assetManager;

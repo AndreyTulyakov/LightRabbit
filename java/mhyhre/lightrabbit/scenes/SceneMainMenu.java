@@ -24,6 +24,8 @@ import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneMainMenu extends EaseScene {
 
+    public final float INACTIVE_ALPHA = 0.45f;
+
     public Text mCaptionItem1; // New Game
     public Text mCaptionItem2; // About
     public Text mCaptionItem3; // Exit
@@ -95,7 +97,6 @@ public class SceneMainMenu extends EaseScene {
         };
         buttonSpriteExit.setScale(MainActivity.PIXEL_MULTIPLIER);
 
-          
         // Calculating positions
         float OffsetX = MainActivity.getHalfWidth();
         float OffsetY = MainActivity.getHeight() / 9.0f;
@@ -109,7 +110,6 @@ public class SceneMainMenu extends EaseScene {
         mCaptionItem3.setPosition(buttonSpriteExit);
 
         // Attaching
-
         attachChild(buttonSpriteGame);
         attachChild(buttonSpriteAbout);
         attachChild(buttonSpriteExit);
@@ -130,7 +130,7 @@ public class SceneMainMenu extends EaseScene {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
                     if (MainActivity.isVibroEnabled() == true) {
-                        this.setAlpha(0.4f);
+                        this.setAlpha(INACTIVE_ALPHA);
                         MainActivity.setVibroEnabled(false);
                     } else {
                         this.setAlpha(1.0f);
@@ -141,11 +141,12 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
+
         mSpriteVibro.setScale(MainActivity.PIXEL_MULTIPLIER);
         mSpriteVibro.setPosition(MainActivity.getWidth() / 6, MainActivity.getHalfHeight());
         registerTouchArea(mSpriteVibro);
         attachChild(mSpriteVibro);
-        mSpriteVibro.setColor(0.4f, 0.8f, 1.0f);
+        mSpriteVibro.setColor(0.5f, 0.85f, 1.0f);
 
         Sprite mSpriteSound = new Sprite(0, 0, MainActivity.resources.getTextureRegion("ButtonSound"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
@@ -153,7 +154,7 @@ public class SceneMainMenu extends EaseScene {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
                     if (MainActivity.isSoundEnabled() == true) {
-                        this.setAlpha(0.4f);
+                        this.setAlpha(INACTIVE_ALPHA);
                         MainActivity.setSoundEnabled(false);
                     } else {
                         this.setAlpha(1.0f);
@@ -165,17 +166,19 @@ public class SceneMainMenu extends EaseScene {
                 return true;
             }
         };
+
         mSpriteSound.setScale(MainActivity.PIXEL_MULTIPLIER);
         mSpriteSound.setPosition((MainActivity.getWidth()/6)*5, MainActivity.getHalfHeight());
         attachChild(mSpriteSound);
         registerTouchArea(mSpriteSound);
-        mSpriteSound.setColor(0.4f,0.8f,1.0f);
+        mSpriteSound.setColor(0.5f,0.85f,1.0f);
         
         if (MainActivity.isVibroEnabled() == false) {
-            mSpriteVibro.setAlpha(0.4f);
+            mSpriteVibro.setAlpha(INACTIVE_ALPHA);
         }
+
         if (MainActivity.isSoundEnabled() == false) {
-            mSpriteSound.setAlpha(0.4f);
+            mSpriteSound.setAlpha(INACTIVE_ALPHA);
         }
     }
 }

@@ -29,11 +29,9 @@ import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneLoader extends EaseScene {
 
-    private float AlphaTime = 0.0f;
-    private float AlphaTime2 = -0.3f;
-    private float AlphaTime3 = 0.0f;
-
-    private boolean soundPlayed = false;
+    private float AlphaTime = -0.8f;
+    private float pressAlphaTime = 0.0f;
+    private float leaveAlphaTime = 1.0f;
 
     public Text mCaptionTapScreen;
 
@@ -45,7 +43,7 @@ public class SceneLoader extends EaseScene {
     public SceneLoader() {
         
         setBackgroundEnabled(true);
-        setBackground(new Background(0.1f, 0.25f, 0.3f));
+        setBackground(new Background(0.0f, 0.0f, 0.0f));
         
         MainActivity.resources.LoadResourcesForPreloader();
         Color captionsColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -53,7 +51,7 @@ public class SceneLoader extends EaseScene {
         // Tap text
         String TextMessage = MainActivity.Me.getString(R.string.textTap);
         mCaptionTapScreen = new Text(0, 0, MainActivity.resources.getFont("White Furore"), TextMessage, MainActivity.getVboManager());
-        mCaptionTapScreen.setPosition(MainActivity.getHalfWidth()*1.6f, (MainActivity.getHeight() / 4) * 1.6f);
+        mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() * 1.6f, (MainActivity.getHeight() / 4) * 1.6f);
         mCaptionTapScreen.setVisible(false);
         mCaptionTapScreen.setAlpha(0.0f);
         mCaptionTapScreen.setColor(captionsColor);
@@ -61,8 +59,8 @@ public class SceneLoader extends EaseScene {
         textGameLogo = new Text(0, 0, MainActivity.resources.getFont("Furore48"), " " + MainActivity.Me.getString(R.string.app_name),
                 MainActivity.getVboManager());
         textGameLogo.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 4) * 2.1f);
-        textGameLogo.setAlpha(0.0f);
         textGameLogo.setColor(captionsColor);
+        textGameLogo.setAlpha(0.0f);
 
         // tap-zone
         splashSprite = new Sprite(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(), MainActivity.resources.getTextureRegion("splash") , MainActivity.getVboManager()) {
@@ -72,7 +70,7 @@ public class SceneLoader extends EaseScene {
                     unregisterTouchArea(splashSprite);
                     Clicked = true;
                     Log.i(MainActivity.DEBUG_ID, "Splash Screen [ Tap ] button");
-                    MainActivity.vibrate(30);
+                    MainActivity.vibrate(20);
                 }
                 return true;
             }
@@ -85,7 +83,6 @@ public class SceneLoader extends EaseScene {
         attachChild(textGameLogo);
         attachChild(mCaptionTapScreen);
 
-
         // Alpha Timer
         registerUpdateHandler(new TimerHandler(0.02f, true, new ITimerCallback() {
             // @Override
@@ -93,38 +90,29 @@ public class SceneLoader extends EaseScene {
 
                 if (mCaptionTapScreen.isVisible()) {
 
-                    if (AlphaTime2 > 0.3f && soundPlayed == false) {
-                        MainActivity.resources.playSound("switchOn");
-                        soundPlayed = true;
+                    pressAlphaTime += 0.05f;
+                    if (pressAlphaTime > Math.PI) {
+                        pressAlphaTime = 0.0f;
                     }
+                    mCaptionTapScreen.setAlpha((float) Math.sin(pressAlphaTime));
 
-                    if (AlphaTime2 < 0.99f) {
-                        AlphaTime2 += 0.01f;
-                        if (AlphaTime2 < 0.0f) {
-                            textGameLogo.setAlpha(0.0f);
-                        } else {
-                            textGameLogo.setAlpha(AlphaTime2);
+                    if (AlphaTime < 0.98f) {
+                        AlphaTime += 0.02f;
+                        if(AlphaTime > 0.0f) {
+                            textGameLogo.setAlpha(AlphaTime);
                         }
-                    }
-
-                    if (AlphaTime2 > 0.5f) {
-                        AlphaTime += 0.05f;
-                        if (AlphaTime > Math.PI)
-                            AlphaTime = 0.0f;
-                        mCaptionTapScreen.setAlpha((float) Math.sin(AlphaTime));
                     }
                 }
 
                 if (Clicked) {
                     // Splash off scene by rect
-                    if (AlphaTime3 >= 1.0f) {
+                    if (leaveAlphaTime > 0.05f) {
+                        leaveAlphaTime -= 0.03f;
+                        splashSprite.setAlpha(leaveAlphaTime);
+                    } else {
                         unregisterUpdateHandler(pTimerHandler);
                         MainActivity.getRootScene().SetState(SceneStates.MainMenu);
-                    } else {
-                        AlphaTime3 += 0.1f;
                     }
-                    splashSprite.setVisible(true);
-                    splashSprite.setAlpha(AlphaTime3);
                 }
             }
         }));

@@ -4,16 +4,16 @@
  <Dialogs>
 
   <dialog id="1">
-   <replic id="1" actor_id="0" next_id="0" >Настало утро следующего дня</replic>
+   <replic id="1" actor_id="2" next_id="0" >Настало утро следующего дня</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="0" next_id="0" >Я взял помощника - Гоги.
+   <replic id="1" actor_id="2" next_id="0" >Я взял помощника - Гоги.
 Старого друга.</replic>
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="1" next_id="2" >Вот так скорость!</replic>
+   <replic id="1" actor_id="1" next_id="2" >Вот это скорость!</replic>
    <replic id="2" actor_id="2" next_id="0" >Не нравится это мне…</replic>
   </dialog>
 
@@ -23,11 +23,11 @@
    <replic id="2" actor_id="2" next_id="3" >Мы останемся живы?</replic>
    <replic id="3" actor_id="5" next_id="4" >Эм, нет наверное.</replic>
    <replic id="4" actor_id="2" next_id="5" >Тогда мы наверное будем сопротивляться..?</replic>
-   <replic id="5" actor_id="5" next_id="0" >Окей.</replic>
+   <replic id="5" actor_id="5" next_id="0" >Хорошо-хорошо.</replic>
   </dialog>
 
   <dialog id="5">
-   <replic id="1" actor_id="5" next_id="0" >Что же, пришло время покончить с этим!</replic>
+   <replic id="1" actor_id="5" next_id="0" >Эм.. Пора покончить с этим!</replic>
   </dialog>
 
   <dialog id="6">
@@ -35,9 +35,9 @@
   </dialog>
 
   <dialog id="7">
-   <replic id="1" actor_id="8" next_id="2" >Исчезая под водой я понимал.</replic>
-   <replic id="2" actor_id="8" next_id="3" >Это была славная битва.</replic>
-   <replic id="3" actor_id="8" next_id="0" >Но так просто это всё не могло закончится...</replic>
+   <replic id="1" actor_id="2" next_id="2" >Исчезая под водой я понимал - 
+это была славная битва.</replic>
+   <replic id="2" actor_id="2" next_id="0" >Но так просто это всё не могло закончится...</replic>
   </dialog>
 
 

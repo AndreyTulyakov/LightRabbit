@@ -14,12 +14,11 @@
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="27" next_id="2" >Ну как тебе майор?!</replic>
-   <replic id="2" actor_id="27" next_id="0" >..Император сказал помочь тебе.</replic>
+   <replic id="1" actor_id="27" next_id="0" >Ну как тебе подкрепление?!</replic>
   </dialog>
 
   <dialog id="4">
-   <replic id="1" actor_id="5" next_id="2" >Добрый день.</replic>
+   <replic id="1" actor_id="5" next_id="2" >Эм.. Добрый день.</replic>
    <replic id="2" actor_id="29" next_id="3" >Добрый.</replic>
    <replic id="3" actor_id="29" next_id="0" >Штаб, я не справлюсь.</replic>
   </dialog>
@@ -29,8 +28,9 @@
 странное рядом с вами!</replic>
   </dialog>
 
+
   <dialog id="6">
-     <replic id="1" actor_id="29" next_id="2" >Нечто 0_о</replic>
+     <replic id="1" actor_id="29" next_id="2" >Ого!</replic>
      <replic id="2" actor_id="30" next_id="3" >...</replic>
      <replic id="3" actor_id="27" next_id="0" >Майор, назад!</replic>
   </dialog>

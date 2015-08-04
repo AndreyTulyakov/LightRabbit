@@ -13,8 +13,6 @@ public abstract class Projectile extends Entity {
     
     protected ProjectileType type;
     protected final UnitModel unitParent;
-    
-
 
     public Projectile(UnitModel unitParent, float mx, float my) {
         super(mx, my);

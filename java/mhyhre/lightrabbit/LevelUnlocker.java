@@ -28,7 +28,6 @@ public class LevelUnlocker {
     private static final String LOCKS_FILENAME = "LEVEL_LOCKS.bin";
     private static final int LEVELS_TOTAL_COUNT = 16;
     private HashMap<Integer, Boolean> levelsLockData;
-    
 
     public LevelUnlocker() {
         
@@ -104,12 +103,11 @@ public class LevelUnlocker {
     }
 
     private void loadFromFile() {
-        
-        FileInputStream inputStream = null;   
+
         DataInputStream dataStream = null;
         
         try {
-            inputStream = MainActivity.Me.openFileInput(LOCKS_FILENAME);
+            FileInputStream inputStream = MainActivity.Me.openFileInput(LOCKS_FILENAME);
             dataStream = new DataInputStream(inputStream);
             
             int countOfRecords = dataStream.readInt();

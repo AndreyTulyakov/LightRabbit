@@ -65,7 +65,7 @@
 
   <Event command="SET_FOG_VISIBLE" arg_int="50"/>
 
-  <Event command="SHOW_REPLIC" id="6" arg_int="3"/>
+  <Event command="SHOW_REPLIC" id="5" arg_int="3"/>
 
   <Event command="SET_FOG_VISIBLE" arg_int="100"/>
   <Event command="UNLOCK_LEVEL" arg_int="1"/>

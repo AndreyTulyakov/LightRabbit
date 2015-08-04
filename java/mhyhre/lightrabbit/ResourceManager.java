@@ -132,80 +132,36 @@ public class ResourceManager {
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "tex_01.png", 0, 0);
         atlas.load();
         atlases.put("texture01", atlas);
-        
-        // Level game ui
-        
-        // Buttons
+
         regions.put("Left", TextureRegionFactory.extractFromTexture(atlas, 0, 60, 8, 8, false));
         regions.put("Right", TextureRegionFactory.extractFromTexture(atlas, 8, 60, 8, 8, false));
         regions.put("Fire", TextureRegionFactory.extractFromTexture(atlas, 16, 60, 8, 8, false));
         regions.put("Jump", TextureRegionFactory.extractFromTexture(atlas, 24, 60, 8, 8, false));
         regions.put("ButtonUp", TextureRegionFactory.extractFromTexture(atlas, 0, 90, 8, 8, false));
         regions.put("ButtonDown", TextureRegionFactory.extractFromTexture(atlas, 8, 90, 8, 8, false));
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 34, 33, 16, 10);
-        regions.put("SteamShip", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 100, 50, 16, 10);
-        regions.put("SteamShipGhost", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 76, 50, 20, 12);
-        regions.put("NovaSteamShip", region);
+        regions.put("SteamShip", TextureRegionFactory.extractFromTexture(atlas, 34, 33, 16, 10));
+        regions.put("SteamShipGhost", TextureRegionFactory.extractFromTexture(atlas, 100, 50, 16, 10));
+        regions.put("NovaSteamShip", TextureRegionFactory.extractFromTexture(atlas, 76, 50, 20, 12));
+        regions.put("PirateBoat", TextureRegionFactory.extractFromTexture(atlas, 0, 16, 14, 6));
+        regions.put("PirateShip", TextureRegionFactory.extractFromTexture(atlas, 0, 25, 32, 18));
+        regions.put("PirateGhostShip", TextureRegionFactory.extractFromTexture(atlas, 0, 105, 32, 18));
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 16, 14, 6);
-        regions.put("PirateBoat", region);
-
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 25, 32, 18);
-        regions.put("PirateShip", region);
-
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 105, 32, 18);
-        regions.put("PirateGhostShip", region);
-
-        region = TextureRegionFactory.extractFromTexture(atlas, 0, 0, 16, 10);
-        regions.put("Shark", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 62, 46, 9, 9);
-        regions.put("MarineBomb", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 52, 32, 22, 11);
-        regions.put("MerchantShip", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 76, 0, 32, 12);
-        regions.put("Barge", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 20, 0, 52, 27);
-        regions.put("ImperialDirigible", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 76, 14, 24, 11);
-        regions.put("ImperialPoliceShip", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 102, 19, 15, 6);
-        regions.put("ImperialBoat", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 76, 67, 40, 14);
-        regions.put("ImperialBigShip", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 100, 40, 27, 5);
-        regions.put("ImperialAirTypeA", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 71, 87, 26, 13);
-        regions.put("ImperialHelicopter", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 76, 26, 20, 12);
-        regions.put("IndustrialShip", region);
-        
-        region = TextureRegionFactory.extractFromTexture(atlas, 76, 39, 20, 9);
-        regions.put("PirateAir", region);
-        
-        // Misc
-        region = TextureRegionFactory.extractFromTexture(atlas, 32, 46, 8, 8);
-        regions.put("heart", region);
-
-        region = TextureRegionFactory.extractFromTexture(atlas, 40, 46, 8, 8);
-        regions.put("heart_died", region);
-
-        region = TextureRegionFactory.extractFromTexture(atlas, 48, 46, 8, 8);
-        regions.put("gold", region);
+        regions.put("Shark", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 16, 10));
+        regions.put("MarineBomb", TextureRegionFactory.extractFromTexture(atlas, 62, 46, 9, 9));
+        regions.put("MerchantShip", TextureRegionFactory.extractFromTexture(atlas, 52, 32, 22, 11));
+        regions.put("Barge", TextureRegionFactory.extractFromTexture(atlas, 76, 0, 32, 12));
+        regions.put("ImperialDirigible", TextureRegionFactory.extractFromTexture(atlas, 20, 0, 52, 27));
+        regions.put("ImperialPoliceShip", TextureRegionFactory.extractFromTexture(atlas, 76, 14, 24, 11));
+        regions.put("ImperialBoat", TextureRegionFactory.extractFromTexture(atlas, 102, 19, 15, 6));
+        regions.put("ImperialBigShip", TextureRegionFactory.extractFromTexture(atlas, 76, 67, 40, 14));
+        regions.put("ImperialAirTypeA", TextureRegionFactory.extractFromTexture(atlas, 100, 40, 27, 5));
+        regions.put("ImperialHelicopter", TextureRegionFactory.extractFromTexture(atlas, 71, 87, 26, 13));
+        regions.put("IndustrialShip", TextureRegionFactory.extractFromTexture(atlas, 76, 26, 20, 12));
+        regions.put("PirateAir", TextureRegionFactory.extractFromTexture(atlas, 76, 39, 20, 9));
+        regions.put("heart", TextureRegionFactory.extractFromTexture(atlas, 32, 46, 8, 8));
+        regions.put("heart_died", TextureRegionFactory.extractFromTexture(atlas, 40, 46, 8, 8));
+        regions.put("gold", TextureRegionFactory.extractFromTexture(atlas, 48, 46, 8, 8));
 
         // Bullets
         region = TextureRegionFactory.extractFromTexture(atlas, 51, 74, 3, 1);

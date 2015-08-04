@@ -29,12 +29,11 @@ import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneLoader extends EaseScene {
 
-    private float AlphaTime = -0.8f;
+    private float alphaTime = -0.8f;
     private float pressAlphaTime = 0.0f;
     private float leaveAlphaTime = 1.0f;
 
     public Text mCaptionTapScreen;
-
     public Sprite splashSprite;
     public Text textGameLogo;
 
@@ -96,17 +95,17 @@ public class SceneLoader extends EaseScene {
                     }
                     mCaptionTapScreen.setAlpha((float) Math.sin(pressAlphaTime));
 
-                    if (AlphaTime < 0.98f) {
-                        AlphaTime += 0.02f;
-                        if(AlphaTime > 0.0f) {
-                            textGameLogo.setAlpha(AlphaTime);
+                    if (alphaTime < 0.98f) {
+                        alphaTime += 0.02f;
+                        if(alphaTime > 0.0f) {
+                            textGameLogo.setAlpha(alphaTime);
                         }
                     }
                 }
 
                 if (Clicked) {
                     // Splash off scene by rect
-                    if (leaveAlphaTime > 0.05f) {
+                    if (leaveAlphaTime > 0.33f) {
                         leaveAlphaTime -= 0.03f;
                         splashSprite.setAlpha(leaveAlphaTime);
                     } else {

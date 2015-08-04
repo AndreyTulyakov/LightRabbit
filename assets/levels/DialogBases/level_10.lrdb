@@ -15,7 +15,7 @@
    <replic id="3" actor_id="20" next_id="4" >А чего вода зеленая стала и светится?</replic>
    <replic id="4" actor_id="21" next_id="5" >Эм... Водоросли может быть?</replic>
    <replic id="5" actor_id="20" next_id="0" >Тут что-то не так...
-Милиция!</replic>
+Полиция!</replic>
   </dialog>
 
   <dialog id="3">

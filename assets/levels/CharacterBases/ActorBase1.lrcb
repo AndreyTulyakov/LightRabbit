@@ -3,17 +3,13 @@
  <character id="0" name="..." icon=""/>
  <character id="1" name="Матрос Гоги" icon="gogi"/>
  <character id="2" name="Капитан Рэббит" icon="captainRabbit"/>
- <character id="3" name="Рэббит" icon="player_1"/>
  <character id="4" name="Записка" icon="paper"/>
  <character id="5" name="Вроде пират" icon="pirat01"/>
  <character id="7" name="Торговец" icon="trademan"/>
- <character id="8" name="Внутренний голос" icon="intuition"/>
- <character id="9" name="Правила Водного Движения" icon=""/>
-
  <character id="10" name="Тип в капюшоне" icon="pythonMan"/>
  <character id="12" name="Питон" icon=""/>
  
- <character id="20" name="Индустриальный" icon="indMan"/>
+ <character id="20" name="Ответственный товарищ" icon="indMan"/>
  <character id="21" name="Николя" icon="nikola"/>
  <character id="22" name="Дядька Милиционер" icon="milicio"/>
 

@@ -8,6 +8,7 @@
    <replic id="2" actor_id="25" next_id="3" >Аллоу.</replic>
    <replic id="3" actor_id="27" next_id="4" >Мы поставили тебе ракетную установку
 и автомат.</replic>
+
    <replic id="4" actor_id="27" next_id="0" >Направляешься верно, удачи!</replic>
   </dialog>
 
@@ -17,7 +18,7 @@
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="27" next_id="0" >Осталась последняя группка.</replic>
+   <replic id="1" actor_id="27" next_id="0" >Еще осталась пара кораблей!</replic>
   </dialog>
 
  </Dialogs>

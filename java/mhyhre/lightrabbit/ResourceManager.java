@@ -194,7 +194,7 @@ public class ResourceManager {
         region = TextureRegionFactory.extractFromTexture(atlas, 46, 72, 3, 3);
         regions.put("ray_piece", region);
 
-        region = TextureRegionFactory.extractFromTexture(atlas, 16, 70, 16, 16);
+        region = TextureRegionFactory.extractFromTexture(atlas, 18, 72, 12, 12);
         regions.put("sun", region);
 
         region = TextureRegionFactory.extractFromTexture(atlas, 0, 70, 16, 16);

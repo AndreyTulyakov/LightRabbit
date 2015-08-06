@@ -35,9 +35,12 @@
   </dialog>
 
   <dialog id="7">
-   <replic id="1" actor_id="2" next_id="2" >Исчезая под водой я понимал - 
-это была славная битва.</replic>
-   <replic id="2" actor_id="2" next_id="0" >Но так просто это всё не могло закончится...</replic>
+   <replic id="1" actor_id="2" next_id="2" >Это была славная битва.
+Но огромная дыра!</replic>
+   <replic id="2" actor_id="2" next_id="3" >Воды было всё больше и больше.
+Корабль тонул.</replic>
+   <replic id="3" actor_id="2" next_id="0" >Но у меня было немного времени
+чтобы осмотреть свой груз напоследок...</replic>
   </dialog>
 
 

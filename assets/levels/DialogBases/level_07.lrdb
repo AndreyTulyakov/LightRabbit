@@ -12,8 +12,10 @@
 
    <replic id="6" actor_id="0" next_id="7">Сзади из темноты выехало кресло.</replic>
 
-   <replic id="7" actor_id="0" next_id="12">И тут император стал задвигать мне теории
+   <replic id="7" actor_id="0" next_id="8">И тут император стал задвигать мне теории
 о потусторонних мирах.</replic>
+   <replic id="8" actor_id="0" next_id="12">О старых реликвиях, способных оживлять
+мертвецов...</replic>
    <replic id="12" actor_id="0" next_id="13">Он так разволновался, что умер.</replic>
    <replic id="13" actor_id="0" next_id="0">Вообщем, я стал императором.
 Так бывает.</replic>

@@ -34,7 +34,7 @@ public class Character {
         String filename = CHARACTER_ICON_DIR + mIconName + ".png";
         BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-        BitmapTextureAtlas atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+        BitmapTextureAtlas atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.NEAREST);
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, filename, 0, 0);
         atlas.load();
         

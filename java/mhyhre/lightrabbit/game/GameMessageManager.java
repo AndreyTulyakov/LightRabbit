@@ -165,9 +165,9 @@ public class GameMessageManager extends EaseScene {
                 character = characterBase.getCharacter(currentReplic.getActorId());
                 if (character == null) {
                     Log.w(MainActivity.DEBUG_ID, "character == null");
-
                     return;
                 }
+
                 textCharacter.setVisible(true);
                 textCharacter.setText(character.getName());
                 Log.w(MainActivity.DEBUG_ID, "Char name:" + character.getName());
@@ -183,6 +183,7 @@ public class GameMessageManager extends EaseScene {
                     characterIcon.setScale(8);
                     attachChild(characterIcon);
                 }
+
                 break;
 
             case SHOW_TITLES:

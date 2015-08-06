@@ -180,7 +180,7 @@ public class GameMessageManager extends EaseScene {
 
                 if (character.getIconRegion() != null) {
                     characterIcon = new Sprite(128, MainActivity.getHeight() * 0.75f, character.getIconRegion(), MainActivity.getVboManager());
-                    characterIcon.setScale(2);
+                    characterIcon.setScale(8);
                     attachChild(characterIcon);
                 }
                 break;
@@ -222,12 +222,6 @@ public class GameMessageManager extends EaseScene {
                 if (characterIcon != null) {
                     characterIcon.detachSelf();
                     characterIcon = null;
-                }
-
-                if (character.getIconRegion() != null) {
-                    characterIcon = new Sprite(MainActivity.getWidth() * 0.20f, MainActivity.getHeight() * 0.20f, character.getIconRegion(), MainActivity.getVboManager());
-                    characterIcon.setScale(1);
-                    attachChild(characterIcon);
                 }
                 break;
 

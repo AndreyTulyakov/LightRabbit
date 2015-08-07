@@ -112,43 +112,43 @@ public class GameUserInterface extends EaseScene {
     private void createButtonSprites() {
         
         spriteMoveUp = new Sprite(0, 0, MainActivity.resources.getTextureRegion("ButtonUp"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveUp.setPosition(64 + 64 + 30, 40+64+30);
+        spriteMoveUp.setPosition(64 + 64 + 30, 50+64+30);
         spriteMoveUp.setVisible(true);
         spriteMoveUp.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveUp);
         
         spriteMoveDown = new Sprite(0, 0, MainActivity.resources.getTextureRegion("ButtonDown"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveDown.setPosition(64 + 64 + 30, 40);
+        spriteMoveDown.setPosition(64 + 64 + 30, 50);
         spriteMoveDown.setVisible(true);
         spriteMoveDown.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveDown);
         
         spriteMoveLeft = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Left"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveLeft.setPosition(64, 60);
+        spriteMoveLeft.setPosition(64, 70);
         spriteMoveLeft.setVisible(true);
         spriteMoveLeft.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveLeft);
 
         spriteMoveRight = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Right"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteMoveRight.setPosition(spriteMoveDown.getX() + 64 + 30, 60);
+        spriteMoveRight.setPosition(spriteMoveDown.getX() + 64 + 30, 70);
         spriteMoveRight.setVisible(true);
         spriteMoveRight.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteMoveRight);
 
         spriteFire = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteFire.setPosition(MainActivity.getWidth() - 64, 50);
+        spriteFire.setPosition(MainActivity.getWidth() - 64, 70);
         spriteFire.setVisible(true);
         spriteFire.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteFire);
         
         spriteSecondFire = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteSecondFire.setPosition(MainActivity.getWidth() - 64, 50 + 64 + 30);
+        spriteSecondFire.setPosition(MainActivity.getWidth() - 64, 60 + 64 + 30);
         spriteSecondFire.setVisible(true);
         spriteSecondFire.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteSecondFire);
         
         spriteJump = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Jump"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteJump.setPosition((spriteFire.getX() - 64) - 30, 50);
+        spriteJump.setPosition((spriteFire.getX() - 64) - 30, 70);
         spriteJump.setVisible(true);
         spriteJump.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteJump);
@@ -564,17 +564,17 @@ public class GameUserInterface extends EaseScene {
         case ALL_DIRECTIONS:
             showElement(Buttons.UP);
             showElement(Buttons.DOWN);
-            spriteMoveUp.setPosition(64 + 64 + 30, 40+64+30);
-            spriteMoveDown.setPosition(64 + 64 + 30, 40);
-            spriteMoveRight.setPosition(spriteMoveDown.getX() + 64 + 30, 87);
-            spriteMoveLeft.setPosition(64, 87);
+            spriteMoveUp.setPosition(64 + 64 + 30, 50+64+30);
+            spriteMoveDown.setPosition(64 + 64 + 30, 50);
+            spriteMoveRight.setPosition(spriteMoveDown.getX() + 64 + 30, 97);
+            spriteMoveLeft.setPosition(64, 97);
             break;
             
         case LEFT_RIGHT:
             hideElement(Buttons.UP);
             hideElement(Buttons.DOWN);
-            spriteMoveLeft.setPosition(64, 40);
-            spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 30, 40);
+            spriteMoveLeft.setPosition(64, 70);
+            spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 30, 70);
             break;
             
         default:

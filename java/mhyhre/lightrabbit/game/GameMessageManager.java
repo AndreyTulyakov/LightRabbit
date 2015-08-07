@@ -211,7 +211,7 @@ public class GameMessageManager extends EaseScene {
                 titleBackgroundRect.setVisible(false);
 
                 textMessage.setVisible(true);
-                textMessage.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() * 0.20f);
+                textMessage.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() * 0.28f);
                 textMessage.setText(currentReplic.getText());
                 textMessage.setAlpha(0);
 

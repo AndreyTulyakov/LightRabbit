@@ -1,0 +1,48 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+  <dialog id="1">
+   <replic id="1" actor_id="27" next_id="2" >Пшш... Вы приближаетесь.</replic>
+   <replic id="2" actor_id="25" next_id="3" >Вас понял!</replic>
+   <replic id="3" actor_id="27" next_id="0" >Кстати вы теперь майор.
+ Поздравляю!</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" actor_id="27" next_id="0" >Продолжайте продвигаться.</replic>
+  </dialog>
+
+  <dialog id="3">
+   <replic id="1" actor_id="27" next_id="0" >Ну как тебе подкрепление?!</replic>
+  </dialog>
+
+  <dialog id="4">
+   <replic id="1" actor_id="5" next_id="2" >Эм.. Добрый день.</replic>
+   <replic id="2" actor_id="29" next_id="3" >Добрый.</replic>
+   <replic id="3" actor_id="29" next_id="0" >Штаб, я не справлюсь.</replic>
+  </dialog>
+
+  <dialog id="5">
+     <replic id="1" actor_id="27" next_id="0" >Радар показывает нечто
+странное рядом с вами!</replic>
+  </dialog>
+
+
+  <dialog id="6">
+     <replic id="1" actor_id="29" next_id="2" >Ого!</replic>
+     <replic id="2" actor_id="30" next_id="3" >...</replic>
+     <replic id="3" actor_id="27" next_id="0" >Майор, назад!</replic>
+  </dialog>
+
+  <dialog id="7">
+     <replic id="1" actor_id="29" next_id="2" >Кажется обошлось...
+Исчез.</replic>
+     <replic id="2" actor_id="27" next_id="3" >На радаре пропал.
+Тем не менее...</replic>
+     <replic id="3" actor_id="27" next_id="0" >Миссия окончена успешно.
+Поздравляю.</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

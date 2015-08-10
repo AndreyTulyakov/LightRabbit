@@ -28,9 +28,7 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 public class Level {
-    
-    public static final String LEVELS_FOLDER = "levels/";
-    
+
     private static final String EVENT = "Event";
     private static final String COMMAND = "command";
     private static final String ID = "id";
@@ -63,7 +61,7 @@ public class Level {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         try {
-            InputStream is = MainActivity.Me.getAssets().open(LEVELS_FOLDER + filename);
+            InputStream is = MainActivity.Me.getAssets().open(MainActivity.LEVELS_FOLDER + filename);
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
             Document doc = docBuilder.parse(is);
             Element root = doc.getDocumentElement();

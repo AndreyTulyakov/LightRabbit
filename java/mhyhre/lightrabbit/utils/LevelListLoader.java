@@ -26,11 +26,11 @@ import mhyhre.lightrabbit.game.levels.LevelsPage;
 public class LevelListLoader {
 
     private static final String XML_NAME_PAGE = "Page";
-    private static final String XML_NAME_LEVEL = "level";    
-    private static final String LEVEL_LIST_FILENAME = "levels/LevelsList.xml";
-
+    private static final String XML_NAME_LEVEL = "level";
     public static List<LevelsPage> load() {
-        return load(LEVEL_LIST_FILENAME);
+
+        String levelListFilename = "levels_" + MainActivity.LOCALIZATION + "/LevelsList.xml";
+        return load(levelListFilename);
     }
     
     public static List<LevelsPage> load(String filename) {

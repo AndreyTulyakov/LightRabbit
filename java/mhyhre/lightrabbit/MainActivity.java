@@ -28,9 +28,10 @@ import mhyhre.lightrabbit.scenes.SceneStates;
 
 public class MainActivity extends LayoutGameActivity {
 
+    public static final String LOCALIZATION = "EN";
     public static final String DEBUG_ID = "LRABBIT";
     public static final String PREFERENCE_ID = "LIGHT_RABBIT_PREF";
-    public static final String LEVELS_FOLDER = "levels/";
+    public static final String LEVELS_FOLDER = "levels_" + LOCALIZATION + "/";
 
     public static final int PIXEL_MULTIPLIER = 4;
 

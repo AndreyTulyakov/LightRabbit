@@ -1,0 +1,17 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+ 
+  <dialog id="1">
+   <replic id="1" actor_id="0" next_id="0" >Тем временем призрак рыбака
+продолжал отрываться на остатках пиратов.</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" actor_id="0" next_id="0" >Уничтожив последний пиратский корабль,
+призрак исчез.</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

@@ -1,0 +1,26 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава Восьмая</Chapter>
+  <Name>Импер</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_07.lrdb</DialogBase>
+  <Fog colorR="30" colorG="25" colorB="5" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="HIDE_TOP_PANEL"/> 
+  <Event command="GUI_HIDE_ALL_ELEMENTS"/>
+  <Event command="SET_TIME" arg_int="5"/>
+  <Event command="SKY_SET_PALETTE" arg_str="IMPERIAL_DARK"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="66"/>
+  <Event command="WAIT_SECONDS" arg_int="3"/>
+  <Event command="SHOW_DIALOG" id="1"/>
+  <Event command="UNLOCK_LEVEL" arg_int="8"/>
+  <Event command="WAIT_SECONDS" arg_int="3"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="100"/>
+ </Events>
+
+</Level>

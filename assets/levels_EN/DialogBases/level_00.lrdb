@@ -1,0 +1,38 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+
+  <dialog id="1">
+   <replic id="1" next_id="2"  actor_id="0">Привет! Надо ввести
+тебя в курс дела.</replic>
+   <replic id="2" next_id="0"  actor_id="0">Первым делом вспомним как
+управлять этой посудиной.</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" next_id="0"  actor_id="0">Если ты хочешь сдвинуть судно,
+нажми вот здесь...</replic>
+  </dialog>
+  
+  <dialog id="3">
+   <replic id="1" next_id="0"  actor_id="0">Некоторые корабли могут прыгать,
+попробуй нажать вот это...</replic>
+  </dialog>
+
+  <dialog id="4">
+   <replic id="1" next_id="3"  actor_id="0">Славно! Буду надеяться
+что ты всё понял.</replic>
+   <replic id="3" next_id="4"  actor_id="0">У тебя есть небольшая пушка на корабле.</replic>
+   <replic id="4" next_id="0"  actor_id="0">А еще у тебя есть пара снарядов.
+Можешь попробовать, смотри, акула!</replic>
+  </dialog>
+
+
+  <dialog id="5">
+   <replic id="1" next_id="0"  actor_id="0">Будем считать, что тебе можно доверить
+корабль!</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

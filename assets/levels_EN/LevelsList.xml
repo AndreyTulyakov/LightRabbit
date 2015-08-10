@@ -1,0 +1,29 @@
+<!DOCTYPE LR_LEVELS_LIST>
+
+<Root>
+	
+ <Levels>
+
+	<Page id="1" caption="First part">
+		<level id="0" label="Chapter I">part_1/level_00.lrlvl</level>
+	    <level id="1" label="Chapter II">part_1/level_01.lrlvl</level>
+	    <level id="2" label="Chapter III">part_1/level_02.lrlvl</level>
+	    <level id="3" label="Chapter IV">part_1/level_03.lrlvl</level>
+    </Page>
+
+    <Page id="2" caption="Second part">
+ 		<level id="4" label="Chapter V">part_2/level_04.lrlvl</level>
+ 		<level id="5" label="Chapter VI">part_2/level_05.lrlvl</level>
+ 		<level id="6" label="Chapter VII">part_2/level_06.lrlvl</level>
+ 		<level id="7" label="Chapter VIII">part_2/level_07.lrlvl</level>
+    </Page>
+
+    <Page id="3" caption="Third part">
+ 		<level id="8" label="Chapter IX">part_3/level_08.lrlvl</level>
+ 		<level id="9" label="Chapter X">part_3/level_09.lrlvl</level>
+ 		<level id="10" label="Chapter XI">part_3/level_10.lrlvl</level>
+    </Page>
+
+ </Levels>
+ 
+</Root>

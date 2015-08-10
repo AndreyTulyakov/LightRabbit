@@ -1,0 +1,53 @@
+<!DOCTYPE LRDialogBase>
+<Root>
+ <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
+ <Dialogs>
+ 
+  <dialog id="1">
+   <replic id="1" actor_id="0" next_id="2" >Небольшая пиратская банда расположилась
+на побережье пустынных островов.</replic>
+   <replic id="2" actor_id="0" next_id="3" >Один пиратский корабль был без якоря.</replic>
+   <replic id="3" actor_id="0" next_id="0" >И пока все дрейфовали, его время от
+времени сносило течением.</replic>
+  </dialog>
+
+  <dialog id="2">
+   <replic id="1" actor_id="33" next_id="2" >Эй Кларсен, мы отдалились, пора бы
+подплыть поближе к остальным.</replic>
+   <replic id="2" actor_id="32" next_id="3" >Стив, я хочу спать,
+может ты сам всё сделаешь?</replic>
+   <replic id="3" actor_id="33" next_id="0" >Хорошо, но только в этот раз.</replic>
+  </dialog>
+
+
+  <dialog id="3">
+   <replic id="1" actor_id="0" next_id="0" >..Зашуршала рация..</replic>
+  </dialog>
+
+
+  <dialog id="4">
+   <replic id="1" actor_id="34" next_id="2" >Пшшш, парни, держитесь ближе.
+Вас едва видно.</replic>
+   <replic id="2" actor_id="33" next_id="0" >Говорит Стив, сейчас приблизимся.</replic>
+  </dialog>
+
+  <dialog id="5">
+   <replic id="1" actor_id="34" next_id="2" >Пшшш, вы плывете не в ту сторону,
+вас уже не видно.</replic>
+   <replic id="2" actor_id="33" next_id="0" >Мы плывем на белые огни.</replic>
+  </dialog>
+
+  <dialog id="7">
+   <replic id="1" actor_id="34" next_id="0" >Но у пшшс красные пшшш..
+(Нет сигнала)</replic>
+  </dialog>
+
+
+  <dialog id="6">
+   <replic id="1" actor_id="0" next_id="2" >Через некоторое время сквозь
+туман к берегу приплыл корабль.</replic>
+   <replic id="2" actor_id="0" next_id="0" >Ни одной живой души на нём не нашли.</replic>
+  </dialog>
+
+ </Dialogs>
+</Root>

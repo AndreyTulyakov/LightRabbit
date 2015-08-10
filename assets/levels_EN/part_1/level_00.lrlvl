@@ -1,0 +1,74 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава первая</Chapter>
+  <Name>Пролог</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_00.lrdb</DialogBase>
+  <Fog colorR="15" colorG="30" colorB="60" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="SET_WATER_WAVE_HEIGHT" arg_int="30"/>
+  <Event command="SET_WATER_WAVE_REPEATING" arg_int="15"/>
+  <Event command="SET_TIME" arg_int="10"/>
+  <Event command="STOP_TIME_IN" arg_int="18"/> 
+  <Event command="HIDE_TOP_PANEL"/> 
+  
+
+  <Event command="UNIT_ADD" id="0" arg_int="-600" arg_str="SteamShip" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="0" arg_int="3"/>
+
+  <Event command="GUI_HIDE_ALL_ELEMENTS"/>
+  <Event command="UNIT_SET_POSITION" id="0" arg_int="400"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="0" arg_int="15"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="50"/>
+
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SHOW_DIALOG" id="1"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="0"/>
+  <Event command="SET_DIE_POSITION" arg_int="-100"/>
+
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+
+  <Event command="SHOW_DIALOG" id="2"/>
+
+  <Event command="GUI_BLINK_ELEMENT" arg_str="LEFT"/>
+  <Event command="GUI_BLINK_ELEMENT" arg_str="RIGHT"/>
+
+  <Event command="WAIT_SECONDS" arg_int="3"/>
+
+  <Event command="SHOW_DIALOG" id="3"/>
+
+  <Event command="GUI_SHOW_ELEMENT" arg_str="LEFT"/>
+  <Event command="GUI_SHOW_ELEMENT" arg_str="RIGHT"/>
+
+  <Event command="GUI_BLINK_ELEMENT" arg_str="JUMP"/>
+
+  <Event command="WAIT_SECONDS" arg_int="3"/>
+
+  <Event command="SHOW_DIALOG" id="4"/>
+
+  <Event command="GUI_SHOW_ELEMENT" arg_str="JUMP"/>
+  <Event command="GUI_BLINK_ELEMENT" arg_str="FIRE"/>
+
+  <Event command="UNIT_ADD" id="1" arg_int="50" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="WAIT_WHILE_UNIT_ALIVE" id="1"/>
+
+  <Event command="GUI_SHOW_ELEMENT" arg_str="FIRE"/>
+
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="50"/>
+
+  <Event command="SHOW_REPLIC" id="5" arg_int="3"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="100"/>
+  <Event command="UNLOCK_LEVEL" arg_int="1"/>
+ </Events>
+ 
+</Level>

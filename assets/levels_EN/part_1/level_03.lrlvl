@@ -1,0 +1,161 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава Четвертая</Chapter>
+  <Name>Начало конца</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_03.lrdb</DialogBase>
+  <Fog colorR="30" colorG="25" colorB="5" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="SET_WATER_WAVE_HEIGHT" arg_int="60"/>
+  <Event command="SET_WATER_WAVE_REPEATING" arg_int="10"/>
+
+  <Event command="SET_TIME" arg_int="6"/>
+  <Event command="STOP_TIME_IN" arg_int="7"/>
+  <Event command="SKY_SET_PALETTE" arg_str="RAINY"/> 
+
+  <Event command="UNIT_ADD" id="0" arg_int="-500" arg_str="SteamShip" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="0" arg_int="150"/>
+
+  <Event command="SET_DIE_POSITION" arg_int="-60"/>
+  <Event command="UNIT_SET_POSITION" id="0" arg_int="200"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="50"/>
+
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SHOW_REPLIC" id="1"  arg_int="1"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="0"/>
+  <Event command="SHOW_REPLIC" id="2"  arg_int="1"/>
+
+  <Event command="WAIT_SECONDS" arg_int="2"/>
+  <Event command="MAKE_LIGHTNING" arg_int="800"/>
+  <Event command="WAIT_SECONDS" arg_int="2"/>
+  <Event command="MAKE_LIGHTNING" arg_int="650"/>
+
+
+  <Event command="UNIT_ADD" id="1" arg_int="100" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="2" arg_int="150" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="3" arg_int="160" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="4" arg_int="190" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="5" arg_int="220" arg_str="Shark" arg_str2="LEFT"/>
+
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="2" arg_int="6" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="4" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="5" arg_int="7" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="WAIT_ENEMIES_EXIST"/>
+  <Event command="ENABLE_RAIN" arg_int="100"/>
+
+  <Event command="SHOW_DIALOG" id="3"/>
+
+  <Event command="UNIT_ADD" id="1" arg_int="200" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="2" arg_int="230" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="3" arg_int="260" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="4" arg_int="290" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="5" arg_int="220" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="6" arg_int="300" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="7" arg_int="330" arg_str="Shark" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="8" arg_int="350" arg_str="Shark" arg_str2="LEFT"/>
+
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="2" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="8" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="4" arg_int="6" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="5" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="6" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="7" arg_int="6" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="8" arg_int="5" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="WAIT_ENEMIES_EXIST"/>
+
+  <Event command="UNIT_ADD" id="10" arg_int="150" arg_str="PirateShip" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="10" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="10" arg_int="881"/>
+  <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="10"/>
+
+  <Event command="SHOW_DIALOG" id="4"/>
+
+  <Event command="NPC_CHANGE_STATE" id="10" arg_int="-6" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="10" arg_int="1700"/>
+
+  <Event command="UNIT_ADD" id="11" arg_int="100" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="11" arg_int="200" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="11" arg_int="300" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="11" arg_int="400" arg_str="PirateBoat" arg_str2="LEFT"/>
+  
+  <Event command="NPC_CHANGE_STATE" id="11" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="WAIT_SECONDS" arg_int="8"/>
+
+  <Event command="UNIT_ADD" id="91" arg_int="100" arg_str="PirateAir" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="91" arg_int="6" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+
+
+  <Event command="UNIT_ADD" id="21" arg_int="300" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="400" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="450" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="500" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="550" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="700" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="725" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="21" arg_int="750" arg_str="PirateBoat" arg_str2="LEFT"/>
+  
+  <Event command="NPC_CHANGE_STATE" id="21" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SHOW_REPLIC" id="8"  arg_int="1"/>
+
+  <Event command="WAIT_SECONDS" arg_int="8"/>
+
+  <!-- Add pirate ship from right--> 
+  <Event command="UNIT_ADD" id="30" arg_int="-1000" arg_str="PirateShip" arg_str2="RIGHT"/>
+  <Event command="NPC_CHANGE_STATE" id="30" arg_int="2" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="30" arg_int="100"/>
+
+  <Event command="NPC_CHANGE_STATE" id="10" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="10" arg_int="850"/>
+
+  <Event command="WAIT_WHILE_UNIT_ALIVE" id="11"/>
+  <Event command="WAIT_WHILE_UNIT_ALIVE" id="21"/>
+
+  <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="30"/>
+  <Event command="MAKE_LIGHTNING" arg_int="850"/>
+  <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="10"/>
+
+  <Event command="WAIT_WHILE_UNIT_ALIVE" id="21"/>
+
+  <Event command="SHOW_DIALOG" id="5"/>
+  <Event command="SET_GAME_OVER_CONTIDION" arg_str="NEVER_ENDING"/>
+
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SHOW_REPLIC" id="6"  arg_int="1"/>
+
+
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="10" arg_int="500"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="30" arg_int="500"/>
+
+  <Event command="NPC_CHANGE_STATE" id="10" arg_str="ATTACK" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="30" arg_str="ATTACK" arg_str2="RIGHT"/>
+  
+  <Event command="WAIT_WHILE_UNIT_ALIVE" id="0"/>
+   
+  <Event command="NPC_CHANGE_STATE" id="10" arg_str="NONE"/>
+  <Event command="NPC_CHANGE_STATE" id="30"arg_str="NONE" />
+ 
+  <Event command="SET_FOG_VISIBLE" arg_int="33"/> 
+  <Event command="WAIT_SECONDS" arg_int="3"/>
+
+  <Event command="SHOW_DIALOG" id="7"/>
+
+  <Event command="UNLOCK_LEVEL" arg_int="4"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="100"/>
+  <Event command="END_GAME"/>
+
+ </Events>
+
+</Level>

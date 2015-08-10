@@ -1,0 +1,77 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава пятая</Chapter>
+  <Name>Причины</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_10.lrdb</DialogBase>
+  <Fog colorR="75" colorG="75" colorB="75" colorA="255"/>
+ </Setting>
+
+ <Events>
+  <Event command="HIDE_TOP_PANEL"/> 
+  <Event command="GUI_HIDE_ALL_ELEMENTS"/>
+  <Event command="SET_WATER_WAVE_HEIGHT" arg_int="10"/>
+  <Event command="SET_WATER_WAVE_REPEATING" arg_int="20"/>
+  <Event command="SET_WATER_COLOR" arg_str="0.4f, 0.4f, 0.4f, 0.5f"/>
+
+  <Event command="SET_TIME" arg_int="4"/>
+  <Event command="STOP_TIME_IN" arg_int="5"/> 
+
+
+  <Event command="UNIT_ADD" id="1" arg_int="-500" arg_str="Barge" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="1" arg_int="6"/>
+
+  <Event command="SET_DIE_POSITION" arg_int="-50"/>
+  <Event command="UNIT_SET_POSITION" id="0" arg_int="200"/>
+
+  <Event command="SHOW_DIALOG" id="1"/>
+  <Event command="NPC_CHANGE_STATE" id="1" arg_str="ATTACK" arg_str2="RIGHT"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="0"/>
+
+
+  <Event command="UNIT_ADD" id="2" arg_int="100" arg_str="IndustrialShip" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="2" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SET_WATER_COLOR" arg_str="0.35f, 0.45f, 0.35f, 0.5f"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SET_WATER_COLOR" arg_str="0.30f, 0.47f, 0.30f, 0.52f"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SET_WATER_COLOR" arg_str="0.25f, 0.50f, 0.25f, 0.55f"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="SET_WATER_COLOR" arg_str="0.2f, 0.50f, 0.2f, 0.57f"/>
+
+  <Event command="UNIT_SET_STOP_POSITION" id="2" arg_int="800"/>
+  <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="2"/>
+
+  <Event command="SHOW_DIALOG" id="2"/>
+
+  <Event command="UNIT_ADD" id="3" arg_int="-1000" arg_str="ImperialPoliceShip" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_PROJECTILES_COUNT" id="3" arg_int="20"/>
+    <Event command="NPC_CHANGE_STATE" id="3" arg_int="4" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="UNIT_SET_STOP_POSITION" id="3" arg_int="185"/>
+  <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="3"/>
+
+  <Event command="SHOW_DIALOG" id="3"/>
+
+  <Event command="NPC_CHANGE_STATE" id="1" arg_int="5" arg_str="MOVE" arg_str2="RIGHT"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/> 
+  <Event command="NPC_CHANGE_STATE" id="3" arg_int="5" arg_str="ATTACK_AND_MOVE" arg_str2="RIGHT"/>
+
+  <Event command="SHOW_REPLIC" id="4"  arg_int="1"/>
+
+  <Event command="WAIT_SECONDS" arg_int="2"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="75"/>
+
+  <Event command="SHOW_TITLES" id="5"/>
+
+  <Event command="SET_FOG_VISIBLE" arg_int="100"/>
+
+  <Event command="GO_TO_MAIN_MENU"/>
+ </Events>
+
+</Level>

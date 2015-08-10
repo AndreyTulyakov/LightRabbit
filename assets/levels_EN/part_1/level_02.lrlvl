@@ -1,0 +1,32 @@
+<!DOCTYPE LRLevel>
+
+<Level>
+ <Setting>
+  <Chapter>Глава Третья</Chapter>
+  <Name>Питон</Name>
+  <Zone>SEA</Zone>
+  <Weather>FAIR</Weather>
+  <DialogBase>DialogBases/level_02.lrdb</DialogBase>
+  <Fog colorR="128" colorG="128" colorB="128" colorA="128"/>
+ </Setting>
+
+ <Events>
+  <Event command="HIDE_TOP_PANEL"/> 
+  <Event command="GUI_HIDE_ALL_ELEMENTS"/>
+
+  <Event command="SET_WATER_WAVE_HEIGHT" arg_int="20"/>
+  <Event command="SET_WATER_WAVE_REPEATING" arg_int="20"/>
+  <Event command="SET_WATER_COLOR" arg_str="0.20f, 0.25f, 0.35f, 0.66f"/>
+  <Event command="DISABLE_CLOUDS"/>
+  <Event command="SET_TIME" arg_int="9"/>
+  <Event command="STOP_TIME_IN" arg_int="21"/>
+  <Event command="SKY_SET_PALETTE" arg_str="IMPERIAL_DARK"/> 
+  <Event command="ENABLE_RAIN" arg_int="100"/>
+  <Event command="SET_FOG_VISIBLE" arg_int="50"/>
+
+  <Event command="SHOW_DIALOG" id="1"/>
+  <Event command="WAIT_SECONDS" arg_int="1"/>
+  <Event command="UNLOCK_LEVEL" arg_int="3"/>
+ </Events>
+
+</Level>

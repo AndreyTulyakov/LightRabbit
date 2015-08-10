@@ -1,0 +1,28 @@
+<!DOCTYPE LRCharactersFile>
+<Characters>
+ <character id="0" name="..." icon=""/>
+ <character id="1" name="Матрос Гоги" icon="gogi"/>
+ <character id="2" name="Капитан Рэббит" icon="captainRabbit"/>
+ <character id="4" name="Записка" icon="paper"/>
+ <character id="5" name="Вроде пират" icon="pirat01"/>
+ <character id="7" name="Торговец" icon="trademan"/>
+ <character id="10" name="Тип в капюшоне" icon="pythonMan"/>
+ <character id="12" name="Питон" icon=""/>
+ 
+ <character id="20" name="Ответственный товарищ" icon="indMan"/>
+ <character id="21" name="Николя" icon="nikola"/>
+ <character id="22" name="Дядька Милиционер" icon="milicio"/>
+
+ <character id="25" name="Лейтенант Купер" icon="cooper"/>
+ <character id="26" name="Майор Даллас" icon=""/>
+ <character id="27" name="Штаб" icon=""/>
+ <character id="28" name="Император" icon=""/>
+ <character id="29" name="Майор Купер" icon="cooper"/>
+ <character id="30" name="Призрак" icon=""/>
+ <character id="31" name="Купер" icon="cooper"/> 
+
+ <character id="32" name="Кларсен" icon=""/> 
+ <character id="33" name="Стив" icon=""/>  
+ <character id="34" name="Рация *Пиратская волна*" icon=""/>  
+
+</Characters>

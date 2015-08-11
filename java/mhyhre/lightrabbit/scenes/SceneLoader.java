@@ -24,6 +24,7 @@ import org.andengine.util.adt.color.Color;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 
@@ -48,15 +49,14 @@ public class SceneLoader extends EaseScene {
         Color captionsColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Tap text
-        String TextMessage = MainActivity.Me.getString(R.string.textTap);
+        String TextMessage = StringsBase.getInstance().getValue("Press_For_Continue");
         mCaptionTapScreen = new Text(0, 0, MainActivity.resources.getFont("White Furore"), TextMessage, MainActivity.getVboManager());
         mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() * 1.6f, (MainActivity.getHeight() / 4) * 1.6f);
         mCaptionTapScreen.setVisible(false);
         mCaptionTapScreen.setAlpha(0.0f);
         mCaptionTapScreen.setColor(captionsColor);
         
-        textGameLogo = new Text(0, 0, MainActivity.resources.getFont("Furore48"), " " + MainActivity.Me.getString(R.string.app_name),
-                MainActivity.getVboManager());
+        textGameLogo = new Text(0, 0, MainActivity.resources.getFont("Furore48"), StringsBase.getInstance().getValue("Application_Name"), MainActivity.getVboManager());
         textGameLogo.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 4) * 2.1f);
         textGameLogo.setColor(captionsColor);
         textGameLogo.setAlpha(0.0f);

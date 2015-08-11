@@ -104,7 +104,7 @@ public class ResourceManager {
         atlas.load();
         atlases.put("User_Interface", atlas);
 
-        regions.put("Button1", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 76, 16, false));
+        regions.put("Button1", TextureRegionFactory.extractFromTexture(atlas, 1, 0, 78, 19, false));
 
         region = TextureRegionFactory.extractFromTexture(atlas, 28, 113, 22, 14, false);
         regions.put("Button2", region);

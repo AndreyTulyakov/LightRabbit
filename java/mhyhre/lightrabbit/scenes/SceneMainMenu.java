@@ -20,6 +20,7 @@ import org.andengine.opengl.font.IFont;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneMainMenu extends EaseScene {
@@ -42,9 +43,9 @@ public class SceneMainMenu extends EaseScene {
         attachChild(background);
 
         // Text captions
-        String TextItem1 = MainActivity.Me.getString(R.string.MenuItem_Play);
-        String TextItem3 = MainActivity.Me.getString(R.string.MenuItem_About);
-        String TextItem4 = MainActivity.Me.getString(R.string.MenuItem_Exit);
+        String TextItem1 = StringsBase.getInstance().getValue("MenuItem_Play");
+        String TextItem3 = StringsBase.getInstance().getValue("MenuItem_About");
+        String TextItem4 = StringsBase.getInstance().getValue("MenuItem_Exit");
 
         // Creating text
         final IFont usedFont = MainActivity.resources.getFont("Furore");

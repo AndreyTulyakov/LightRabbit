@@ -21,6 +21,7 @@ import org.andengine.util.adt.color.Color;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneGameLoading extends EaseScene {
@@ -59,7 +60,7 @@ public class SceneGameLoading extends EaseScene {
         attachChild(backRect);
         registerTouchArea(backRect);
 
-        mTextPress = new Text(0, 0, MainActivity.resources.getFont("White Furore 24"), MainActivity.Me.getString(R.string.tapForContinue), 100,
+        mTextPress = new Text(0, 0, MainActivity.resources.getFont("White Furore 24"), StringsBase.getInstance().getValue("Press_For_Continue"), 100,
                 MainActivity.Me.getVertexBufferObjectManager());
         mTextPress.setPosition(MainActivity.getHalfWidth(), 30 + mTextPress.getHeight() / 2);
 

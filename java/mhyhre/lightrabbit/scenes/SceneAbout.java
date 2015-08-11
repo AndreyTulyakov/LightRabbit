@@ -17,6 +17,7 @@ import java.io.InputStream;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneAbout extends EaseScene {
@@ -35,9 +36,8 @@ public class SceneAbout extends EaseScene {
         background.setScale(2);
         attachChild(background);
 
-        String strText1 = MainActivity.Me.getString(R.string.textAbout);
+        String strText1 = StringsBase.getInstance().getValue("About");
         textTop = new Text(0, 0, MainActivity.resources.getFont("White Furore"), strText1, MainActivity.Me.getVertexBufferObjectManager());
-        //textTop.setPosition(MainActivity.getHalfWidth(), MainActivity.getHeight() - 40);
 
         Rectangle topRect = new Rectangle(0, 0, MainActivity.getWidth(), 1, MainActivity.Me.getVertexBufferObjectManager());
         topRect.setColor(0.0f, 0.0f, 0.0f, 0.3f);
@@ -53,8 +53,6 @@ public class SceneAbout extends EaseScene {
         attachChild(textTop);
         attachChild(textInfo);
 
-        String strBack = MainActivity.Me.getString(R.string.textBack);
-
         Sprite mBackButtonSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -69,7 +67,7 @@ public class SceneAbout extends EaseScene {
 
         mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
 
-        Text textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), strBack, MainActivity.Me.getVertexBufferObjectManager());
+        Text textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), StringsBase.getInstance().getValue("Back"), MainActivity.Me.getVertexBufferObjectManager());
         textBack.setPosition(mBackButtonSprite);
 
         attachChild(mBackButtonSprite);

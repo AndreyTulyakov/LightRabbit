@@ -32,6 +32,7 @@ public class MainActivity extends LayoutGameActivity {
     public static final String DEBUG_ID = "LRABBIT";
     public static final String PREFERENCE_ID = "LIGHT_RABBIT_PREF";
     public static final String LEVELS_FOLDER = "levels_" + LOCALIZATION + "/";
+    public static final String LOCATE_STRINGS_FILENAME = "strings_" + LOCALIZATION + ".xml";
 
     public static final int PIXEL_MULTIPLIER = 4;
 

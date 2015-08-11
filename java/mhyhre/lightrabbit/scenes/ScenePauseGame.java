@@ -9,6 +9,7 @@ import org.andengine.input.touch.TouchEvent;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class ScenePauseGame extends EaseScene {
@@ -21,9 +22,9 @@ public class ScenePauseGame extends EaseScene {
 
         setBackgroundEnabled(false);
 
-        String textPause = MainActivity.Me.getString(R.string.pause);
-        String textResume = MainActivity.Me.getString(R.string.resume);
-        String textExit = MainActivity.Me.getString(R.string.pauseExit);
+        String textPause = StringsBase.getInstance().getValue("Pause"); MainActivity.Me.getString(R.string.pause);
+        String textResume = StringsBase.getInstance().getValue("Resume"); MainActivity.Me.getString(R.string.resume);
+        String textExit = StringsBase.getInstance().getValue("Pause_Exit"); MainActivity.Me.getString(R.string.pauseExit);
 
 
         Rectangle backRect = new Rectangle(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),
@@ -37,7 +38,6 @@ public class ScenePauseGame extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    Log.i(MainActivity.DEBUG_ID, "Exit from pause!");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.MainMenu);
                 }
@@ -51,7 +51,6 @@ public class ScenePauseGame extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    Log.i(MainActivity.DEBUG_ID, "Resume from pause!");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.Game);
                 }

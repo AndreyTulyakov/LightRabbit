@@ -20,6 +20,7 @@ import org.andengine.input.touch.TouchEvent;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.R;
+import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneExit extends EaseScene {
@@ -38,9 +39,9 @@ public class SceneExit extends EaseScene {
         background.setScale(2);
         attachChild(background);
 
-        String textExit = MainActivity.Me.getString(R.string.QExit);
-        String textBack = MainActivity.Me.getString(R.string.textBack);
-        String textExitQuestion = MainActivity.Me.getString(R.string.textExit);
+        String textExit = StringsBase.getInstance().getValue("Question_Exit");
+        String textBack = StringsBase.getInstance().getValue("Back");
+        String textExitQuestion = StringsBase.getInstance().getValue("Exit");
 
         // Creating sprite
         Sprite buttonExitRect = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Button1"), MainActivity.Me.getVertexBufferObjectManager()) {
@@ -48,7 +49,6 @@ public class SceneExit extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Exit ] pressed");
                     MainActivity.vibrate(30);
                     MainActivity.Me.finish();
                 }
@@ -62,7 +62,6 @@ public class SceneExit extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
-                    Log.i(MainActivity.DEBUG_ID, "Exit Scene [ Back ] pressed");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.MainMenu);
                 }

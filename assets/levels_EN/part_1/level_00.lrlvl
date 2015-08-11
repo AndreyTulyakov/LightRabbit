@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава первая</Chapter>
-  <Name>Пролог</Name>
+  <Chapter>Chapter One</Chapter>
+  <Name>Prolog</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_00.lrdb</DialogBase>

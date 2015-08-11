@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава пятая</Chapter>
-  <Name>Пиро-Фиаско</Name>
+  <Chapter>Chapter Five</Chapter>
+  <Name>Dead frost</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_04.lrdb</DialogBase>

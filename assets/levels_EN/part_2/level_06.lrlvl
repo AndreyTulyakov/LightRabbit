@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава седьмая</Chapter>
-  <Name>Новая цель</Name>
+  <Chapter>Chapter Seven</Chapter>
+  <Name>New target</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_06.lrdb</DialogBase>

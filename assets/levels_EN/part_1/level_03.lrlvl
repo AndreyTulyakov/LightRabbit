@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава Четвертая</Chapter>
-  <Name>Начало конца</Name>
+  <Chapter>Chapter Four</Chapter>
+  <Name>Beginning of the end</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_03.lrdb</DialogBase>

@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава Восьмая</Chapter>
-  <Name>Импер</Name>
+  <Chapter>Chapter Eight</Chapter>
+  <Name>Emperor</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_07.lrdb</DialogBase>

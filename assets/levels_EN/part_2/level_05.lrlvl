@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава шестая</Chapter>
-  <Name>Законченное дело</Name>
+  <Chapter>Chapter Six</Chapter>
+  <Name>Completed case</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_05.lrdb</DialogBase>

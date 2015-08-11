@@ -1,5 +1,5 @@
 <resources>
-    <string name="banner_ad_unit_id">ca-app-pub-5885898336310144/3045317719</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-5885898336310144/3045317719</string>
     <string name="app_name">Морская история</string>
     <string name="title_activity_main">Морская история</string>
     <string name="QExit">Вы хотите выйти?</string>

@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава Восьмая</Chapter>
-  <Name>Изучая старое узнаешь новое.</Name>
+  <Chapter>Chapter Nine</Chapter>
+  <Name>Old in new</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_08.lrdb</DialogBase>

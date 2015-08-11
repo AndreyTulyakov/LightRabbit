@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава пятая</Chapter>
-  <Name>Причины</Name>
+  <Chapter>Chapter Eleven</Chapter>
+  <Name>Causes</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_10.lrdb</DialogBase>

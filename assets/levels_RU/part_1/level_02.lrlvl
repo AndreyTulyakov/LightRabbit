@@ -3,7 +3,7 @@
 <Level>
  <Setting>
   <Chapter>Глава Третья</Chapter>
-  <Name>Питон</Name>
+  <Name>Сделка</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_02.lrdb</DialogBase>

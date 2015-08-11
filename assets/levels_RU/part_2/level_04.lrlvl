@@ -3,7 +3,7 @@
 <Level>
  <Setting>
   <Chapter>Глава пятая</Chapter>
-  <Name>Пиро-Фиаско</Name>
+  <Name>Гиблое дело</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_04.lrdb</DialogBase>

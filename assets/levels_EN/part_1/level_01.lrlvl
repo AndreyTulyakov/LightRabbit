@@ -2,8 +2,8 @@
 
 <Level>
  <Setting>
-  <Chapter>Глава вторая</Chapter>
-  <Name>Повседневность</Name>
+  <Chapter>Chapter Two</Chapter>
+  <Name>Daily life</Name>
   <Zone>SEA</Zone>
   <Weather>FAIR</Weather>
   <DialogBase>DialogBases/level_01.lrdb</DialogBase>

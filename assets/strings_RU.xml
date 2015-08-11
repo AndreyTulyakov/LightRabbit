@@ -1,0 +1,21 @@
+<resources>
+    <string name="Application_Name">Морская история</string>
+    <string name="Question_Exit">Вы хотите выйти?</string>
+    <string name="MenuItem_Exit">Выход</string>
+    <string name="MenuItem_About">О игре</string>
+    <string name="MenuItem_Play">Старт</string>
+    <string name="Start">Старт</string>
+    <string name="Back">Назад</string>
+    <string name="Exit">Выход</string>
+    <string name="About">О игре</string>
+    <string name="Press">Нажмите...</string>
+    <string name="Select_Level">Выберите уровень</string>
+    <string name="Loading">Загрузка...</string>
+    <string name="Press_For_Continue">нажмите для продолжения</string>
+    <string name="You_Was_Died">Вы умерли!</string>
+    <string name="Level_Completed">Уровень пройден!</string>
+    <string name="Level">Уровень</string>
+    <string name="Resume">Продолжить</string>
+    <string name="Pause_Exit">Выход</string>
+    <string name="Pause">Пауза</string>
+</resources>

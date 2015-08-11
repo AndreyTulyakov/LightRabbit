@@ -22,9 +22,9 @@ public class ScenePauseGame extends EaseScene {
 
         setBackgroundEnabled(false);
 
-        String textPause = StringsBase.getInstance().getValue("Pause"); MainActivity.Me.getString(R.string.pause);
-        String textResume = StringsBase.getInstance().getValue("Resume"); MainActivity.Me.getString(R.string.resume);
-        String textExit = StringsBase.getInstance().getValue("Pause_Exit"); MainActivity.Me.getString(R.string.pauseExit);
+        String textPause = StringsBase.getInstance().getValue("Pause");
+        String textResume = StringsBase.getInstance().getValue("Resume");
+        String textExit = StringsBase.getInstance().getValue("Pause_Exit");
 
 
         Rectangle backRect = new Rectangle(MainActivity.getHalfWidth(), MainActivity.getHalfHeight(),

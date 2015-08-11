@@ -78,7 +78,6 @@ public class SceneGameLoading extends EaseScene {
         attachChild(mTextPress);
         attachChild(mLevelName);
         attachChild(mLevelChapter);
-
         setLoaded(false);
     }
 
@@ -88,7 +87,7 @@ public class SceneGameLoading extends EaseScene {
     protected void onManagedUpdate(float pSecondsElapsed) {
 
         if (mLoaded) {
-            rectAlpha += 0.03f;
+            rectAlpha += 0.033f;
             if (rectAlpha >= Math.PI) {
                 rectAlpha = 0;
             }

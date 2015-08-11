@@ -94,6 +94,7 @@ public class SceneRoot extends Scene {
             switch (state) {
                 case Splash:
                     mSceneLoader.show();
+                    MainActivity.Me.hideAd();
                     break;
 
                 case MainMenu:
@@ -103,8 +104,8 @@ public class SceneRoot extends Scene {
 
                 case LevelSelector:
                     mSceneLevelSelector.show();
+                    MainActivity.Me.showAd();
                     break;
-
 
                 case About:
                     mSceneAbout.show();
@@ -142,13 +143,11 @@ public class SceneRoot extends Scene {
                     mSceneGame.show();
 
                     mSceneGameLoading.setLoaded(true);
-
                     break;
 
                 case Game:
 
                     if (mSceneGame != null) {
-
                         mSceneGame.show();
                         mSceneGame.start();
                     }

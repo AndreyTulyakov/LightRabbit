@@ -65,7 +65,7 @@ public class SceneAbout extends EaseScene {
         };
         mBackButtonSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
 
-        mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), 50);
+        mBackButtonSprite.setPosition(MainActivity.getHalfWidth(), (MainActivity.getHeight() / 9.0f) * 2.2f);
 
         Text textBack = new Text(0, 0, MainActivity.resources.getFont("Furore"), StringsBase.getInstance().getValue("Back"), MainActivity.Me.getVertexBufferObjectManager());
         textBack.setPosition(mBackButtonSprite);

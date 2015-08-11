@@ -7,6 +7,9 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import mhyhre.lightrabbit.scenes.SceneRoot;
+import mhyhre.lightrabbit.scenes.SceneStates;
+
 public class ScreenAdvertisement {
 
     final Activity activity;
@@ -21,9 +24,7 @@ public class ScreenAdvertisement {
         this.activity = activity;
         this.advertisementId = advertisementId;
 
-        request = new AdRequest.Builder()
-                .setGender(AdRequest.GENDER_UNKNOWN)
-                .build();
+        request = new AdRequest.Builder().build();
 
         adsHandler.post(new Runnable() {
             public void run() {
@@ -40,8 +41,12 @@ public class ScreenAdvertisement {
         adView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                adView.setEnabled(true);
-                adView.setVisibility(android.view.View.VISIBLE);
+                if(SceneRoot.getState() == SceneStates.MainMenu || SceneRoot.getState() == SceneStates.LevelSelector) {
+                    adView.setEnabled(true);
+                    adView.setVisibility(android.view.View.VISIBLE);
+                } else {
+                    unshowAds();
+                }
             }
         });
 

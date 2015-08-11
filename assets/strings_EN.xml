@@ -1,0 +1,21 @@
+<resources>
+	<string name="Application_Name">A Sea Story</string>
+    <string name="Question_Exit">Do you want exit?</string>
+    <string name="MenuItem_Exit">Exit</string>
+    <string name="MenuItem_About">About</string>
+    <string name="MenuItem_Play">Start</string>
+    <string name="Start">Start</string>
+    <string name="Back">Back</string>
+    <string name="Exit">Exit</string>
+    <string name="About">About</string>
+    <string name="Press">Press...</string>
+    <string name="Select_Level">Select level</string>
+    <string name="Loading">Loading...</string>
+    <string name="Press_For_Continue">press for continue</string>
+    <string name="You_Was_Died">You died!</string>
+    <string name="Level_Completed">Level completed!</string>
+    <string name="Level">Level</string>
+    <string name="Resume">Resume</string>
+    <string name="Pause_Exit">Exit</string>
+    <string name="Pause">Pause</string>
+</resources>

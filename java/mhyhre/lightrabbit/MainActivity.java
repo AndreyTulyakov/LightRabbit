@@ -29,6 +29,8 @@ import mhyhre.lightrabbit.scenes.SceneStates;
 public class MainActivity extends LayoutGameActivity {
 
     public static final String LOCALIZATION = "EN";
+    public static final boolean USE_ADMOB = true;
+
     public static final String DEBUG_ID = "LRABBIT";
     public static final String PREFERENCE_ID = "LIGHT_RABBIT_PREF";
     public static final String LEVELS_FOLDER = "levels_" + LOCALIZATION + "/";
@@ -225,11 +227,13 @@ public class MainActivity extends LayoutGameActivity {
     @Override
     public synchronized void onGameCreated() {
 
-        this.runOnUiThread(new Runnable() {
-            public void run() {
-                mAdvertisement = new ScreenAdvertisement(MainActivity.Me, R.id.adViewId);
-            }
-        });
+        if(USE_ADMOB) {
+            this.runOnUiThread(new Runnable() {
+                public void run() {
+                    mAdvertisement = new ScreenAdvertisement(MainActivity.Me, R.id.adViewId);
+                }
+            });
+        }
 
         super.onGameCreated();
     }
@@ -245,10 +249,14 @@ public class MainActivity extends LayoutGameActivity {
     }
 
     public void showAd() {
-        mAdvertisement.showAdvertisement();
+        if(USE_ADMOB) {
+            mAdvertisement.showAdvertisement();
+        }
     }
 
     public void hideAd() {
-        mAdvertisement.hideAdvertisement();
+        if(USE_ADMOB) {
+            mAdvertisement.hideAdvertisement();
+        }
     }
 }

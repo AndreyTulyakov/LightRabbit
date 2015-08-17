@@ -23,7 +23,6 @@ import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
@@ -67,6 +66,7 @@ public class SceneLoader extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN && !Clicked) {
                     unregisterTouchArea(splashSprite);
+                    MainActivity.resources.playSound("click1");
                     Clicked = true;
                     Log.i(MainActivity.DEBUG_ID, "Splash Screen [ Tap ] button");
                     MainActivity.vibrate(20);

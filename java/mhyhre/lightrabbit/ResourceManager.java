@@ -8,6 +8,8 @@ package mhyhre.lightrabbit;
 import android.graphics.Color;
 import android.util.Log;
 
+import org.andengine.audio.music.Music;
+import org.andengine.audio.music.MusicFactory;
 import org.andengine.audio.sound.Sound;
 import org.andengine.audio.sound.SoundFactory;
 import org.andengine.opengl.font.Font;
@@ -32,6 +34,7 @@ public class ResourceManager {
     private Map<String, BitmapTextureAtlas> atlases;
     private Map<String, Font> fonts;
     private Map<String, Sound> sounds;
+    private Map<String, Music> musics;
 
     public ResourceManager() {
         regions = new HashMap<String, ITextureRegion>();
@@ -39,6 +42,7 @@ public class ResourceManager {
         atlases = new HashMap<String, BitmapTextureAtlas>();
         fonts = new HashMap<String, Font>();
         sounds = new HashMap<String, Sound>();
+        musics = new HashMap<String, Music>();
     }
 
     public ITextureRegion getTextureRegion(String key) {
@@ -76,6 +80,20 @@ public class ResourceManager {
             Log.e(MainActivity.DEBUG_ID, "ResourceManager::playSound: invalid key - " + key);
         if (MainActivity.isSoundEnabled()) {
             sounds.get(key).play();
+        }
+    }
+
+    public Music getMusic(String key) {
+        if (!musics.containsKey(key))
+            Log.e(MainActivity.DEBUG_ID, "ResourceManager::getMusic: invalid key - " + key);
+        return musics.get(key);
+    }
+
+    public void playMusic(String key) {
+        if (!musics.containsKey(key))
+            Log.e(MainActivity.DEBUG_ID, "ResourceManager::playMusic: invalid key - " + key);
+        if (MainActivity.isSoundEnabled()) {
+            musics.get(key).play();
         }
     }
 
@@ -256,9 +274,10 @@ public class ResourceManager {
     
     public void loadSounds() {
         SoundFactory.setAssetBasePath("sound/");
+        MusicFactory.setAssetBasePath("sound/");
 
-        addSound("untitled.ogg", "roboClick");
-        addSound("SwitchOn.ogg", "switchOn");
+        addSound("click0.ogg", "click");
+        addSound("click1.ogg", "click1");
         addSound("shoot01.ogg", "shoot01");
         addSound("shoot02.ogg", "shoot02");
         addSound("boom01.ogg", "boom01");
@@ -266,20 +285,35 @@ public class ResourceManager {
         addSound("lighting.ogg", "lighting");
         addSound("dropToWater.ogg", "dropToWater");
         addSound("message.ogg", "message");
+
+        addMusic("rain.ogg", "rain");
+        addMusic("sea.ogg", "sea");
     }
     
 
     private void addSound(String filename, String name) {
-        Sound snd = null;
+        Sound sound = null;
         try {
-            snd = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), filename);
+            sound = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), filename);
         } catch (IOException e) {
             Log.e(MainActivity.DEBUG_ID, "ResourceManager::addSound: " + e.getMessage());
             e.printStackTrace();
         }
-        sounds.put(name, snd);
+        sounds.put(name, sound);
     }
-    
+
+
+    private void addMusic(String filename, String name) {
+        Music music = null;
+        try {
+            music = MusicFactory.createMusicFromAsset(MainActivity.Me.getMusicManager(), MainActivity.Me.getApplicationContext(), filename);
+        } catch (IOException e) {
+            Log.e(MainActivity.DEBUG_ID, "ResourceManager::addSound: " + e.getMessage());
+            e.printStackTrace();
+        }
+        musics.put(name, music);
+    }
+
 
     public void loadFonts() {
 

@@ -7,6 +7,7 @@ package mhyhre.lightrabbit.scenes;
 
 import android.util.Log;
 
+import org.andengine.audio.music.Music;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
 
@@ -209,6 +210,19 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
 
                 case SET_WATER_WAVE_HEIGHT:
                     water.setWaveHeight(gameEvent.getIntegerArg());
+                    if(water.getWaveHeight() > 25) {
+                        Music wave = MainActivity.resources.getMusic("sea");
+                        wave.play();
+                        wave.setLooping(true);
+                        //
+                        Log.i(MainActivity.DEBUG_ID, "play wave!");
+
+                    } else {
+                        if(MainActivity.resources.getMusic("sea").isPlaying())
+                        {
+                            MainActivity.resources.getMusic("sea").stop();
+                        }
+                    }
                     goToNextEvent();
                     break;
 
@@ -240,12 +254,21 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
                     break;
 
                 case ENABLE_RAIN:
+                    Music rain = MainActivity.resources.getMusic("rain");
+                    rain.setLooping(true);
+                    rain.play();
                     skyes.enableRain();
+
                     goToNextEvent();
                     break;
 
                 case DISABLE_RAIN:
                     skyes.disableRain();
+                    if(MainActivity.resources.getMusic("rain").isPlaying())
+                    {
+                        MainActivity.resources.getMusic("rain").stop();
+                    }
+
                     goToNextEvent();
                     break;
 
@@ -368,6 +391,7 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
 
                 case UNIT_SPEED:
                     break;
+
                 case UNIT_SET_IDEOLOGY:
                     units.unitSetIdeology(gameEvent);
                     goToNextEvent();
@@ -639,7 +663,16 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
         }
     }
 
-    private void endGame() {
+    public void endGame() {
+        if(MainActivity.resources.getMusic("rain").isPlaying())
+        {
+            MainActivity.resources.getMusic("rain").stop();
+        }
+        if(MainActivity.resources.getMusic("sea").isPlaying())
+        {
+            MainActivity.resources.getMusic("sea").stop();
+        }
+
         MainActivity.getRootScene().SetState(SceneStates.EndGame);
     }
 

@@ -12,14 +12,11 @@
 
 package mhyhre.lightrabbit.scenes;
 
-import android.util.Log;
-
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
@@ -61,7 +58,7 @@ public class SceneExit extends EaseScene {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-
+                    MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.MainMenu);
                 }

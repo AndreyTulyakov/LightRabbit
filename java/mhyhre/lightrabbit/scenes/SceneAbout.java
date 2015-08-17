@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
@@ -57,6 +56,7 @@ public class SceneAbout extends EaseScene {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+                    MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.MainMenu);
                 }

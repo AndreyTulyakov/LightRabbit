@@ -74,6 +74,7 @@ public class SceneLevelSelector extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if(pSceneTouchEvent.isActionDown()) {
                     if (currentPage < pages.size() - 1) {
+                        MainActivity.resources.playSound("click");
                         currentPage++;
                         configureLevelsItem();
                         configureLevelsCaption();
@@ -99,6 +100,7 @@ public class SceneLevelSelector extends EaseScene {
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if(pSceneTouchEvent.isActionDown()) {
                     if (currentPage > 0) {
+                        MainActivity.resources.playSound("click");
                         currentPage--;
                         configureLevelsItem();
                         configureLevelsCaption();
@@ -240,6 +242,7 @@ public class SceneLevelSelector extends EaseScene {
 
                     selectedLevel = item;
                     MainActivity.getRootScene().SetState(SceneStates.GameLoading);
+                    MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                 }
             }

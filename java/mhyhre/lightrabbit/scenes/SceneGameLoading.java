@@ -20,7 +20,6 @@ import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
@@ -43,7 +42,7 @@ public class SceneGameLoading extends EaseScene {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
 
                     if (mLoaded) {
-
+                        MainActivity.resources.playSound("click1");
                         MainActivity.getRootScene().SetState(SceneStates.Game);
 
                         setLoaded(false);

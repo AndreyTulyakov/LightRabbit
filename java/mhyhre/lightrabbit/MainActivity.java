@@ -82,6 +82,7 @@ public class MainActivity extends LayoutGameActivity {
         EngineOptions mEngineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(metrics.widthPixels,
                 metrics.heightPixels), camera);
         mEngineOptions.getAudioOptions().setNeedsSound(true);
+        mEngineOptions.getAudioOptions().setNeedsMusic(true);
         mEngineOptions.getTouchOptions().setNeedsMultiTouch(true);
         return mEngineOptions;
     }

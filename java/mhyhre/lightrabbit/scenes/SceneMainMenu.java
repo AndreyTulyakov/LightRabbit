@@ -19,7 +19,6 @@ import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.font.IFont;
 
 import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.R;
 import mhyhre.lightrabbit.StringsBase;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
@@ -63,7 +62,7 @@ public class SceneMainMenu extends EaseScene {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-
+                    MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
                 }
@@ -76,7 +75,7 @@ public class SceneMainMenu extends EaseScene {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-
+                    MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.About);
                 }
@@ -89,7 +88,7 @@ public class SceneMainMenu extends EaseScene {
             @Override
             public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
                 if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-
+                    MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.Exit);
                 }
@@ -137,7 +136,7 @@ public class SceneMainMenu extends EaseScene {
                         this.setAlpha(1.0f);
                         MainActivity.setVibroEnabled(true);
                     }
-                    MainActivity.vibrate(30);
+                    MainActivity.vibrate(60);
                 }
                 return true;
             }
@@ -160,7 +159,7 @@ public class SceneMainMenu extends EaseScene {
                     } else {
                         this.setAlpha(1.0f);
                         MainActivity.setSoundEnabled(true);
-                        MainActivity.resources.playSound("roboClick");
+                        MainActivity.resources.playSound("click");
                     }
                     MainActivity.vibrate(30);
                 }

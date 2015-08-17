@@ -4,35 +4,35 @@
  <Dialogs>
 
   <dialog id="1">
-   <replic id="1" actor_id="31" next_id="2" >Что же еще случилось?</replic>
-   <replic id="2" actor_id="31" next_id="0" >Я ввел жестокие меры
-за нарушение экологии...</replic>
+   <replic id="1" actor_id="31" next_id="2" >What happened next?</replic>
+   <replic id="2" actor_id="31" next_id="0" >I will apply
+some ecological rules...</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="20" next_id="2" >А что это вы здесь делаете?</replic>
-   <replic id="2" actor_id="21" next_id="3" >Да так, отдыхаем уважаемый</replic>
-   <replic id="3" actor_id="20" next_id="4" >А чего вода зеленая стала и светится?</replic>
-   <replic id="4" actor_id="21" next_id="5" >Эм... Водоросли может быть?</replic>
-   <replic id="5" actor_id="20" next_id="0" >Тут что-то не так...
-Полиция!</replic>
+   <replic id="1" actor_id="20" next_id="2" >What are you doing here?</replic>
+   <replic id="2" actor_id="21" next_id="3" >None, just rest!</replic>
+   <replic id="3" actor_id="20" next_id="4" >Why water obtain green color and lighting?</replic>
+   <replic id="4" actor_id="21" next_id="5" >Um... Maybe it is algaes?</replic>
+   <replic id="5" actor_id="20" next_id="0" >Something is happening...
+Police!</replic>
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="22" next_id="2" >Что случилось, что с водой?</replic>
-   <replic id="2" actor_id="20" next_id="3" >Сбрасывает что-то в воду.</replic>
-   <replic id="3" actor_id="22" next_id="0" >А, понятно, расстрелять!</replic>
+   <replic id="1" actor_id="22" next_id="2" >What is happening with water?</replic>
+   <replic id="2" actor_id="20" next_id="3" >He drop something to water.</replic>
+   <replic id="3" actor_id="22" next_id="0" >I am understand, shooting!</replic>
   </dialog>
 
   <dialog id="4">
-     <replic id="1" actor_id="21" next_id="0" >Пора сматываться!</replic>
+     <replic id="1" actor_id="21" next_id="0" >I must leave you!</replic>
   </dialog>
 
   <dialog id="5">
-   <replic id="1" actor_id="0" next_id="2" >Проект Light Rabbit</replic>
+   <replic id="1" actor_id="0" next_id="2" >A marine story project</replic>
    <replic id="2" actor_id="0" next_id="3" >2014-2015</replic>
-   <replic id="3" actor_id="0" next_id="4" >Разработано в России.</replic>
-   <replic id="4" actor_id="0" next_id="0" >Конец!</replic>
+   <replic id="3" actor_id="0" next_id="4" >Developed in Russia.</replic>
+   <replic id="4" actor_id="0" next_id="0" >End!</replic>
   </dialog>
 
  </Dialogs>

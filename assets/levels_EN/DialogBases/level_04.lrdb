@@ -4,35 +4,34 @@
  <Dialogs>
 
   <dialog id="1">
-   <replic id="1" actor_id="27" next_id="2" >Пшш... ПРиказываю всем!
-Перейти в наступление!</replic>
-   <replic id="2" actor_id="25" next_id="3" >Так точно!</replic>
-   <replic id="3" actor_id="26" next_id="0" >Вас понял!</replic>
+   <replic id="1" actor_id="27" next_id="2" >Phss... Command for all!
+Assume the offensive!</replic>
+   <replic id="2" actor_id="25" next_id="3" >Yes sir!</replic>
+   <replic id="3" actor_id="26" next_id="0" >Yes!</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="26" next_id="2" >Мы несем потери!</replic>
-   <replic id="2" actor_id="27" next_id="3" >Пшш.. Продолжайте наступление!</replic>
-   <replic id="3" actor_id="25" next_id="4" >У меня развалилось орудие!
-Собираю!</replic>
-   <replic id="4" actor_id="27" next_id="0" >Пшш.. Некогда болтать!</replic>
+   <replic id="1" actor_id="26" next_id="2" >We suffer losses!</replic>
+   <replic id="2" actor_id="27" next_id="3" >Phss.. Continue offensive!</replic>
+   <replic id="3" actor_id="25" next_id="4" >My weapon is breaked up!
+Repairing!</replic>
+   <replic id="4" actor_id="27" next_id="0" >Phss.. There is no time!</replic>
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="25" next_id="2" >Святой помидор!
-Я остался один.</replic>
-   <replic id="2" actor_id="25" next_id="0" >Зато починил орудие...</replic>
+   <replic id="1" actor_id="25" next_id="2" >Holy tomato!
+I stay alone!</replic>
+   <replic id="2" actor_id="25" next_id="0" >But my weapon is repaired...</replic>
   </dialog>
 
   <dialog id="4">
-   <replic id="1" actor_id="27" next_id="2" >Вы большой молодец.
-Осталось дело за малым.</replic>
-   <replic id="2" actor_id="25" next_id="3" >Что там?</replic>
-   <replic id="3" actor_id="27" next_id="4" >Недалеко от вас пираты
-окружают гражданское судно.</replic>
-   <replic id="4" actor_id="25" next_id="5" >Мне нужно немного времени
-залатать дыры.</replic>
-   <replic id="5" actor_id="27" next_id="0" >Поспешите, лейтенант.</replic>
+   <replic id="1" actor_id="27" next_id="2" >Good battle!
+We have a little job for you.</replic>
+   <replic id="2" actor_id="25" next_id="3" >What is?</replic>
+   <replic id="3" actor_id="27" next_id="4" >Near at you, some pirates attack
+pacific ship.</replic>
+   <replic id="4" actor_id="25" next_id="5" >I need a little time.</replic>
+   <replic id="5" actor_id="27" next_id="0" >Hurry, lieutenant!</replic>
   </dialog>
 
  </Dialogs>

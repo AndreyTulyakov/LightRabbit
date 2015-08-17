@@ -4,13 +4,13 @@
  <Dialogs>
  
   <dialog id="1">
-   <replic id="1" actor_id="0" next_id="0" >Тем временем призрак рыбака
-продолжал отрываться на остатках пиратов.</replic>
+   <replic id="1" actor_id="0" next_id="0" >Whereas Rabbit ghost
+continue avenge to pirates.</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="0" next_id="0" >Уничтожив последний пиратский корабль,
-призрак исчез.</replic>
+   <replic id="1" actor_id="0" next_id="0" >When last ship was destroyed,
+the ghost disappear.</replic>
   </dialog>
 
  </Dialogs>

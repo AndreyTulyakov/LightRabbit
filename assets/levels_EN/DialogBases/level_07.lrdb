@@ -4,21 +4,22 @@
  <Dialogs>
  
   <dialog id="1">
-   <replic id="1" actor_id="0" next_id="4">По окончании славной битвы
-пригласил меня император.</replic>
+   <replic id="1" actor_id="0" next_id="4">After good battle
+i was invited by Emperor.</replic>
 
-   <replic id="4" actor_id="29" next_id="5">Купер явился!</replic>
-   <replic id="5" actor_id="28" next_id="6">Присаживайся!</replic>
+   <replic id="4" actor_id="29" next_id="5">Cooper is come!</replic>
+   <replic id="5" actor_id="28" next_id="6">Sit down.</replic>
 
-   <replic id="6" actor_id="0" next_id="7">Сзади из темноты выехало кресло.</replic>
+   <replic id="6" actor_id="0" next_id="7">At the back, from darkness
+appear chair.</replic>
 
-   <replic id="7" actor_id="0" next_id="8">И тут император стал задвигать мне теории
-о потусторонних мирах.</replic>
-   <replic id="8" actor_id="0" next_id="12">О старых реликвиях, способных оживлять
-мертвецов...</replic>
-   <replic id="12" actor_id="0" next_id="13">Он так разволновался, что умер.</replic>
-   <replic id="13" actor_id="0" next_id="0">Вообщем, я стал императором.
-Так бывает.</replic>
+   <replic id="7" actor_id="0" next_id="8">So, Emperor was started chatting
+with me about next world.</replic>
+   <replic id="8" actor_id="0" next_id="12">About reliquiaes and enliven of 
+dead manS...</replic>
+   <replic id="12" actor_id="0" next_id="13">He be agitated, and... die.</replic>
+   <replic id="13" actor_id="0" next_id="0">Generally speaking,
+I was awarded as Emperor.</replic>
   </dialog>
 
  </Dialogs>

@@ -4,43 +4,43 @@
  <Dialogs>
 
   <dialog id="1">
-   <replic id="1" actor_id="2" next_id="0" >Настало утро следующего дня</replic>
+   <replic id="1" actor_id="2" next_id="0" >In the morning of next day.</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="2" next_id="0" >Я взял помощника - Гоги.
-Старого друга.</replic>
+   <replic id="1" actor_id="2" next_id="0" >I takes with me - Gogi.
+Gogi is playmate.</replic>
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="1" next_id="2" >Вот это скорость!</replic>
-   <replic id="2" actor_id="2" next_id="0" >Не нравится это мне…</replic>
+   <replic id="1" actor_id="1" next_id="2" >What is speed!</replic>
+   <replic id="2" actor_id="2" next_id="0" >I have a bad presentiment...</replic>
   </dialog>
 
   <dialog id="4">
-   <replic id="1" actor_id="5" next_id="2" >Здравствуйте, мы хотели бы
-забрать всё что у вас есть.</replic>
-   <replic id="2" actor_id="2" next_id="3" >Мы останемся живы?</replic>
-   <replic id="3" actor_id="5" next_id="4" >Эм, нет наверное.</replic>
-   <replic id="4" actor_id="2" next_id="5" >Тогда мы наверное будем сопротивляться..?</replic>
-   <replic id="5" actor_id="5" next_id="0" >Хорошо-хорошо.</replic>
+   <replic id="1" actor_id="5" next_id="2" >Hello, we want to despoil you.</replic>
+   <replic id="2" actor_id="2" next_id="3" >We will alive?</replic>
+   <replic id="3" actor_id="5" next_id="4" >Hm... I think no.</replic>
+   <replic id="4" actor_id="2" next_id="5" >So... we will resistance..?</replic>
+   <replic id="5" actor_id="5" next_id="0" >Ok!</replic>
   </dialog>
 
   <dialog id="5">
-   <replic id="1" actor_id="5" next_id="0" >Эм.. Пора покончить с этим!</replic>
+   <replic id="1" actor_id="5" next_id="0" >So.. it is the end,
+for you my friend!</replic>
   </dialog>
 
   <dialog id="6">
-   <replic id="1" actor_id="1" next_id="0" >Я еще слишком молод!</replic>
+   <replic id="1" actor_id="1" next_id="0" >I am too young yet!</replic>
   </dialog>
 
   <dialog id="7">
-   <replic id="1" actor_id="2" next_id="2" >Это была славная битва.
-Но огромная дыра!</replic>
-   <replic id="2" actor_id="2" next_id="3" >Воды было всё больше и больше.
-Корабль тонул.</replic>
-   <replic id="3" actor_id="2" next_id="0" >Но у меня было немного времени
-чтобы осмотреть свой груз напоследок...</replic>
+   <replic id="1" actor_id="2" next_id="2" >It will be good battle.
+But big hole at ship!</replic>
+   <replic id="2" actor_id="2" next_id="3" >Water! Around water.
+Ship is sink.</replic>
+   <replic id="3" actor_id="2" next_id="0" >But i have time for
+seeing my pay-load...</replic>
   </dialog>
 
 

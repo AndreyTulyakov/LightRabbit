@@ -3,45 +3,46 @@
  <CharacterBase>CharacterBases/ActorBase1.lrcb</CharacterBase>
  <Dialogs>
   <dialog id="1">
-   <replic id="1" actor_id="27" next_id="2" >Пшш... Вы приближаетесь.</replic>
-   <replic id="2" actor_id="25" next_id="3" >Вас понял!</replic>
-   <replic id="3" actor_id="27" next_id="0" >Кстати вы теперь майор.
- Поздравляю!</replic>
+   <replic id="1" actor_id="27" next_id="2" >Pshh... You proximate to
+target.</replic>
+   <replic id="2" actor_id="25" next_id="3" >Yeah, thanks!</replic>
+   <replic id="3" actor_id="27" next_id="0" >You are was awarded as major now.
+ My congratulations!</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="27" next_id="0" >Продолжайте продвигаться.</replic>
+   <replic id="1" actor_id="27" next_id="0" >Continue move.</replic>
   </dialog>
 
   <dialog id="3">
-   <replic id="1" actor_id="27" next_id="0" >Ну как тебе подкрепление?!</replic>
+   <replic id="1" actor_id="27" next_id="0" >Do you like it in skyes?!</replic>
   </dialog>
 
   <dialog id="4">
-   <replic id="1" actor_id="5" next_id="2" >Эм.. Добрый день.</replic>
-   <replic id="2" actor_id="29" next_id="3" >Добрый.</replic>
-   <replic id="3" actor_id="29" next_id="0" >Штаб, я не справлюсь.</replic>
+   <replic id="1" actor_id="5" next_id="2" >So.. Good day.</replic>
+   <replic id="2" actor_id="29" next_id="3" >Hello.</replic>
+   <replic id="3" actor_id="29" next_id="0" >Headquarters, i will
+not cope with this!</replic>
   </dialog>
 
   <dialog id="5">
-     <replic id="1" actor_id="27" next_id="0" >Радар показывает нечто
-странное рядом с вами!</replic>
+     <replic id="1" actor_id="27" next_id="0" >Radar show some
+object near you! It is strange.</replic>
   </dialog>
 
 
   <dialog id="6">
-     <replic id="1" actor_id="29" next_id="2" >Ого!</replic>
+     <replic id="1" actor_id="29" next_id="2" >Wow!</replic>
      <replic id="2" actor_id="30" next_id="3" >...</replic>
-     <replic id="3" actor_id="27" next_id="0" >Майор, назад!</replic>
+     <replic id="3" actor_id="27" next_id="0" >Major, go back!</replic>
   </dialog>
 
   <dialog id="7">
-     <replic id="1" actor_id="29" next_id="2" >Кажется обошлось...
-Исчез.</replic>
-     <replic id="2" actor_id="27" next_id="3" >На радаре пропал.
-Тем не менее...</replic>
-     <replic id="3" actor_id="27" next_id="0" >Миссия окончена успешно.
-Поздравляю.</replic>
+     <replic id="1" actor_id="29" next_id="2" >Disappear...</replic>
+     <replic id="2" actor_id="27" next_id="3" >Disappeared on radar.
+ But...</replic>
+     <replic id="3" actor_id="27" next_id="0" >Mission is complete.
+My congratulations, twice!</replic>
   </dialog>
 
  </Dialogs>

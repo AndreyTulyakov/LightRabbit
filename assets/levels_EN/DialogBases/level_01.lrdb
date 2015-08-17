@@ -6,23 +6,24 @@
  <Dialogs>
 
   <dialog id="1">
-   <replic id="1" actor_id="0" next_id="0">Спустя некоторое время...</replic>
+   <replic id="1" actor_id="0" next_id="0">Some days later...</replic>
   </dialog>
 
   <dialog id="2">
-   <replic id="1" actor_id="2" next_id="2">Акулы! Их давно не было.</replic>
-   <replic id="2" actor_id="2" next_id="0">Они опасны,
-надо их обойти или уничтожить.</replic>
+   <replic id="1" actor_id="2" next_id="2">Sharks!
+I haven`t seen it for ages!</replic>
+   <replic id="2" actor_id="2" next_id="0">It is dangerous,
+you must exterminate it!</replic>
   </dialog>
 
   <dialog id="4">
-   <replic id="1" actor_id="7" next_id="2">Сударь, посторонитесь,
-у нас тут караван проходит!</replic>
-   <replic id="2" actor_id="2" next_id="3">Я не могу, мы же в двумерном мире!</replic>
-   <replic id="3" actor_id="7" next_id="4">Ваши проблемы.
-При столкновении вы пойдете на дно.</replic>
-   <replic id="4" actor_id="0" next_id="5">Его корабли массивнее. Не столкнись!</replic>
-   <replic id="5" actor_id="0" next_id="0">Постарайся перепрыгнуть их!</replic>
+   <replic id="1" actor_id="7" next_id="2">Sir, make way there!</replic>
+   <replic id="2" actor_id="2" next_id="3">I can't, we exists in 2D-world!</replic>
+   <replic id="3" actor_id="7" next_id="4">It is your problem.
+You will sink by our collision.</replic>
+   <replic id="4" actor_id="0" next_id="5">These ships is more massive!
+Don't collide!</replic>
+   <replic id="5" actor_id="0" next_id="0">Try to overjump!</replic>
   </dialog>
 
  </Dialogs>

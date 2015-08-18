@@ -33,7 +33,7 @@ public class StringsBase {
 
     private StringsBase() {
 
-        strings = new HashMap<>();
+        strings = new HashMap<String, String>();
 
         try {
             InputStream inputStream = MainActivity.Me.getAssets().open(MainActivity.LOCATE_STRINGS_FILENAME);

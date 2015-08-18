@@ -1,23 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">A marine story</string>
-    <string name="level">Level</string>
-    <string name="loading">Loading...</string>
-    <string name="passLevel">Level is complete!</string>
-    <string name="pause">Pause</string>
-    <string name="pauseExit">Exit</string>
-    <string name="resume">Resume</string>
-    <string name="selectLevel">Select level</string>
-    <string name="tapForContinue">Press for continue...</string>
-    <string name="textAbout">About</string>
-    <string name="textBack">Back</string>
-    <string name="textExit">Exit</string>
-    <string name="textStart">Start</string>
-    <string name="textTap">Press</string>
-    <string name="title_activity_main">A marine story</string>
-    <string name="youWasDied">You died</string>
-    <string name="QExit">Do you want exit?</string>
-    <string name="MenuItem_Play">Start</string>
-    <string name="MenuItem_Exit">Exit</string>
-    <string name="MenuItem_About">About</string>
+    <string name="app_name">A Marine Story</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5885898336310144/3045317719</string>
 </resources>

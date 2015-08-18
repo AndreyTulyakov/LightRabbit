@@ -13,6 +13,8 @@
 package mhyhre.lightrabbit.scenes;
 
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
@@ -65,6 +67,11 @@ public class SceneMainMenu extends EaseScene {
                     MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.LevelSelector);
+
+                    MainActivity.Me.tracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Action")
+                            .setAction("Main menu: Start")
+                            .build());
                 }
                 return true;
             }
@@ -78,6 +85,11 @@ public class SceneMainMenu extends EaseScene {
                     MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.About);
+
+                    MainActivity.Me.tracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Action")
+                            .setAction("Main menu: About")
+                            .build());
                 }
                 return true;
             }
@@ -91,6 +103,11 @@ public class SceneMainMenu extends EaseScene {
                     MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);
                     MainActivity.getRootScene().SetState(SceneStates.Exit);
+
+                    MainActivity.Me.tracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Action")
+                            .setAction("Main menu: Exit")
+                            .build());
                 }
                 return true;
             }

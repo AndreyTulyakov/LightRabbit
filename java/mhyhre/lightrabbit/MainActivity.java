@@ -13,6 +13,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
@@ -26,7 +30,9 @@ import mhyhre.lightrabbit.ads.ScreenAdvertisement;
 import mhyhre.lightrabbit.scenes.SceneRoot;
 import mhyhre.lightrabbit.scenes.SceneStates;
 
+
 public class MainActivity extends LayoutGameActivity {
+    public Tracker tracker;
 
     public static final String LOCALIZATION = "EN";
     public static final boolean USE_ADMOB = true;
@@ -93,6 +99,8 @@ public class MainActivity extends LayoutGameActivity {
             Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateResources");
         }
 
+
+
         pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
 
@@ -104,8 +112,11 @@ public class MainActivity extends LayoutGameActivity {
             Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
+        tracker = getDefaultTracker();
+
         resources = new ResourceManager();
         sceneRoot = new SceneRoot();
+
 
         pOnCreateSceneCallback.onCreateSceneFinished(sceneRoot);
     }
@@ -123,6 +134,13 @@ public class MainActivity extends LayoutGameActivity {
 
     @Override
     public void onBackPressed() {
+
+        if(tracker != null) {
+            MainActivity.Me.tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("Action")
+                    .setAction("Back hard key")
+                    .build());
+        }
 
         if (SceneRoot.getState() == SceneStates.Splash) {
             super.onBackPressed();
@@ -164,6 +182,7 @@ public class MainActivity extends LayoutGameActivity {
     public void onDestroy() {
 
         savePreferences();
+
         if (BuildConfig.DEBUG)
             Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onDestroy");
         super.onDestroy();
@@ -259,5 +278,14 @@ public class MainActivity extends LayoutGameActivity {
         if(USE_ADMOB) {
             mAdvertisement.hideAdvertisement();
         }
+    }
+
+    synchronized public Tracker getDefaultTracker() {
+        if (tracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            tracker = analytics.newTracker(R.xml.app_tracker);
+        }
+        return tracker;
     }
 }

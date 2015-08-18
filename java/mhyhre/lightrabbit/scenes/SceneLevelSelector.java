@@ -14,6 +14,8 @@ package mhyhre.lightrabbit.scenes;
 
 import android.util.Log;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.sprite.batch.SpriteBatch;
 import org.andengine.entity.text.Text;
@@ -241,6 +243,11 @@ public class SceneLevelSelector extends EaseScene {
                     Log.i(MainActivity.DEBUG_ID, "SceneLevelSelector: Selected level [" + item.getLabel() + "]");
 
                     selectedLevel = item;
+                    MainActivity.Me.tracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("Action")
+                            .setAction("Selected level index:").setValue(item.getId())
+                            .build());
+
                     MainActivity.getRootScene().SetState(SceneStates.GameLoading);
                     MainActivity.resources.playSound("click");
                     MainActivity.vibrate(30);

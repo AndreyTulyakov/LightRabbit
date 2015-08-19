@@ -92,8 +92,16 @@ public class ResourceManager {
     public void playMusic(String key) {
         if (!musics.containsKey(key))
             Log.e(MainActivity.DEBUG_ID, "ResourceManager::playMusic: invalid key - " + key);
-        if (MainActivity.isSoundEnabled()) {
+        if (MainActivity.isSoundEnabled() && musics.get(key).isPlaying() == false) {
             musics.get(key).play();
+        }
+    }
+
+    public void stopMusic(String key) {
+        if (!musics.containsKey(key))
+            Log.e(MainActivity.DEBUG_ID, "ResourceManager::stopMusic: invalid key - " + key);
+        if (MainActivity.isSoundEnabled() && musics.get(key).isPlaying()) {
+            musics.get(key).pause();
         }
     }
 
@@ -311,6 +319,8 @@ public class ResourceManager {
             Log.e(MainActivity.DEBUG_ID, "ResourceManager::addSound: " + e.getMessage());
             e.printStackTrace();
         }
+        music.play();
+        music.pause();
         musics.put(name, music);
     }
 

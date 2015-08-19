@@ -212,10 +212,8 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
                     water.setWaveHeight(gameEvent.getIntegerArg());
                     if(water.getWaveHeight() > 25) {
                         Music wave = MainActivity.resources.getMusic("sea");
-                        wave.play();
                         wave.setLooping(true);
-                        //
-                        Log.i(MainActivity.DEBUG_ID, "play wave!");
+                        MainActivity.resources.playMusic("sea");
 
                     } else {
                         if(MainActivity.resources.getMusic("sea").isPlaying())
@@ -256,7 +254,8 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
                 case ENABLE_RAIN:
                     Music rain = MainActivity.resources.getMusic("rain");
                     rain.setLooping(true);
-                    rain.play();
+                    MainActivity.resources.playMusic("rain");
+
                     skyes.enableRain();
 
                     goToNextEvent();
@@ -264,10 +263,7 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
 
                 case DISABLE_RAIN:
                     skyes.disableRain();
-                    if(MainActivity.resources.getMusic("rain").isPlaying())
-                    {
-                        MainActivity.resources.getMusic("rain").stop();
-                    }
+                    MainActivity.resources.stopMusic("rain");
 
                     goToNextEvent();
                     break;
@@ -664,15 +660,8 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
     }
 
     public void endGame() {
-        if(MainActivity.resources.getMusic("rain").isPlaying())
-        {
-            MainActivity.resources.getMusic("rain").stop();
-        }
-        if(MainActivity.resources.getMusic("sea").isPlaying())
-        {
-            MainActivity.resources.getMusic("sea").stop();
-        }
-
+        MainActivity.resources.stopMusic("rain");
+        MainActivity.resources.stopMusic("sea");
         MainActivity.getRootScene().SetState(SceneStates.EndGame);
     }
 

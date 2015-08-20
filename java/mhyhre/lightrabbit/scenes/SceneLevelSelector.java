@@ -245,7 +245,7 @@ public class SceneLevelSelector extends EaseScene {
                     selectedLevel = item;
                     MainActivity.Me.tracker.send(new HitBuilders.EventBuilder()
                             .setCategory("Action")
-                            .setAction("Selected level index:").setValue(item.getId())
+                            .setAction("Selected level index:" + String.valueOf(item.getId()))
                             .build());
 
                     MainActivity.getRootScene().SetState(SceneStates.GameLoading);

@@ -122,7 +122,7 @@ public class ResourceManager {
         BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "splash.png", 0, 0);
         atlas.load();
         atlases.put("SplashAtlas", atlas);
-        regions.put("splash",TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
+        regions.put("splash", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
 
 
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 128, TextureOptions.NEAREST);
@@ -230,7 +230,7 @@ public class ResourceManager {
         regions.put("highlight_spot", region);
         
         regions.put("boat_smoke",TextureRegionFactory.extractFromTexture(atlas, 0, 46, 8, 8));
-        
+
 
         // Clouds texture
         atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 128, 192, TextureOptions.NEAREST);
@@ -368,7 +368,15 @@ public class ResourceManager {
         atlas.load();
         atlases.put("SplashAtlas", atlas);
         regions.put("splash", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 480, 270, false));
-        
+
+        // Bubble
+        atlas = new BitmapTextureAtlas(MainActivity.Me.getTextureManager(), 64, 64, TextureOptions.NEAREST);
+        BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, MainActivity.Me, "bubble.png", 0, 0);
+        atlas.load();
+        atlases.put("bubble", atlas);
+        regions.put("bubble", TextureRegionFactory.extractFromTexture(atlas, 0, 0, 59, 59, false));
+
+
         Font mFont;
         FontFactory.setAssetBasePath("font/");
 

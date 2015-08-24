@@ -22,11 +22,14 @@ import org.andengine.opengl.font.IFont;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.StringsBase;
+import mhyhre.lightrabbit.scenes.utils.BubbleGenerator;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 public class SceneMainMenu extends EaseScene {
 
     public final float INACTIVE_ALPHA = 0.45f;
+
+    private BubbleGenerator bubbleGenerator;
 
     public Text mCaptionItem1; // New Game
     public Text mCaptionItem2; // About
@@ -42,6 +45,9 @@ public class SceneMainMenu extends EaseScene {
                 MainActivity.Me.getVertexBufferObjectManager());
         background.setScale(2);
         attachChild(background);
+
+        bubbleGenerator = new BubbleGenerator();
+        attachChild(bubbleGenerator);
 
         // Text captions
         String TextItem1 = StringsBase.getInstance().getValue("MenuItem_Play");

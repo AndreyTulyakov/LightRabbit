@@ -24,6 +24,7 @@ import org.andengine.util.adt.color.Color;
 
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.StringsBase;
+import mhyhre.lightrabbit.scenes.utils.BubbleGenerator;
 import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 
@@ -36,6 +37,7 @@ public class SceneLoader extends EaseScene {
     public Text mCaptionTapScreen;
     public Sprite splashSprite;
     public Text textGameLogo;
+    private BubbleGenerator bubbleGenerator;
 
     private boolean Clicked = false;
     
@@ -46,6 +48,8 @@ public class SceneLoader extends EaseScene {
         
         MainActivity.resources.LoadResourcesForPreloader();
         Color captionsColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+
 
         // Tap text
         String TextMessage = StringsBase.getInstance().getValue("Press_For_Continue");
@@ -79,6 +83,9 @@ public class SceneLoader extends EaseScene {
         splashSprite.setScale(2);
 
         attachChild(splashSprite);
+        bubbleGenerator = new BubbleGenerator();
+        attachChild(bubbleGenerator);
+
         attachChild(textGameLogo);
         attachChild(mCaptionTapScreen);
 

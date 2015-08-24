@@ -281,8 +281,6 @@ public class ResourceManager {
 
     
     public void loadSounds() {
-        SoundFactory.setAssetBasePath("sound/");
-        MusicFactory.setAssetBasePath("sound/");
 
         addSound("click0.ogg", "click");
         addSound("click1.ogg", "click1");
@@ -300,6 +298,7 @@ public class ResourceManager {
     
 
     private void addSound(String filename, String name) {
+        SoundFactory.setAssetBasePath("sound/");
         Sound sound = null;
         try {
             sound = SoundFactory.createSoundFromAsset(MainActivity.Me.getSoundManager(), MainActivity.Me.getApplicationContext(), filename);
@@ -312,6 +311,7 @@ public class ResourceManager {
 
 
     private void addMusic(String filename, String name) {
+        MusicFactory.setAssetBasePath("sound/");
         Music music = null;
         try {
             music = MusicFactory.createMusicFromAsset(MainActivity.Me.getMusicManager(), MainActivity.Me.getApplicationContext(), filename);
@@ -399,5 +399,7 @@ public class ResourceManager {
                 Color.WHITE);
         mFont.load();
         fonts.put("Furore48", mFont);
+
+        addMusic("mainTheme.ogg", "mainTheme");
     }
 }

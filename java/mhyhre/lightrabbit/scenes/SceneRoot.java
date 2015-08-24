@@ -75,6 +75,7 @@ public class SceneRoot extends Scene {
     public void SetState(SceneStates pState) {
 
         state = pState;
+        MainActivity.resources.stopMusic("mainTheme");
 
         if (Preloaded) {
 
@@ -98,6 +99,10 @@ public class SceneRoot extends Scene {
                     break;
 
                 case MainMenu:
+                    if(MainActivity.resources.getMusic("mainTheme").isPlaying() == false)
+                    {
+                        MainActivity.resources.playMusic("mainTheme");
+                    }
                     mSceneMainMenu.show();
                     MainActivity.Me.showAd();
                     break;

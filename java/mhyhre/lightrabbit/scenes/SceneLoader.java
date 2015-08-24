@@ -122,5 +122,8 @@ public class SceneLoader extends EaseScene {
                 }
             }
         }));
+
+        MainActivity.resources.playMusic("mainTheme");
+
     }
 }

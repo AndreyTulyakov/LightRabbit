@@ -67,18 +67,18 @@ public class GameUserInterface extends EaseScene {
 
     private void createIndicators() {
         
-        float wStep = MainActivity.getWidth()/5.0f;
+        float wStep = MainActivity.getWidth()/4.0f;
         
         healthSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("heart"), MainActivity.Me.getVertexBufferObjectManager());
-        healthSprite.setPosition(wStep - 50, MainActivity.getHeight() - 28);    
+        healthSprite.setPosition(wStep - 50, MainActivity.getHeight() - 28);
         healthSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
 
         projectilesCountSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("bullet150"), MainActivity.Me.getVertexBufferObjectManager());
-        projectilesCountSprite.setPosition(wStep*2 - 50, MainActivity.getHeight() - 28);
+        projectilesCountSprite.setPosition(wStep*3 - 50, MainActivity.getHeight() - 28);
         projectilesCountSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
         
         projectilesSecondCountSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("x-barrel"), MainActivity.Me.getVertexBufferObjectManager());
-        projectilesSecondCountSprite.setPosition(wStep*3 - 50, MainActivity.getHeight() - 28);
+        projectilesSecondCountSprite.setPosition(wStep*2 - 50, MainActivity.getHeight() - 28);
         projectilesSecondCountSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
         
 

@@ -100,7 +100,7 @@ public class ResourceManager {
     public void stopMusic(String key) {
         if (!musics.containsKey(key))
             Log.e(MainActivity.DEBUG_ID, "ResourceManager::stopMusic: invalid key - " + key);
-        if (MainActivity.isSoundEnabled() && musics.get(key).isPlaying()) {
+        if (musics.get(key).isPlaying()) {
             musics.get(key).pause();
         }
     }

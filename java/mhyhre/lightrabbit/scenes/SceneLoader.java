@@ -82,6 +82,7 @@ public class SceneLoader extends EaseScene {
         splashSprite.setPosition(MainActivity.getHalfWidth(), MainActivity.getHalfHeight());
         splashSprite.setScale(2);
 
+
         attachChild(splashSprite);
         bubbleGenerator = new BubbleGenerator();
         attachChild(bubbleGenerator);
@@ -104,7 +105,7 @@ public class SceneLoader extends EaseScene {
 
                     if (alphaTime < 0.98f) {
                         alphaTime += 0.02f;
-                        if(alphaTime > 0.0f) {
+                        if (alphaTime > 0.0f) {
                             textGameLogo.setAlpha(alphaTime);
                         }
                     }
@@ -123,7 +124,7 @@ public class SceneLoader extends EaseScene {
             }
         }));
 
-        MainActivity.resources.playMusic("mainTheme");
+
 
     }
 }

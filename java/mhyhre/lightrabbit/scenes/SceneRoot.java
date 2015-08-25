@@ -48,6 +48,8 @@ public class SceneRoot extends Scene {
         MainActivity.resources.loadFonts();
         MainActivity.resources.loadSounds();
 
+        MainActivity.resources.playMusic("mainTheme");
+
         // Scenes Creating ------------------------------------------------
         mSceneMainMenu = new SceneMainMenu();
         mSceneAbout = new SceneAbout();
@@ -75,10 +77,10 @@ public class SceneRoot extends Scene {
     public void SetState(SceneStates pState) {
 
         state = pState;
-        MainActivity.resources.stopMusic("mainTheme");
+
 
         if (Preloaded) {
-
+            MainActivity.resources.stopMusic("mainTheme");
             // Hide all scenes.
             MainActivity.Me.hideAd();
             mSceneLoader.hide();
@@ -94,6 +96,7 @@ public class SceneRoot extends Scene {
 
             switch (state) {
                 case Splash:
+
                     mSceneLoader.show();
                     MainActivity.Me.hideAd();
                     break;

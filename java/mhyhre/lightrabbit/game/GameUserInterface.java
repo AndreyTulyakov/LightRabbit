@@ -5,14 +5,15 @@
 
 package mhyhre.lightrabbit.game;
 
-import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.scenes.utils.EaseScene;
-import mhyhre.lightrabbit.utils.ControllType;
+import android.util.Log;
+
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
-import android.util.Log;
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.scenes.utils.EaseScene;
+import mhyhre.lightrabbit.utils.ControllType;
 
 public class GameUserInterface extends EaseScene {
 
@@ -25,13 +26,12 @@ public class GameUserInterface extends EaseScene {
     
     private ControllType controllType;
 
-    private Sprite spriteGold;
     private Sprite healthSprite;
     private Sprite projectilesCountSprite;
     private Sprite projectilesSecondCountSprite;
     private Sprite spriteMoveRight, spriteMoveLeft, spriteMoveUp, spriteMoveDown;
     private Sprite spriteFire, spriteSecondFire, spriteJump;
-    private Text textGold;
+
     private Text healthPoints;
     private Text projectilesCount;
     private Text projectilesSecondCount;
@@ -72,11 +72,7 @@ public class GameUserInterface extends EaseScene {
         healthSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("heart"), MainActivity.Me.getVertexBufferObjectManager());
         healthSprite.setPosition(wStep - 50, MainActivity.getHeight() - 28);    
         healthSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
-        
-        spriteGold = new Sprite(0, 0, MainActivity.resources.getTextureRegion("gold"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteGold.setPosition(wStep*4 - 50, MainActivity.getHeight() - 28);
-        spriteGold.setScale(MainActivity.PIXEL_MULTIPLIER);
-        
+
         projectilesCountSprite = new Sprite(0, 0, MainActivity.resources.getTextureRegion("bullet150"), MainActivity.Me.getVertexBufferObjectManager());
         projectilesCountSprite.setPosition(wStep*2 - 50, MainActivity.getHeight() - 28);
         projectilesCountSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
@@ -85,9 +81,7 @@ public class GameUserInterface extends EaseScene {
         projectilesSecondCountSprite.setPosition(wStep*3 - 50, MainActivity.getHeight() - 28);
         projectilesSecondCountSprite.setScale(MainActivity.PIXEL_MULTIPLIER);
         
-        
-        textGold = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
-        updateGoldIndicator(0);
+
         
         healthPoints = new Text(340, 10, MainActivity.resources.getFont("White Furore"), String.valueOf(0), 20, MainActivity.Me.getVertexBufferObjectManager());
         updateHealthIndicator(0);
@@ -101,10 +95,10 @@ public class GameUserInterface extends EaseScene {
         
         attachChild(healthSprite);
         attachChild(healthPoints);
-        attachChild(spriteGold);
+
         attachChild(projectilesCountSprite);
         attachChild(projectilesSecondCountSprite);
-        attachChild(textGold);
+
         attachChild(projectilesCount);
         attachChild(projectilesSecondCount);
     }
@@ -155,10 +149,8 @@ public class GameUserInterface extends EaseScene {
     }
     
     public void hideTopPanel() {
-        healthSprite.setVisible(false);    
-        spriteGold.setVisible(false);   
-        projectilesCountSprite.setVisible(false);     
-        textGold.setVisible(false);      
+        healthSprite.setVisible(false);
+        projectilesCountSprite.setVisible(false);
         healthPoints.setVisible(false);
         projectilesCount.setVisible(false);
         projectilesSecondCount.setVisible(false);
@@ -166,10 +158,8 @@ public class GameUserInterface extends EaseScene {
     }
     
     public void showTopPanle() {
-        healthSprite.setVisible(true);    
-        spriteGold.setVisible(true);   
-        projectilesCountSprite.setVisible(true);     
-        textGold.setVisible(true);      
+        healthSprite.setVisible(true);
+        projectilesCountSprite.setVisible(true);
         healthPoints.setVisible(true);
         projectilesCount.setVisible(true);
     }
@@ -182,11 +172,6 @@ public class GameUserInterface extends EaseScene {
     public void updateSecondProjectilesIndicator(int value) {     
         projectilesSecondCount.setText(String.valueOf(value));
         projectilesSecondCount.setPosition(projectilesSecondCountSprite.getX() + 30 + projectilesSecondCount.getWidth() / 2, MainActivity.getHeight() - 24);    
-    }
-
-    public void updateGoldIndicator(int value) {
-        textGold.setText(String.valueOf(value));
-        textGold.setPosition(spriteGold.getX() + 30 + textGold.getWidth() / 2, MainActivity.getHeight() - 24);
     }
 
     public void updateHealthIndicator(int currentHealth) {

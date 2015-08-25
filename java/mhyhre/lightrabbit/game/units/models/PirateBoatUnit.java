@@ -5,6 +5,7 @@
 
 package mhyhre.lightrabbit.game.units.models;
 
+import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
 import mhyhre.lightrabbit.game.units.UnitType;
@@ -27,6 +28,18 @@ public class PirateBoatUnit extends UnitModel {
         setSize(64, 22);
         setRadius(16);
     }
+
+    @Override
+    public void setDied(boolean mDied) {
+        if(mDied == true && this.isDied() == false) {
+            if(MainActivity.random.nextBoolean()) {
+                MainActivity.resources.playSound("shipDie");
+            } else {
+                MainActivity.resources.playSound("shipDie2");
+            }
+        }
+        super.setDied(mDied);
+    };
 
     @Override
     public void update(WaterPolygon water) {

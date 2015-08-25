@@ -26,6 +26,8 @@ import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.LayoutGameActivity;
 
+import java.util.Random;
+
 import mhyhre.lightrabbit.ads.ScreenAdvertisement;
 import mhyhre.lightrabbit.scenes.SceneRoot;
 import mhyhre.lightrabbit.scenes.SceneStates;
@@ -53,10 +55,12 @@ public class MainActivity extends LayoutGameActivity {
     public static Camera camera;
     public static ResourceManager resources;
     public static SceneRoot sceneRoot;
+    public static Random random;
 
     private LevelUnlocker levelUnlocker;
     private AssetManager assetManager;
     private Vibrator vibrator;
+
 
     private boolean vibroEnabled = true;
     private boolean soundEnabled = true;
@@ -66,6 +70,8 @@ public class MainActivity extends LayoutGameActivity {
 
     @Override
     public EngineOptions onCreateEngineOptions() {
+
+        random = new Random();
 
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(40);

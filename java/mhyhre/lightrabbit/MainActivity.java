@@ -285,6 +285,7 @@ public class MainActivity extends LayoutGameActivity {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
             tracker = analytics.newTracker(R.xml.app_tracker);
+            tracker.enableAdvertisingIdCollection(true);
         }
         return tracker;
     }

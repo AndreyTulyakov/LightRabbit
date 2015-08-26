@@ -5,13 +5,14 @@
 
 package mhyhre.lightrabbit.game.weapons.guns;
 
+import android.util.Log;
+
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.GunType;
 import mhyhre.lightrabbit.game.weapons.projectiles.Projectile;
 import mhyhre.lightrabbit.game.weapons.projectiles.RocketA;
-import android.util.Log;
 
 public class RocketLauncher extends Gun {
     
@@ -37,7 +38,7 @@ public class RocketLauncher extends Gun {
                 projectilesAmount--;
             }
             
-            MainActivity.resources.playSound("shoot01");
+            MainActivity.resources.playSound("rocketLaunch");
             
             RocketA bullet = new RocketA(parent.getX(), parent.getY()-15, this.parent);
             float angle = 0;

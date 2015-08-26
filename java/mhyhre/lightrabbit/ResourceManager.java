@@ -293,6 +293,7 @@ public class ResourceManager {
         addSound("dropToWater.ogg", "dropToWater");
         addSound("message.ogg", "message");
         addSound("fly_down.ogg", "flyDown");
+        addSound("rocketLaunch.ogg", "rocketLaunch");
 
         addMusic("rain.ogg", "rain");
         addMusic("sea.ogg", "sea");

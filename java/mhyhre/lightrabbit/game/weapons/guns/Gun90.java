@@ -19,7 +19,7 @@ public class Gun90 extends Gun {
     
     private static final float RELOADING_TIME = 0.6f;
     private static final int SHOT_POWER = 8;
-    
+    protected static float lashShootTime = 0;
     private float lastFireTime;
 
 
@@ -31,16 +31,19 @@ public class Gun90 extends Gun {
     @Override
     public Projectile fire(UnitMoveDirection direction) {
 
-        if(canFireNow()) {   
-            Log.i(MainActivity.DEBUG_ID, "Gun90:fire!");
+        if(canFireNow()) {
             lastFireTime = currentTime;
             
             if(projectilesAmount > 0) {
                 projectilesAmount--;
             }
-            
-            MainActivity.resources.playSound("shoot01");
-            
+
+            if(Math.abs(lashShootTime-currentTime) > 0.5f) {
+                MainActivity.resources.playSound("shoot01");
+                lashShootTime = currentTime;
+            }
+
+
             Bullet90Unit bullet = new Bullet90Unit(parent.getX(), parent.getY(), this.parent);
             float angle = 0;
             

@@ -288,9 +288,11 @@ public class ResourceManager {
         addSound("shoot02.ogg", "shoot02");
         addSound("boom01.ogg", "boom01");
         addSound("shipDie.ogg", "shipDie");
+        addSound("shipDie2.ogg", "shipDie2");
         addSound("lighting.ogg", "lighting");
         addSound("dropToWater.ogg", "dropToWater");
         addSound("message.ogg", "message");
+        addSound("fly_down.ogg", "flyDown");
 
         addMusic("rain.ogg", "rain");
         addMusic("sea.ogg", "sea");

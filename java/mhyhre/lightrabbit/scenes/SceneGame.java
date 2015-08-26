@@ -145,7 +145,6 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
         if (player != null) {
             UnitModel playerModel = player.getModel();
             hud.updateHealthIndicator(playerModel.getHealth());
-            hud.updateGoldIndicator(playerModel.getGold());
 
             Gun gun = player.getModel().getGun();
 

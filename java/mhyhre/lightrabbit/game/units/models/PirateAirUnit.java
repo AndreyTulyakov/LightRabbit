@@ -5,6 +5,7 @@
 
 package mhyhre.lightrabbit.game.units.models;
 
+import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.WaterPolygon;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
@@ -28,11 +29,10 @@ public class PirateAirUnit extends UnitModel {
     
     @Override
     public void setDied(boolean mDied) {
-        super.setDied(mDied);
-        if(mDied == true) {
-            // TODO: Airplane down
-            //MainActivity.resources.playSound("shipDie");
+        if(mDied == true && this.isDied() == false) {
+            MainActivity.resources.playSound("flyDown");
         }
+        super.setDied(mDied);
     };
 
 

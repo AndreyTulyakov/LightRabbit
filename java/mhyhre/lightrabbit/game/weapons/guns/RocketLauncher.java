@@ -37,19 +37,12 @@ public class RocketLauncher extends Gun {
             if(projectilesAmount > 0) {
                 projectilesAmount--;
             }
-<<<<<<< HEAD
-            
-            MainActivity.resources.playSound("rocketLaunch");
-            
-=======
-
 
             if(Math.abs(lashShootTime-currentTime) > 0.5f) {
-                MainActivity.resources.playSound("shoot01");
+                MainActivity.resources.playSound("rocketLaunch");
                 lashShootTime = currentTime;
             }
 
->>>>>>> f55764c3fbf86b8e81e7435e2fa47642ba100f40
             RocketA bullet = new RocketA(parent.getX(), parent.getY()-15, this.parent);
             float angle = 0;
             

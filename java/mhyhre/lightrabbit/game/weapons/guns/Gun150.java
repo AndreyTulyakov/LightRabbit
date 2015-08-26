@@ -16,7 +16,7 @@ public class Gun150 extends Gun {
 
     private static final float RELOADING_TIME = 1.8f;
     private static final int SHOT_POWER = 8;
-    
+    protected static float lashShootTime = 0;
     private float lastFireTime;
 
 
@@ -33,8 +33,11 @@ public class Gun150 extends Gun {
             if(projectilesAmount > 0) {
                 projectilesAmount--;
             }
-            
-            MainActivity.resources.playSound("shoot02");
+
+            if(Math.abs(lashShootTime-currentTime) > 0.5f) {
+                MainActivity.resources.playSound("shoot02");
+                lashShootTime = currentTime;
+            }
             
             Bullet150Unit bullet = new Bullet150Unit(parent.getX(), parent.getY(), this.parent);
             

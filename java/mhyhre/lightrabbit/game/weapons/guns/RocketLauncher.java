@@ -17,7 +17,7 @@ public class RocketLauncher extends Gun {
     
     private static final float RELOADING_TIME = 0.6f;
     private static final int SHOT_POWER = 8;
-    
+    protected static float lashShootTime = 0;
     private float lastFireTime;
 
 
@@ -36,9 +36,13 @@ public class RocketLauncher extends Gun {
             if(projectilesAmount > 0) {
                 projectilesAmount--;
             }
-            
-            MainActivity.resources.playSound("shoot01");
-            
+
+
+            if(Math.abs(lashShootTime-currentTime) > 0.5f) {
+                MainActivity.resources.playSound("shoot01");
+                lashShootTime = currentTime;
+            }
+
             RocketA bullet = new RocketA(parent.getX(), parent.getY()-15, this.parent);
             float angle = 0;
             

@@ -29,8 +29,7 @@ public class BarrelsKicker extends Gun {
     @Override
     public Projectile fire(UnitMoveDirection direction) {
 
-        if(canFireNow()) {   
-            Log.i(MainActivity.DEBUG_ID, "BarrelsKicker:drop!");
+        if(canFireNow()) {
             lastFireTime = currentTime;
             
             if(projectilesAmount > 0) {

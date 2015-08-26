@@ -15,9 +15,9 @@ import android.util.Log;
 
 public class GhostGun extends Gun {
 
-    private static final float RELOADING_TIME = 0.25f;
+    private static final float RELOADING_TIME = 0.35f;
     private static final int SHOT_POWER = 9;
-
+    protected static float lashShootTime = 0;
     private float lastFireTime;
 
     public GhostGun(UnitModel parent, int amount) {
@@ -28,14 +28,16 @@ public class GhostGun extends Gun {
     public Projectile fire(UnitMoveDirection direction) {
 
         if (canFireNow()) {
-            Log.i(MainActivity.DEBUG_ID, "GhostGun:fire!");
             lastFireTime = currentTime;
 
             if (projectilesAmount > 0) {
                 projectilesAmount--;
             }
 
-            MainActivity.resources.playSound("shoot01");
+            if(Math.abs(lashShootTime-currentTime) > 0.24f) {
+                MainActivity.resources.playSound("shoot01");
+                lashShootTime = currentTime;
+            }
 
             GhostBulletUnit bullet = new GhostBulletUnit(parent.getX(), parent.getY(), this.parent);
             float angle = 0;

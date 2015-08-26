@@ -19,6 +19,7 @@ public abstract class Gun {
     protected int projectilesAmount;
     protected float currentTime;
 
+
     protected Gun(UnitModel parent, GunType type, int projectilesAmount) {
         this.parent = parent;
         this.type = type;

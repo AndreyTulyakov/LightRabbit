@@ -27,7 +27,8 @@ public class FastBomber extends Gun {
 
         if(canFireNow()) {   
             lastFireTime = currentTime;
-            
+
+
             if(projectilesAmount > 0) {
                 projectilesAmount--;
             }

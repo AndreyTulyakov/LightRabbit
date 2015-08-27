@@ -34,13 +34,12 @@ public class Gun150 extends Gun {
                 projectilesAmount--;
             }
 
-            if(Math.abs(lashShootTime-currentTime) > 0.5f) {
+            if(Math.abs(lashShootTime-currentTime) > 0.95f) {
                 MainActivity.resources.playSound("shoot02");
                 lashShootTime = currentTime;
             }
             
             Bullet150Unit bullet = new Bullet150Unit(parent.getX(), parent.getY(), this.parent);
-            
             float angle = 0;
             
             switch(direction) {

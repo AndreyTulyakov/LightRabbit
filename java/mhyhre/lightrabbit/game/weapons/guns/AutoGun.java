@@ -5,6 +5,7 @@
 
 package mhyhre.lightrabbit.game.weapons.guns;
 
+import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.GunType;
@@ -13,11 +14,11 @@ import mhyhre.lightrabbit.game.weapons.projectiles.Projectile;
 
 public class AutoGun extends Gun {
     
-    private static final float RELOADING_TIME = 0.1f;
+    private static final float RELOADING_TIME = 0.2f;
     private static final float RELOADING_CLIP_TIME = 2.0f;
     private static final int CLIP_SIZE = 4;
     private static final int SHOT_POWER = 10;
-    
+    protected static float lashShootTime = 0;
     private float lastFireTime;
     private float clipContain;
     private boolean clipReloading;
@@ -57,6 +58,11 @@ public class AutoGun extends Gun {
 
             if(clipContain > 0) {
                 clipContain--;
+            }
+
+            if(Math.abs(lashShootTime-currentTime) > 0.18f) {
+                MainActivity.resources.playSound("shoot03");
+                lashShootTime = currentTime;
             }
 
             Bullet20Unit bullet = new Bullet20Unit(parent.getX(), parent.getY(), this.parent);

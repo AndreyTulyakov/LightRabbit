@@ -286,6 +286,7 @@ public class ResourceManager {
         addSound("click1.ogg", "click1");
         addSound("shoot01.ogg", "shoot01");
         addSound("shoot02.ogg", "shoot02");
+        addSound("shoot03.ogg", "shoot03");
         addSound("boom01.ogg", "boom01");
         addSound("shipDie.ogg", "shipDie");
         addSound("shipDie2.ogg", "shipDie2");
@@ -293,6 +294,7 @@ public class ResourceManager {
         addSound("dropToWater.ogg", "dropToWater");
         addSound("message.ogg", "message");
         addSound("fly_down.ogg", "flyDown");
+        addSound("rocketLaunch.ogg", "rocketLaunch");
 
         addMusic("rain.ogg", "rain");
         addMusic("sea.ogg", "sea");

@@ -74,7 +74,7 @@ public abstract class UnitModel {
         moveDirection = UnitMoveDirection.LEFT;
         ideology = UnitIdeology.NEUTRAL;
         
-        agents = new LinkedList<UnitAgent>();
+        agents = new LinkedList<>();
 
         xPosition = 0;
         yPosition = 0;

@@ -33,6 +33,9 @@
 
   <Event command="SET_DIE_POSITION" arg_int="-100"/>
 
+
+
+
   <Event command="UNIT_ADD" id="35" arg_int="50" arg_str="PirateBoat" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="35" arg_int="150" arg_str="PirateBoat" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="35" arg_int="250" arg_str="PirateBoat" arg_str2="LEFT"/>
@@ -85,6 +88,7 @@
 
 
 
+
   <Event command="UNIT_ADD" id="40" arg_int="50" arg_str="PirateShip" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="41" arg_int="150" arg_str="PirateShip" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="42" arg_int="250" arg_str="PirateShip" arg_str2="LEFT"/>
@@ -109,34 +113,34 @@
 
 
   <Event command="UNIT_ADD" id="50" arg_int="50" arg_str="SteamShipGhost" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="50" arg_int="2" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="50" arg_int="3" arg_str="MOVE" arg_str2="LEFT"/>
   <Event command="UNIT_SET_STOP_POSITION" id="50" arg_int="700"/>
 
 
   <Event command="WAIT_SECONDS" arg_int="1"/>
-  <Event command="MAKE_LIGHTNING" arg_int="920"/>
-  <Event command="UNIT_KILL" id="43"/>
-  <Event command="SET_WATER_COLOR" arg_str="0.05f, 0.05f, 0.50f, 0.65f"/>
+    <Event command="MAKE_LIGHTNING" arg_int="920"/>
+    <Event command="UNIT_KILL" id="43"/>
+    <Event command="SET_WATER_COLOR" arg_str="0.05f, 0.05f, 0.50f, 0.65f"/>
 
   <Event command="WAIT_SECONDS" arg_int="1"/>
-  <Event command="MAKE_LIGHTNING" arg_int="820"/>
-  <Event command="UNIT_KILL" id="42"/>
-  <Event command="SET_WATER_COLOR" arg_str="0.07f, 0.0f, 0.35f, 0.65f"/>
+    <Event command="MAKE_LIGHTNING" arg_int="820"/>
+    <Event command="UNIT_KILL" id="42"/>
+    <Event command="SET_WATER_COLOR" arg_str="0.07f, 0.0f, 0.35f, 0.65f"/>
 
   <Event command="WAIT_SECONDS" arg_int="1"/>
-  <Event command="MAKE_LIGHTNING" arg_int="720"/>
-  <Event command="UNIT_KILL" id="41"/>
-  <Event command="SET_WATER_COLOR" arg_str="0.09f, 0.0f, 0.25f, 0.65f"/>
+    <Event command="MAKE_LIGHTNING" arg_int="720"/>
+    <Event command="UNIT_KILL" id="41"/>
+    <Event command="SET_WATER_COLOR" arg_str="0.09f, 0.0f, 0.25f, 0.65f"/>
 
   <Event command="WAIT_SECONDS" arg_int="1"/>
-  <Event command="MAKE_LIGHTNING" arg_int="620"/>
-  <Event command="UNIT_KILL" id="40"/>
-  <Event command="SET_WATER_COLOR" arg_str="0.10f, 0.0f, 0.20f, 0.65f"/>
+    <Event command="MAKE_LIGHTNING" arg_int="620"/>
+    <Event command="UNIT_KILL" id="40"/>
+    <Event command="SET_WATER_COLOR" arg_str="0.10f, 0.0f, 0.20f, 0.65f"/>
 
-  <Event command="WAIT_SECONDS" arg_int="5"/>
-  <Event command="SHOW_DIALOG" id="6"/>
+  <Event command="WAIT_SECONDS" arg_int="6"/>
+    <Event command="SHOW_DIALOG" id="6"/>
 
-  <Event command="NPC_CHANGE_STATE" id="50" arg_int="10" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="50" arg_int="15" arg_str="MOVE" arg_str2="LEFT"/>
   <Event command="UNIT_SET_DIE_POSITION" id="50" arg_int="350"/>
   <Event command="WAIT_WHILE_UNIT_AGENTS_ACTIVE" id="50"/>
   <Event command="SET_FOG_VISIBLE" arg_int="0"/>

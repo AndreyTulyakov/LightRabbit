@@ -225,7 +225,7 @@ public class UnitsManager extends SpriteBatch {
                         model.setIdeology(UnitIdeology.valueOf(event.getStringArg()));
 
                     } catch (IllegalArgumentException e) {
-                        Log.w(MainActivity.DEBUG_ID, "UnitManager: can't set unit ideology");
+                        Log.w(MainActivity.DEBUG_ID, "UnitManager: can't set unit ideology!");
                     }
 
                 }
@@ -239,7 +239,7 @@ public class UnitsManager extends SpriteBatch {
 
             for (Unit unit : units) {
                 if (unit.getModel().getId() == event.getId()) {
-                    UnitStopAgent stopAgent = new UnitStopAgent(unit, event.getIntegerArg(), 5);
+                    UnitStopAgent stopAgent = new UnitStopAgent(unit, event.getIntegerArg(), 17);
                     unit.getModel().addAgent(stopAgent);
                 }
             }

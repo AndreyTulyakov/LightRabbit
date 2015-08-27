@@ -54,20 +54,26 @@
   <Event command="UNIT_ADD" id="31" arg_int="200" arg_str="PirateAir" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="32" arg_int="300" arg_str="PirateAir" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="33" arg_int="400" arg_str="PirateAir" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="34" arg_int="500" arg_str="PirateAir" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="35" arg_int="600" arg_str="PirateAir" arg_str2="LEFT"/>
 
   <Event command="NPC_CHANGE_STATE" id="30" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
   <Event command="NPC_CHANGE_STATE" id="31" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
   <Event command="NPC_CHANGE_STATE" id="32" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
   <Event command="NPC_CHANGE_STATE" id="33" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="34" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="35" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
 
-  <Event command="UNIT_ADD" id="35" arg_int="50" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="35" arg_int="100" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="35" arg_int="150" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="35" arg_int="200" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="35" arg_int="250" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="35" arg_int="300" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="UNIT_ADD" id="35" arg_int="350" arg_str="PirateBoat" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="35" arg_int="2" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="50" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="100" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="150" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="200" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="250" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="300" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="350" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="400" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="39" arg_int="450" arg_str="PirateBoat" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="39" arg_int="2" arg_str="MOVE" arg_str2="LEFT"/>
         
   <Event command="WAIT_WHILE_UNIT_ALIVE" id="10"/>
 
@@ -81,13 +87,17 @@
   <Event command="SHOW_DIALOG" id="2"/>
 
   <Event command="UNIT_ADD" id="36" arg_int="150" arg_str="PirateShip" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="36" arg_int="1" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="36" arg_int="1" arg_str="MOVE" arg_str2="LEFT"/>
 
   <Event command="UNIT_ADD" id="37" arg_int="300" arg_str="PirateShip" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="37" arg_int="1" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="37" arg_int="1" arg_str="MOVE" arg_str2="LEFT"/>
 
-  <Event command="UNIT_ADD" id="37" arg_int="450" arg_str="PirateShip" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="37" arg_int="1" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="UNIT_ADD" id="38" arg_int="450" arg_str="PirateShip" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="37" arg_int="1" arg_str="MOVE" arg_str2="LEFT"/>
+
+  <Event command="UNIT_SET_FIRE_POSITION" id="36" arg_int="950"/>
+  <Event command="UNIT_SET_FIRE_POSITION" id="37" arg_int="950"/>
+  <Event command="UNIT_SET_FIRE_POSITION" id="38" arg_int="950"/>
 
   <Event command="UNIT_ADD" id="35" arg_int="50" arg_str="PirateBoat" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="35" arg_int="100" arg_str="PirateBoat" arg_str2="LEFT"/>

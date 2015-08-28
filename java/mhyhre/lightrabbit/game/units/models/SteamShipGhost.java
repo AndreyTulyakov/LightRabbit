@@ -66,7 +66,8 @@ public class SteamShipGhost extends UnitModel{
                     setY(waveYPositionUnderPlayer);
                 }
             }
-            updateAgents();
+
         }
+        updateAgents();
     }
 }

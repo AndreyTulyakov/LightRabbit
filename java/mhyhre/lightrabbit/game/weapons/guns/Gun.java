@@ -45,6 +45,8 @@ public abstract class Gun {
         this.projectilesAmount = projectilesAmount;
     }
 
-
+    public GunType getType() {
+        return type;
+    }
 
 }

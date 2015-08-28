@@ -47,13 +47,21 @@ public class UnitsManager extends SpriteBatch {
 
     private WaterPolygon water;
     private List<Unit> units;
+    private static UnitsManager instance = null;
+
+    public static UnitsManager getInstance() {
+        if(instance == null) {
+            Log.e(MainActivity.DEBUG_ID, "UnitsManager::getInstance(): null instance!");
+        }
+        return instance;
+    }
     
     private PlayerDeadEventListener playerDeadListener;
     
 
     public UnitsManager(WaterPolygon pWater, VertexBufferObjectManager pVertexBufferObjectManager) {
         super(MainActivity.resources.getTextureAtlas("texture01"), UNITS_MAX_COUNT, pVertexBufferObjectManager);
-
+        instance = this;
         water = pWater;
         units = new ArrayList<Unit>(UNITS_MAX_COUNT);
         diePositionXForEveryone = MINIMAX_UNIT_X;

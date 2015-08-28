@@ -22,12 +22,13 @@ public class AutoGun extends Gun {
     private float lastFireTime;
     private float clipContain;
     private boolean clipReloading;
+    private float angle;
 
 
     public AutoGun(UnitModel parent, int amount) {
         super(parent, GunType.AUTOMATIC_GUN, amount);
         makeReload();
-        
+        angle = 0;
     }
     
     private void makeReload() {
@@ -66,11 +67,10 @@ public class AutoGun extends Gun {
             }
 
             Bullet20Unit bullet = new Bullet20Unit(parent.getX(), parent.getY(), this.parent);
-            float angle = 0;
-            
+            float subAngle = 0;
             switch(direction) {
             case LEFT:
-                angle =  180 - parent.getRotation();
+                subAngle =  180 - parent.getRotation();
                 break;
                 
             case NONE:
@@ -78,13 +78,13 @@ public class AutoGun extends Gun {
                 break;
                 
             case RIGHT:
-                angle = -parent.getRotation();
+                subAngle = -parent.getRotation();
                 break;
             default:
                 break;
             }
 
-            bullet.setAccelerationByAngle(angle, SHOT_POWER);
+            bullet.setAccelerationByAngle(subAngle + angle, SHOT_POWER);
             
             if(clipContain == 0) {
                 clipReloading = true;
@@ -106,4 +106,10 @@ public class AutoGun extends Gun {
         }
         return false;
     }
+
+    public float getAngle() {
+        return angle;
+    }
+
+    public void setAngle(float value) { this.angle = value; }
 }

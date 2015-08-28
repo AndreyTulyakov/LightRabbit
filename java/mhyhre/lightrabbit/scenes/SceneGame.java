@@ -174,8 +174,7 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
         if (gameEvent == null) {
             endGame();
         } else {
-
-            Unit player = null;
+            Unit player;
 
             switch (gameEvent.getType()) {
 
@@ -243,6 +242,7 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
 
                 case END_GAME:
                     endGame();
+                    goToNextEvent();
                     break;
 
                 case SKY_SET_PALETTE:
@@ -269,8 +269,7 @@ public class SceneGame extends EaseScene implements PlayerDeadEventListener {
 
                 case WAIT_SECONDS:
                     if (((int) timeCounter) >= gameEvent.getIntegerArg()) {
-                        timeCounter = 0;
-                        getLevel().nextEvent();
+                        goToNextEvent();
                     }
                     break;
 

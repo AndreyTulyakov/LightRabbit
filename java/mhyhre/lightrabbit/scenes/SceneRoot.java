@@ -135,7 +135,7 @@ public class SceneRoot extends Scene {
                         mSceneGame = null;
                     }
 
-                    Log.i(MainActivity.DEBUG_ID, "level filename: " + mSceneLevelSelector.getSelectedLevel().getFilename());
+                    Log.i(MainActivity.DEBUG_ID, "Level filename: " + mSceneLevelSelector.getSelectedLevel().getFilename());
                     mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().getFilename());
                     mSceneGame.onManagedUpdate(0);
                     mSceneGame.pause();

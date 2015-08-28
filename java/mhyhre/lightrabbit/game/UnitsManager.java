@@ -47,13 +47,21 @@ public class UnitsManager extends SpriteBatch {
 
     private WaterPolygon water;
     private List<Unit> units;
+    private static UnitsManager instance = null;
+
+    public static UnitsManager getInstance() {
+        if(instance == null) {
+            Log.e(MainActivity.DEBUG_ID, "UnitsManager::getInstance(): null instance!");
+        }
+        return instance;
+    }
     
     private PlayerDeadEventListener playerDeadListener;
     
 
     public UnitsManager(WaterPolygon pWater, VertexBufferObjectManager pVertexBufferObjectManager) {
         super(MainActivity.resources.getTextureAtlas("texture01"), UNITS_MAX_COUNT, pVertexBufferObjectManager);
-
+        instance = this;
         water = pWater;
         units = new ArrayList<Unit>(UNITS_MAX_COUNT);
         diePositionXForEveryone = MINIMAX_UNIT_X;
@@ -225,7 +233,7 @@ public class UnitsManager extends SpriteBatch {
                         model.setIdeology(UnitIdeology.valueOf(event.getStringArg()));
 
                     } catch (IllegalArgumentException e) {
-                        Log.w(MainActivity.DEBUG_ID, "UnitManager: can't set unit ideology");
+                        Log.w(MainActivity.DEBUG_ID, "UnitManager: can't set unit ideology!");
                     }
 
                 }
@@ -239,7 +247,7 @@ public class UnitsManager extends SpriteBatch {
 
             for (Unit unit : units) {
                 if (unit.getModel().getId() == event.getId()) {
-                    UnitStopAgent stopAgent = new UnitStopAgent(unit, event.getIntegerArg(), 5);
+                    UnitStopAgent stopAgent = new UnitStopAgent(unit, event.getIntegerArg(), 17);
                     unit.getModel().addAgent(stopAgent);
                 }
             }

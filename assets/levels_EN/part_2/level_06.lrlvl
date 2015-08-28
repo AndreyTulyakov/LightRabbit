@@ -10,6 +10,7 @@
   <Fog colorR="30" colorG="25" colorB="5" colorA="255"/>
  </Setting>
 
+
  <Events>
   <Event command="GUI_HIDE_ELEMENT" arg_str="JUMP"/>
   <Event command="SET_WATER_WAVE_HEIGHT" arg_int="10"/>
@@ -33,6 +34,7 @@
   <Event command="UNIT_ADD" id="3" arg_int="200" arg_str="PirateAir" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="4" arg_int="300" arg_str="PirateAir" arg_str2="LEFT"/>
   <Event command="UNIT_ADD" id="5" arg_int="400" arg_str="PirateAir" arg_str2="LEFT"/>
+  <Event command="UNIT_SET_GUN" id="5" arg_int="120" arg_str="AUTOMATIC_GUN"/>
 
   <Event command="UNIT_SET_VPOSITION" id="2"  arg_int="200"/>
   <Event command="UNIT_SET_VPOSITION" id="3"  arg_int="300"/>
@@ -42,7 +44,7 @@
   <Event command="NPC_CHANGE_STATE" id="2" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
   <Event command="NPC_CHANGE_STATE" id="3" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
   <Event command="NPC_CHANGE_STATE" id="4" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="5" arg_int="4" arg_str="MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="5" arg_int="4" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
 
   <Event command="UNIT_ADD" id="1" arg_int="200" arg_str="PirateShip" arg_str2="LEFT"/>
   <Event command="NPC_CHANGE_STATE" id="1" arg_int="2" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
@@ -91,14 +93,18 @@
 
 
   <Event command="UNIT_ADD" id="20" arg_int="100" arg_str="PirateShip" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="20" arg_int="1" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="20" arg_int="1" arg_str="MOVE" arg_str2="LEFT"/>
         
   <Event command="UNIT_ADD" id="21" arg_int="300" arg_str="PirateShip" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="21" arg_int="1" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="21" arg_int="1" arg_str="MOVE" arg_str2="LEFT"/>
         
   <Event command="UNIT_ADD" id="22" arg_int="500" arg_str="PirateShip" arg_str2="LEFT"/>
-  <Event command="NPC_CHANGE_STATE" id="22" arg_int="1" arg_str="ATTACK_AND_MOVE" arg_str2="LEFT"/>
+  <Event command="NPC_CHANGE_STATE" id="22" arg_int="1" arg_str="MOVE" arg_str2="LEFT"/>
         
+  <Event command="UNIT_SET_FIRE_POSITION" id="20" arg_int="950"/>
+  <Event command="UNIT_SET_FIRE_POSITION" id="21" arg_int="950"/>
+  <Event command="UNIT_SET_FIRE_POSITION" id="22" arg_int="950"/>
+
   	<Event command="WAIT_SECONDS" arg_int="5"/>
 		<Event command="UNIT_ADD" id="31" arg_int="100" arg_str="PirateAir" arg_str2="LEFT"/>
   		<Event command="UNIT_ADD" id="32" arg_int="200" arg_str="PirateAir" arg_str2="LEFT"/>

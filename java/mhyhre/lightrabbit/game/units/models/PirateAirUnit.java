@@ -6,11 +6,16 @@
 package mhyhre.lightrabbit.game.units.models;
 
 import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.UnitsManager;
 import mhyhre.lightrabbit.game.WaterPolygon;
+import mhyhre.lightrabbit.game.units.Unit;
 import mhyhre.lightrabbit.game.units.UnitIdeology;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
+import mhyhre.lightrabbit.game.weapons.GunType;
+import mhyhre.lightrabbit.game.weapons.guns.AutoGun;
 import mhyhre.lightrabbit.game.weapons.guns.Bomber;
+import mhyhre.lightrabbit.game.weapons.guns.Gun;
 import mhyhre.lightrabbit.utils.ControllType;
 
 public class PirateAirUnit extends UnitModel {
@@ -70,6 +75,20 @@ public class PirateAirUnit extends UnitModel {
             
             if(getX() > 1000) {
                 setMoveDirection(UnitMoveDirection.LEFT);
+            }
+
+
+            if(getGun().getType() == GunType.AUTOMATIC_GUN) {
+                Unit unit = UnitsManager.getInstance().getFirstUnitWithId(0);
+
+                    if (unit.getModel().getY() > getY() + 12) {
+                        heightLevel += 0.5f;
+                    }
+
+                    if (unit.getModel().getY() < getY() - 12) {
+                        heightLevel -= 0.5f;
+                    }
+
             }
             
             

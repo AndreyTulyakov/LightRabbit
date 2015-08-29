@@ -66,8 +66,6 @@
 
   <Event command="SHOW_DIALOG" id="6"/>
 
-
-
   <Event command="WAIT_SECONDS" arg_int="1"/>
   <Event command="SET_FOG_VISIBLE" arg_int="100"/>
   <Event command="UNLOCK_LEVEL" arg_int="9"/>

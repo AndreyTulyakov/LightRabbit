@@ -109,13 +109,13 @@ public class UnitsManager extends SpriteBatch {
 
         if (first.getHealth() <= 0) {
             first.setHealth(0);
-            Log.i(MainActivity.DEBUG_ID, "Unit:" + first.getType().getName() + " died by collision.");
+            Log.i(MainActivity.DEBUG_ID, "Unit:" + first.getType().getName() + " died by collision with " + second.getType().getName());
             first.setDied(true);
         }
 
         if (second.getHealth() <= 0) {
             second.setHealth(0);
-            Log.i(MainActivity.DEBUG_ID, "Unit:" + second.getType().getName() + " died by collision.");
+            Log.i(MainActivity.DEBUG_ID, "Unit:" + second.getType().getName() + " died by collision  with " + first.getType().getName());
             second.setDied(true);
         }
 

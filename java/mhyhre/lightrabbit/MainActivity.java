@@ -36,7 +36,7 @@ import mhyhre.lightrabbit.scenes.SceneStates;
 public class MainActivity extends LayoutGameActivity {
     public Tracker tracker;
 
-    public static final String LOCALIZATION = "EN";
+    public static final String LOCALIZATION = "RU";
     public static final boolean USE_ADMOB = true;
 
     public static final String DEBUG_ID = "LRABBIT";

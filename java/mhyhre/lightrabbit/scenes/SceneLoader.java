@@ -53,8 +53,12 @@ public class SceneLoader extends EaseScene {
 
         // Tap text
         String TextMessage = StringsBase.getInstance().getValue("Press_For_Continue");
+        float offsetDivider =  1.6f;
+        if(TextMessage.length() > 20) {
+            offsetDivider = 1.4f;
+        }
         mCaptionTapScreen = new Text(0, 0, MainActivity.resources.getFont("White Furore"), TextMessage, MainActivity.getVboManager());
-        mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() * 1.6f, (MainActivity.getHeight() / 4) * 1.6f);
+        mCaptionTapScreen.setPosition(MainActivity.getHalfWidth() * offsetDivider, (MainActivity.getHeight() / 4) * 1.6f);
         mCaptionTapScreen.setVisible(false);
         mCaptionTapScreen.setAlpha(0.0f);
         mCaptionTapScreen.setColor(captionsColor);

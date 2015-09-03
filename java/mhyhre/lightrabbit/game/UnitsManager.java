@@ -298,6 +298,7 @@ public class UnitsManager extends SpriteBatch {
             
             if(unit != targetUnit) {
                 if (targetIdeology.isEnemy(otherIdeology)) {
+                    Log.i(MainActivity.DEBUG_ID, "existEnemies:" + unit.getModel().getType().getName());
                     return true;
                 }
             }
@@ -312,7 +313,6 @@ public class UnitsManager extends SpriteBatch {
             if (unit.getModel().getId() == gameEvent.getId()) {
                 if (unit.getController().isPlayerController() == false) {
 
-                    // Need fix it.
                     NPCController controller = (NPCController) unit.getController();
                     controller.setStateByEvent(gameEvent);
                 }

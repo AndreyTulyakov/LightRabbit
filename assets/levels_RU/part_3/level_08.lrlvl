@@ -10,6 +10,7 @@
   <Fog colorR="30" colorG="25" colorB="5" colorA="255"/>
  </Setting>
 
+ 
  <Events>
   <Event command="GUI_HIDE_ALL_ELEMENTS"/>
   <Event command="HIDE_TOP_PANEL"/> 

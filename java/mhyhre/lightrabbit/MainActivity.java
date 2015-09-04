@@ -36,7 +36,7 @@ import mhyhre.lightrabbit.scenes.SceneStates;
 public class MainActivity extends LayoutGameActivity {
     public Tracker tracker;
 
-    public static final String LOCALIZATION = "EN";
+    public static final String LOCALIZATION = "RU";
     public static final boolean USE_ADMOB = true;
 
     public static final String DEBUG_ID = "LRABBIT";
@@ -101,12 +101,6 @@ public class MainActivity extends LayoutGameActivity {
 
     @Override
     public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) {
-        if (BuildConfig.DEBUG) {
-            Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateResources");
-        }
-
-
-
         pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
 
@@ -114,8 +108,6 @@ public class MainActivity extends LayoutGameActivity {
 
     @Override
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) {
-        if (BuildConfig.DEBUG)
-            Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onCreateScene");
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
         tracker = getDefaultTracker();
@@ -123,17 +115,11 @@ public class MainActivity extends LayoutGameActivity {
         resources = new ResourceManager();
         sceneRoot = new SceneRoot();
 
-
         pOnCreateSceneCallback.onCreateSceneFinished(sceneRoot);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (BuildConfig.DEBUG)
-                Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onKeyDown: KEYCODE_BACK");
-        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -188,9 +174,6 @@ public class MainActivity extends LayoutGameActivity {
     public void onDestroy() {
 
         savePreferences();
-
-        if (BuildConfig.DEBUG)
-            Log.i(DEBUG_ID, this.getClass().getSimpleName() + ".onDestroy");
         super.onDestroy();
         android.os.Process.killProcess(android.os.Process.myPid());
     }

@@ -92,11 +92,11 @@ public class LevelUnlocker {
             }
             
         } catch (FileNotFoundException e) {
-            Log.i(MainActivity.DEBUG_ID, "LevelUnlocker::saveScores:" + e.getMessage());
+            Log.e(MainActivity.DEBUG_ID, "LevelUnlocker::saveScores:" + e.getMessage());
         } catch (IllegalStateException e) {
-            Log.i(MainActivity.DEBUG_ID, "LevelUnlocker::saveScores:" + e.getMessage());  
+            Log.e(MainActivity.DEBUG_ID, "LevelUnlocker::saveScores:" + e.getMessage());
         } catch (IOException e) {
-            Log.i(MainActivity.DEBUG_ID, "LevelUnlocker::saveScores:" + e.getMessage());  
+            Log.e(MainActivity.DEBUG_ID, "LevelUnlocker::saveScores:" + e.getMessage());
         } finally {
             StreamUtils.silentClose(dataStream);
         }
@@ -122,11 +122,11 @@ public class LevelUnlocker {
             }
             
           } catch (FileNotFoundException e) {  
-              Log.i(MainActivity.DEBUG_ID, "LevelUnlocker::loadFromFile:" + e.getMessage());
+              Log.e(MainActivity.DEBUG_ID, "LevelUnlocker::loadFromFile:" + e.getMessage());
           } catch (IOException e) {
-              Log.i(MainActivity.DEBUG_ID, "LevelUnlocker::loadFromFile:" + e.getMessage());
+              Log.e(MainActivity.DEBUG_ID, "LevelUnlocker::loadFromFile:" + e.getMessage());
           } catch (IllegalStateException e) {
-              Log.i(MainActivity.DEBUG_ID, "LevelUnlocker::loadFromFile: " + e.getMessage());
+              Log.e(MainActivity.DEBUG_ID, "LevelUnlocker::loadFromFile: " + e.getMessage());
           } finally {
               StreamUtils.silentClose(dataStream);
           }

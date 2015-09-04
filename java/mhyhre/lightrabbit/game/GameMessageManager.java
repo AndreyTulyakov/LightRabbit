@@ -86,7 +86,6 @@ public class GameMessageManager extends EaseScene {
                             currentReplic = currentDialog.getReplic(currentReplic.getNextId());
                             updateVisualMessage();
                         }
-                        Log.i(MainActivity.DEBUG_ID, "GameMessageManager: clickRect");
                         MainActivity.vibrate(30);
                     }
                 }

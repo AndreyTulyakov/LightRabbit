@@ -41,7 +41,6 @@ public class StringsBase {
 
         } catch (IOException e) {
             Log.e(MainActivity.DEBUG_ID, "LevelListLoader: Level list loading: " + e);
-
         }
     }
 
@@ -60,7 +59,6 @@ public class StringsBase {
             Element root = dom.getDocumentElement();
 
             NodeList stringsItems = root.getElementsByTagName(XML_STRING_TAG);
-            Log.i(MainActivity.DEBUG_ID, "Locale strings count:" + stringsItems.getLength());
 
             for (int i = 0; i < stringsItems.getLength(); i++) {
                 Node pageNode = stringsItems.item(i);

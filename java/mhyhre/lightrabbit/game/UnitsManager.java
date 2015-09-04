@@ -109,13 +109,13 @@ public class UnitsManager extends SpriteBatch {
 
         if (first.getHealth() <= 0) {
             first.setHealth(0);
-            Log.i(MainActivity.DEBUG_ID, "Unit:" + first.getType().getName() + " died by collision with " + second.getType().getName());
+            //Log.i(MainActivity.DEBUG_ID, "Unit:" + first.getType().getName() + " died by collision with " + second.getType().getName());
             first.setDied(true);
         }
 
         if (second.getHealth() <= 0) {
             second.setHealth(0);
-            Log.i(MainActivity.DEBUG_ID, "Unit:" + second.getType().getName() + " died by collision  with " + first.getType().getName());
+            //Log.i(MainActivity.DEBUG_ID, "Unit:" + second.getType().getName() + " died by collision  with " + first.getType().getName());
             second.setDied(true);
         }
 
@@ -156,7 +156,6 @@ public class UnitsManager extends SpriteBatch {
                     playerDeadListener.playerDeadEvent();
                 }
                 units.remove(i);
-                Log.i(MainActivity.DEBUG_ID, "Units Manager: unit was removed:" + model.getType().getName());
                 i--;
                 continue;
             }
@@ -189,7 +188,6 @@ public class UnitsManager extends SpriteBatch {
 
     public void addUnit(Unit unit) {
         if (unit != null) {
-            Log.i(MainActivity.DEBUG_ID, "UnitManager:addUnit:" + unit.getModel().getType());
             units.add(unit);
         }
     }
@@ -216,8 +214,6 @@ public class UnitsManager extends SpriteBatch {
                 unit.getModel().setPosition(xpos, unit.getModel().getHeightLevel());
                 unit.getModel().setMoveDirection(moveDirection);
                 units.add(unit);
-
-                Log.i(MainActivity.DEBUG_ID, "UnitManager:addUnit:" + unit.getModel().getType());
             }
         }
     }
@@ -298,7 +294,7 @@ public class UnitsManager extends SpriteBatch {
             
             if(unit != targetUnit) {
                 if (targetIdeology.isEnemy(otherIdeology)) {
-                    Log.i(MainActivity.DEBUG_ID, "existEnemies:" + unit.getModel().getType().getName());
+                    //Log.i(MainActivity.DEBUG_ID, "existEnemies:" + unit.getModel().getType().getName());
                     return true;
                 }
             }
@@ -312,7 +308,6 @@ public class UnitsManager extends SpriteBatch {
 
             if (unit.getModel().getId() == gameEvent.getId()) {
                 if (unit.getController().isPlayerController() == false) {
-
                     NPCController controller = (NPCController) unit.getController();
                     controller.setStateByEvent(gameEvent);
                 }

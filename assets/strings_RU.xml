@@ -11,7 +11,7 @@
     <string name="Press">Нажмите...</string>
     <string name="Select_Level">Выберите уровень</string>
     <string name="Loading">Загрузка...</string>
-    <string name="Press_For_Continue">нажмите для продолжения</string>
+    <string name="Press_For_Continue">нажмите</string>
     <string name="You_Was_Died">Вы умерли!</string>
     <string name="Level_Completed">Уровень пройден!</string>
     <string name="Level">Уровень</string>

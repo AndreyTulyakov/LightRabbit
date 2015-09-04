@@ -256,8 +256,6 @@ public class ResourceManager {
         
         region = TextureRegionFactory.extractFromTexture(atlas, 50, 0, 3, 6);
         regions.put("lighing", region);
-
-        Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadAtlases: Success");
     }
     
     
@@ -358,8 +356,6 @@ public class ResourceManager {
                 Color.WHITE);
         mFont.load();
         fonts.put("White Furore 16", mFont);
-
-        Log.i(MainActivity.DEBUG_ID, "ResourceManager::loadFonts: OK");
     }
 
     public void LoadResourcesForPreloader() {

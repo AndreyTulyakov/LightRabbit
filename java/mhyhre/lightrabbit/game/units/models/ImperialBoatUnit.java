@@ -15,7 +15,7 @@ public class ImperialBoatUnit extends UnitModel {
     private float targetRotation = 45;
 
     public ImperialBoatUnit(int id) {
-        super(id, UnitType.IMPERIAL_BOAT_UNIT, 80, 40, 0.5f, 1.5f, ControllType.LEFT_RIGHT);
+        super(id, UnitType.IMPERIAL_BOAT_UNIT, 80, 40, 0.8f, 1.5f, ControllType.LEFT_RIGHT);
         setIdeology(UnitIdeology.IMPERIAL);
         setSize(64, 22);
         setRadius(16);

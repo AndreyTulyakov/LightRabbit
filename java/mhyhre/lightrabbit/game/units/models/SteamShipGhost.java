@@ -16,7 +16,7 @@ public class SteamShipGhost extends UnitModel{
     public final float JUMP_ACCELERATION_LIMIT = 23;
     
     public SteamShipGhost(int id) {
-        super(id, UnitType.STEAM_SHIP_GHOST, 800, 1, 7.0f, 5.0f, ControllType.LEFT_RIGHT);   
+        super(id, UnitType.STEAM_SHIP_GHOST, 55, 1, 7.0f, 5.0f, ControllType.LEFT_RIGHT);
         setIdeology(UnitIdeology.ENEMY_FOR_ALL);
         setSize(64, 22);
         setRadius(20);

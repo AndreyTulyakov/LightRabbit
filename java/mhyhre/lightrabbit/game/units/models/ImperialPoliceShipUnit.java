@@ -17,7 +17,7 @@ public class ImperialPoliceShipUnit extends UnitModel {
     private float targetRotation = -30;
 
     public ImperialPoliceShipUnit(int id) {
-        super(id, UnitType.IMPERIAL_POLICE_UNIT, 280, 70, 0.5f, 1.0f, ControllType.LEFT_RIGHT);
+        super(id, UnitType.IMPERIAL_POLICE_UNIT, 320, 70, 0.8f, 1.0f, ControllType.LEFT_RIGHT);
         setIdeology(UnitIdeology.IMPERIAL);    
         setSize(128, 75);
         setRadius(40);

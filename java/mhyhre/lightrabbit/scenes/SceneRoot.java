@@ -12,8 +12,6 @@
 
 package mhyhre.lightrabbit.scenes;
 
-import android.util.Log;
-
 import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
 
@@ -135,7 +133,6 @@ public class SceneRoot extends Scene {
                         mSceneGame = null;
                     }
 
-                    Log.i(MainActivity.DEBUG_ID, "Level filename: " + mSceneLevelSelector.getSelectedLevel().getFilename());
                     mSceneGame = new SceneGame(mSceneLevelSelector.getSelectedLevel().getFilename());
                     mSceneGame.onManagedUpdate(0);
                     mSceneGame.pause();

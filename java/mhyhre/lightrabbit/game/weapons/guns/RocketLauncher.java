@@ -5,8 +5,6 @@
 
 package mhyhre.lightrabbit.game.weapons.guns;
 
-import android.util.Log;
-
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.models.UnitModel;
@@ -30,8 +28,7 @@ public class RocketLauncher extends Gun {
     @Override
     public Projectile fire(UnitMoveDirection direction) {
 
-        if(canFireNow()) {   
-            Log.i(MainActivity.DEBUG_ID, "RocketLauncher:fire!");
+        if(canFireNow()) {
             lastFireTime = currentTime;
             
             if(projectilesAmount > 0) {

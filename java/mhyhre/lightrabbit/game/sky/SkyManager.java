@@ -5,17 +5,17 @@
 
 package mhyhre.lightrabbit.game.sky;
 
-import mhyhre.lightrabbit.MainActivity;
-import mhyhre.lightrabbit.game.sky.lighting.LightingManager;
-import mhyhre.lightrabbit.scenes.utils.EaseScene;
+import android.graphics.PointF;
+import android.util.Log;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.adt.color.Color;
 
-import android.graphics.PointF;
-import android.util.Log;
+import mhyhre.lightrabbit.MainActivity;
+import mhyhre.lightrabbit.game.sky.lighting.LightingManager;
+import mhyhre.lightrabbit.scenes.utils.EaseScene;
 
 
 public class SkyManager extends EaseScene {
@@ -86,14 +86,12 @@ public class SkyManager extends EaseScene {
         if(rain == null) {
             rain = new Rain();
             attachChild(rain);
-            Log.i(MainActivity.DEBUG_ID, "Rain attached.");
         }
     }
     
     public void disableRain() {
         if(rain != null) {
             detachChild(rain);
-            Log.i(MainActivity.DEBUG_ID, "Rain detached.");
             rain = null;
         }
     }
@@ -102,7 +100,7 @@ public class SkyManager extends EaseScene {
         try {
             setPalette(SkyPalette.valueOf(stringArg));
         } catch(IllegalArgumentException e) {
-            Log.i(MainActivity.DEBUG_ID, "SkyManager: can't set palette:" + stringArg);
+            Log.e(MainActivity.DEBUG_ID, "SkyManager: can't set palette:" + stringArg);
         }
     }
 

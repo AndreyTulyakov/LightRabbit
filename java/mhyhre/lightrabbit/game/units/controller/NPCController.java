@@ -41,8 +41,6 @@ public class NPCController extends UnitController {
 
     public void setStateByEvent(Event event) {
 
-        Log.i(MainActivity.DEBUG_ID, "State Changed:" + event.getStringArg());
-
         if (event.getType() == EventType.NPC_CHANGE_STATE) {
 
             try {

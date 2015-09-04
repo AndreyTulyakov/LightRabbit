@@ -136,7 +136,7 @@ public class GameUserInterface extends EaseScene {
         attachChild(spriteFire);
         
         spriteSecondFire = new Sprite(0, 0, MainActivity.resources.getTextureRegion("Fire"), MainActivity.Me.getVertexBufferObjectManager());
-        spriteSecondFire.setPosition(MainActivity.getWidth() - 64, 60 + 64 + 30);
+        spriteSecondFire.setPosition(MainActivity.getWidth() - 64, 60 + 64 + 40);
         spriteSecondFire.setVisible(true);
         spriteSecondFire.setScale(MainActivity.PIXEL_MULTIPLIER*2);
         attachChild(spriteSecondFire);
@@ -559,7 +559,7 @@ public class GameUserInterface extends EaseScene {
             hideElement(Buttons.UP);
             hideElement(Buttons.DOWN);
             spriteMoveLeft.setPosition(64, 70);
-            spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 30, 70);
+            spriteMoveRight.setPosition(spriteMoveLeft.getX() + 64 + 40, 70);
             break;
             
         default:

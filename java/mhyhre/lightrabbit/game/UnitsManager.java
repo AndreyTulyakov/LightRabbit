@@ -294,7 +294,6 @@ public class UnitsManager extends SpriteBatch {
             
             if(unit != targetUnit) {
                 if (targetIdeology.isEnemy(otherIdeology)) {
-                    //Log.i(MainActivity.DEBUG_ID, "existEnemies:" + unit.getModel().getType().getName());
                     return true;
                 }
             }

@@ -11,7 +11,6 @@ import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.GunType;
 import mhyhre.lightrabbit.game.weapons.projectiles.Barrel;
 import mhyhre.lightrabbit.game.weapons.projectiles.Projectile;
-import android.util.Log;
 
 public class BarrelsKicker extends Gun {
     

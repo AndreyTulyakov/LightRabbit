@@ -11,7 +11,6 @@ import mhyhre.lightrabbit.game.units.models.UnitModel;
 import mhyhre.lightrabbit.game.weapons.GunType;
 import mhyhre.lightrabbit.game.weapons.projectiles.GhostBulletUnit;
 import mhyhre.lightrabbit.game.weapons.projectiles.Projectile;
-import android.util.Log;
 
 public class GhostGun extends Gun {
 

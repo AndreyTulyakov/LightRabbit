@@ -5,7 +5,6 @@
 
 package mhyhre.lightrabbit.game.weapons.guns;
 
-import android.util.Log;
 import mhyhre.lightrabbit.MainActivity;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.models.UnitModel;

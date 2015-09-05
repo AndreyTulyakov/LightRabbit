@@ -13,9 +13,7 @@ import mhyhre.lightrabbit.game.units.UnitIdeology;
 import mhyhre.lightrabbit.game.units.UnitMoveDirection;
 import mhyhre.lightrabbit.game.units.UnitType;
 import mhyhre.lightrabbit.game.weapons.GunType;
-import mhyhre.lightrabbit.game.weapons.guns.AutoGun;
 import mhyhre.lightrabbit.game.weapons.guns.Bomber;
-import mhyhre.lightrabbit.game.weapons.guns.Gun;
 import mhyhre.lightrabbit.utils.ControllType;
 
 public class PirateAirUnit extends UnitModel {

@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 
 import com.google.android.gms.analytics.GoogleAnalytics;

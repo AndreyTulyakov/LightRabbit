@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -25,6 +26,7 @@ import org.andengine.entity.util.FPSLogger;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.LayoutGameActivity;
 
+import java.util.Locale;
 import java.util.Random;
 
 import mhyhre.lightrabbit.ads.ScreenAdvertisement;
@@ -35,13 +37,13 @@ import mhyhre.lightrabbit.scenes.SceneStates;
 public class MainActivity extends LayoutGameActivity {
     public Tracker tracker;
 
-    public static final String LOCALIZATION = "RU";
-    public static final boolean USE_ADMOB = true;
+    public static String LOCALIZATION = "EN";
+    public static final boolean USE_ADMOB = false;
 
     public static final String DEBUG_ID = "LRABBIT";
     public static final String PREFERENCE_ID = "LIGHT_RABBIT_PREF";
-    public static final String LEVELS_FOLDER = "levels_" + LOCALIZATION + "/";
-    public static final String LOCATE_STRINGS_FILENAME = "strings_" + LOCALIZATION + ".xml";
+    public static  String LEVELS_FOLDER = "none";
+    public static  String LOCATE_STRINGS_FILENAME = "none";
 
     public static final int PIXEL_MULTIPLIER = 4;
 
@@ -69,6 +71,14 @@ public class MainActivity extends LayoutGameActivity {
 
     @Override
     public EngineOptions onCreateEngineOptions() {
+
+        Log.i(MainActivity.DEBUG_ID, "location[" + Locale.getDefault().getLanguage() + "]");
+        if(Locale.getDefault().getLanguage().startsWith("ru")) {
+            LOCALIZATION = "RU";
+        }
+
+        LEVELS_FOLDER = "levels_" + LOCALIZATION + "/";
+        LOCATE_STRINGS_FILENAME = "strings_" + LOCALIZATION + ".xml";
 
         random = new Random();
 

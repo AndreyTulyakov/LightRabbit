@@ -1,6 +1,6 @@
-==Light Rabbit
+* Project Light Rabbit (A marine story)
 
-Copyright (C) 2014-2015 Andrey Tulyakov
+Copyright (C) 2013-2015 Andrey Tulyakov
 @mail: mhyhre@gmail.com
 
 This work is licensed under a Creative Commons 

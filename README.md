@@ -14,6 +14,6 @@ Google play link:
 
 
 ## Screenshots:
-![](https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_0.webp)
-![](https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_1.webp)
-![](https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_2.webp)
+<img src="https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_0.webp" width="640">
+<img src="https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_1.webp" width="640">
+<img src="https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_2.webp" width="640">

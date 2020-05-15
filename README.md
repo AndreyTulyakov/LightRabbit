@@ -12,6 +12,9 @@ You may obtain a copy of the License at
 Google play link:
 [https://play.google.com/store/apps/details?id=mhyhre.lightrabbit](https://play.google.com/store/apps/details?id=mhyhre.lightrabbit)
 
+Habr Article:
+[https://habr.com/ru/post/279195/](https://habr.com/ru/post/279195/)
+
 
 ## Screenshots:
 <img src="https://github.com/mhyhre/LightRabbit/blob/master/readme_images/ms_0.webp" width="640">
